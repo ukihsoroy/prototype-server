@@ -4,17 +4,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.ko.prototpye</groupId>
-    <artifactId>ko-boot</artifactId>
+    <groupId>org.ko.framework</groupId>
+    <artifactId>framework-boot</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>ko-core</module>
-        <module>ko-browser</module>
-        <module>ko-app</module>
-        <module>ko-data</module>
-        <module>ko-generator</module>
+        <module>framework-core</module>
+        <module>framework-browser</module>
+        <module>framework-app</module>
+        <module>framework-data</module>
+        <module>framework-generator</module>
     </modules>
 
     <properties>
