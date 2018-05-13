@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>org.ko.prototpye</groupId>
-            <artifactId>ko-core</artifactId>
+            <artifactId>ko-data</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

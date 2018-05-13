@@ -76,17 +76,17 @@
         </dependency>
 
         <!--阿里监控数据源 druid -->
-        <!--<dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
-        </dependency>-->
+        </dependency>
 
         <!--MySql 驱动-->
-        <!--<dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-        </dependency>-->
+        </dependency>
 
         <!--MyBatis分页插件-->
         <dependency>

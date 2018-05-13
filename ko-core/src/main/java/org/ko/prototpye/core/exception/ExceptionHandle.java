@@ -1,6 +1,6 @@
 package org.ko.prototpye.core.exception;
 
-import com.mysql.jdbc.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.ko.prototpye.core.support.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +41,7 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
         logger.error(ex.getClass().getName(), ex);
         Response response = new Response<>(Response.FAILED, errorMsg,
                 ex instanceof ValidateException ? VALIDATOR_ERROR_CODE : httpStatus.toString(),
-                StringUtils.isNullOrEmpty(ex.getMessage())? ex.toString() : ex.getMessage());
+                StringUtils.isNotBlank(ex.getMessage())? ex.toString() : ex.getMessage());
         return super.handleExceptionInternal(ex, response, responseEntity.getHeaders(), httpStatus, request);
     }
 }
