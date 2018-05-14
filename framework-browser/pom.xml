@@ -17,6 +17,11 @@
     <dependencies>
         <dependency>
             <groupId>org.ko.framework</groupId>
+            <artifactId>framework-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ko.framework</groupId>
             <artifactId>framework-data</artifactId>
             <version>${project.version}</version>
         </dependency>
