@@ -25,6 +25,14 @@
             <artifactId>framework-data</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--给前端提供假数据-->
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${wiremock.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
