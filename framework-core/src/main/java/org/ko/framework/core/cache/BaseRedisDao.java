@@ -10,8 +10,6 @@ import java.util.Map;
  * 
  * BaseRedisDao
  *
- * @author <A>calder</A>
- *
  */
 public class BaseRedisDao extends JedisClusterAdpter {
 

@@ -2,7 +2,7 @@ package org.ko.framework.core.support;
 
 import com.google.common.base.Strings;
 import lombok.ToString;
-import org.ko.framework.core.base.BaseObject;
+import org.ko.framework.core.bean.SerializeBean;
 
 /**
  * 
@@ -12,7 +12,7 @@ import org.ko.framework.core.base.BaseObject;
  *
  */
 @ToString
-public class Response<T> extends BaseObject {
+public class Response<T> extends SerializeBean {
 
     public static final boolean FAILED = false;
     public static final boolean SUCCESS = true;

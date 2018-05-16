@@ -2,7 +2,7 @@ package org.ko.framework.rest.controller;
 
 
 import org.apache.commons.io.IOUtils;
-import org.ko.web.dto.FileInfo;
+import org.ko.framework.core.bean.FileInfo;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 

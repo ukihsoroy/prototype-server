@@ -8,8 +8,6 @@ import redis.clients.jedis.JedisCluster;
  * 
  * JedisClusterAdpter
  *
- * @author <A>chent</A>
- *
  */
 public abstract class JedisClusterAdpter {
 

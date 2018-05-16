@@ -1,13 +1,10 @@
-package org.ko.framework.core.base;
+package org.ko.framework.core.bean;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 
  * BaseController
- *
- * @author <A>chent</A>
- *
  */
 public class BaseController {
 
