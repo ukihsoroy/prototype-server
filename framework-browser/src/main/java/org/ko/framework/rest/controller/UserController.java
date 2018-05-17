@@ -6,8 +6,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.ko.web.dto.User;
-import org.ko.web.dto.UserQueryCondition;
+import org.ko.framework.rest.condition.UserQueryCondition;
+import org.ko.framework.rest.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -48,41 +48,41 @@ public class UserController {
     }
 
     @PostMapping("register")
-    public void register (User user, HttpServletRequest request) {
+    public void register (UserDTO user, HttpServletRequest request) {
         System.out.println("注册用户");
         String userId = user.getUsername();
         providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
     }
 
     @GetMapping
-    @JsonView(User.UserSimpleView.class)
+    @JsonView(UserDTO.UserSimpleView.class)
     @ApiOperation("用户查询列表")
-    public List<User> query(UserQueryCondition condition,
+    public List<UserDTO> query(UserQueryCondition condition,
                             @PageableDefault(page = 1, size = 15, sort = "username,asc") Pageable pageable) {
         System.out.println(ReflectionToStringBuilder.toString(condition, ToStringStyle.MULTI_LINE_STYLE));
         System.out.println(pageable.getPageSize());
         System.out.println(pageable.getPageNumber());
         System.out.println(pageable.getSort());
-        List<User> users = new ArrayList<>();
-        users.add(new User());
-        users.add(new User());
-        users.add(new User());
+        List<UserDTO> users = new ArrayList<>();
+        users.add(new UserDTO());
+        users.add(new UserDTO());
+        users.add(new UserDTO());
         return users;
     }
 
     @GetMapping("{id:\\d+}")
-    @JsonView(User.UserDetailView.class)
+    @JsonView(UserDTO.UserDetailView.class)
     @ApiOperation("用户详细查询")
-    public User getInfo (@ApiParam("用户ID") @PathVariable String id) {
+    public UserDTO getInfo (@ApiParam("用户ID") @PathVariable String id) {
 //        throw new UserNotExistException("1");
         System.out.println("getInfo---");
-        User user = new User();
+        UserDTO user = new UserDTO();
         user.setUsername("K.O");
         return user;
     }
 
     @PostMapping
-    public User create (@Valid @RequestBody User user/*, BindingResult errors*/) {
+    public UserDTO create (@Valid @RequestBody UserDTO user/*, BindingResult errors*/) {
 
 //        if (errors.hasErrors()) {
 //            errors.getAllErrors().forEach(System.out::println);
@@ -97,7 +97,7 @@ public class UserController {
     }
 
     @PutMapping("{id:\\d+}")
-    public User update (@Valid @RequestBody User user, BindingResult errors) {
+    public UserDTO update (@Valid @RequestBody UserDTO user, BindingResult errors) {
 
         if (errors.hasErrors()) {
             errors.getAllErrors().forEach(e -> {
