@@ -27,6 +27,13 @@
 
 
     <dependencies>
+        <!--Spring boot Test-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.ko.framework</groupId>
             <artifactId>framework-core</artifactId>

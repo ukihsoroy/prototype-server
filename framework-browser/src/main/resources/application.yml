@@ -10,3 +10,9 @@ spring:
 security:
   basic:
     enabled: false
+mybatis:
+  typeAliasesPackage: org.ko.framework.data.*.domain #小名
+  mapperLocations: classpath:mappers/*.xml  #mapper扫描
+  configuration:
+    mapUnderscoreToCamelCase: true #开始下划线转驼峰
+
