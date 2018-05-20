@@ -45,7 +45,7 @@ public class UserControllerTests {
 //                .param("sort", "age,desc")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.length()").value(3))
+                .andExpect(jsonPath("$.success").value(true))
                 .andReturn().getResponse().getContentAsString();
         System.out.println(result);
     }
