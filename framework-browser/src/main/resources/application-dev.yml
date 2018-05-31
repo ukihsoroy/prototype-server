@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://111.231.224.68:3306/art-prototype
+    username: root
+    password: tiger

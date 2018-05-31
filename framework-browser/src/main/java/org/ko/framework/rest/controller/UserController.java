@@ -24,7 +24,6 @@ public class UserController {
     public Response<List<UserDTO>> queryUserList(UserQueryCondition condition) {
         List<UserDTO> userDTOS = userService.queryUserList(condition);
         return new Response<>(userDTOS);
-
     }
 
 

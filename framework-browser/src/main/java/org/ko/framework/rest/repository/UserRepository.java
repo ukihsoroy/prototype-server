@@ -1,10 +1,10 @@
 package org.ko.framework.rest.repository;
 
-import org.ko.framework.data.master.mapper.UserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ko.framework.data.master.domain.User;
 import org.springframework.stereotype.Repository;
+import tk.mybatis.mapper.common.Mapper;
 
 @Repository
-public interface UserRepository extends UserMapper {
+public interface UserRepository extends Mapper<User> {
 
 }

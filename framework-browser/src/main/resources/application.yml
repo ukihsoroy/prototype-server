@@ -4,15 +4,22 @@ server:
 #配置文件默认dev
 spring:
   profiles:
-    active: ds, dev
+    active: dev
 
 # 关闭security默认
 security:
   basic:
     enabled: false
+
+# mybatis 配置
 mybatis:
   typeAliasesPackage: org.ko.framework.data.*.domain #小名
   mapperLocations: classpath:mappers/*.xml  #mapper扫描
   configuration:
     mapUnderscoreToCamelCase: true #开始下划线转驼峰
 
+# 通用mapper配置
+mapper:
+  not-empty: true #
+  before: true #
+  mappers: tk.mybatis.mapper.common.Mapper #配置的mapper
