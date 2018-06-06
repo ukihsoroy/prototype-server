@@ -1,4 +1,4 @@
-package org.ko.framework.core.common;
+package org.ko.framework.core.support;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -16,9 +16,9 @@ import java.util.List;
  * 全局handler前日期统一处理
  */
 @Component
-public class DateConverterConfig implements Converter<String, Date> {
+public class DateConverter implements Converter<String, Date> {
 
-    private static Logger logger = LoggerFactory.getLogger(DateConverterConfig.class);
+    private static Logger logger = LoggerFactory.getLogger(DateConverter.class);
 
     private static final List<String> formats = new ArrayList<String>();
     static{

@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ko.framework</groupId>
-    <artifactId>framework-boot</artifactId>
+    <artifactId>framework-server</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -26,6 +26,7 @@
         <fastjson.version>1.2.47</fastjson.version>
         <wiremock.version>2.16.0</wiremock.version>
         <spring.mybatis.version>1.3.2</spring.mybatis.version>
+        <mybatis.common.mapper>1.2.3</mybatis.common.mapper>
     </properties>
 
     <dependencyManagement>

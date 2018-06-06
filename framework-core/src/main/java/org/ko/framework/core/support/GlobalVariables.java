@@ -1,4 +1,4 @@
-package org.ko.framework.core.common;
+package org.ko.framework.core.support;
 
 /**
  * 

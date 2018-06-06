@@ -1,12 +1,14 @@
-package org.ko.framework.core.bean;
+package org.ko.framework.core.support;
+
+import org.apache.commons.lang.ArrayUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
  * 
- * BaseController
+ * IController
  */
-public class BaseController {
+public interface IController {
 
     /**
      * 获得用户真实IP
@@ -15,14 +17,14 @@ public class BaseController {
      *            请求对象
      * @return 真实IP地址
      */
-    protected String getIpAddr(HttpServletRequest request) {
+    default String getIpAddr(HttpServletRequest request) {
         // 多层nginx
         String ip = request.getHeader("X-Forwarded-For");
         if (ip != null && !"".equals(ip)) {
             if (ip.contains(",")) {
-                String[] forwardeds = ip.split(",");
-                if (forwardeds != null && forwardeds.length > 0) {
-                    ip = forwardeds[0] == null ? forwardeds[0] : forwardeds[0]
+                String[] forwards = ip.split(",");
+                if (ArrayUtils.isNotEmpty(forwards)) {
+                    ip = forwards[0] == null ? forwards[0] : forwards[0]
                             .trim();
                 }
             }
