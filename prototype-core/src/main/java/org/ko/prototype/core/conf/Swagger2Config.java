@@ -23,8 +23,8 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("KO-BOOT API")
-                .description("单JAR BASE框架API")
+                .title("PROTOTYPE-SERVER API")
+                .description("短频快BASE框架API")
                 .version("1.0")
                 .build();
     }

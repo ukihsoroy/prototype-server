@@ -1,6 +1,6 @@
 package org.ko.prototype.core.conf;
 
-import org.ko.prototype.core.properties.FrameworkProperties;
+import org.ko.prototype.core.properties.PrototypeProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
  * REST TEMPLATE config
  */
 @Configuration
-@EnableConfigurationProperties(FrameworkProperties.class)
+@EnableConfigurationProperties(PrototypeProperties.class)
 public class RestTemplateConfig {
 
     @Bean

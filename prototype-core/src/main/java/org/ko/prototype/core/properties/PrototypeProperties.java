@@ -2,8 +2,8 @@ package org.ko.prototype.core.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties(prefix = "framework")
-public class FrameworkProperties {
+@ConfigurationProperties(prefix = "prototype")
+public class PrototypeProperties {
 
     private SecurityProperties security = new SecurityProperties();
 

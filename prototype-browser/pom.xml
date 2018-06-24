@@ -35,13 +35,13 @@
         </dependency>
 
         <dependency>
-            <groupId>org.ko.framework</groupId>
-            <artifactId>framework-core</artifactId>
+            <groupId>org.ko.prototype</groupId>
+            <artifactId>prototype-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.ko.framework</groupId>
-            <artifactId>framework-data</artifactId>
+            <groupId>org.ko.prototype</groupId>
+            <artifactId>prototype-data</artifactId>
             <version>${project.version}</version>
         </dependency>
 
