@@ -10,6 +10,11 @@ spring:
       repositories:
         enabled: false
 
+management:
+  health:
+    redis:
+      enabled: false # 禁用Redis健康检查
+
 # 关闭security默认
 security:
   basic:
@@ -29,5 +34,3 @@ mapper:
   mappers: tk.mybatis.mapper.common.Mapper #配置的mapper
 
 
-prototype:
-  security:

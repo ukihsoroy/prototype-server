@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑设备申报单</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/plugins/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="/plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="/css/modules/vue/vue-datepicker-local.css">
+    <script src="/libs/jquery.min.js"></script>
+    <script src="/plugins/layer/layer.js"></script>
+    <script src="/libs/bootstrap.min.js"></script>
+    <script src="/libs/vue.min.js"></script>
+    <script src="/libs/vue-resource.min.js"></script>
+    <script src="/libs/vue-validator.min.js"></script>
+    <script src="/libs/vue-datepicker-local.js"></script>
+    <script src="/plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="/plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="/plugins/select2/js/select2.js"></script>
+    <script src="/plugins/layui/layui.all.js"></script>
+    <script src="/libs/jquery.form.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/libs/moment.js"></script>
+    <script src="/js/directive.js"></script>
+    <style>
+        div i.pos_abs {
+            position: absolute;
+            left: 100px;
+            top: 0px;
+            z-index: 1;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="_edit">
+        <form v-ajax="uploadSuccess" id="_uploadForm" method="post" enctype="multipart/form-data">
+            <input @change="upload" type="file" name="file" id="_uploadFile" style="display: none"/>
+        </form>
+        <div class="col-md-9 col-lg-9 col-sm-9 form-inline" style="float: left; margin-left: 100px">
+            <input type="radio" @click="check" :checked="declaration.applyTypeC == 1" name="applyTypeC" value="1"/>技改实施
+            <input type="radio" @click="check" :checked="declaration.applyTypeC == 2" name="applyTypeC" value="2" style="margin-left: 40px"/>故障维修
+            <input type="radio" @click="check" :checked="declaration.applyTypeC == 3" name="applyTypeC" value="3" style="margin-left: 40px"/>设备保养
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 form-inline" style="margin-top: 20px">
+            <div class="col-md-4 col-lg-4 col-sm-4 form-inline">
+                <label class="control-label">申报设备</label>
+                <input class="form-control" type="text" :value="declaration.deviceInfo" disabled name="deviceInfo" placeholder="显示设备编号+设备名称"/>
+                <i @click="openDeviceBox" class="layui-icon">&#xe615;</i>
+            </div>
+            <div class="row" class="col-md-8 col-lg-8 col-sm-8 form-inline">
+                <label class="control-label" style="float:left; margin-top: 7px">实施地点</label>
+                <select v-model="declaration.implementPlaceTypeC" class="form-control" style="float: left; width: 230px; margin-left: 5px">
+                    <option value="1">现场</option>
+                    <option value="2">机修厂</option>
+                    <option value="3">汽修厂</option>
+                </select>
+                <input v-model="declaration.implementPlaceM" class="form-control" maxlength="50" style="width: 120px; margin-left: 5px" type="text" name="implementPlaceM" placeholder="设备位置">
+                <input v-model="declaration.coordinate" class="form-control" style="width: 120px;" type="text" disabled name="coordinate" placeholder="设备故障坐标"/>
+                <i @click="position" class="layui-icon">&#xe64d;</i>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 form-inline" style="margin-top: 20px">
+            <div class="col-md-4 col-lg-4 col-sm-4 form-inline">
+                <label class="control-label" style="float: left; margin-top: 7px">申报部门</label>
+                <select v-model="declaration.applyDepartmentCodeC" @change="getDepartmentUsers($event.currentTarget.value, 1)" class="form-control" style="float: left; width: 230px; margin-left: 5px">
+                    <option value="">请选择申报部门</option>
+                    <template v-if="departmentOptions && departmentOptions.length > 0" v-for="department in departmentOptions">
+                        <option :value="department.id" v-text="department.text"></option>
+                    </template>
+                </select>
+            </div>
+            <div class="row" class="col-md-8 col-lg-8 col-sm-8 form-inline">
+                <label class="control-label" style="float:left; margin-top: 7px">申报人</label>
+                <select v-model="declaration.applyUserId" class="form-control" style="float: left; width: 230px; margin-left: 19px">
+                    <option value="">请选择申报人</option>
+                    <template v-if="applyUserOptions && applyUserOptions.length > 0" v-for="user in applyUserOptions">
+                        <option :value="user.userId" v-text="user.userName"></option>
+                    </template>
+                </select>
+                <vue-datepicker-local v-model="declaration.applyDt" format="YYYY-MM-DD HH:mm:ss" placeholder="申报时间" style="float:left; width: 200px; margin-left: 5px"></vue-datepicker-local>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 form-inline" style="margin-top: 20px">
+            <label class="control-label" style="float: left; margin-left: 15px; margin-top: 7px">紧急度</label>
+            <select v-model="declaration.urgentTypeC" class="form-control" style="float: left; width: 230px; margin-left: 19px">
+                <option value="1">低</option>
+                <option value="2">中</option>
+                <option value="3">高</option>
+            </select>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 form-inline" style="margin-top: 20px">
+            <label class="control-label" style="float: left; margin-left: 15px; margin-top: 7px">现象描述</label>
+            <select v-model="declaration.phenomenonDescX" class="form-control" multiple style="float: left; width: 800px; margin-left: 7px">
+                <option value="1">第一</option>
+                <option value="2">第二</option>
+                <option value="3">第三</option>
+                <option value="4">第四</option>
+            </select>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 form-inline" style="margin-top: 20px">
+            <label class="control-label" style="float: left; margin-left: 15px; margin-top: 7px">接受部门</label>
+            <select v-model="declaration.receiveDepartmentC" @change="getDepartmentUsers($event.currentTarget.value, 2)" class="form-control" style="float: left; width: 800px; margin-left: 7px">
+                <option value="">请选择接受部门</option>
+                <template v-if="departmentOptions && departmentOptions.length > 0" v-for="department in departmentOptions">
+                    <option :value="department.id" v-text="department.text"></option>
+                </template>
+            </select>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12 form-inline" style="margin-top: 20px">
+            <label class="control-label" style="float: left; margin-left: 15px; margin-top: 7px">接受人员</label>
+            <select v-model="declaration.receiveUserId" class="form-control" style="float: left; width: 800px; margin-left: 7px">
+                <option value="">请选择接受人</option>
+                <template v-if="receiveUserOption && receiveUserOption.length > 0" v-for="user in receiveUserOption">
+                    <option :value="user.userId" v-text="user.userName"></option>
+                </template>
+            </select>
+        </div>
+        <div class="col-md-12 col-lg-12 col-sm-12" style="margin-top: 20px">
+            <label class="control-label" style="float: left; margin-left: 15px; margin-top: 7px">转交原因</label>
+            <textarea v-model="declaration.transferReasonX" placeholder="请输入转件原因" class="form-control" style="float: left; width: 800px; margin-left: 7px"></textarea>
+        </div>
+        <div class="col-md-9 col-lg-9 col-sm-9 form-inline" style="margin-top: 20px; margin-left: 40px">
+            <template v-if="declaration.filePathX && declaration.filePathX.length > 0" v-for="image, index in declaration.filePathX">
+                <div class="col-md-1 col-lg-1 col-sm-1 form-inline" style="float:left; margin-left: 20px; margin-top: 5px; height: 80px">
+                    <img :src="image" style="width:100px; height: 80px"/>
+                    <i @click="removeImage(index)" class="layui-icon pos_abs">&#x1006;</i>
+                </div>
+            </template>
+        </div>
+        <template v-if="declaration.filePathX && declaration.filePathX.length < 5">
+            <div class="col-md-12 col-lg-12 col-sm-12 form-inline" style="margin-top: 20px; margin-left: 57px; margin-bottom: 10px">
+                <a @click="openBox" class="btn btn-primary" style="float:left; margin-left: 20px; margin-top: -10px"><i class="fa"></i>上传图片</a>
+            </div>
+        </template>
+        <hr width="1000px"/>
+        <div class="col-md-9 col-lg-9 col-sm-9 form-inline">
+            <a class="btn btn-primary" @click="submit" style="float:left; margin-left: 400px">提交</a>
+            <a class="btn btn-primary" @click="save" style="float:left; margin-left: 20px">保存</a>
+        </div>
+    </div>
+    <div id="_deviceList" style="display: none"></div>
+    <script src="/js/modules/business/device/declaration/edit.js"></script>
+</body>
+</html>

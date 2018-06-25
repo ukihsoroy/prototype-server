@@ -1,0 +1,33 @@
+server.port: 1337
+
+spring:
+  application.name: prototype-generator
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    ip: 127.0.0.1
+    port: 3306
+    name: prototype-server
+    username: ko
+    password: tiger
+    url: jdbc:mysql://${spring.datasource.ip}:${spring.datasource.port}/${spring.datasource.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
+
+# 生成工具配置
+ko.generator:
+  moduleName: prototype-data
+  tables: t_admin_user
+  java:
+    rootPackage: org.ko.prototype.data.master
+    mybatis:
+      domain: domain
+      mapper: dao
+      xml: mappers
+  view:
+    path: d://
+    js: js
+    html: module
+  generator:
+    project:
+      enable: false
+      name: ko
+      path: d://
+
