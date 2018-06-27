@@ -1,8 +1,11 @@
 package org.ko.prototype.data.master.domain;
 
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 
+@Table(name = "t_admin_user")
 public class AdminUser implements Serializable {
     /**
      *
@@ -11,7 +14,8 @@ public class AdminUser implements Serializable {
      *
      * @mbg.generated Mon Jun 25 22:22:35 CST 2018
      */
-    private Integer id;
+    @Id
+    private Long id;
 
     /**
      *
@@ -218,7 +222,7 @@ public class AdminUser implements Serializable {
      *
      * @mbg.generated Mon Jun 25 22:22:35 CST 2018
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -230,7 +234,7 @@ public class AdminUser implements Serializable {
      *
      * @mbg.generated Mon Jun 25 22:22:35 CST 2018
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

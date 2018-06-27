@@ -37,12 +37,6 @@ public class AdminUserControllerTests {
     @Test
     public void whenQuerySuccess () throws Exception {
         String result = mock.perform(get("/user")
-                .param("username", "K.O")
-                .param("age", "18")
-                .param("ageTo", "20")
-//                .param("size", "15")
-//                .param("page", "3")
-//                .param("sort", "age,desc")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
