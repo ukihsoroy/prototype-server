@@ -1,5 +1,6 @@
 package org.ko.prototype.data.master.domain;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class AdminUser implements Serializable {
      * @mbg.generated Thu Jun 28 21:43:01 CST 2018
      */
     @Id
+    @GeneratedValue(generator = "JDBC")
     private Long id;
 
     /**
