@@ -3,6 +3,7 @@ package org.ko.prototype.core.support;
 import com.google.common.base.Strings;
 import lombok.ToString;
 import org.ko.prototype.core.bean.SerializeBean;
+import org.ko.prototype.core.type.SystemCode;
 
 /**
  * 
@@ -61,6 +62,8 @@ public class Response<T> extends SerializeBean {
     public Response(T data) {
         this.data = data;
         this.success = SUCCESS;
+        this.code = SystemCode.SUCCESS.getCode();
+        this.msg = SystemCode.SUCCESS.getMsg();
     }
 
     /**
@@ -85,6 +88,16 @@ public class Response<T> extends SerializeBean {
         this.code = code;
         this.msg = msg;
         this.success = success;
+    }
+
+    /**
+     * 构造器
+     * @param systemCode
+     */
+    public Response(SystemCode systemCode) {
+        this.success = false;
+        this.code = systemCode.getCode();
+        this.msg = systemCode.getMsg();
     }
 
     /**

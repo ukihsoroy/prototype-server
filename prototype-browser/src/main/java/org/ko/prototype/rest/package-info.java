@@ -1,1 +1,0 @@
-package org.ko.prototype.rest;

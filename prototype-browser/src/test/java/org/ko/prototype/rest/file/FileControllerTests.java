@@ -1,4 +1,4 @@
-package org.ko.prototype.rest.user.controller;
+package org.ko.prototype.rest.file;
 
 import org.junit.Before;
 import org.junit.Test;

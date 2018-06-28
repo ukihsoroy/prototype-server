@@ -1,5 +1,6 @@
 package org.ko.prototype.rest.user.service.impl;
 
+import org.ko.prototype.core.type.SystemConstants;
 import org.ko.prototype.data.master.domain.AdminUser;
 import org.ko.prototype.rest.user.condition.AdminUserQueryCondition;
 import org.ko.prototype.rest.user.repository.AdminUserRepository;
@@ -9,12 +10,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
-@Component
+@Service
+@Transactional(rollbackFor = Throwable.class)
 public class AdminUserServiceImpl implements AdminUserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminUserServiceImpl.class);
@@ -39,5 +42,12 @@ public class AdminUserServiceImpl implements AdminUserService {
     @Override
     public AdminUser queryUserInfo(Long id) {
         return adminUserRepository.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public Long createUser(AdminUser adminUser) {
+        adminUser.setDeleteStatus(SystemConstants.DeleteStatus.Available);
+        adminUserRepository.insert(adminUser);
+        return adminUser.getId();
     }
 }

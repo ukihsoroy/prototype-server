@@ -6,6 +6,7 @@ package org.ko.prototype.core.type;
 public enum SystemCode {
 
     SUCCESS("200", "Request success."),
+    EMPTY_DATA("201", "Empty data."),
     SYSTEM_ERROR("500", "System error.")
     ;
 

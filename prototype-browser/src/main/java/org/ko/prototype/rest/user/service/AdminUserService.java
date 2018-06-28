@@ -11,4 +11,6 @@ public interface AdminUserService extends UserDetailsService {
     List<AdminUser> queryUserList(AdminUserQueryCondition condition);
 
     AdminUser queryUserInfo(Long id);
+
+    Long createUser(AdminUser adminUser);
 }
