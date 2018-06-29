@@ -2,6 +2,7 @@ package org.ko.power;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import org.ko.generator.helper.GeneratorHelper;
 
 import java.util.Objects;
 
@@ -26,6 +27,12 @@ public class PowerTest {
         System.out.println(formatPath("a", "b", "c"));
     }
 
+    @Test
+    public void test4 () {
+        String name = GeneratorHelper.buildDomainName("t_user_info");
+        System.out.println(name);
+    }
+
 
     protected String converterPackage (String packages) {
         return packages.replace(".", "/");
@@ -40,5 +47,7 @@ public class PowerTest {
         }
         return path.toString();
     }
+
+
 
 }

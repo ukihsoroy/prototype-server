@@ -72,25 +72,26 @@ public class AdminUserControllerTests {
                 .andReturn().getResponse().getContentAsString();
         System.out.println(result);
     }
-//
-//    @Test
-//    public void whenUpdateSuccess () throws Exception {
-//        Date time = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-////        Date time = new Date();
-//        String content = "{\"id\":\"1\",\"username\":\"K.O\",\"password\":null,\"birthday\":" + time.getTime() + "}";
-//        System.out.println(time.getTime());
-//        String result = mock.perform(put("/user/1")
-//                .contentType(MediaType.APPLICATION_JSON_UTF8)
-//                .content(content))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value("1"))
-//                .andReturn().getResponse().getContentAsString();
-//        System.out.println(result);
-//    }
-//
-//    @Test
-//    public void whenDeleteSuccess () throws Exception {
-//        mock.perform(delete("/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
-//                .andExpect(status().isOk());
-//    }
+
+    @Test
+    public void whenUpdateSuccess () throws Exception {
+        Date time = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+//        Date time = new Date();
+        String content = "{\"id\":\"1\",\"username\":\"lee\",\"password\": \"123\",\"birthday\":" + time.getTime() + "}";
+        System.out.println(time.getTime());
+        String result = mock.perform(put("/user/1")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(content))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println(result);
+    }
+
+    @Test
+    public void whenDeleteSuccess () throws Exception {
+        mock.perform(delete("/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").value("1"));
+    }
 }

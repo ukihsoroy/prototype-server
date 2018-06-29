@@ -13,8 +13,8 @@
 
 
 -- 导出 prototype-server 的数据库结构
-CREATE DATABASE IF NOT EXISTS `prototype-server` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `prototype-server`;
+CREATE DATABASE IF NOT EXISTS `prototype_server` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `prototype_server`;
 
 -- 导出  表 prototype-server.t_admin_user 结构
 CREATE TABLE IF NOT EXISTS `t_admin_user` (

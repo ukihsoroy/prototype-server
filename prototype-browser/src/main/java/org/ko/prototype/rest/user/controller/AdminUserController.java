@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@Api(description = "用户接口")
 @RestController
 @RequestMapping("user")
-@Api("用户模块")
 @Validated
 public class AdminUserController {
 
@@ -43,7 +43,8 @@ public class AdminUserController {
 
     @GetMapping("{id:\\d+}")
     @ApiOperation("通过ID获取用户详细")
-    public Response<AdminUserDTO> queryUserInfo (@ApiParam("用户ID") @PathVariable Long id) {
+    public Response<AdminUserDTO> queryUserInfo (
+            @ApiParam("用户ID") @PathVariable Long id) {
         AdminUser adminUser = adminUserService.queryUserInfo(id);
         if (Objects.nonNull(adminUser)) {
             return new Response<>(this.mapAdminUser(adminUser));
@@ -53,9 +54,27 @@ public class AdminUserController {
 
     @PostMapping
     @ApiOperation("新建用户")
-    public Response<Long> createUser (@RequestBody AdminUserDTO adminUserDTO) {
+    public Response<Long> createUser (
+            @ApiParam("用户传输对象实体") @RequestBody AdminUserDTO adminUserDTO) {
         Long adminUserId = adminUserService.createUser(mapAdminUser(adminUserDTO));
         return new Response<>(adminUserId);
+    }
+
+    @PutMapping("{id:\\d+}")
+    @ApiOperation("通过ID更新用户信息")
+    public Response<AdminUserDTO> updateUser (
+            @ApiParam("用户ID主键") @PathVariable Long id,
+            @ApiParam("用户传输对象实体") @RequestBody AdminUserDTO adminUserDTO) {
+        AdminUser adminUser = adminUserService.updateUser(id, mapAdminUser(adminUserDTO));
+        return new Response<>(mapAdminUser(adminUser));
+    }
+
+    @DeleteMapping("{id:\\d+}")
+    @ApiOperation("通过ID删除用户")
+    public Response<Long> removeUser (
+            @ApiParam("用户ID") @PathVariable Long id) {
+        Long result = adminUserService.removeUser(id);
+        return new Response<>(result);
     }
 
     /**

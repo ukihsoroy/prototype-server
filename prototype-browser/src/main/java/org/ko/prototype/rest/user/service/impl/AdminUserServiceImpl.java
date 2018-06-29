@@ -3,6 +3,7 @@ package org.ko.prototype.rest.user.service.impl;
 import org.ko.prototype.core.type.SystemConstants;
 import org.ko.prototype.data.master.domain.AdminUser;
 import org.ko.prototype.rest.user.condition.AdminUserQueryCondition;
+import org.ko.prototype.rest.user.dto.AdminUserDTO;
 import org.ko.prototype.rest.user.repository.AdminUserRepository;
 import org.ko.prototype.rest.user.service.AdminUserService;
 import org.slf4j.Logger;
@@ -49,5 +50,18 @@ public class AdminUserServiceImpl implements AdminUserService {
         adminUser.setDeleteStatus(SystemConstants.DeleteStatus.Available);
         adminUserRepository.insert(adminUser);
         return adminUser.getId();
+    }
+
+    @Override
+    public AdminUser updateUser(Long id, AdminUser adminUser) {
+        adminUser.setId(id);
+        adminUserRepository.updateByPrimaryKeySelective(adminUser);
+        return adminUser;
+    }
+
+    @Override
+    public Long removeUser(Long id) {
+        adminUserRepository.deleteByPrimaryKey(id);
+        return id;
     }
 }
