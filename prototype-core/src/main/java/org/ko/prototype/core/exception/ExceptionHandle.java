@@ -15,16 +15,13 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.ko.prototype.core.type.SystemCode.VALIDATOR_ERROR_CODE;
+
 @ControllerAdvice
 @ResponseBody
 public class ExceptionHandle extends ResponseEntityExceptionHandler {
 
     private final static Logger logger = LoggerFactory.getLogger(ExceptionHandle.class);
-
-    /**
-     * 参数验证异常代码（前台判断用）
-     */
-    private final static String VALIDATOR_ERROR_CODE = "800";
 
     @ExceptionHandler
     public ResponseEntity<Object> generalException(Exception ex, WebRequest request) {
@@ -40,7 +37,7 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
         }
         logger.error(ex.getClass().getName(), ex);
         Response response = new Response<>(Response.FAILED, errorMsg,
-                ex instanceof ValidateException ? VALIDATOR_ERROR_CODE : httpStatus.toString(),
+                ex instanceof ValidateException ? VALIDATOR_ERROR_CODE.getCode() : httpStatus.toString(),
                 StringUtils.isNotBlank(ex.getMessage())? ex.toString() : ex.getMessage());
         return super.handleExceptionInternal(ex, response, responseEntity.getHeaders(), httpStatus, request);
     }

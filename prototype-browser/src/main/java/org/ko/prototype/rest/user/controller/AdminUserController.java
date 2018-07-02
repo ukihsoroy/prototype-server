@@ -10,6 +10,8 @@ import org.ko.prototype.data.master.domain.AdminUser;
 import org.ko.prototype.rest.user.condition.AdminUserQueryCondition;
 import org.ko.prototype.rest.user.dto.AdminUserDTO;
 import org.ko.prototype.rest.user.service.AdminUserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -24,6 +26,8 @@ import java.util.stream.Collectors;
 @RequestMapping("user")
 @Validated
 public class AdminUserController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(AdminUserController.class);
 
     @Autowired private AdminUserService adminUserService;
 
@@ -45,6 +49,7 @@ public class AdminUserController {
     @ApiOperation("通过ID获取用户详细")
     public Response<AdminUserDTO> queryUserInfo (
             @ApiParam("用户ID") @PathVariable Long id) {
+        LOGGER.info("AdminUserController#queryUserInfo");
         AdminUser adminUser = adminUserService.queryUserInfo(id);
         if (Objects.nonNull(adminUser)) {
             return new Response<>(this.mapAdminUser(adminUser));

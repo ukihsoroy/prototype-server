@@ -2,5 +2,5 @@ spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql:///prototype_server
-    username: root
-    password: Tiger
+    username: ko
+    password: tiger
