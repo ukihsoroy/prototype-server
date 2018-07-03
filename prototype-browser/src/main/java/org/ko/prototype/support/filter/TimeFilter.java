@@ -1,17 +1,16 @@
-package org.ko.prototype.filter;
+package org.ko.prototype.support.filter;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import java.io.IOException;
 import java.util.Date;
 
 /**
+ * servlet API提供的Filter
  * <p>过滤器</p>
  */
-//@Component
 public class TimeFilter implements Filter {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TimeFilter.class);

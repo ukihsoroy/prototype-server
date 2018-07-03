@@ -4,3 +4,8 @@ spring:
     url: jdbc:mysql:///prototype_server
     username: ko
     password: tiger
+
+
+prototype:
+  file:
+    folder: D:/tmp/resources/
