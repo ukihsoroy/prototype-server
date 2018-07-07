@@ -59,14 +59,14 @@ public class LocalFileService implements IFileService {
     @Override
     public void download(String id, ServletWebRequest request) {
         String fileId = BASE64.decryptBASE64String(id);
-        String name = request.getParameter("name");
+        String filename = request.getParameter("filename");
         try (
                 InputStream inputStream =
                         new FileInputStream(new File(prototypeProperties.getFile().getFolder(), fileId));
                 OutputStream outputStream = request.getResponse().getOutputStream()) {
             request.getResponse().setContentType("application/x-download");
             request.getResponse().addHeader("Content-Disposition", "attachment;filename="
-                    + (StringUtils.isNotBlank(name) ? name : fileId));
+                    + (StringUtils.isNotBlank(filename) ? filename : fileId));
             IOUtils.copy(inputStream, outputStream);
             outputStream.flush();
         } catch (IOException e) {
