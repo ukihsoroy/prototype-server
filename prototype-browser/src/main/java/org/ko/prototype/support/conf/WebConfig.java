@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -37,5 +39,20 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         super.addInterceptors(registry);
         registry.addInterceptor(timeInterceptor);
+    }
+
+    /**
+     * <p>异步请求一些配置</p>
+     * @param configurer
+     */
+    @Override
+    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
+        super.configureAsyncSupport(configurer);
+//        configurer.registerDeferredResultInterceptors()
+//        configurer.registerCallableInterceptors()
+        //异步调用超时时间
+        configurer.setDefaultTimeout(1000);
+        //配置线程池
+//        configurer.setTaskExecutor(new SimpleAsyncTaskExecutor());
     }
 }
