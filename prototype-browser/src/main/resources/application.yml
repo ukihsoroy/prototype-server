@@ -15,10 +15,9 @@ management:
     redis:
       enabled: false # 禁用Redis健康检查
 
+
 # 关闭security默认
-security:
-  basic:
-    enabled: false
+#security.basic.enabled: false
 
 # mybatis 配置
 mybatis:
@@ -33,4 +32,6 @@ mapper:
   before: true #
   mappers: tk.mybatis.mapper.common.Mapper #配置的mapper
 
+logging:
+  level: info
 
