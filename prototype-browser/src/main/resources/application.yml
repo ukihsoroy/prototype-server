@@ -17,7 +17,7 @@ management:
 
 
 # 关闭security默认
-#security.basic.enabled: false
+security.basic.enabled: false
 
 # mybatis 配置
 mybatis:
