@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
 
 @SpringBootApplication
-@MapperScan(basePackages = "org.ko.prototype.rest.user.repository")
+@MapperScan(basePackages = "org.ko.prototype.rest.*.repository")
 public class BrowserApplicationServer {
 
     public static void main(String[] args) {

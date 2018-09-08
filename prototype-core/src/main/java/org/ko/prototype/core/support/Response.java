@@ -9,7 +9,7 @@ import org.ko.prototype.core.type.SystemCode;
  * 
  * Response
  *
- * @author <A>calder</A>
+ * @author <A>K.O</A>
  *
  */
 @ToString

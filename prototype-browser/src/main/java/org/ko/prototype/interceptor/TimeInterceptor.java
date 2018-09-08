@@ -1,4 +1,4 @@
-package org.ko.prototype.support.interceptor;
+package org.ko.prototype.interceptor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

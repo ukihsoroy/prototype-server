@@ -1,12 +1,11 @@
-package org.ko.prototype.support.conf;
+package org.ko.prototype.conf;
 
-import org.ko.prototype.support.filter.TimeFilter;
-import org.ko.prototype.support.interceptor.TimeInterceptor;
+import org.ko.prototype.filter.TimeFilter;
+import org.ko.prototype.interceptor.TimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
