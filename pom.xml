@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ko.prototype</groupId>
-    <artifactId>prototype-server</artifactId>
+    <artifactId>ko-server</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>prototype-core</module>
-        <module>prototype-browser</module>
-        <module>prototype-app</module>
-        <module>prototype-data</module>
-        <module>prototype-generator</module>
+        <module>ko-core</module>
+        <module>ko-browser</module>
+        <module>ko-app</module>
+        <module>ko-data</module>
+        <module>ko-generator</module>
     </modules>
 
     <properties>
