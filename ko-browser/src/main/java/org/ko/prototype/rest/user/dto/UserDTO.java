@@ -7,7 +7,7 @@ import javax.validation.constraints.Past;
 import java.util.Date;
 
 @Data
-public class AdminUserDTO {
+public class UserDTO {
 
     private Long id;
 

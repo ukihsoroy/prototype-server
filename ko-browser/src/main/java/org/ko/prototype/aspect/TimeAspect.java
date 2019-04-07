@@ -21,7 +21,7 @@ public class TimeAspect {
     /**
      * <p>拦截AdminUserController全部方法</p>
      */
-    @Around("execution(* org.ko.prototype.rest.user.controller.AdminUserController.*(..))")
+    @Around("execution(* org.ko.prototype.rest.user.controller.UserController.*(..))")
     public Object handleControllerMethod (ProceedingJoinPoint joinPoint) throws Throwable {
         LOGGER.info("TimeAspect#handleControllerMethod start!");
         Object[] args = joinPoint.getArgs();
