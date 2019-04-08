@@ -18,7 +18,7 @@ public class MyBatisGeneratorTests extends MybatisGenerator {
 	@Test
 	@Override
 	public void generator() {
-		buildSingleMapper("t_admin_user");
+		buildSingleMapper("t_menu", "t_role", "t_role_menu");
 //		buildAllMappers();
 	}
 

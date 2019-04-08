@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     public List<User> queryUserList(UserQueryCondition condition) {
         Example e = new Example(User.class);
         e.createCriteria()
-                .andEqualTo("deleteStatus", "1");
+                .andEqualTo("delStatus", "1");
         return userRepository.selectByExample(e);
     }
 
@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long createUser(User user) {
-        user.setDeleteStatus(SystemConstants.DeleteStatus.Available);
+        user.setDelStatus(SystemConstants.DelStatus.Available);
         userRepository.insert(user);
         return user.getId();
     }

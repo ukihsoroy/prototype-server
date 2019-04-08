@@ -6,15 +6,15 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     ip: 127.0.0.1
     port: 3306
-    name: prototype-server
-    username: ko
+    name: ko_server
+    username: root
     password: tiger
     url: jdbc:mysql://${spring.datasource.ip}:${spring.datasource.port}/${spring.datasource.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
 
 # 生成工具配置
 ko.generator:
-  moduleName: prototype-data
-  tables: t_admin_user
+  moduleName: ko-data
+  tables: t_user
   java:
     rootPackage: org.ko.prototype.data.master
     mybatis:

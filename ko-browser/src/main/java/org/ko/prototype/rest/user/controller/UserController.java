@@ -39,7 +39,7 @@ public class UserController {
 
         //2. 如果不为空
         if (CollectionUtils.isNotEmpty(users)) {
-            List<UserDTO> userDTOS = users.stream().map(this::mapAdminUser).collect(Collectors.toList());
+            List<UserDTO> userDTOS = users.stream().map(this::mapUser).collect(Collectors.toList());
             return new Response<>(userDTOS);
         }
         return new Response<>(SystemCode.EMPTY_DATA);
@@ -52,7 +52,7 @@ public class UserController {
         LOGGER.info("UserController#queryUserInfo");
         User user = userService.queryUserInfo(id);
         if (Objects.nonNull(user)) {
-            return new Response<>(this.mapAdminUser(user));
+            return new Response<>(this.mapUser(user));
         }
         return new Response<>(SystemCode.EMPTY_DATA);
     }
@@ -61,7 +61,7 @@ public class UserController {
     @ApiOperation("新建用户")
     public Response<Long> createUser (
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
-        Long adminUserId = userService.createUser(mapAdminUser(userDTO));
+        Long adminUserId = userService.createUser(mapUser(userDTO));
         return new Response<>(adminUserId);
     }
 
@@ -70,8 +70,8 @@ public class UserController {
     public Response<UserDTO> updateUser (
             @ApiParam("用户ID主键") @PathVariable Long id,
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
-        User user = userService.updateUser(id, mapAdminUser(userDTO));
-        return new Response<>(mapAdminUser(user));
+        User user = userService.updateUser(id, mapUser(userDTO));
+        return new Response<>(mapUser(user));
     }
 
     @DeleteMapping("{id:\\d+}")
@@ -87,7 +87,7 @@ public class UserController {
      * @param user
      * @return
      */
-    private UserDTO mapAdminUser (User user) {
+    private UserDTO mapUser (User user) {
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(user, userDTO);
         return userDTO;
@@ -98,7 +98,7 @@ public class UserController {
      * @param userDTO
      * @return
      */
-    private User mapAdminUser (UserDTO userDTO) {
+    private User mapUser (UserDTO userDTO) {
         User user = new User();
         BeanUtils.copyProperties(userDTO, user);
         return user;
