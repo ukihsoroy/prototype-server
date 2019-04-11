@@ -1,2 +1,4 @@
-# prototype-server 框架原型
-|-prototype-browser: 浏览器
+# ko-server
+
+每日完成情况
+2019-04-11: 完成权限模块

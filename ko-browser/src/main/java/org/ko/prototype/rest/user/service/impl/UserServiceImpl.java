@@ -1,5 +1,6 @@
 package org.ko.prototype.rest.user.service.impl;
 
+import org.ko.prototype.core.exception.TransactionalException;
 import org.ko.prototype.core.type.SystemConstants;
 import org.ko.prototype.data.master.domain.User;
 import org.ko.prototype.rest.user.condition.UserQueryCondition;
@@ -15,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+
+import static org.ko.prototype.core.type.SystemCode.*;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
@@ -47,20 +50,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public Long createUser(User user) {
         user.setDelStatus(SystemConstants.DelStatus.Available);
-        userRepository.insert(user);
+        if (userRepository.insert(user) == 0) {
+            throw new TransactionalException(INSERT_ERROR);
+        }
         return user.getId();
     }
 
     @Override
     public User updateUser(Long id, User user) {
         user.setId(id);
-        userRepository.updateByPrimaryKeySelective(user);
+        if (userRepository.updateByPrimaryKeySelective(user) == 0) {
+            throw new TransactionalException(UPDATE_ERROR);
+        }
         return user;
     }
 
     @Override
     public Long removeUser(Long id) {
-        userRepository.deleteByPrimaryKey(id);
+        if (userRepository.deleteByPrimaryKey(id) == 0) {
+            throw new TransactionalException(DELETE_ERROR);
+        }
         return id;
     }
 }

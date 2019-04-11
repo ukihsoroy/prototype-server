@@ -1,5 +1,6 @@
 package org.ko.prototype.data.master.domain;
 
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
@@ -13,6 +14,7 @@ public class User implements Serializable {
      *
      * @mbg.generated Mon Apr 08 22:49:35 CST 2019
      */
+    @Id
     private Long id;
 
     /**

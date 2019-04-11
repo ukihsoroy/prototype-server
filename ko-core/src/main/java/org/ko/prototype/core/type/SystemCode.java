@@ -7,6 +7,9 @@ public enum SystemCode {
 
     SUCCESS("200", "request success!"),
     EMPTY_DATA("201", "empty data!"),
+    INSERT_ERROR("202", "insert error!"),
+    UPDATE_ERROR("202", "update error!"),
+    DELETE_ERROR("202", "delete error!"),
     SYSTEM_ERROR("500", "system error!"),
     CONVERTER_ERROR("501", "converter error!"),
     VALIDATOR_ERROR_CODE("800", "validator error code!")
