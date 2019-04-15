@@ -8,7 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.ko.prototype.core.support.Response;
 import org.ko.prototype.core.type.SystemCode;
 import org.ko.prototype.data.master.domain.Role;
-import org.ko.prototype.rest.role.condition.RoleQueryCondition;
+import org.ko.prototype.rest.role.condition.RoleQueryListCondition;
 import org.ko.prototype.rest.role.dto.RoleDTO;
 import org.ko.prototype.rest.role.service.RoleService;
 import org.springframework.beans.BeanUtils;
@@ -29,13 +29,13 @@ public class RoleController {
 
     @GetMapping
     @ApiOperation("查询全部权限")
-    public Response<List<RoleDTO>> queryRoleList(RoleQueryCondition condition) {
+    public Response<List<RoleDTO>> queryRoleList(@ApiParam("权限查询参数") @ModelAttribute RoleQueryListCondition condition) {
         //1. 查询用户列表数据
         List<Role> roles = roleService.queryRoleList(condition);
 
         //2. 如果不为空
         if (CollectionUtils.isNotEmpty(roles)) {
-            List<RoleDTO> roleDTOS = roles.stream().map(this::mapRole).collect(Collectors.toList());
+            List<RoleDTO> roleDTOS = roles.stream().map(this::map).collect(Collectors.toList());
             return new Response<>(roleDTOS);
         }
         return new Response<>(SystemCode.EMPTY_DATA);
@@ -45,14 +45,14 @@ public class RoleController {
     @ApiOperation("通过ID查询权限")
     public Response<RoleDTO> queryRoleInfo (@ApiParam("主键") @PathVariable Long id) {
         Role role = roleService.queryRoleInfo(id);
-        return new Response<>(mapRole(role));
+        return new Response<>(map(role));
     }
 
     @PostMapping
     @ApiOperation("新增权限")
     public Response<Long> createRole (
             @ApiParam("权限传输对象实体") @RequestBody RoleDTO roleDTO) {
-        Long roleId = roleService.createRole(mapRole(roleDTO));;
+        Long roleId = roleService.createRole(map(roleDTO));;
         return new Response<>(roleId);
     }
 
@@ -61,8 +61,8 @@ public class RoleController {
     public Response<RoleDTO> updateRole (
             @ApiParam("用户ID主键") @PathVariable Long id,
             @ApiParam("用户传输对象实体") @RequestBody RoleDTO roleDTO) {
-        Role role = roleService.updateRole(id, mapRole(roleDTO));
-        return new Response<>(mapRole(role));
+        Role role = roleService.updateRole(id, map(roleDTO));
+        return new Response<>(map(role));
     }
 
     @DeleteMapping("{id:\\d+}")
@@ -77,7 +77,7 @@ public class RoleController {
      * @param role
      * @return roleDTO
      */
-    private RoleDTO mapRole (Role role) {
+    private RoleDTO map (Role role) {
         RoleDTO roleDTO = new RoleDTO();
         BeanUtils.copyProperties(role, roleDTO);
         return roleDTO;
@@ -88,7 +88,7 @@ public class RoleController {
      * @param roleDTO
      * @return
      */
-    private Role mapRole (RoleDTO roleDTO) {
+    private Role map (RoleDTO roleDTO) {
         Role role = new Role();
         BeanUtils.copyProperties(roleDTO, role);
         return role;

@@ -1,4 +1,4 @@
 package org.ko.prototype.rest.user.condition;
 
-public class UserQueryCondition {
+public class UserQueryListCondition {
 }

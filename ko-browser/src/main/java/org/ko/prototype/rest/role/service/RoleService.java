@@ -1,8 +1,7 @@
 package org.ko.prototype.rest.role.service;
 
 import org.ko.prototype.data.master.domain.Role;
-import org.ko.prototype.rest.role.condition.RoleQueryCondition;
-import org.ko.prototype.rest.role.dto.RoleDTO;
+import org.ko.prototype.rest.role.condition.RoleQueryListCondition;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface RoleService {
      * @param condition
      * @return
      */
-    List<Role> queryRoleList(RoleQueryCondition condition);
+    List<Role> queryRoleList(RoleQueryListCondition condition);
 
     /**
      * <p>通过主键查询权限</p>

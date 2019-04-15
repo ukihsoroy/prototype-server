@@ -1,0 +1,96 @@
+package org.ko.prototype.rest.menu.controller;
+
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
+import org.ko.prototype.core.support.Response;
+import org.ko.prototype.core.type.SystemCode;
+import org.ko.prototype.data.master.domain.Menu;
+import org.ko.prototype.rest.menu.condition.MenuQueryListCondition;
+import org.ko.prototype.rest.menu.dto.MenuDTO;
+import org.ko.prototype.rest.menu.service.MenuService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("menu")
+@Validated
+@Api(description = "菜单模块")
+public class MenuController {
+
+    @Autowired private MenuService menuService;
+
+    @GetMapping
+    @ApiOperation("查询全部菜单")
+    public Response<List<MenuDTO>> queryMenuList (@ApiParam("查询参数") @ModelAttribute MenuQueryListCondition condition) {
+        // 1.查询全部菜单
+        List<Menu> menus = menuService.queryMenuList(condition);
+
+        // 2.格式化菜单
+        if (CollectionUtils.isNotEmpty(menus)) {
+            List<MenuDTO> menuDTOS = menus.stream().map(this::map).collect(Collectors.toList());
+            return new Response<>(menuDTOS);
+        }
+        return new Response<>(SystemCode.EMPTY_DATA);
+    }
+
+    @GetMapping("{id:\\d+}")
+    @ApiOperation("通过ID查询菜单详情")
+    public Response<MenuDTO> queryMenuInfo (@ApiParam("菜单ID") @PathVariable Long id) {
+        Menu menu = menuService.queryMenuInfo(id);
+        return new Response<>(map(menu));
+    }
+
+    @PostMapping
+    @ApiOperation("新增菜单")
+    public Response<Long> createMenu (
+            @ApiParam("菜单传输对象实体") @RequestBody MenuDTO menuDTO) {
+        Long roleId = menuService.createMenu(map(menuDTO));
+        return new Response<>(roleId);
+    }
+
+    @PutMapping("{id:\\d+}")
+    @ApiOperation("通过ID修改菜单")
+    public Response<MenuDTO> updateMenu (
+            @ApiParam("菜单主键ID") @PathVariable Long id,
+            @ApiParam("菜单DTO对象实体") @RequestBody MenuDTO menuDTO) {
+        Menu result = menuService.updateMenu(id, map(menuDTO));
+        return new Response<>(map(result));
+    }
+
+    @DeleteMapping("{id:\\d+}")
+    @ApiOperation("通过ID删除菜单")
+    public Response<Long> removeMenu (@ApiParam("被删除菜单ID") @PathVariable Long id) {
+        Long result = menuService.deleteMenu(id);
+        return new Response<>(result);
+    }
+
+    /**
+     * menu to menuDTO
+     * @param menu
+     * @return
+     */
+    private MenuDTO map (Menu menu) {
+        MenuDTO menuDTO = new MenuDTO();
+        BeanUtils.copyProperties(menu, menuDTO);
+        return menuDTO;
+    }
+
+    /**
+     * menuDTO to menu
+     * @param menuDTO
+     * @return
+     */
+    private Menu map (MenuDTO menuDTO) {
+        Menu menu = new Menu();
+        BeanUtils.copyProperties(menuDTO, menu);
+        return menu;
+    }
+}

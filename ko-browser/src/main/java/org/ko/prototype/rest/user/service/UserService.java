@@ -1,7 +1,7 @@
 package org.ko.prototype.rest.user.service;
 
 import org.ko.prototype.data.master.domain.User;
-import org.ko.prototype.rest.user.condition.UserQueryCondition;
+import org.ko.prototype.rest.user.condition.UserQueryListCondition;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface UserService extends UserDetailsService {
      * @param condition
      * @return
      */
-    List<User> queryUserList(UserQueryCondition condition);
+    List<User> queryUserList(UserQueryListCondition condition);
 
     /**
      * <p>查询用户详细</p>

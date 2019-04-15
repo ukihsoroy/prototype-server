@@ -7,7 +7,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.ko.prototype.core.support.Response;
 import org.ko.prototype.core.type.SystemCode;
 import org.ko.prototype.data.master.domain.User;
-import org.ko.prototype.rest.user.condition.UserQueryCondition;
+import org.ko.prototype.rest.user.condition.UserQueryListCondition;
 import org.ko.prototype.rest.user.dto.UserDTO;
 import org.ko.prototype.rest.user.service.UserService;
 import org.slf4j.Logger;
@@ -33,13 +33,13 @@ public class UserController {
 
     @GetMapping
     @ApiOperation("查询用户列表")
-    public Response<List<UserDTO>> queryUserList(UserQueryCondition condition) {
+    public Response<List<UserDTO>> queryUserList(@ApiParam("列表查询参数") @ModelAttribute UserQueryListCondition condition) {
         //1. 查询用户列表数据
         List<User> users = userService.queryUserList(condition);
 
         //2. 如果不为空
         if (CollectionUtils.isNotEmpty(users)) {
-            List<UserDTO> userDTOS = users.stream().map(this::mapUser).collect(Collectors.toList());
+            List<UserDTO> userDTOS = users.stream().map(this::map).collect(Collectors.toList());
             return new Response<>(userDTOS);
         }
         return new Response<>(SystemCode.EMPTY_DATA);
@@ -52,7 +52,7 @@ public class UserController {
         LOGGER.info("UserController#queryUserInfo");
         User user = userService.queryUserInfo(id);
         if (Objects.nonNull(user)) {
-            return new Response<>(this.mapUser(user));
+            return new Response<>(this.map(user));
         }
         return new Response<>(SystemCode.EMPTY_DATA);
     }
@@ -61,7 +61,7 @@ public class UserController {
     @ApiOperation("新建用户")
     public Response<Long> createUser (
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
-        Long adminUserId = userService.createUser(mapUser(userDTO));
+        Long adminUserId = userService.createUser(map(userDTO));
         return new Response<>(adminUserId);
     }
 
@@ -70,8 +70,8 @@ public class UserController {
     public Response<UserDTO> updateUser (
             @ApiParam("用户ID主键") @PathVariable Long id,
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
-        User user = userService.updateUser(id, mapUser(userDTO));
-        return new Response<>(mapUser(user));
+        User user = userService.updateUser(id, map(userDTO));
+        return new Response<>(map(user));
     }
 
     @DeleteMapping("{id:\\d+}")
@@ -87,7 +87,7 @@ public class UserController {
      * @param user
      * @return
      */
-    private UserDTO mapUser (User user) {
+    private UserDTO map (User user) {
         UserDTO userDTO = new UserDTO();
         BeanUtils.copyProperties(user, userDTO);
         return userDTO;
@@ -98,7 +98,7 @@ public class UserController {
      * @param userDTO
      * @return
      */
-    private User mapUser (UserDTO userDTO) {
+    private User map (UserDTO userDTO) {
         User user = new User();
         BeanUtils.copyProperties(userDTO, user);
         return user;

@@ -4,7 +4,7 @@ import org.ko.prototype.core.exception.TransactionalException;
 import org.ko.prototype.core.type.SystemCode;
 import org.ko.prototype.core.type.SystemConstants;
 import org.ko.prototype.data.master.domain.Role;
-import org.ko.prototype.rest.role.condition.RoleQueryCondition;
+import org.ko.prototype.rest.role.condition.RoleQueryListCondition;
 import org.ko.prototype.rest.role.repository.RoleRepository;
 import org.ko.prototype.rest.role.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class RoleServiceImpl implements RoleService {
     @Autowired private RoleRepository roleRepository;
 
     @Override
-    public List<Role> queryRoleList(RoleQueryCondition condition) {
+    public List<Role> queryRoleList(RoleQueryListCondition condition) {
         Example e = new Example(Role.class);
         e.createCriteria()
                 .andEqualTo("delStatus", "1");
@@ -56,7 +56,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Long deleteRole(Long id) {
-        if (roleRepository.deleteByPrimaryKey(id) == 0) {
+        Role role = new Role();
+        role.setId(id);
+        role.setDelStatus(SystemConstants.DelStatus.Deleted);
+        if (roleRepository.updateByPrimaryKeySelective(role) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }
         return id;

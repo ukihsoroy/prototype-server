@@ -3,7 +3,7 @@ package org.ko.prototype.rest.user.service.impl;
 import org.ko.prototype.core.exception.TransactionalException;
 import org.ko.prototype.core.type.SystemConstants;
 import org.ko.prototype.data.master.domain.User;
-import org.ko.prototype.rest.user.condition.UserQueryCondition;
+import org.ko.prototype.rest.user.condition.UserQueryListCondition;
 import org.ko.prototype.rest.user.repository.UserRepository;
 import org.ko.prototype.rest.user.service.UserService;
 import org.slf4j.Logger;
@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> queryUserList(UserQueryCondition condition) {
+    public List<User> queryUserList(UserQueryListCondition condition) {
         Example e = new Example(User.class);
         e.createCriteria()
                 .andEqualTo("delStatus", "1");
@@ -67,7 +67,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long removeUser(Long id) {
-        if (userRepository.deleteByPrimaryKey(id) == 0) {
+        User user = new User();
+        user.setId(id);
+        user.setDelStatus(SystemConstants.DelStatus.Deleted);
+        if (userRepository.updateByPrimaryKeySelective(user) == 0) {
             throw new TransactionalException(DELETE_ERROR);
         }
         return id;
