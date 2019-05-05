@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ko.prototype.rest.menu.repository.MenuRepository">
+
+    <resultMap id="BaseMenuResultMap" type="org.ko.prototype.data.master.domain.Menu">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="del_status" property="delStatus" jdbcType="SMALLINT"/>
+        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="ResultMapWithChildMenu"
+               type="org.ko.prototype.rest.menu.dto.MenuDTO"
+               extends="BaseMenuResultMap">
+        <collection property="menuDTOS"
+                    javaType="java.util.List"
+                    ofType="org.ko.prototype.rest.menu.dto.MenuDTO"
+                    column="id"
+                    select="queryMenuByParentId"/>
+    </resultMap>
+
+    <select id="queryMenuList" resultMap="ResultMapWithChildMenu">
+        SELECT
+            id,
+            name,
+            parent_id,
+            del_status,
+            create_user,
+            create_date,
+            update_user,
+            update_date
+        FROM t_menu
+        WHERE del_status = 1
+            AND parent_id IS NULL
+    </select>
+
+    <select id="queryMenuByParentId" resultMap="ResultMapWithChildMenu" parameterType="java.lang.Long">
+        SELECT
+            id,
+            name,
+            parent_id,
+            del_status,
+            create_user,
+            create_date,
+            update_user,
+            update_date
+        FROM t_menu
+        WHERE del_status = 1
+            AND parent_id = #{id}
+    </select>
+
+</mapper>

@@ -36,7 +36,7 @@ public class MenuControllerTests {
 
     @Test
     public void whenQuerySuccess () throws Exception {
-        String result = mock.perform(get("/user")
+        String result = mock.perform(get("/menu")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -47,6 +47,16 @@ public class MenuControllerTests {
     @Test
     public void whenGetInfoSuccess () throws Exception {
         String result = mock.perform(get("/user/1")
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true))
+                .andReturn().getResponse().getContentAsString();
+        System.out.println(result);
+    }
+
+    @Test
+    public void whenGetMenuByParentId () throws Exception {
+        String result = mock.perform(get("/menu/child/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))

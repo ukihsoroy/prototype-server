@@ -10,6 +10,7 @@ import org.ko.prototype.core.type.SystemCode;
 import org.ko.prototype.data.master.domain.Role;
 import org.ko.prototype.rest.role.condition.RoleQueryListCondition;
 import org.ko.prototype.rest.role.dto.RoleDTO;
+import org.ko.prototype.rest.role.dto.RoleMenuDTO;
 import org.ko.prototype.rest.role.service.RoleService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,12 @@ public class RoleController {
     public Response<Long> deleteRole(@ApiParam("用户ID主键") @PathVariable Long id) {
         Long result = roleService.deleteRole(id);
         return new Response<>(result);
+    }
+
+    @GetMapping("menu/{id:\\d+}")
+    @ApiOperation("获取单一权限下的全部菜单")
+    public Response<RoleMenuDTO> queryRoleMenuByRoleId (@ApiParam("用户权限编号") @PathVariable Long id) {
+        return null;
     }
 
     /**

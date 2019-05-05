@@ -4,9 +4,7 @@ package org.ko.prototype.rest.menu.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.commons.collections.CollectionUtils;
 import org.ko.prototype.core.support.Response;
-import org.ko.prototype.core.type.SystemCode;
 import org.ko.prototype.data.master.domain.Menu;
 import org.ko.prototype.rest.menu.condition.MenuQueryListCondition;
 import org.ko.prototype.rest.menu.dto.MenuDTO;
@@ -17,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("menu")
@@ -31,14 +28,8 @@ public class MenuController {
     @ApiOperation("查询全部菜单")
     public Response<List<MenuDTO>> queryMenuList (@ApiParam("查询参数") @ModelAttribute MenuQueryListCondition condition) {
         // 1.查询全部菜单
-        List<Menu> menus = menuService.queryMenuList(condition);
-
-        // 2.格式化菜单
-        if (CollectionUtils.isNotEmpty(menus)) {
-            List<MenuDTO> menuDTOS = menus.stream().map(this::map).collect(Collectors.toList());
-            return new Response<>(menuDTOS);
-        }
-        return new Response<>(SystemCode.EMPTY_DATA);
+        List<MenuDTO> menus = menuService.queryMenuList(condition);
+        return new Response<>(menus);
     }
 
     @GetMapping("{id:\\d+}")
@@ -46,6 +37,13 @@ public class MenuController {
     public Response<MenuDTO> queryMenuInfo (@ApiParam("菜单ID") @PathVariable Long id) {
         Menu menu = menuService.queryMenuInfo(id);
         return new Response<>(map(menu));
+    }
+
+    @GetMapping("child/{parentId:\\d+}")
+    @ApiOperation("通过父ID查询子菜单列表")
+    public Response<List<MenuDTO>> queryMenuByParentId (@ApiParam("父级菜单ID") @PathVariable Long parentId) {
+        List<MenuDTO> menuDTOS = menuService.queryMenuByParentId(parentId);
+        return new Response<>(menuDTOS);
     }
 
     @PostMapping

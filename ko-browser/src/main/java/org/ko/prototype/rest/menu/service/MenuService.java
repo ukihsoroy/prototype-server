@@ -2,6 +2,7 @@ package org.ko.prototype.rest.menu.service;
 
 import org.ko.prototype.data.master.domain.Menu;
 import org.ko.prototype.rest.menu.condition.MenuQueryListCondition;
+import org.ko.prototype.rest.menu.dto.MenuDTO;
 
 import java.util.List;
 
@@ -12,14 +13,17 @@ public interface MenuService {
      * @param condition
      * @return
      */
-    List<Menu> queryMenuList(MenuQueryListCondition condition);
+    List<MenuDTO> queryMenuList(MenuQueryListCondition condition);
 
     /**
      * <p>通过主键查询菜单</p>
      * @param id
      * @return
      */
-    Menu queryMenuInfo(Long id);
+    MenuDTO queryMenuInfo(Long id);
+
+
+    List<MenuDTO> queryMenuByParentId(Long id);
 
     /**
      * <p>创建新的菜单</p>
