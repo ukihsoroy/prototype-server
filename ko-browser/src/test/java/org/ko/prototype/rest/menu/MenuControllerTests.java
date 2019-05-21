@@ -87,7 +87,7 @@ public class MenuControllerTests {
     public void whenUpdateSuccess () throws Exception {
         Date time = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
 //        Date time = new Date();
-        String content = "{\"name\":\"菜单369\"}";
+        String content = "{\"name\":\"菜单311\"}";
         System.out.println(time.getTime());
         String result = mock.perform(put("/menu/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)

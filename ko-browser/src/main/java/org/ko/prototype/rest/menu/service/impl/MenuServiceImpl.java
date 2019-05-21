@@ -32,13 +32,18 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public List<MenuDTO> queryMenuByRoleId(Long roleId) {
+        return menuRepository.queryMenuByRoleId(roleId);
+    }
+
+    @Override
     public List<MenuDTO> queryMenuByParentId(Long id) {
         return menuRepository.queryMenuByParentId(id);
     }
 
     @Override
     public Long createMenu(Menu menu) {
-        menu.setDelStatus(SystemConstants.DelStatus.Available);
+        menu.setAvailableStatus(SystemConstants.AvailableStatus.Available);
         if (menuRepository.insertSelective(menu) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
@@ -58,7 +63,7 @@ public class MenuServiceImpl implements MenuService {
     public Long deleteMenu(Long id) {
         Menu menu = new Menu();
         menu.setId(id);
-        menu.setDelStatus(SystemConstants.DelStatus.Deleted);
+        menu.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
         if (menuRepository.updateByPrimaryKeySelective(menu) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }

@@ -47,4 +47,10 @@ public interface MenuService {
     Long deleteMenu(Long id);
 
 
+    /**
+     * 通过权限ID查询菜单列表
+     * @param roleId
+     * @return
+     */
+    List<MenuDTO> queryMenuByRoleId(Long roleId);
 }

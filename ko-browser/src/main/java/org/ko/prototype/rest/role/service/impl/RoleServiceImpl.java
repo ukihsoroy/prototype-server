@@ -27,7 +27,7 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> queryRoleList(RoleQueryListCondition condition) {
         Example e = new Example(Role.class);
         e.createCriteria()
-                .andEqualTo("delStatus", "1");
+                .andEqualTo("availableStatus", "1");
         return roleRepository.selectByExample(e);
     }
 
@@ -38,7 +38,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Long createRole(Role role) {
-        role.setDelStatus(SystemConstants.DelStatus.Available);
+        role.setAvailableStatus(SystemConstants.AvailableStatus.Available);
         if (roleRepository.insert(role) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
@@ -58,7 +58,7 @@ public class RoleServiceImpl implements RoleService {
     public Long deleteRole(Long id) {
         Role role = new Role();
         role.setId(id);
-        role.setDelStatus(SystemConstants.DelStatus.Deleted);
+        role.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
         if (roleRepository.updateByPrimaryKeySelective(role) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }

@@ -39,6 +39,13 @@ public class MenuController {
         return new Response<>(map(menu));
     }
 
+    @GetMapping("role/{roleId:\\d+}")
+    @ApiOperation("通过权限ID查询菜单")
+    public Response<List<MenuDTO>> queryMenuInfoByRoleId (@ApiParam("权限ID") @PathVariable Long roleId) {
+        List<MenuDTO> menuDTOS = menuService.queryMenuByRoleId(roleId);
+        return new Response<>(menuDTOS);
+    }
+
     @GetMapping("child/{parentId:\\d+}")
     @ApiOperation("通过父ID查询子菜单列表")
     public Response<List<MenuDTO>> queryMenuByParentId (@ApiParam("父级菜单ID") @PathVariable Long parentId) {

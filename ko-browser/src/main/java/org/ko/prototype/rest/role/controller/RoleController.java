@@ -73,12 +73,6 @@ public class RoleController {
         return new Response<>(result);
     }
 
-    @GetMapping("menu/{id:\\d+}")
-    @ApiOperation("获取单一权限下的全部菜单")
-    public Response<RoleMenuDTO> queryRoleMenuByRoleId (@ApiParam("用户权限编号") @PathVariable Long id) {
-        return null;
-    }
-
     /**
      * Role mapTo RoleDTO
      * @param role

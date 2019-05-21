@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     public List<User> queryUserList(UserQueryListCondition condition) {
         Example e = new Example(User.class);
         e.createCriteria()
-                .andEqualTo("delStatus", "1");
+                .andEqualTo("availableStatus", "1");
         return userRepository.selectByExample(e);
     }
 
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long createUser(User user) {
-        user.setDelStatus(SystemConstants.DelStatus.Available);
+        user.setAvailableStatus(SystemConstants.AvailableStatus.Available);
         if (userRepository.insert(user) == 0) {
             throw new TransactionalException(INSERT_ERROR);
         }
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
     public Long removeUser(Long id) {
         User user = new User();
         user.setId(id);
-        user.setDelStatus(SystemConstants.DelStatus.Deleted);
+        user.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
         if (userRepository.updateByPrimaryKeySelective(user) == 0) {
             throw new TransactionalException(DELETE_ERROR);
         }

@@ -14,4 +14,6 @@ public interface MenuRepository extends Mapper<Menu> {
     MenuDTO queryMenuById(Long id);
 
     List<MenuDTO> queryMenuByParentId(Long id);
+
+    List<MenuDTO> queryMenuByRoleId(Long roleId);
 }

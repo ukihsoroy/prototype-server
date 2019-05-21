@@ -6,7 +6,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
-        <result column="del_status" property="delStatus" jdbcType="SMALLINT"/>
+        <result column="available_status" property="availableStatus" jdbcType="SMALLINT"/>
         <result column="create_user" property="createUser" jdbcType="BIGINT"/>
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
         <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
@@ -28,13 +28,13 @@
             id,
             name,
             parent_id,
-            del_status,
+            available_status,
             create_user,
             create_date,
             update_user,
             update_date
         FROM t_menu
-        WHERE del_status = 1
+        WHERE available_status = 1
             AND parent_id IS NULL
     </select>
 
@@ -43,14 +43,28 @@
             id,
             name,
             parent_id,
-            del_status,
+            available_status,
             create_user,
             create_date,
             update_user,
             update_date
         FROM t_menu
-        WHERE del_status = 1
+        WHERE available_status = 1
             AND parent_id = #{id}
+    </select>
+
+    <select id="queryMenuByRoleId" resultMap="ResultMapWithChildMenu" parameterType="java.lang.Long">
+        SELECT
+            m.id,
+            m.name,
+            m.available_status,
+            m.create_user,
+            m.create_date,
+            m.update_user,
+            m.update_date
+        FROM t_role_menu rm
+        LEFT JOIN t_menu m ON rm.menu_id = m.id AND m.available_status = 1
+        WHERE rm.available_status = 1 AND rm.role_id = #{roleId}
     </select>
 
 </mapper>

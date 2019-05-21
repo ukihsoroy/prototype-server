@@ -8,7 +8,7 @@ public final class SystemConstants {
     /**
      * 删除状态
      */
-    public static final class DelStatus {
+    public static final class AvailableStatus {
         /**
          * 删除
          */
@@ -17,7 +17,7 @@ public final class SystemConstants {
         //有效
         public static final Short Available = 1;
 
-        private DelStatus () {}
+        private AvailableStatus () {}
     }
 
     private SystemConstants () {}
