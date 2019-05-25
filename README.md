@@ -1,7 +1,7 @@
 # quick-sigma-server
 
 ## 文档地址
-`swagger-ui`: [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
+`swagger-ui`: [http://localhost:8088/swagger-ui.html](http://localhost:8088/swagger-ui.html)
 
 ## 提交记录
 - 2019-04-11: 完成用户模块

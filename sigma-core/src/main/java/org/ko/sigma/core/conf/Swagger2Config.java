@@ -26,9 +26,9 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("PROTOTYPE-SERVER API")
-                .description("BASE框架API")
-                .version("1.0")
+                .title("QUICK-SIGMA-SERVER")
+                .description("快速开放框架swagger2 API文档")
+                .version("1.0.0")
                 .build();
     }
 

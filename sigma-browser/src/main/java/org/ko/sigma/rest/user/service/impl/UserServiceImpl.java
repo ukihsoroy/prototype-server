@@ -30,7 +30,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //根据用户名查找用户信息
-        return null;
+        Example e = new Example(User.class);
+        e.createCriteria()
+                .andEqualTo("username", username)
+                .andEqualTo("availableStatus", "1");
+        return userRepository.selectOneByExample(e);
     }
 
 

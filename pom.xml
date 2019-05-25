@@ -27,6 +27,7 @@
         <wiremock.version>2.16.0</wiremock.version>
         <spring.mybatis.version>1.3.2</spring.mybatis.version>
         <mybatis.common.mapper>1.2.3</mybatis.common.mapper>
+        <spring.security.version>4.2.5.RELEASE</spring.security.version>
     </properties>
 
     <dependencyManagement>

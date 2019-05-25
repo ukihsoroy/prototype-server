@@ -33,8 +33,8 @@ public class ServerCodeGenerator extends AbstractGenerator {
     @Autowired private Configuration freeMarkerConfiguration;
 
     private static List<String> ENV_JAVA = Arrays.asList(
-            "bo.java.ftl",
-            "command.java.ftl",
+            "dto.java.ftl",
+            "condition.java.ftl",
             "controller.java.ftl",
             "repository.java.ftl",
             "service.java.ftl",
