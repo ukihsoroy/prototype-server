@@ -3,7 +3,7 @@ package org.ko.sigma.rest.menu.service.impl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.type.SystemConstants;
-import org.ko.sigma.data.master.domain.Menu;
+import org.ko.sigma.data.master.entity.Menu;
 import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.repository.MenuRepository;
@@ -11,7 +11,6 @@ import org.ko.sigma.rest.menu.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 

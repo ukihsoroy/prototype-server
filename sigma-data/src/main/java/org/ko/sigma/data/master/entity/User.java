@@ -1,4 +1,4 @@
-package org.ko.sigma.data.master.domain;
+package org.ko.sigma.data.master.entity;
 
 import javax.persistence.Id;
 import javax.persistence.Table;

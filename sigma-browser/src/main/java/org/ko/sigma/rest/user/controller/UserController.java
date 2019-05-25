@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiParam;
 import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
-import org.ko.sigma.data.master.domain.User;
+import org.ko.sigma.data.master.entity.User;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.service.UserService;

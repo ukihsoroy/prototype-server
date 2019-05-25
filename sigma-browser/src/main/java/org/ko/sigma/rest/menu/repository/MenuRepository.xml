@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.ko.sigma.rest.menu.repository.MenuRepository">
 
-    <resultMap id="BaseMenuResultMap" type="org.ko.sigma.data.master.domain.Menu">
+    <resultMap id="BaseMenuResultMap" type="org.ko.sigma.data.master.entity.Menu">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="parent_id" property="parentId" jdbcType="BIGINT"/>

@@ -1,6 +1,6 @@
 package org.ko.sigma.rest.menu.dto;
 
-import org.ko.sigma.data.master.domain.Menu;
+import org.ko.sigma.data.master.entity.Menu;
 
 import java.util.List;
 

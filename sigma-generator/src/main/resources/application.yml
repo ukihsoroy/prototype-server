@@ -1,7 +1,7 @@
 server.port: 1337
 
 spring:
-  application.name: prototype-generator
+  application.name: sigma-generator
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     ip: 127.0.0.1
@@ -13,10 +13,10 @@ spring:
 
 # 生成工具配置
 ko.generator:
-  moduleName: ko-data
+  moduleName: sigma-data
   tables: t_user
   java:
-    rootPackage: org.ko.prototype.data.master
+    rootPackage: org.ko.sigma.data.master
     mybatis:
       domain: domain
       mapper: dao

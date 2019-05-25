@@ -1,8 +1,8 @@
 package org.ko.sigma.rest.role.dto;
 
-import org.ko.sigma.data.master.domain.Menu;
-import org.ko.sigma.data.master.domain.Role;
-import org.ko.sigma.data.master.domain.RoleMenu;
+import org.ko.sigma.data.master.entity.Menu;
+import org.ko.sigma.data.master.entity.Role;
+import org.ko.sigma.data.master.entity.RoleMenu;
 
 import java.util.List;
 

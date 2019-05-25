@@ -2,7 +2,7 @@ package org.ko.sigma.rest.user.service.impl;
 
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemConstants;
-import org.ko.sigma.data.master.domain.User;
+import org.ko.sigma.data.master.entity.User;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;
 import org.ko.sigma.rest.user.repository.UserRepository;
 import org.ko.sigma.rest.user.service.UserService;
