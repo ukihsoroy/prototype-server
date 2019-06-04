@@ -1,7 +1,7 @@
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql:///ko_server
+    url: jdbc:mysql:///sigma_server
     username: root
     password: tiger
 

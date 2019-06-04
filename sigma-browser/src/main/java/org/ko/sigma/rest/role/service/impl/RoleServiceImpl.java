@@ -3,7 +3,7 @@ package org.ko.sigma.rest.role.service.impl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.type.SystemConstants;
-import org.ko.sigma.data.master.entity.Role;
+import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
 import org.ko.sigma.rest.role.repository.RoleRepository;
 import org.ko.sigma.rest.role.service.RoleService;

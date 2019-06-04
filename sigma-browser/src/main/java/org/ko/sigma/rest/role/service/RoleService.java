@@ -1,6 +1,6 @@
 package org.ko.sigma.rest.role.service;
 
-import org.ko.sigma.data.master.entity.Role;
+import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
 
 import java.util.List;

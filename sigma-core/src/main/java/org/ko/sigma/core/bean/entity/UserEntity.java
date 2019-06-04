@@ -1,16 +1,15 @@
-package org.ko.sigma.data.master.entity;
+package org.ko.sigma.core.bean.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 
 @Table(name = "t_user")
-public class User implements UserDetails {
+public class UserEntity implements UserDetails {
 
     public boolean isAccountNonExpired() {
         return false;
@@ -686,7 +685,7 @@ public class User implements UserDetails {
         if (getClass() != that.getClass()) {
             return false;
         }
-        User other = (User) that;
+        UserEntity other = (UserEntity) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getUsername() == null ? other.getUsername() == null : this.getUsername().equals(other.getUsername()))
             && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))

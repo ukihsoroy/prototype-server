@@ -3,7 +3,7 @@ package org.ko.sigma.rest.menu.service.impl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.type.SystemConstants;
-import org.ko.sigma.data.master.entity.Menu;
+import org.ko.sigma.data.entity.Menu;
 import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.repository.MenuRepository;
