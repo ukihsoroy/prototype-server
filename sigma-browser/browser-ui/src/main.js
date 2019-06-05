@@ -1,15 +1,8 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import Login from './Login.vue'
+import App from './App.vue'
 
-Vue.use(ElementUI)
+Vue.config.productionTip = false
 
 new Vue({
-  el: '#login',
-  data: {
-    username: "",
-    password: ""
-  },
-  render: h => h(Login)
-})
+  render: h => h(App)
+}).$mount('#app')
