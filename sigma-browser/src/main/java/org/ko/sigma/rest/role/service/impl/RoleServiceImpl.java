@@ -26,7 +26,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
 
     @Override
     public List<Role> queryRoleList(RoleQueryListCondition condition) {
-        return roleRepository.selectList(new QueryWrapper<Role>().eq("availableStatus", 1));
+        return roleRepository.selectList(new QueryWrapper<Role>().eq("available_status", 1));
     }
 
     @Override
