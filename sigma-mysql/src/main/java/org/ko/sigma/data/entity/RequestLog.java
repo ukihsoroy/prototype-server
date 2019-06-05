@@ -1,11 +1,12 @@
 package org.ko.sigma.data.entity;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.util.Date;
 
-@Table(name="t_request_log")
+@TableName("t_request_log")
 public class RequestLog implements Serializable {
     /**
      *
@@ -14,7 +15,7 @@ public class RequestLog implements Serializable {
      *
      * @mbg.generated Sat May 25 16:40:04 CST 2019
      */
-    @Id
+    @TableId
     private String id;
 
     /**

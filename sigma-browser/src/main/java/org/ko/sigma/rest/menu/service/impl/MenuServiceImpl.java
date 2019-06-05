@@ -1,5 +1,6 @@
 package org.ko.sigma.rest.menu.service.impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.type.SystemConstants;
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class MenuServiceImpl implements MenuService {
+public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implements MenuService {
 
     @Autowired private MenuRepository menuRepository;
 
@@ -43,7 +44,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Long createMenu(Menu menu) {
         menu.setAvailableStatus(SystemConstants.AvailableStatus.Available);
-        if (menuRepository.insertSelective(menu) == 0) {
+        if (menuRepository.insert(menu) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
         return menu.getId();
@@ -52,7 +53,7 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Menu updateMenu(Long id, Menu menu) {
         menu.setId(id);
-        if (menuRepository.updateByPrimaryKeySelective(menu) == 0) {
+        if (menuRepository.updateById(menu) == 0) {
             throw new TransactionalException(SystemCode.UPDATE_ERROR);
         }
         return menu;
@@ -63,7 +64,7 @@ public class MenuServiceImpl implements MenuService {
         Menu menu = new Menu();
         menu.setId(id);
         menu.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
-        if (menuRepository.updateByPrimaryKeySelective(menu) == 0) {
+        if (menuRepository.updateById(menu) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }
         return id;

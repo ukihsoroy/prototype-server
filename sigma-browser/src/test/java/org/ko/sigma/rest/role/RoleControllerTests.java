@@ -52,7 +52,7 @@ public class RoleControllerTests {
     public void whenUpdateSuccess () throws Exception {
         String content = "{\"name\":\"新增菜单2\"}";
         System.out.println(new Date().getTime());
-        String result = mock.perform(put("/role/2")
+        String result = mock.perform(put("/role/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())
@@ -63,7 +63,7 @@ public class RoleControllerTests {
     @Test
     public void whenDeleteSuccess () throws Exception {
         System.out.println(new Date().getTime());
-        String result = mock.perform(delete("/role/2")
+        String result = mock.perform(delete("/role/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
@@ -82,7 +82,7 @@ public class RoleControllerTests {
 
     @Test
     public void whenQueryInfoSuccess () throws Exception {
-        String result = mock.perform(get("/role/2")
+        String result = mock.perform(get("/role/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))

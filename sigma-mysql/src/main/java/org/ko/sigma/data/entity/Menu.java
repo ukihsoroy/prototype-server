@@ -1,10 +1,12 @@
 package org.ko.sigma.data.entity;
 
-import javax.persistence.Table;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.io.Serializable;
 import java.util.Date;
 
-@Table(name = "t_menu")
+@TableName("t_menu")
 public class Menu implements Serializable {
     /**
      *
@@ -13,6 +15,7 @@ public class Menu implements Serializable {
      *
      * @mbg.generated Tue May 21 23:25:19 CST 2019
      */
+    @TableId
     private Long id;
 
     /**
