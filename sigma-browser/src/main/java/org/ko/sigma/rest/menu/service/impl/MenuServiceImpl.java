@@ -27,8 +27,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     }
 
     @Override
-    public MenuDTO queryMenuInfo(Long id) {
-        return menuRepository.queryMenuById(id);
+    public Menu queryMenuInfo(Long id) {
+        return menuRepository.selectById(id);
     }
 
     @Override

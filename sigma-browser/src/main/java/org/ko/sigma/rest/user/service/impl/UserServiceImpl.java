@@ -2,7 +2,7 @@ package org.ko.sigma.rest.user.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.ko.sigma.core.bean.entity.UserEntity;
+import org.ko.sigma.rest.user.entity.UserEntity;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemConstants;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;

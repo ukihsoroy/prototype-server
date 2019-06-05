@@ -3,8 +3,9 @@ package org.ko.sigma.rest.user.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.models.auth.In;
 import org.apache.commons.collections.CollectionUtils;
-import org.ko.sigma.core.bean.entity.UserEntity;
+import org.ko.sigma.rest.user.entity.UserEntity;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;
@@ -67,11 +68,11 @@ public class UserController {
 
     @PutMapping("{id:\\d+}")
     @ApiOperation("通过ID更新用户信息")
-    public Response<UserDTO> updateUser (
+    public Response<UserEntity> updateUser (
             @ApiParam("用户ID主键") @PathVariable Long id,
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
         UserEntity userEntity = userService.updateUser(id, map(userDTO));
-        return new Response<>(map(userEntity));
+        return new Response<>(userEntity);
     }
 
     @DeleteMapping("{id:\\d+}")

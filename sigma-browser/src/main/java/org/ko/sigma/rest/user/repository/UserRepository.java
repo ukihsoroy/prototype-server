@@ -1,7 +1,7 @@
 package org.ko.sigma.rest.user.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.ko.sigma.core.bean.entity.UserEntity;
+import org.ko.sigma.rest.user.entity.UserEntity;
 import org.springframework.stereotype.Repository;
 
 @Repository

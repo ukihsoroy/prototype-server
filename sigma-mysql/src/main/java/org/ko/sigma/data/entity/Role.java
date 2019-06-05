@@ -1,5 +1,6 @@
 package org.ko.sigma.data.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -15,7 +16,7 @@ public class Role implements Serializable {
      *
      * @mbg.generated Tue May 21 23:25:19 CST 2019
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
