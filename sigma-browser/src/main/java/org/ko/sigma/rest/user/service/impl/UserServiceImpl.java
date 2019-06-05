@@ -1,5 +1,7 @@
 package org.ko.sigma.rest.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.bean.entity.UserEntity;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemConstants;
@@ -13,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ import static org.ko.sigma.core.type.SystemCode.*;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
@@ -29,26 +30,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //根据用户名查找用户信息
-        Example e = new Example(UserEntity.class);
-        e.createCriteria()
-                .andEqualTo("username", username)
-                .andEqualTo("availableStatus", "1");
-        return userRepository.selectOneByExample(e);
+        return userRepository.selectOne(new QueryWrapper<UserEntity>().eq("username", username));
     }
 
 
     @Override
     public List<UserEntity> queryUserList(UserQueryListCondition condition) {
-        Example e = new Example(UserEntity.class);
-        e.createCriteria()
-                .andEqualTo("availableStatus", "1");
-        return userRepository.selectByExample(e);
+        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
+        return userRepository.selectList(queryWrapper);
     }
 
     @Override
     public UserEntity queryUserInfo(Long id) {
-        return userRepository.selectByPrimaryKey(id);
+        return userRepository.selectById(id);
     }
 
     @Override
@@ -63,7 +57,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserEntity updateUser(Long id, UserEntity userEntity) {
         userEntity.setId(id);
-        if (userRepository.updateByPrimaryKeySelective(userEntity) == 0) {
+        if (userRepository.updateById(userEntity) == 0) {
             throw new TransactionalException(UPDATE_ERROR);
         }
         return userEntity;
@@ -74,7 +68,7 @@ public class UserServiceImpl implements UserService {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(id);
         userEntity.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
-        if (userRepository.updateByPrimaryKeySelective(userEntity) == 0) {
+        if (userRepository.updateById(userEntity) == 0) {
             throw new TransactionalException(DELETE_ERROR);
         }
         return id;

@@ -1,11 +1,12 @@
 package org.ko.sigma.rest.role.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
 
 import java.util.List;
 
-public interface RoleService {
+public interface RoleService extends IService<Role> {
 
     /**
      * <p>查询权限列表</p>

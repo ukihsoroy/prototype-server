@@ -1,13 +1,13 @@
 package org.ko.sigma.rest.menu.repository;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.ko.sigma.data.entity.Menu;
 import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
-import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
 
-public interface MenuRepository extends Mapper<Menu> {
+public interface MenuRepository extends BaseMapper<Menu> {
 
     List<MenuDTO> queryMenuList(MenuQueryListCondition condition);
 

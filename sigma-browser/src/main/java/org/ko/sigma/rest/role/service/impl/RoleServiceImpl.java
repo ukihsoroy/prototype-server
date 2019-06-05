@@ -1,5 +1,7 @@
 package org.ko.sigma.rest.role.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.type.SystemConstants;
@@ -10,13 +12,12 @@ import org.ko.sigma.rest.role.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class RoleServiceImpl implements RoleService {
+public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implements RoleService {
 
     /**
      * 权限数据库对象
@@ -25,15 +26,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> queryRoleList(RoleQueryListCondition condition) {
-        Example e = new Example(Role.class);
-        e.createCriteria()
-                .andEqualTo("availableStatus", "1");
-        return roleRepository.selectByExample(e);
+        return roleRepository.selectList(new QueryWrapper<Role>().eq("availableStatus", 1));
     }
 
     @Override
     public Role queryRoleInfo(Long id) {
-        return roleRepository.selectByPrimaryKey(id);
+        return roleRepository.selectById(id);
     }
 
     @Override
@@ -48,7 +46,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role updateRole(Long id, Role role) {
         role.setId(id);
-        if (roleRepository.updateByPrimaryKeySelective(role) == 0) {
+        if (roleRepository.updateById(role) == 0) {
             throw new TransactionalException(SystemCode.UPDATE_ERROR);
         }
         return role;
@@ -59,7 +57,7 @@ public class RoleServiceImpl implements RoleService {
         Role role = new Role();
         role.setId(id);
         role.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
-        if (roleRepository.updateByPrimaryKeySelective(role) == 0) {
+        if (roleRepository.updateById(role) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }
         return id;

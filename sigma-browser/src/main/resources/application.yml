@@ -20,11 +20,11 @@ management:
 security.basic.enabled: false
 
 # mybatis 配置
-mybatis:
+mybatis-plus:
+  mapper-locations: classpath:org/ko/segma/rest/**/repository/*.xml  #mapper xml扫描
   typeAliasesPackage: org.ko.segma.data.*.domain #小名
-  mapperLocations: classpath:org/ko/segma/rest/**/repository/*.xml  #mapper xml扫描
-  configuration:
-    mapUnderscoreToCamelCase: true #开始下划线转驼峰
+
+mybatis.configuration.mapUnderscoreToCamelCase: true
 
 # 通用mapper配置
 mapper:
@@ -34,4 +34,6 @@ mapper:
 
 logging:
   level: info
+
+
 
