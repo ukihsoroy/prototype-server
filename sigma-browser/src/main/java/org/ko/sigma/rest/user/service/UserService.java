@@ -1,6 +1,6 @@
 package org.ko.sigma.rest.user.service;
 
-import org.ko.sigma.data.master.entity.User;
+import org.ko.sigma.core.bean.entity.UserEntity;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -13,29 +13,29 @@ public interface UserService extends UserDetailsService {
      * @param condition
      * @return
      */
-    List<User> queryUserList(UserQueryListCondition condition);
+    List<UserEntity> queryUserList(UserQueryListCondition condition);
 
     /**
      * <p>查询用户详细</p>
      * @param id
      * @return
      */
-    User queryUserInfo(Long id);
+    UserEntity queryUserInfo(Long id);
 
     /**
      * <p>创建用户</p>
-     * @param user
+     * @param userEntity
      * @return
      */
-    Long createUser(User user);
+    Long createUser(UserEntity userEntity);
 
     /**
      * <p>更新用户信息</p>
      * @param id
-     * @param user
+     * @param userEntity
      * @return
      */
-    User updateUser(Long id, User user);
+    UserEntity updateUser(Long id, UserEntity userEntity);
 
 
     /**

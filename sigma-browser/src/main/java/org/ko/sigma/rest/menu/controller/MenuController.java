@@ -5,7 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
-import org.ko.sigma.data.master.entity.Menu;
+import org.ko.sigma.data.entity.Menu;
 import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.service.MenuService;

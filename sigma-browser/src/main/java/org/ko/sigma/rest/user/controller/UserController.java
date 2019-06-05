@@ -4,9 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.collections.CollectionUtils;
+import org.ko.sigma.core.bean.entity.UserEntity;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
-import org.ko.sigma.data.master.entity.User;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.service.UserService;
@@ -35,11 +35,11 @@ public class UserController {
     @ApiOperation("查询用户列表")
     public Response<List<UserDTO>> queryUserList(@ApiParam("列表查询参数") @ModelAttribute UserQueryListCondition condition) {
         //1. 查询用户列表数据
-        List<User> users = userService.queryUserList(condition);
+        List<UserEntity> userEntities = userService.queryUserList(condition);
 
         //2. 如果不为空
-        if (CollectionUtils.isNotEmpty(users)) {
-            List<UserDTO> userDTOS = users.stream().map(this::map).collect(Collectors.toList());
+        if (CollectionUtils.isNotEmpty(userEntities)) {
+            List<UserDTO> userDTOS = userEntities.stream().map(this::map).collect(Collectors.toList());
             return new Response<>(userDTOS);
         }
         return new Response<>(SystemCode.EMPTY_DATA);
@@ -50,9 +50,9 @@ public class UserController {
     public Response<UserDTO> queryUserInfo (
             @ApiParam("用户ID") @PathVariable Long id) {
         LOGGER.info("UserController#queryUserInfo");
-        User user = userService.queryUserInfo(id);
-        if (Objects.nonNull(user)) {
-            return new Response<>(this.map(user));
+        UserEntity userEntity = userService.queryUserInfo(id);
+        if (Objects.nonNull(userEntity)) {
+            return new Response<>(this.map(userEntity));
         }
         return new Response<>(SystemCode.EMPTY_DATA);
     }
@@ -70,8 +70,8 @@ public class UserController {
     public Response<UserDTO> updateUser (
             @ApiParam("用户ID主键") @PathVariable Long id,
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
-        User user = userService.updateUser(id, map(userDTO));
-        return new Response<>(map(user));
+        UserEntity userEntity = userService.updateUser(id, map(userDTO));
+        return new Response<>(map(userEntity));
     }
 
     @DeleteMapping("{id:\\d+}")
@@ -83,25 +83,25 @@ public class UserController {
     }
 
     /**
-     * User mapTo UserDTO
-     * @param user
+     * UserEntity mapTo UserDTO
+     * @param userEntity
      * @return
      */
-    private UserDTO map (User user) {
+    private UserDTO map (UserEntity userEntity) {
         UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(user, userDTO);
+        BeanUtils.copyProperties(userEntity, userDTO);
         return userDTO;
     }
 
     /**
-     * UserDTO mapTo User
+     * UserDTO mapTo UserEntity
      * @param userDTO
      * @return
      */
-    private User map (UserDTO userDTO) {
-        User user = new User();
-        BeanUtils.copyProperties(userDTO, user);
-        return user;
+    private UserEntity map (UserDTO userDTO) {
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(userDTO, userEntity);
+        return userEntity;
     }
 
 

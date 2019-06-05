@@ -1,8 +1,8 @@
 package org.ko.sigma.rest.user.service.impl;
 
+import org.ko.sigma.core.bean.entity.UserEntity;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemConstants;
-import org.ko.sigma.data.master.entity.User;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;
 import org.ko.sigma.rest.user.repository.UserRepository;
 import org.ko.sigma.rest.user.service.UserService;
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //根据用户名查找用户信息
-        Example e = new Example(User.class);
+        Example e = new Example(UserEntity.class);
         e.createCriteria()
                 .andEqualTo("username", username)
                 .andEqualTo("availableStatus", "1");
@@ -39,42 +39,42 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public List<User> queryUserList(UserQueryListCondition condition) {
-        Example e = new Example(User.class);
+    public List<UserEntity> queryUserList(UserQueryListCondition condition) {
+        Example e = new Example(UserEntity.class);
         e.createCriteria()
                 .andEqualTo("availableStatus", "1");
         return userRepository.selectByExample(e);
     }
 
     @Override
-    public User queryUserInfo(Long id) {
+    public UserEntity queryUserInfo(Long id) {
         return userRepository.selectByPrimaryKey(id);
     }
 
     @Override
-    public Long createUser(User user) {
-        user.setAvailableStatus(SystemConstants.AvailableStatus.Available);
-        if (userRepository.insert(user) == 0) {
+    public Long createUser(UserEntity userEntity) {
+        userEntity.setAvailableStatus(SystemConstants.AvailableStatus.Available);
+        if (userRepository.insert(userEntity) == 0) {
             throw new TransactionalException(INSERT_ERROR);
         }
-        return user.getId();
+        return userEntity.getId();
     }
 
     @Override
-    public User updateUser(Long id, User user) {
-        user.setId(id);
-        if (userRepository.updateByPrimaryKeySelective(user) == 0) {
+    public UserEntity updateUser(Long id, UserEntity userEntity) {
+        userEntity.setId(id);
+        if (userRepository.updateByPrimaryKeySelective(userEntity) == 0) {
             throw new TransactionalException(UPDATE_ERROR);
         }
-        return user;
+        return userEntity;
     }
 
     @Override
     public Long removeUser(Long id) {
-        User user = new User();
-        user.setId(id);
-        user.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
-        if (userRepository.updateByPrimaryKeySelective(user) == 0) {
+        UserEntity userEntity = new UserEntity();
+        userEntity.setId(id);
+        userEntity.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
+        if (userRepository.updateByPrimaryKeySelective(userEntity) == 0) {
             throw new TransactionalException(DELETE_ERROR);
         }
         return id;

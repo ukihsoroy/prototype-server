@@ -41,14 +41,8 @@
         </dependency>
         <dependency>
             <groupId>org.ko.sigma</groupId>
-            <artifactId>sigma-data</artifactId>
+            <artifactId>sigma-mysql</artifactId>
             <version>${project.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.persistence</groupId>
-                    <artifactId>persistence-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!--给前端提供假数据-->

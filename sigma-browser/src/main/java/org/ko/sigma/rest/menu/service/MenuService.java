@@ -1,6 +1,6 @@
 package org.ko.sigma.rest.menu.service;
 
-import org.ko.sigma.data.master.entity.Menu;
+import org.ko.sigma.data.entity.Menu;
 import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 

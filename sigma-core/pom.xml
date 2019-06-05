@@ -63,6 +63,12 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>javax.persistence</groupId>
+            <artifactId>persistence-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!--Alibaba JSON格式化工具-->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -70,39 +76,11 @@
             <version>${fastjson.version}</version>
         </dependency>
 
-        <!--阿里监控数据源 druid -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
         <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-
-        <!-- spring boot mybatis starter POMS -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>${spring.mybatis.version}</version>
-        </dependency>
-
-
-        <!--MySql 驱动-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-
-        <!--tk mybatis common mapper starter POMS-->
-        <dependency>
-            <groupId>tk.mybatis</groupId>
-            <artifactId>mapper-spring-boot-starter</artifactId>
-            <version>${mybatis.common.mapper}</version>
-        </dependency>
-
-        <!--MyBatis分页插件-->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>${pagehelper.version}</version>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <!--social 三方登陆-->
