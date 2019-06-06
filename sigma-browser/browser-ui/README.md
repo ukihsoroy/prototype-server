@@ -16,3 +16,12 @@ npm run build
 
 ## vue项目管理器
 vue ui
+
+## 相关文档
+```
+Node API    http://nodejs.cn/api/
+Vue-Cli     https://cli.vuejs.org/zh/
+Vue-Router  https://router.vuejs.org/zh/
+Vue-Eslint  https://github.com/vuejs/eslint-config-vue
+
+```
