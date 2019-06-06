@@ -1,5 +1,6 @@
 package org.ko.sigma.data.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -15,7 +16,7 @@ public class RequestLog implements Serializable {
      *
      * @mbg.generated Sat May 25 16:40:04 CST 2019
      */
-    @TableId
+    @TableId(type = IdType.AUTO)
     private String id;
 
     /**

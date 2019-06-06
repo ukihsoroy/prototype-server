@@ -21,7 +21,7 @@ public interface MenuService extends IService<Menu> {
      * @param id
      * @return
      */
-    MenuDTO queryMenuInfo(Long id);
+    Menu queryMenuInfo(Long id);
 
 
     List<MenuDTO> queryMenuByParentId(Long id);

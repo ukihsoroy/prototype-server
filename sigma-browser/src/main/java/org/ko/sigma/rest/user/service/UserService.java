@@ -1,7 +1,7 @@
 package org.ko.sigma.rest.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.ko.sigma.core.bean.entity.UserEntity;
+import org.ko.sigma.rest.user.entity.UserEntity;
 import org.ko.sigma.rest.user.condition.UserQueryListCondition;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
