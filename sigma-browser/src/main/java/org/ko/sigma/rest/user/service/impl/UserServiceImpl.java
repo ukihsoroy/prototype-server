@@ -1,7 +1,9 @@
 package org.ko.sigma.rest.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.entity.UserEntity;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemConstants;
@@ -72,5 +74,17 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
             throw new TransactionalException(DELETE_ERROR);
         }
         return id;
+    }
+
+    @Override
+    public UserEntity login(String username, String password) {
+        QueryWrapper<UserEntity> wrapper = new QueryWrapper<UserEntity>()
+                .eq("username", username)
+                .eq("password", password);
+        UserEntity userEntity = userRepository.selectOne(wrapper);
+        if (userEntity != null) {
+            return userEntity;
+        }
+        return null;
     }
 }

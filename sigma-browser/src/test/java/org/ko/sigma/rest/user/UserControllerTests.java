@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 //用SpringRunner来运行测试用例
 @RunWith(SpringRunner.class)
-public class UserEntityControllerTests {
+public class UserControllerTests {
 
     @Autowired private WebApplicationContext context;
 
