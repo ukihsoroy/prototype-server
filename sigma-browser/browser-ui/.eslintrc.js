@@ -1,4 +1,3 @@
-//相关文档
 //https://github.com/vuejs/eslint-config-vue
 
 module.exports = {
