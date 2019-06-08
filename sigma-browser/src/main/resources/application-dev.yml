@@ -8,4 +8,6 @@ spring:
 
 prototype:
   file:
-    folder: D:/tmp/resources/
+    folder: D://tmp/resources/
+
+log.path: D://tmp/log
