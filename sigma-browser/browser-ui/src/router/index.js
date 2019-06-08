@@ -9,7 +9,7 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    component: () => import('@/views/dashboard')
+    component: () => import('@/views/login')
   }
 ]
 

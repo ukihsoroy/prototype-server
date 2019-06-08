@@ -19,14 +19,15 @@ vue ui
 
 ## 项目涉及的相关文档
 ```
-Node API      http://nodejs.cn/api/
-Webpack       https://webpack.docschina.org/
-Vue           https://cn.vuejs.org/
-Vue-Cli       https://cli.vuejs.org/zh/
-Vue-Router    https://router.vuejs.org/zh/
-Vue-Loader    https://vue-loader.vuejs.org/zh/
-Vue-Eslint    https://github.com/vuejs/eslint-config-vue
-Sass          https://www.sass.hk/
+Node API          http://nodejs.cn/api/
+Webpack           https://webpack.docschina.org/
+Vue               https://cn.vuejs.org/
+Vue-Cli           https://cli.vuejs.org/zh/
+Vue-Router        https://router.vuejs.org/zh/
+Vue-Loader        https://vue-loader.vuejs.org/zh/
+Vue-Eslint        https://github.com/vuejs/eslint-config-vue
+Sass              https://www.sass.hk/
+Normalize.css     http://necolas.github.io/normalize.css/
 ```
 ## 本地预览build之后的文件
 ```
