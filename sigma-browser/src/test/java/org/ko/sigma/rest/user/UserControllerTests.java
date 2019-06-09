@@ -54,7 +54,7 @@ public class UserControllerTests {
     public void whenCreateSuccess () throws Exception {
         String content = mapper.writeValueAsString(userEntity);
         System.out.println(new Date().getTime());
-        String result = mock.perform(post("/user")
+        String result = mock.perform(post("/sigma/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())
@@ -64,7 +64,7 @@ public class UserControllerTests {
 
     @Test
     public void whenGetInfoSuccess () throws Exception {
-        String result = mock.perform(get("/user/1")
+        String result = mock.perform(get("/sigma/user/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -74,7 +74,7 @@ public class UserControllerTests {
 
     @Test
     public void whenGetInfoFail () throws Exception {
-        mock.perform(get("/user/a")
+        mock.perform(get("/sigma/user/a")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().is4xxClientError());
     }
@@ -84,7 +84,7 @@ public class UserControllerTests {
         Date time = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
         userEntity.setBirthday(time);
         String content = mapper.writeValueAsString(userEntity);
-        String result = mock.perform(put("/user/1")
+        String result = mock.perform(put("/sigma/user/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())
@@ -95,7 +95,7 @@ public class UserControllerTests {
 
     @Test
     public void whenQuerySuccess () throws Exception {
-        String result = mock.perform(get("/user")
+        String result = mock.perform(get("/sigma/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -105,7 +105,7 @@ public class UserControllerTests {
 
     @Test
     public void whenDeleteSuccess () throws Exception {
-        mock.perform(delete("/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+        mock.perform(delete("/sigma/user/1").contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").value("1"));
     }

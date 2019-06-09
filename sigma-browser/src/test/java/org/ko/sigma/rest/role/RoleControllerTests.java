@@ -51,7 +51,7 @@ public class RoleControllerTests {
     public void whenCreateSuccess () throws Exception {
         String content = mapper.writeValueAsString(role);
         System.out.println(new Date().getTime());
-        String result = mock.perform(post("/role")
+        String result = mock.perform(post("/sigma/role")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())
@@ -61,7 +61,7 @@ public class RoleControllerTests {
 
     @Test
     public void whenQueryListSuccess () throws Exception {
-        String result = mock.perform(get("/role")
+        String result = mock.perform(get("/sigma/role")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -71,7 +71,7 @@ public class RoleControllerTests {
 
     @Test
     public void whenQueryInfoSuccess () throws Exception {
-        String result = mock.perform(get("/role/1")
+        String result = mock.perform(get("/sigma/role/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -84,7 +84,7 @@ public class RoleControllerTests {
         role.setName("super admin");
         String content = mapper.writeValueAsString(role);
         System.out.println(new Date().getTime());
-        String result = mock.perform(put("/role/1")
+        String result = mock.perform(put("/sigma/role/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())
@@ -95,7 +95,7 @@ public class RoleControllerTests {
     @Test
     public void whenDeleteSuccess () throws Exception {
         System.out.println(new Date().getTime());
-        String result = mock.perform(delete("/role/1")
+        String result = mock.perform(delete("/sigma/role/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
@@ -110,7 +110,7 @@ public class RoleControllerTests {
         menuIds.add(3L);
         menuIds.add(4L);
         String content = mapper.writeValueAsString(menuIds);
-        String result = mock.perform(post("/role/1/menu")
+        String result = mock.perform(post("/sigma/role/1/menu")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())

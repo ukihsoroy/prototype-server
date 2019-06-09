@@ -5,4 +5,4 @@ spring:
     username: root
     password: tiger
 
-log.path: ~/log
+log.path: /tmp/log

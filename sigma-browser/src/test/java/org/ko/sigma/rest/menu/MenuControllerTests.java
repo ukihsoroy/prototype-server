@@ -68,7 +68,7 @@ public class MenuControllerTests {
         menus.forEach(menu -> {
             try {
                 String content = mapper.writeValueAsString(menu);
-                String result = mock.perform(post("/menu")
+                String result = mock.perform(post("/sigma/menu")
                     .contentType(MediaType.APPLICATION_JSON_UTF8)
                     .content(content))
                     .andExpect(status().isOk())
@@ -82,7 +82,7 @@ public class MenuControllerTests {
 
     @Test
     public void whenQuerySuccess () throws Exception {
-        String result = mock.perform(get("/menu")
+        String result = mock.perform(get("/sigma/menu")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -92,7 +92,7 @@ public class MenuControllerTests {
 
     @Test
     public void whenGetInfoSuccess () throws Exception {
-        String result = mock.perform(get("/user/1")
+        String result = mock.perform(get("/sigma/user/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -102,7 +102,7 @@ public class MenuControllerTests {
 
     @Test
     public void whenGetMenuByParentId () throws Exception {
-        String result = mock.perform(get("/menu/child/1")
+        String result = mock.perform(get("/sigma/menu/child/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
@@ -112,7 +112,7 @@ public class MenuControllerTests {
 
     @Test
     public void whenGetInfoFail () throws Exception {
-        mock.perform(get("/menu/a")
+        mock.perform(get("/sigma/menu/a")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().is4xxClientError());
     }
@@ -122,7 +122,7 @@ public class MenuControllerTests {
         Menu menu = menus.get(0);
         menu.setName("system operation");
         String content = mapper.writeValueAsString(menu);
-        String result = mock.perform(put("/menu/1")
+        String result = mock.perform(put("/sigma/menu/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())
@@ -133,7 +133,7 @@ public class MenuControllerTests {
 
     @Test
     public void whenDeleteSuccess () throws Exception {
-        mock.perform(delete("/menu/1").contentType(MediaType.APPLICATION_JSON_UTF8))
+        mock.perform(delete("/sigma/menu/1").contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").value("1"));
     }

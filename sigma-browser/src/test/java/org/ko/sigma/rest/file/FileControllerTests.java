@@ -31,7 +31,7 @@ public class FileControllerTests {
 
     @Test
     public void whenUploadSuccess () throws Exception {
-        String result = mock.perform(fileUpload("/file")
+        String result = mock.perform(fileUpload("/sigma/file")
                 .file(new MockMultipartFile("file", "test.txt", "multipart/form-data", "hello upload".getBytes("UTF-8"))))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();

@@ -1,4 +1,5 @@
 server:
+  context-path: /sigma
   port: 8080
 
 #配置文件默认dev
