@@ -1,0 +1,21 @@
+#app {
+  .sidebar-container {
+    transition: width 0.28s;
+    width: $sideBarWidth !important;
+    height: 100%;
+    background-color: $menuBg;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    font-size: 0px;
+    z-index: 1001;
+    overflow: hidden;
+  }
+
+  .el-menu {
+    border: none;
+    height: 100%;
+    width: 100% !important;
+  }
+}
