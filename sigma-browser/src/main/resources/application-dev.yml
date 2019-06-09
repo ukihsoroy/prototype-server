@@ -1,11 +1,13 @@
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.105.164.165:3306/sigma_server
+    url: jdbc:mysql:///sigma_server
     username: root
     password: tiger
 
 
 prototype:
   file:
-    folder: D:/tmp/resources/
+    folder: D://tmp/resources/
+
+log.path: D://tmp/log
