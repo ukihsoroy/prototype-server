@@ -1,9 +1,8 @@
 spring:
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://39.105.164.165:3306/sigma_server
+    url: jdbc:mysql:///sigma_server?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
     username: root
     password: tiger
 
-
-  log.path: ~/log
+log.path: ~/log

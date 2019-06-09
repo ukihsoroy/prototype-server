@@ -1,8 +1,13 @@
 package org.ko.sigma.rest.user;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
+import org.ko.sigma.core.utils.JacksonHelper;
+import org.ko.sigma.rest.user.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -23,23 +28,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 //用SpringRunner来运行测试用例
 @RunWith(SpringRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class UserControllerTests {
 
     @Autowired private WebApplicationContext context;
+    @Autowired private ObjectMapper mapper;
 
     private MockMvc mock;
+    private UserEntity userEntity;
 
     @Before
     public void setup () {
         mock = MockMvcBuilders.webAppContextSetup(context).build();
+        userEntity = new UserEntity();
+        userEntity.setUsername("sigma");
+        userEntity.setAge(28);
+        userEntity.setBirthday(new Date());
+        userEntity.setEmail("ko.shen@hotmail.com");
+        userEntity.setNickName("K.O");
+        userEntity.setRoleId(1L);
+        userEntity.setPassword("tiger");
     }
 
     @Test
-    public void whenQuerySuccess () throws Exception {
-        String result = mock.perform(get("/user")
-                .contentType(MediaType.APPLICATION_JSON_UTF8))
+    public void whenCreateSuccess () throws Exception {
+        String content = mapper.writeValueAsString(userEntity);
+        System.out.println(new Date().getTime());
+        String result = mock.perform(post("/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(content))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.success").value(true))
                 .andReturn().getResponse().getContentAsString();
         System.out.println(result);
     }
@@ -62,26 +80,23 @@ public class UserControllerTests {
     }
 
     @Test
-    public void whenCreateSuccess () throws Exception {
-        String content = "{\"username\":\"Sultan\",\"password\":\"123456\",\"birthday\":" + new Date().getTime() + "}";
-        System.out.println(new Date().getTime());
-        String result = mock.perform(post("/user")
+    public void whenUpdateSuccess () throws Exception {
+        Date time = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+        userEntity.setBirthday(time);
+        String content = mapper.writeValueAsString(userEntity);
+        String result = mock.perform(put("/user/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.success").value(true))
                 .andReturn().getResponse().getContentAsString();
         System.out.println(result);
     }
 
     @Test
-    public void whenUpdateSuccess () throws Exception {
-        Date time = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-//        Date time = new Date();
-        String content = "{\"id\":\"1\",\"username\":\"lee\",\"password\": \"123\",\"birthday\":" + time.getTime() + "}";
-        System.out.println(time.getTime());
-        String result = mock.perform(put("/user/1")
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
-                .content(content))
+    public void whenQuerySuccess () throws Exception {
+        String result = mock.perform(get("/user")
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.success").value(true))
                 .andReturn().getResponse().getContentAsString();

@@ -6,19 +6,19 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     ip: 127.0.0.1
     port: 3306
-    name: ko_server
+    name: sigma_server
     username: root
     password: tiger
     url: jdbc:mysql://${spring.datasource.ip}:${spring.datasource.port}/${spring.datasource.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
 
 # 生成工具配置
 ko.generator:
-  moduleName: sigma-data
+  moduleName: sigma-mysql
   tables: t_user
   java:
-    rootPackage: org.ko.sigma.data.master
+    rootPackage: org.ko.sigma.data
     mybatis:
-      domain: domain
+      domain: entity
       mapper: dao
       xml: mappers
   view:
