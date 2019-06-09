@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h2>基础项目模板搭建</h2>
     <router-view />
   </div>
 </template>
