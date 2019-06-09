@@ -2,4 +2,5 @@
 *.js linguist-language=java
 *.html linguist-language=java
 *.vue linguist-language=java
-*.TSQL linguist-language=java
+*.sql linguist-language=java
+*.xml linguist-language=java
