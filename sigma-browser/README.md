@@ -9,5 +9,5 @@
 
 ```shell
 mvn clean package
-nohup java -jar -Xmx128m -Xms128m -Dspring.profiles.active=uat sigma-browser-1.0-SNAPSHOT.jar
+nohup java -jar -Xmx128m -Xms128m -Dspring.profiles.active=uat sigma-browser-1.0-SNAPSHOT.jar &
 ```
