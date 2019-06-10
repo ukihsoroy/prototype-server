@@ -1,15 +1,16 @@
 // https://router.vuejs.org/zh/
-// 采用路由懒加载，随用随载
 
 import Vue from 'vue'
 import Router from 'vue-router'
 
 Vue.use(Router)
 
+import Layout from '@/layout'
+
 const routes = [
   {
     path: '/',
-    component: () => import('@/views/login')
+    component: Layout
   }
 ]
 
