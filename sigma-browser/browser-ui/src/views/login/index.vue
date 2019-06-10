@@ -3,12 +3,12 @@
     <header class="sso-header" />
     <section class="content_box">
       <div class="qrcode_content">
-        <div class="qrcode_img"></div>
-        <div class="mobile_info"></div>
+        <div class="qrcode_img" />
+        <div class="mobile_info" />
       </div>
-      <div class="left_area"></div>
-      <div class="divider"></div>
-      <div class="right_area"></div>
+      <div class="left_area" />
+      <div class="divider" />
+      <div class="right_area" />
     </section>
   </div>
 </template>
