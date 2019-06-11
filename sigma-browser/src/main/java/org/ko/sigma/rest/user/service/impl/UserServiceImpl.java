@@ -38,8 +38,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
 
     @Override
     public List<UserEntity> queryUserList(UserQueryListCondition condition) {
-        QueryWrapper<UserEntity> queryWrapper = new QueryWrapper<>();
-        return userRepository.selectList(queryWrapper);
+        return userRepository.selectList(new QueryWrapper<UserEntity>().eq("available_status", "1"));
     }
 
     @Override

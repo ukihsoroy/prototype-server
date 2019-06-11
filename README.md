@@ -4,4 +4,4 @@
 
 - j2ee快启动框架
 
-感谢前端小伙伴[@@Xiao-Cuir](https://github.com/Xiao-Cuir)
+感谢前端小伙伴[@Xiao-Cuir](https://github.com/Xiao-Cuir)

@@ -18,7 +18,7 @@ public class MyBatisGeneratorTests extends MybatisGenerator {
 	@Test
 	@Override
 	public void generator() {
-		buildSingleMapper("t_request_log");
+		buildSingleMapper("t_menu");
 //		buildAllMappers();
 	}
 
