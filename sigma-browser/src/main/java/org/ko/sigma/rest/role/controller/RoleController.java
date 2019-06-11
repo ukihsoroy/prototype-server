@@ -8,8 +8,11 @@ import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.Role;
+import org.ko.sigma.rest.menu.dto.MenuDTO;
+import org.ko.sigma.rest.menu.service.MenuService;
 import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
 import org.ko.sigma.rest.role.dto.RoleDTO;
+import org.ko.sigma.rest.role.service.RoleMenuService;
 import org.ko.sigma.rest.role.service.RoleService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +28,20 @@ import java.util.stream.Collectors;
 @Validated
 public class RoleController {
 
+    /**
+     * 权限service
+     */
     @Autowired private RoleService roleService;
+
+    /**
+     * 菜单service
+     */
+    @Autowired private MenuService menuService;
+
+    /**
+     * 权限菜单service
+     */
+    @Autowired private RoleMenuService roleMenuService;
 
     @GetMapping
     @ApiOperation("查询全部权限")
@@ -70,6 +86,22 @@ public class RoleController {
     public Response<Long> deleteRole(@ApiParam("用户ID主键") @PathVariable Long id) {
         Long result = roleService.deleteRole(id);
         return new Response<>(result);
+    }
+
+    @GetMapping("{roleId:\\d+}/menu")
+    @ApiOperation("查询当前权限下菜单")
+    public Response<List<MenuDTO>> queryMenuInfoByRoleId (@ApiParam("权限ID") @PathVariable Long roleId) {
+        List<MenuDTO> menuDTOS = menuService.queryMenuByRoleId(roleId);
+        return new Response<>(menuDTOS);
+    }
+
+    @PostMapping("{roleId:\\d+}/menu")
+    @ApiOperation("为当前权限添加菜单")
+    public Response<Long> createRoleMenu (
+            @ApiParam("权限ID") @PathVariable Long roleId,
+            @ApiParam("菜单ID列表") @RequestBody List<Long> menuIds) {
+        Long count = roleMenuService.createRoleMenu(roleId, menuIds);
+        return new Response<>(count);
     }
 
     /**

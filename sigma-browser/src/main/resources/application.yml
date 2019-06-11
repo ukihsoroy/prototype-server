@@ -1,5 +1,6 @@
 server:
-  port: 8088
+  context-path: /sigma
+  port: 8080
 
 #配置文件默认dev
 spring:
