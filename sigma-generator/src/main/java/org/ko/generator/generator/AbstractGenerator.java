@@ -59,18 +59,18 @@ public abstract class AbstractGenerator implements ICodeGenerator{
 		return null;
 	}
 
-	protected List<String> getAllTableNames() throws Exception {
+	protected List<String> getAllTableNames() {
 		return jdbcTemplate.queryForList(INFORMATION_SCHEMA_TABLES, String.class, dbName);
 	}
 	
-	protected List<String> getColumnNames(List<TableMetaData> data) throws Exception {
+	protected List<String> getColumnNames(List<TableMetaData> data) {
 		List<String> columns = new ArrayList<>();
 		data.stream().forEach(d -> columns.add(d.getColumnName()));
 		return columns;
 
 	}
 	
-	protected List<TableMetaData> getTableMetaData(String table) throws Exception {
+	protected List<TableMetaData> getTableMetaData(String table) {
 		return jdbcTemplate.query(INFORMATION_SCHEMA_COLUMNS, (rs, i) -> {
 			TableMetaData data = new TableMetaData();
 			data.setColumnName(rs.getString(COLUMN_NAME));
