@@ -11,22 +11,21 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'ceshi0',
-        component: () => import('@/views/dashboard/index'),
-        meta: { title: '测试零' }
-      }
-    ]
+    redirect: '/ceshi',
+    children: [{
+      path: 'ceshi',
+      name: 'ceshi',
+      component: () => import('@/views/ceshi/index'),
+      meta: { title: 'ceshi' }
+    }]
   },
   {
     path: '/dashboard',
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'ceshi1',
+        path: 'dashboard',
+        name: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '测试一' }
       }
