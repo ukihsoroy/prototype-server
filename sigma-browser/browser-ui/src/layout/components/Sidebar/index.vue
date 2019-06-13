@@ -2,16 +2,16 @@
   <div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        mode="vertical"
+        default-active="ceshi0"
+        :collapse="false"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
+        :unique-opened="false"
         :active-text-color="variables.menuActiveText"
-        default-active="ceshi0"
+        :collapse-transition="false"
+        mode="vertical"
       >
-        <el-menu-item v-for="(route,index) in routes" :key="index" :index="route.children[0].name">
-          <i class="el-icon-menu" />
-          <span slot="title">{{ route.children[0].meta.title }}</span>
-        </el-menu-item>
+        <sidebar-item v-for="(route,index) in routes" :key="index" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -19,10 +19,11 @@
 
 <script>
 import variables from '@/styles/variables.scss'
+import SidebarItem from './SidebarItem'
 
 export default {
   components: {
-
+    SidebarItem
   },
   computed: {
     routes() {
