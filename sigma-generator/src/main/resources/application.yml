@@ -3,13 +3,10 @@ server.port: 1337
 spring:
   application.name: sigma-generator
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    ip: 127.0.0.1
-    port: 3306
-    name: sigma_server
+    driver-class-name: org.h2.Driver
     username: root
-    password: tiger
-    url: jdbc:mysql://${spring.datasource.ip}:${spring.datasource.port}/${spring.datasource.name}?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
+    password: sunniwell
+    url: jdbc:h2:sunniwell:sos
 
 # 生成工具配置
 ko.generator:

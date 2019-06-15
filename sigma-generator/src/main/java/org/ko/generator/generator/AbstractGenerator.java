@@ -1,6 +1,5 @@
 package org.ko.generator.generator;
 
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.generator.bean.Config;
 import org.ko.generator.bean.TableMetaData;
