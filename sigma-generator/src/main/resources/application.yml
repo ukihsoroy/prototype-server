@@ -9,22 +9,13 @@ spring:
     url: jdbc:h2:sunniwell:sos
 
 # 生成工具配置
-ko.generator:
-  moduleName: sigma-mysql
-  tables: t_user
-  java:
+sigma.generator:
+  prefix: t_
+  entity:
+    module: sigma-mysql
     rootPackage: org.ko.sigma.data
-    mybatis:
-      domain: entity
-      mapper: dao
-      xml: mappers
-  view:
-    path: d://
-    js: js
-    html: module
-  generator:
-    project:
-      enable: false
-      name: ko
-      path: d://
+    entityTemplate: entity.java.ftl
+    constantsTemplate: constants.java.ftl
+
+
 

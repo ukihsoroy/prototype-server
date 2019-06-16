@@ -1,4 +1,4 @@
-package org.ko.generator.bean.entity
+package org.ko.generator.entity
 
 case class Column (
                     columnName: String,
