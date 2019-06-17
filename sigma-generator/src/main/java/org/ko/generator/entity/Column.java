@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class Column {
 
-    public Column(String columnName, String propertyName, String columnType, String propertyType, boolean primaryKey, Integer length, String common) {
+    public Column(String columnName, String propertyName, String columnType, String propertyType, boolean primaryKey, Integer length, String comment) {
         this.columnName = columnName;
         this.propertyName = propertyName;
         this.columnType = columnType;
         this.propertyType = propertyType;
         this.primaryKey = primaryKey;
         this.length = length;
-        this.common = common;
+        this.comment = comment;
     }
 
     private String columnName;
@@ -21,7 +21,7 @@ public class Column {
     private String propertyType;
     private boolean primaryKey;
     private Integer length;
-    private String common;
+    private String comment;
 
 
 }

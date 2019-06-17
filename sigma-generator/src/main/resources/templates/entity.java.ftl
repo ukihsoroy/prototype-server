@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import lombok.Data;
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * <p>${comment}</p>
+ * @author K.O
  */
 @Data
 @TableName("${name}")
@@ -17,9 +17,13 @@ public class ${entityName} implements Serializable {
 
 <#list columns as column>
     /**
-     * ${column.comment!}
+     * ${column.comment}
      */
-    private ${column.propertyType!} ${column.propertyName!};
-</#list>
+    <#if column.primaryKey>
+    @TableId(type = IdType.AUTO)
+    </#if>
+    private ${column.propertyType} ${column.propertyName};
+
+    </#list>
 
 }
