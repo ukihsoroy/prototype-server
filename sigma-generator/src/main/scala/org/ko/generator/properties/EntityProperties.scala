@@ -1,8 +1,13 @@
 package org.ko.generator.properties
 
-case class EntityProperties (
-                              module: String,
-                              rootPackage: String,
-                              entityTemplate: String,
-                              constantsTemplate: String
-                            )
+class EntityProperties {
+
+  val module: String = "sigma-mysql"
+
+  val rootPackage: String = "org.ko.sigma.data"
+
+  val entityTemplate: String = "entity.java.ftl"
+
+  val constantsTemplate: String = "constants.java.ftl"
+
+}

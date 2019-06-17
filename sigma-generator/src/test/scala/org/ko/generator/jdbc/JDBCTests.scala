@@ -53,14 +53,17 @@ class JDBCTests {
         println("###len: " + len)
         if (scale != 0) len = len + 1
         println("###len: " + len)
-        Column(
-          columnName = columnName,
-          propertyName = mapUnderscoreToCamelCase(columnName),
-          columnType = columnType,
-          propertyType = ConverterSQLTypeHandler.format(columnType),
-          primaryKey = PRI.equalsIgnoreCase(rs.getString(COLUMN_KEY)),
-          length = len,
-          common = StringUtils.trimToEmpty(rs.getString(COLUMN_COMMENT))
+        val comment = StringUtils.trimToEmpty(rs.getString(COLUMN_COMMENT))
+        println("###comment: " + comment)
+        println("###key: " + PRI.equalsIgnoreCase(rs.getString(COLUMN_KEY)))
+        new Column(
+          columnName,
+          mapUnderscoreToCamelCase(columnName),
+          columnType,
+          ConverterSQLTypeHandler.format(columnType),
+          PRI.equalsIgnoreCase(rs.getString(COLUMN_KEY)),
+          len,
+          comment
         )
       }
     }, "sigma_server", "t_user")

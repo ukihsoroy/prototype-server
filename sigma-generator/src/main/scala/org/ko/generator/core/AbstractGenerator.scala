@@ -21,7 +21,7 @@ private [core] abstract class AbstractGenerator extends TGenerator {
   val jDBCTemplate = new JdbcTemplate()
   var mysqlDataSource: MysqlDataSource = _
 
-  protected [core] def dataSource (dataSource: DataSource): Unit = {
+  def dataSource (dataSource: DataSource): Unit = {
     jDBCTemplate.setDataSource(dataSource)
     dataSource match {
       case mds: MysqlDataSource => mysqlDataSource = mds
@@ -50,14 +50,14 @@ private [core] abstract class AbstractGenerator extends TGenerator {
         val scale = int(rs.getString(NUMERIC_SCALE))
         var len = charLength + precision + scale
         if (scale != 0) len = len + 1
-        Column(
-          columnName = columnName,
-          propertyName = mapUnderscoreToCamelCase(columnName),
-          columnType = columnType,
-          propertyType = ConverterSQLTypeHandler.format(columnType),
-          primaryKey = PRI.equalsIgnoreCase(rs.getString(COLUMN_KEY)),
-          length = len,
-          common = StringUtils.trimToEmpty(rs.getString(COLUMN_COMMENT))
+        new Column(
+          columnName,
+          mapUnderscoreToCamelCase(columnName),
+          columnType,
+          ConverterSQLTypeHandler.format(columnType),
+          PRI.equalsIgnoreCase(rs.getString(COLUMN_KEY)),
+          len,
+          StringUtils.trimToEmpty(rs.getString(COLUMN_COMMENT))
         )
       }
     }, database, name).asScala.toList
@@ -89,6 +89,6 @@ private [core] abstract class AbstractGenerator extends TGenerator {
     } else {
       entityName = mapUnderscoreToCamelCase(name)
     }
-    entityName
+    entityName.replaceFirst(entityName.charAt(0).toString, entityName.charAt(0).toUpper.toString)
   }
 }

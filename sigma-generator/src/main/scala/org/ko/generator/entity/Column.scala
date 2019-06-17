@@ -1,11 +1,11 @@
-package org.ko.generator.entity
-
-case class Column (
-                    columnName: String,
-                    propertyName: String,
-                    columnType: String,
-                    propertyType: String,
-                    primaryKey: Boolean,
-                    length: Int,
-                    common: String
-                  )
+//package org.ko.generator.entity
+//
+////class Column (
+////                var columnName: String,
+////                var propertyName: String,
+////                var columnType: String,
+////                var propertyType: String,
+////                var primaryKey: Boolean,
+////                var length: Int,
+////                var common: String
+////              )

@@ -2,11 +2,20 @@ package org.ko.generator.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
-case class GeneratorProperties @ConfigurationProperties(prefix = "sigma.generator")
-(
-  prefix: String,
-  entity: EntityProperties,   //实体类生成配置
-  controllerProperties: ControllerProperties, //controller生成配置
-  serviceProperties: ServiceProperties, //service生成配置
-  repositoryProperties: RepositoryProperties //数据层生成配置
-)
+@ConfigurationProperties(prefix = "sigma.generator")
+class GeneratorProperties {
+
+  var prefix = "t_"
+
+  //实体类生成配置
+  var entity = new EntityProperties()
+
+  //controller生成配置
+  var controllerProperties = new ControllerProperties()
+
+  //service生成配置
+  var serviceProperties = new ServiceProperties()
+
+  //数据层生成配置
+  var repositoryProperties = new RepositoryProperties()
+}
