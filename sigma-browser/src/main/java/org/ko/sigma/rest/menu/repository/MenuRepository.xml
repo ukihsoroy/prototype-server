@@ -42,9 +42,9 @@
             enable,
             version,
             create_user,
-            create_date,
-            update_user,
-            update_date
+            gmt_create,
+            modified_user,
+            gmt_modified
         FROM t_menu
         WHERE enable = 1
             AND parent_id = '#'
@@ -63,15 +63,15 @@
             enable,
             version,
             create_user,
-            create_date,
-            update_user,
-            update_date
+            gmt_create,
+            modified_user,
+            gmt_modified
         FROM t_menu
         WHERE enable = 1
             AND parent_id = #{id}
     </select>
 
-    <select id="queryMenuByRoleId" resultMap="ResultMapWithChildMenu" parameterType="java.lang.Long">
+    <select id="queryMenuByRoleCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">
         SELECT
             m.id,
             m.code,
@@ -84,12 +84,12 @@
             m.enable,
             m.version,
             m.create_user,
-            m.create_date,
-            m.update_user,
-            m.update_date
+            m.gmt_create,
+            m.modified_user,
+            m.gmt_modified
         FROM t_role_menu rm
         LEFT JOIN t_menu m ON rm.menu_id = m.id AND m.enable = 1
-        WHERE rm.enable = 1 AND rm.role_id = #{roleId}
+        WHERE rm.enable = 1 AND rm.role_code = #{roleCode}
     </select>
 
 </mapper>
