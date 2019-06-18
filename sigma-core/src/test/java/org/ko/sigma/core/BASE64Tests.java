@@ -1,7 +1,7 @@
 package org.ko.sigma.core;
 
 import org.junit.Test;
-import org.ko.sigma.core.utils.BASE64;
+import org.ko.sigma.core.util.BASE64;
 
 public class BASE64Tests {
 

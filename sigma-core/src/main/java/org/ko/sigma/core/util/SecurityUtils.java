@@ -1,4 +1,4 @@
-package org.ko.sigma.core.utils;
+package org.ko.sigma.core.util;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;

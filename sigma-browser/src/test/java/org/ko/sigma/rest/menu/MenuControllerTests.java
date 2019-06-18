@@ -4,7 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.ko.sigma.core.util.JacksonHelper;
 import org.ko.sigma.data.entity.Menu;
+import org.ko.sigma.data.json.MenuMeta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -38,23 +40,45 @@ public class MenuControllerTests {
         mock = MockMvcBuilders.webAppContextSetup(context).build();
         Menu parent = new Menu();
         parent.setName("系统操作");
-        parent.setLink("/system");
+        parent.setCode("system_operation");
+        parent.setPath("/system");
+        parent.setComponent("#");
+        MenuMeta menuMeta = new MenuMeta();
+        menuMeta.setTitle("系统操作");
+        menuMeta.setIcon("#");
+        parent.setMeta(JacksonHelper.obj2String(menuMeta));
         menus.add(parent);
 
         Menu child1 = new Menu();
         child1.setName("用户管理");
-        child1.setParentId(1L);
-        child1.setLink("/system/user");
+        child1.setCode("user");
+        child1.setParentCode("system_operation");
+        child1.setPath("/system/user");
+        child1.setComponent("#");
+        menuMeta.setTitle("用户管理");
+        menuMeta.setIcon("#");
+        child1.setMeta(JacksonHelper.obj2String(menuMeta));
+
 
         Menu child2 = new Menu();
         child2.setName("权限管理");
-        child2.setParentId(1L);
-        child2.setLink("/system/role");
+        child2.setCode("role");
+        child2.setParentCode("system_operation");
+        child2.setPath("/system/role");
+        child2.setComponent("#");
+        menuMeta.setTitle("权限管理");
+        menuMeta.setIcon("#");
+        child2.setMeta(JacksonHelper.obj2String(menuMeta));
 
         Menu child3 = new Menu();
         child3.setName("菜单管理");
-        child3.setParentId(1L);
-        child3.setLink("/system/menu");
+        child3.setCode("menu");
+        child3.setParentCode("system_operation");
+        child3.setPath("/system/menu");
+        child3.setComponent("#");
+        menuMeta.setTitle("菜单管理");
+        menuMeta.setIcon("#");
+        child3.setMeta(JacksonHelper.obj2String(menuMeta));
 
         menus.add(child1);
         menus.add(child2);
@@ -68,7 +92,7 @@ public class MenuControllerTests {
         menus.forEach(menu -> {
             try {
                 String content = mapper.writeValueAsString(menu);
-                String result = mock.perform(post("/sigma/menu")
+                String result = mock.perform(post("/menu")
                     .contentType(MediaType.APPLICATION_JSON_UTF8)
                     .content(content))
                     .andExpect(status().isOk())

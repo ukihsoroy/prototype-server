@@ -1,4 +1,4 @@
-package org.ko.sigma.core.utils;
+package org.ko.sigma.core.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

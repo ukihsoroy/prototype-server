@@ -7,7 +7,7 @@ import org.ko.sigma.core.exception.GeneralException;
 import org.ko.sigma.core.properties.PrototypeProperties;
 import org.ko.sigma.core.service.IFileService;
 import org.ko.sigma.core.type.SystemCode;
-import org.ko.sigma.core.utils.BASE64;
+import org.ko.sigma.core.util.BASE64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.ko.sigma.core.utils;
+package org.ko.sigma.core.util;
 
 /**
  * 

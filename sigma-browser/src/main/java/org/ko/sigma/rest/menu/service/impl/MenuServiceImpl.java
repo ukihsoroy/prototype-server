@@ -43,7 +43,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
 
     @Override
     public Long createMenu(Menu menu) {
-        menu.setAvailableStatus(SystemConstants.AvailableStatus.Available);
+        menu.setEnable(SystemConstants.Enable.Available);
         if (menuRepository.insert(menu) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
@@ -63,7 +63,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     public Long deleteMenu(Long id) {
         Menu menu = new Menu();
         menu.setId(id);
-        menu.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
+        menu.setEnable(SystemConstants.Enable.Deleted);
         if (menuRepository.updateById(menu) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }

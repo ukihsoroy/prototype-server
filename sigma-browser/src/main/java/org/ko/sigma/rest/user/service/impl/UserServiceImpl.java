@@ -48,7 +48,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
 
     @Override
     public Long createUser(UserEntity userEntity) {
-        userEntity.setAvailableStatus(SystemConstants.AvailableStatus.Available);
+        userEntity.setAvailableStatus(SystemConstants.Enable.Available);
         if (userRepository.insert(userEntity) == 0) {
             throw new TransactionalException(INSERT_ERROR);
         }
@@ -68,7 +68,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     public Long removeUser(Long id) {
         UserEntity userEntity = new UserEntity();
         userEntity.setId(id);
-        userEntity.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
+        userEntity.setAvailableStatus(SystemConstants.Enable.Deleted);
         if (userRepository.updateById(userEntity) == 0) {
             throw new TransactionalException(DELETE_ERROR);
         }
