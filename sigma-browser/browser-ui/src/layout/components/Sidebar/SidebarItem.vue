@@ -1,11 +1,13 @@
 <template>
   <div>
-    <app-link :to="resolvePath(item.path)">
-      <el-menu-item :index="item.children[0].name">
-        <i class="el-icon-menu" />
-        <span slot="title">{{ item.children[0].meta.title }}</span>
-      </el-menu-item>
-    </app-link>
+    <template>
+      <app-link :to="resolvePath(item.children[0].path)">
+        <el-menu-item :index="item.children[0].name">
+          <i class="el-icon-menu" />
+          <span slot="title">{{ item.children[0].meta.title }}</span>
+        </el-menu-item>
+      </app-link>
+    </template>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default {
     }
   },
   methods: {
-    resolvePath(routePath) {
+    resolvePath(routePath) { // 处理路径
       return path.resolve(this.basePath, routePath)
     }
   }
