@@ -8,12 +8,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * <p>权限菜单关联表，事实表</p>
+ * <p>部门用户关联表，事实表</p>
  * @author K.O
  */
 @Data
-@TableName("t_role_menu")
-public class RoleMenu implements Serializable {
+@TableName("t_department_user")
+public class DepartmentUser implements Serializable {
 
     /**
      * 主键
@@ -22,34 +22,19 @@ public class RoleMenu implements Serializable {
     private Long id;
 
     /**
-     * 角色编码，由系统统一生成，不可修改
+     * 部门编码，由系统统一生成，不可修改
+     */
+    private String departmentCode;
+
+    /**
+     * 用户编码（UUID），由系统统一生成，不可修改
+     */
+    private String userCode;
+
+    /**
+     * 部门角色，t_dict表配置
      */
     private String roleCode;
-
-    /**
-     * 菜单编码，由系统统一生成，不可修改
-     */
-    private String menuCode;
-
-    /**
-     * 创建数据权限：0-否，1-是
-     */
-    private short create;
-
-    /**
-     * 读取详情权限：0-否，1-是
-     */
-    private short read;
-
-    /**
-     * 更新数据权限：0-否，1-是
-     */
-    private short update;
-
-    /**
-     * 删除数据权限：0-否，1-是
-     */
-    private short delete;
 
     /**
      * 数据状态：0-删除，1-有效

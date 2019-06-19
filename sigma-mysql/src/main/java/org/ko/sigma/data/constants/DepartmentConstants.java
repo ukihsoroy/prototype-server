@@ -1,6 +1,6 @@
 package org.ko.sigma.data.constants;
 
-public class MenuConstants {
+public class DepartmentConstants {
 
     public static class Columns {
 
@@ -10,37 +10,17 @@ public class MenuConstants {
         public static String ID = "id";
 
         /**
-         * 菜单编码，由系统统一生成，不可修改
+         * 部门编码，由系统统一生成，不可修改
          */
         public static String CODE = "code";
 
         /**
-         * 菜单名称
+         * 部门名称
          */
         public static String NAME = "name";
 
         /**
-         * 菜单路由规则索引
-         */
-        public static String PATH = "path";
-
-        /**
-         * 命名视图组件
-         */
-        public static String COMPONENT = "component";
-
-        /**
-         * 路由重定向
-         */
-        public static String REDIRECT = "redirect";
-
-        /**
-         * 菜单元数据。 name: 路由名称，icon: 路由图标
-         */
-        public static String META = "meta";
-
-        /**
-         * 上级菜单编码，由系统统一生成，不可修改
+         * 父级部门编码
          */
         public static String PARENT_CODE = "parent_code";
 
