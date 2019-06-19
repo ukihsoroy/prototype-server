@@ -20,11 +20,6 @@ public class DepartmentUserConstants {
         public static String USER_CODE = "user_code";
 
         /**
-         * 部门角色，t_dict表配置
-         */
-        public static String ROLE_CODE = "role_code";
-
-        /**
          * 数据状态：0-删除，1-有效
          */
         public static String ENABLE = "enable";

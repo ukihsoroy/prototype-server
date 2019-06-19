@@ -32,11 +32,6 @@ public class DepartmentUser implements Serializable {
     private String userCode;
 
     /**
-     * 部门角色，t_dict表配置
-     */
-    private String roleCode;
-
-    /**
      * 数据状态：0-删除，1-有效
      */
     private short enable;

@@ -49,7 +49,7 @@ public class Menu implements Serializable {
     /**
      * 菜单元数据。 name: 路由名称，icon: 路由图标
      */
-    private String meta;
+    private String metaJson;
 
     /**
      * 上级菜单编码，由系统统一生成，不可修改

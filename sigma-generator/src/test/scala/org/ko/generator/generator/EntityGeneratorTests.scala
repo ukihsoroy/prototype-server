@@ -29,7 +29,7 @@ class EntityGeneratorTests {
 
   @Test
   def generator (): Unit = {
-    entity.executor("t_menu", "t_department", "t_department_user", "t_dict", "t_request_log", "t_role", "t_role_menu", "t_user_role")
+    entity.executor("t_menu")
   }
 
 }

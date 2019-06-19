@@ -46,7 +46,7 @@ public class MenuControllerTests {
         MenuMeta menuMeta = new MenuMeta();
         menuMeta.setTitle("系统操作");
         menuMeta.setIcon("#");
-        parent.setMeta(JacksonHelper.obj2String(menuMeta));
+        parent.setMetaJson(JacksonHelper.obj2String(menuMeta));
         menus.add(parent);
 
         Menu child1 = new Menu();
@@ -57,7 +57,7 @@ public class MenuControllerTests {
         child1.setComponent("#");
         menuMeta.setTitle("用户管理");
         menuMeta.setIcon("#");
-        child1.setMeta(JacksonHelper.obj2String(menuMeta));
+        child1.setMetaJson(JacksonHelper.obj2String(menuMeta));
 
 
         Menu child2 = new Menu();
@@ -68,7 +68,7 @@ public class MenuControllerTests {
         child2.setComponent("#");
         menuMeta.setTitle("权限管理");
         menuMeta.setIcon("#");
-        child2.setMeta(JacksonHelper.obj2String(menuMeta));
+        child2.setMetaJson(JacksonHelper.obj2String(menuMeta));
 
         Menu child3 = new Menu();
         child3.setName("菜单管理");
@@ -78,7 +78,7 @@ public class MenuControllerTests {
         child3.setComponent("#");
         menuMeta.setTitle("菜单管理");
         menuMeta.setIcon("#");
-        child3.setMeta(JacksonHelper.obj2String(menuMeta));
+        child3.setMetaJson(JacksonHelper.obj2String(menuMeta));
 
         menus.add(child1);
         menus.add(child2);

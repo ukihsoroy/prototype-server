@@ -37,7 +37,7 @@ public class MenuConstants {
         /**
          * 菜单元数据。 name: 路由名称，icon: 路由图标
          */
-        public static String META = "meta";
+        public static String META_JSON = "meta_json";
 
         /**
          * 上级菜单编码，由系统统一生成，不可修改

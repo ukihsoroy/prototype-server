@@ -13,8 +13,7 @@ public class MenuDTO extends Menu {
 
     private List<MenuDTO> children;
 
-    private MenuMeta menuMeta;
-
+    private MenuMeta meta;
 
 }
 
