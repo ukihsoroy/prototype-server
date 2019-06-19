@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils
 import org.junit.{Before, Test}
 import org.ko.generator.entity.Column
 import org.ko.generator.constants.SQLConstants
-import org.ko.generator.constants.SQLConstants.INFORMATION_SCHEMA_TABLE_DETAIL
 import org.springframework.jdbc.core.{JdbcTemplate, RowMapper}
 
 import collection.JavaConverters._
