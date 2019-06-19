@@ -50,7 +50,7 @@
             AND parent_id = '#'
     </select>
 
-    <select id="queryMenuByParentId" resultMap="ResultMapWithChildMenu" parameterType="java.lang.Long">
+    <select id="queryMenuByParentCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">
         SELECT
             id,
             code,
@@ -68,7 +68,7 @@
             gmt_modified
         FROM t_menu
         WHERE enable = 1
-            AND parent_id = #{id}
+            AND parent_code = #{parentCode}
     </select>
 
     <select id="queryMenuByRoleCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">

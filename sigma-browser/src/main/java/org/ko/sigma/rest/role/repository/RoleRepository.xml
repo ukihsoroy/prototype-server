@@ -5,22 +5,24 @@
     <resultMap id="BaseRoleResultMap" type="org.ko.sigma.data.entity.Role">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="available_status" property="availableStatus" jdbcType="SMALLINT"/>
-        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="enable" property="enable" jdbcType="SMALLINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="modified_user" property="modifiedUser" jdbcType="VARCHAR"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <resultMap id="BaseRoleMenuResultMap" type="org.ko.sigma.data.entity.RoleMenu">
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="role_id" property="roleId" jdbcType="BIGINT"/>
         <result column="menu_id" property="menuId" jdbcType="BIGINT"/>
-        <result column="available_status" property="availableStatus" jdbcType="SMALLINT"/>
-        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="enable" property="enable" jdbcType="SMALLINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="modified_user" property="modifiedUser" jdbcType="VARCHAR"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
     
     <resultMap id="ResultMapWithRoleMenu" 

@@ -20,15 +20,15 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuRepository, RoleMen
     private RoleMenuRepository roleMenuRepository;
 
     @Override
-    public Long createRoleMenu(Long roleId, List<Long> menuIds) {
-        List<RoleMenu> roleMenus =  menuIds.stream().map(menuId -> buildRoleMenu(roleId, menuId)).collect(Collectors.toList());
+    public Long createRoleMenu(String roleCode, List<String> menuCodes) {
+        List<RoleMenu> roleMenus =  menuCodes.stream().map(menuCode -> buildRoleMenu(roleCode, menuCode)).collect(Collectors.toList());
         return roleMenuRepository.insertList(roleMenus);
     }
 
-    private RoleMenu buildRoleMenu (Long roleId, Long menuId) {
+    private RoleMenu buildRoleMenu (String roleCode, String menuCode) {
         RoleMenu roleMenu = new RoleMenu();
-        roleMenu.setRoleId(roleId);
-        roleMenu.setMenuId(menuId);
+        roleMenu.setRoleCode(roleCode);
+        roleMenu.setRoleCode(menuCode);
         return roleMenu;
     }
 }

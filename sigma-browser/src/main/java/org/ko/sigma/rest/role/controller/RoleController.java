@@ -90,17 +90,17 @@ public class RoleController {
 
     @GetMapping("{roleId:\\d+}/menu")
     @ApiOperation("查询当前权限下菜单")
-    public Response<List<MenuDTO>> queryMenuInfoByRoleId (@ApiParam("权限ID") @PathVariable Long roleId) {
-        List<MenuDTO> menuDTOS = menuService.queryMenuByRoleId(roleId);
+    public Response<List<MenuDTO>> queryMenuInfoByRoleId (@ApiParam("权限ID") @PathVariable String roleCode) {
+        List<MenuDTO> menuDTOS = menuService.queryMenuByRoleCode(roleCode);
         return new Response<>(menuDTOS);
     }
 
     @PostMapping("{roleId:\\d+}/menu")
     @ApiOperation("为当前权限添加菜单")
     public Response<Long> createRoleMenu (
-            @ApiParam("权限ID") @PathVariable Long roleId,
-            @ApiParam("菜单ID列表") @RequestBody List<Long> menuIds) {
-        Long count = roleMenuService.createRoleMenu(roleId, menuIds);
+            @ApiParam("权限ID") @PathVariable String roleCode,
+            @ApiParam("菜单ID列表") @RequestBody List<String> menuCodes) {
+        Long count = roleMenuService.createRoleMenu(roleCode, menuCodes);
         return new Response<>(count);
     }
 

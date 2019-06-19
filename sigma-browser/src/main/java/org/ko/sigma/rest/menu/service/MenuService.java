@@ -24,7 +24,7 @@ public interface MenuService extends IService<Menu> {
     Menu queryMenuInfo(Long id);
 
 
-    List<MenuDTO> queryMenuByParentId(Long id);
+    List<MenuDTO> queryMenuByParentCode(String parentCode);
 
     /**
      * <p>创建新的菜单</p>
@@ -50,8 +50,8 @@ public interface MenuService extends IService<Menu> {
 
     /**
      * 通过权限ID查询菜单列表
-     * @param roleId
+     * @param roleCode
      * @return
      */
-    List<MenuDTO> queryMenuByRoleId(Long roleId);
+    List<MenuDTO> queryMenuByRoleCode(String roleCode);
 }

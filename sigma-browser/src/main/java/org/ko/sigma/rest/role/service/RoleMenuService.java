@@ -13,5 +13,5 @@ public interface RoleMenuService extends IService<RoleMenu> {
      * <p>创建权限和菜单关联</p>
      * @return 权限ID
      */
-    Long createRoleMenu(Long roleId, List<Long> menuIds);
+    public Long createRoleMenu(String roleCode, List<String> menuCodes);
 }

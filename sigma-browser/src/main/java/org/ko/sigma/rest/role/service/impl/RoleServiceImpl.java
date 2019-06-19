@@ -36,7 +36,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
 
     @Override
     public Long createRole(Role role) {
-        role.setAvailableStatus(SystemConstants.Enable.Available);
+        role.setEnable(SystemConstants.Enable.Available);
         if (roleRepository.insert(role) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
@@ -56,7 +56,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     public Long deleteRole(Long id) {
         Role role = new Role();
         role.setId(id);
-        role.setAvailableStatus(SystemConstants.Enable.Deleted);
+        role.setEnable(SystemConstants.Enable.Deleted);
         if (roleRepository.updateById(role) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }

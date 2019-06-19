@@ -11,7 +11,7 @@ public interface MenuRepository extends BaseMapper<Menu> {
 
     List<MenuDTO> queryMenuList(MenuQueryListCondition condition);
 
-    List<MenuDTO> queryMenuByParentId(Long id);
+    List<MenuDTO> queryMenuByParentCode(String parentCode);
 
     List<MenuDTO> queryMenuByRoleCode(String roleCode);
 }

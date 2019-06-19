@@ -55,14 +55,14 @@ class EntityGenerator @Autowired()(
         out.close()
       }
 
-//      val constantsFileName = javaDir + CONSTANTS_PACKAGE + table.entityName + "Constants.java"
-//
-//      if (StringUtils.isNotEmpty(constantsFileName)) {
-//        val template = freemarker.getTemplate(properties.entity.constantsTemplate)
-//        val out = new OutputStreamWriter(new FileOutputStream(new File(constantsFileName)), "UTF-8")
-//        template.process(table, out)
-//        out.close()
-//      }
+      val constantsFileName = javaDir + CONSTANTS_PACKAGE + entityName + "Constants.java"
+
+      if (StringUtils.isNotEmpty(constantsFileName)) {
+        val template = freemarker.getTemplate(properties.entity.constantsTemplate)
+        val out = new OutputStreamWriter(new FileOutputStream(new File(constantsFileName)), "UTF-8")
+        template.process(params, out)
+        out.close()
+      }
     }
   }
 }

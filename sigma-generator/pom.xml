@@ -116,24 +116,9 @@
             <artifactId>commons-io</artifactId>
             <version>${apache.io}</version>
         </dependency>
-
-        <!--Lombok 插件-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <plugin>
                 <groupId>net.alchim31.maven</groupId>

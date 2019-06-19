@@ -32,13 +32,13 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     }
 
     @Override
-    public List<MenuDTO> queryMenuByRoleId(Long roleId) {
-        return menuRepository.queryMenuByRoleId(roleId);
+    public List<MenuDTO> queryMenuByRoleCode(String roleCode) {
+        return menuRepository.queryMenuByRoleCode(roleCode);
     }
 
     @Override
-    public List<MenuDTO> queryMenuByParentId(Long id) {
-        return menuRepository.queryMenuByParentId(id);
+    public List<MenuDTO> queryMenuByParentCode(String parentCode) {
+        return menuRepository.queryMenuByParentCode(parentCode);
     }
 
     @Override
