@@ -2,7 +2,7 @@
   <div>
     <template v-if="hasOneShowingChild(item.children,item)">
       <app-link :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item :index="resolvePath(onlyOneChild.path)">
+        <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
           <i class="el-icon-menu" />
           <span slot="title">{{ onlyOneChild.meta.title }}</span>
         </el-menu-item>
@@ -13,8 +13,10 @@
       <sidebar-item
         v-for="child in item.children"
         :key="child.path"
+        :is-nest="true"
         :item="child"
         :base-path="resolvePath(child.path)"
+        class="nest-menu"
       />
     </el-submenu>
   </div>
@@ -35,6 +37,10 @@ export default {
     basePath: {
       type: String,
       required: true
+    },
+    isNest: {
+      type: Boolean,
+      required: false
     }
   },
   data() {

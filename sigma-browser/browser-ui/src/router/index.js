@@ -42,13 +42,13 @@ const routes = [
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table' }
+        meta: { title: '多级菜单一' }
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree' }
+        meta: { title: '多级菜单二' }
       }
     ]
   }
