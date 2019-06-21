@@ -11,7 +11,7 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    // redirect: '/ceshi',
+    redirect: '/ceshi',
     children: [{
       path: 'ceshi',
       name: 'ceshi',
@@ -28,6 +28,27 @@ const routes = [
         name: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         meta: { title: '菜单二' }
+      }
+    ]
+  },
+  {
+    path: '/example',
+    component: Layout,
+    redirect: '/example/table',
+    name: 'Example',
+    meta: { title: 'Example' },
+    children: [
+      {
+        path: 'table',
+        name: 'Table',
+        component: () => import('@/views/table/index'),
+        meta: { title: 'Table' }
+      },
+      {
+        path: 'tree',
+        name: 'Tree',
+        component: () => import('@/views/tree/index'),
+        meta: { title: 'Tree' }
       }
     ]
   }
