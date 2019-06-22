@@ -1,22 +1,19 @@
 package org.ko.sigma.rest.user.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.ko.sigma.core.support.Response;
+import org.ko.sigma.rest.user.bean.UserEntity;
+import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
-import org.ko.sigma.rest.user.entity.UserEntity;
-import org.ko.sigma.rest.user.condition.UserQueryListCondition;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.List;
-
-public interface UserService extends UserDetailsService, IService<UserEntity> {
+public interface UserService extends IService<UserEntity> {
 
     /**
      * <p>查询用户列表</p>
      * @param condition
      * @return
      */
-    List<UserEntity> queryUserList(UserQueryListCondition condition);
+    IPage<UserDTO> queryUserList(QueryUserPageCondition<UserEntity> condition);
 
     /**
      * <p>查询用户详细</p>
@@ -48,11 +45,4 @@ public interface UserService extends UserDetailsService, IService<UserEntity> {
      */
     Long removeUser(Long id);
 
-    /**
-     * 用户登陆
-     * @param username
-     * @param password
-     * @return
-     */
-    UserEntity login(String username, String password);
 }

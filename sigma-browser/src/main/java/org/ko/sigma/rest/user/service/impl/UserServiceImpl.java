@@ -1,24 +1,18 @@
 package org.ko.sigma.rest.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.ko.sigma.rest.user.dto.UserDTO;
-import org.ko.sigma.rest.user.entity.UserEntity;
 import org.ko.sigma.core.exception.TransactionalException;
-import org.ko.sigma.core.type.SystemConstants;
-import org.ko.sigma.rest.user.condition.UserQueryListCondition;
+import org.ko.sigma.rest.user.bean.UserEntity;
+import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
+import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.repository.UserRepository;
 import org.ko.sigma.rest.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 import static org.ko.sigma.core.type.SystemCode.*;
 
@@ -31,14 +25,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
     @Autowired private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.selectOne(new QueryWrapper<UserEntity>().eq("username", username));
-    }
-
-
-    @Override
-    public List<UserEntity> queryUserList(UserQueryListCondition condition) {
-        return userRepository.selectList(new QueryWrapper<UserEntity>().eq("available_status", "1"));
+    public IPage<UserDTO> queryUserList(QueryUserPageCondition<UserEntity> condition) {
+        return userRepository.queryUserList(condition);
     }
 
     @Override
@@ -48,7 +36,6 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
 
     @Override
     public Long createUser(UserEntity userEntity) {
-        userEntity.setAvailableStatus(SystemConstants.Enable.Available);
         if (userRepository.insert(userEntity) == 0) {
             throw new TransactionalException(INSERT_ERROR);
         }
@@ -66,24 +53,10 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> imp
 
     @Override
     public Long removeUser(Long id) {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(id);
-        userEntity.setAvailableStatus(SystemConstants.Enable.Deleted);
-        if (userRepository.updateById(userEntity) == 0) {
+        if (userRepository.deleteById(id) == 0) {
             throw new TransactionalException(DELETE_ERROR);
         }
         return id;
     }
 
-    @Override
-    public UserEntity login(String username, String password) {
-        QueryWrapper<UserEntity> wrapper = new QueryWrapper<UserEntity>()
-                .eq("username", username)
-                .eq("password", password);
-        UserEntity userEntity = userRepository.selectOne(wrapper);
-        if (userEntity != null) {
-            return userEntity;
-        }
-        return null;
-    }
 }

@@ -6,7 +6,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.ko.sigma.rest.user.entity.UserEntity;
+import org.ko.sigma.rest.user.bean.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -41,11 +41,9 @@ public class UserControllerTests {
         mock = MockMvcBuilders.webAppContextSetup(context).build();
         userEntity = new UserEntity();
         userEntity.setUsername("sigma");
-        userEntity.setAge(28);
         userEntity.setBirthday(new Date());
         userEntity.setEmail("ko.shen@hotmail.com");
-        userEntity.setNickName("K.O");
-        userEntity.setRoleId(1L);
+        userEntity.setNickname("K.O");
         userEntity.setPassword("tiger");
     }
 

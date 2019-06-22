@@ -1,8 +1,10 @@
 package org.ko.sigma.data.constants;
 
+import org.ko.sigma.data.bean.BasicColumnConstants;
+
 public class RequestLogConstants {
 
-    public static class Columns {
+    public static class Columns extends BasicColumnConstants {
 
         /**
          * 主键ID，使用UUID

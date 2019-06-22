@@ -38,4 +38,5 @@ public class Department extends BasicEntity {
      */
     private String parentCode;
 
+
 }

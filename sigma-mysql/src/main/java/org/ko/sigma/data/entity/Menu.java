@@ -1,9 +1,12 @@
 package org.ko.sigma.data.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import org.ko.sigma.data.bean.BasicEntity;
 
 import lombok.Data;
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>菜单表，维度表</p>
@@ -11,7 +14,8 @@ import java.io.Serializable;
  */
 @Data
 @TableName("t_menu")
-public class Menu implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class Menu extends BasicEntity {
 
     /**
      * 主键
@@ -53,4 +57,6 @@ public class Menu implements Serializable {
      * 上级菜单编码，由系统统一生成，不可修改
      */
     private String parentCode;
+
+
 }

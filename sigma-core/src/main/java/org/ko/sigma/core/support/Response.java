@@ -70,7 +70,7 @@ public class Response<T> extends SerializeBean {
         this.msg = SystemCode.SUCCESS.getMsg();
     }
 
-    public static <T> Response of (T data) {
+    public static <T> Response<T> of (T data) {
         return new Response<>(data);
     }
 
@@ -84,7 +84,7 @@ public class Response<T> extends SerializeBean {
         this.success = success;
     }
 
-    public static <T> Response of (boolean success, T data) {
+    public static <T> Response<T> of (boolean success, T data) {
         return new Response<>(success, data);
     }
 
@@ -102,7 +102,7 @@ public class Response<T> extends SerializeBean {
         this.success = success;
     }
 
-    public static <T> Response of (boolean success, T data, String code, String msg) {
+    public static <T> Response<T> of (boolean success, T data, String code, String msg) {
         return new Response<>(success, data, code, msg);
     }
 
@@ -116,8 +116,8 @@ public class Response<T> extends SerializeBean {
         this.msg = systemCode.getMsg();
     }
 
-    public static Response of (SystemCode systemCode) {
-        return new Response(systemCode);
+    public static <T> Response<T> of (SystemCode systemCode) {
+        return new Response<>(systemCode);
     }
 
     /**
@@ -136,7 +136,7 @@ public class Response<T> extends SerializeBean {
         this.arguments = args;
     }
 
-    public static <T> Response of (boolean success, T data, String code, String msg, Object... args) {
+    public static <T> Response<T> of (boolean success, T data, String code, String msg, Object... args) {
         return new Response<>(success, data, code, msg, args);
     }
 
@@ -150,8 +150,8 @@ public class Response<T> extends SerializeBean {
         this.success = success;
     }
 
-    public static Response of (boolean success, String msg) {
-        return new Response(success, msg);
+    public static <T> Response<T> of (boolean success, String msg) {
+        return new Response<>(success, msg);
     }
 
     /**
@@ -166,8 +166,8 @@ public class Response<T> extends SerializeBean {
         this.success = success;
     }
 
-    public static Response of (boolean success, String code, String msg) {
-        return new Response(success, code, msg);
+    public static <T> Response<T> of (boolean success, String code, String msg) {
+        return new Response<>(success, code, msg);
     }
 
     /**
@@ -184,8 +184,8 @@ public class Response<T> extends SerializeBean {
         this.arguments = args;
     }
 
-    public static Response of (boolean success, String code, String msg, Object... args) {
-        return new Response(success, code, msg, args);
+    public static <T> Response<T> of (boolean success, String code, String msg, Object... args) {
+        return new Response<>(success, code, msg, args);
     }
 
     public String getCode() {

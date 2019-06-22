@@ -3,9 +3,10 @@ package org.ko.sigma.data.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.ko.sigma.data.bean.BasicEntity;
 
 import lombok.Data;
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>请求日志表</p>
@@ -13,7 +14,8 @@ import java.io.Serializable;
  */
 @Data
 @TableName("t_request_log")
-public class RequestLog implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class RequestLog extends BasicEntity {
 
     /**
      * 主键ID，使用UUID

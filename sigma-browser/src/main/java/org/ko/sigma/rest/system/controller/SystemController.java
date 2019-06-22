@@ -5,8 +5,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
+import org.ko.sigma.rest.system.service.SystemService;
 import org.ko.sigma.rest.user.dto.UserDTO;
-import org.ko.sigma.rest.user.entity.UserEntity;
+import org.ko.sigma.rest.user.bean.UserEntity;
 import org.ko.sigma.rest.user.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +19,14 @@ import org.springframework.web.bind.annotation.*;
 @Validated
 public class SystemController {
 
-    @Autowired private UserService userService;
+    @Autowired private SystemService systemService;
 
     @PostMapping("login")
     @ApiOperation("账号密码登录")
     public Response<UserDTO> login (
             @ApiParam("用户名") @RequestParam String username,
             @ApiParam("用户口令") @RequestParam String password) {
-        UserEntity userEntity =  userService.login(username, password);
+        UserEntity userEntity =  systemService.login(username, password);
         return new Response<>(map(userEntity));
     }
 

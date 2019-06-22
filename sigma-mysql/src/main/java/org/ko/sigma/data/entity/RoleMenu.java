@@ -3,9 +3,10 @@ package org.ko.sigma.data.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.ko.sigma.data.bean.BasicEntity;
 
 import lombok.Data;
-import java.io.Serializable;
+import lombok.EqualsAndHashCode;
 
 /**
  * <p>权限菜单关联表，事实表</p>
@@ -13,7 +14,8 @@ import java.io.Serializable;
  */
 @Data
 @TableName("t_role_menu")
-public class RoleMenu implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class RoleMenu extends BasicEntity {
 
     /**
      * 主键
@@ -50,36 +52,6 @@ public class RoleMenu implements Serializable {
      * 删除数据权限：0-否，1-是
      */
     private short delete;
-
-    /**
-     * 数据状态：0-删除，1-有效
-     */
-    private short enable;
-
-    /**
-     * 更新版本
-     */
-    private Long version;
-
-    /**
-     * 创建用户
-     */
-    private String createUser;
-
-    /**
-     * 创建时间
-     */
-    private java.util.Date gmtCreate;
-
-    /**
-     * 更新用户
-     */
-    private String modifiedUser;
-
-    /**
-     * 更新时间
-     */
-    private java.util.Date gmtModified;
 
 
 }
