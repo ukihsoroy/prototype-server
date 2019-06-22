@@ -28,7 +28,7 @@ class EntityGeneratorTests {
 
   @Test
   def generator (): Unit = {
-    entity.executor("t_department", "t_department_user", "t_dict")
+    entity.executor("t_department")
   }
 
 }
