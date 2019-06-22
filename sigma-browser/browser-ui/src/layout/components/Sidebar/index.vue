@@ -2,7 +2,7 @@
   <div>
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        default-active="ceshi0"
+        :default-active="activeMenu"
         :collapse="false"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
@@ -11,7 +11,12 @@
         :collapse-transition="false"
         mode="vertical"
       >
-        <sidebar-item v-for="(route,index) in routes" :key="index" :item="route" :base-path="route.path" />
+        <sidebar-item
+          v-for="route in routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        />
       </el-menu>
     </el-scrollbar>
   </div>
@@ -26,6 +31,11 @@ export default {
     SidebarItem
   },
   computed: {
+    activeMenu() {
+      const route = this.$route
+      const { path } = route
+      return path
+    },
     routes() {
       return this.$router.options.routes
     },
