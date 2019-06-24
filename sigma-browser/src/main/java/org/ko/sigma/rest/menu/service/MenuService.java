@@ -1,8 +1,9 @@
 package org.ko.sigma.rest.menu.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.ko.sigma.data.entity.Menu;
-import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
+import org.ko.sigma.rest.menu.condition.MenuQueryPageCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface MenuService extends IService<Menu> {
      * @param condition
      * @return
      */
-    List<MenuDTO> queryMenuList(MenuQueryListCondition condition);
+    IPage<MenuDTO> queryMenuList(MenuQueryPageCondition condition);
 
     /**
      * <p>通过主键查询菜单</p>
