@@ -28,6 +28,7 @@ Vue-Loader        https://vue-loader.vuejs.org/zh/
 Vue-Eslint        https://github.com/vuejs/eslint-config-vue
 Sass              https://www.sass.hk/
 Normalize.css     http://necolas.github.io/normalize.css/
+Vuex              https://vuex.vuejs.org/zh/
 ```
 ## 本地预览build之后的文件
 ```
