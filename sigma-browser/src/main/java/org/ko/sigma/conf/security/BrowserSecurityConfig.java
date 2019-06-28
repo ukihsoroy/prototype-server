@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Configuration
+//@Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
