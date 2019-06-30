@@ -37,5 +37,8 @@ mapper:
   before: true #
   mappers: tk.mybatis.mapper.common.Mapper #配置的mapper
 
+logging:
+  level: info
+
 
 

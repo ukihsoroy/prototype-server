@@ -1,7 +1,6 @@
 package org.ko.sigma.core.support;
 
-
-import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang.ArrayUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
