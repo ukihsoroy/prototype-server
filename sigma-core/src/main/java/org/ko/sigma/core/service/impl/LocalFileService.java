@@ -1,7 +1,7 @@
 package org.ko.sigma.core.service.impl;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.ko.sigma.core.bean.FileInfo;
 import org.ko.sigma.core.exception.GeneralException;
 import org.ko.sigma.core.properties.PrototypeProperties;
