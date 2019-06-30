@@ -1,10 +1,10 @@
 package org.ko.sigma.conf.security.authentication;
 
-import org.apache.http.HttpStatus;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.ko.sigma.core.support.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -31,7 +31,7 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
                                         HttpServletResponse response,
                                         AuthenticationException exception) throws IOException {
         logger.info("登陆失败;");
-        response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(Response.of(exception.getMessage())));
     }

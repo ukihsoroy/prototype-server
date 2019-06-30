@@ -4,8 +4,6 @@ import org.ko.sigma.conf.security.session.ExpiredSessionStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
@@ -18,7 +16,7 @@ import java.util.List;
 
 
 //@Configuration
-public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
+public class BrowserSecurityConfig /*extends WebSecurityConfigurerAdapter*/ {
 
     /**
      * 成功处理器
@@ -59,7 +57,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-    @Override
+    /*@Override
     protected void configure(HttpSecurity http) throws Exception {
 
         http
@@ -94,5 +92,5 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated() //都需要认证
                 .and()
                 .csrf().disable();
-    }
+    }*/
 }
