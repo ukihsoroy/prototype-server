@@ -1,12 +1,9 @@
 package org.ko.sigma.core.util;
 
-import org.apache.commons.lang.StringUtils;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.type.JavaType;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,20 +20,9 @@ public final class JacksonHelper {
     private static final ObjectMapper mapper = new ObjectMapper();
 
     static{
-        //对象的所有字段全部列入
-        mapper.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
-
-        //取消默认转换timestamps形式
-        mapper.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS,false);
-
-        //忽略空Bean转json的错误
-        mapper.configure(SerializationConfig.Feature.FAIL_ON_EMPTY_BEANS,false);
 
         //所有的日期格式都统一为以下的样式，即yyyy-MM-dd HH:mm:ss
         mapper.setDateFormat(new SimpleDateFormat(DateTimeUtil.STANDARD_FORMAT));
-
-        //忽略 在json字符串中存在，但是在java对象中不存在对应属性的情况。防止错误
-        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES,false);
     }
 
 
