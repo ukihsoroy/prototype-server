@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+
 @TableName("t_user")
 public class UserEntity extends User implements UserDetails {
 

@@ -53,7 +53,7 @@
             gmt_modified
         FROM t_menu
         WHERE enable = 1
-            AND parent_id = '#'
+            AND parent_code = '#'
     </select>
 
     <select id="queryMenuByParentCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">
