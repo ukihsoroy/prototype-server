@@ -14,9 +14,9 @@ public class BasicEntity implements Serializable {
     /**
      * 数据状态：0-删除，1-有效
      */
-    @TableLogic(value = "0", delval = "1")
+    @TableLogic
     @TableField(select = false)
-    private short enable;
+    private short disable;
 
     /**
      * 更新版本

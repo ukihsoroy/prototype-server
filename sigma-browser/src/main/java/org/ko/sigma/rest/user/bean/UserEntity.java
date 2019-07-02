@@ -34,6 +34,6 @@ public class UserEntity extends User implements UserDetails {
 
     @JsonIgnore
     public boolean isEnabled() {
-        return this.getEnable() == 0;
+        return this.getDisable() == 0;
     }
 }
