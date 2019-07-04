@@ -5,4 +5,9 @@
     <select id="queryUserList" resultType="org.ko.sigma.rest.user.dto.UserDTO">
         select * from t_user
     </select>
+
+
+    <select id="loadUserByUsername" resultType="org.ko.sigma.rest.user.dto.UserDTO" parameterType="string">
+        SELECT * FROM t_user t WHERE t.username = #{username} AND t.disable = 0;
+    </select>
 </mapper>

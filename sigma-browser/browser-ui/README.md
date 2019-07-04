@@ -8,17 +8,20 @@
 `npm >= 3.0.0`
 
 ## 基本三步骤
-```
+
+```shell
 npm install
 npm run dev
 npm run build
 ```
 
 ## vue项目管理器
+
 vue ui
 
 ## 项目涉及的相关文档
-```
+
+```log
 Node API          http://nodejs.cn/api/
 Webpack           https://webpack.docschina.org/
 Vue               https://cn.vuejs.org/
@@ -29,8 +32,10 @@ Vue-Eslint        https://github.com/vuejs/eslint-config-vue
 Sass              https://www.sass.hk/
 Normalize.css     http://necolas.github.io/normalize.css/
 ```
+
 ## 本地预览build之后的文件
-```
+
+```shell
 npm install -g serve
 # -s 参数的意思是将其架设在 Single-Page Application 模式下
 # 这个模式会处理即将提到的路由问题

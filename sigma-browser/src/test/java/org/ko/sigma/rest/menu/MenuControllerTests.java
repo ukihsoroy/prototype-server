@@ -40,7 +40,6 @@ public class MenuControllerTests {
         mock = MockMvcBuilders.webAppContextSetup(context).build();
         Menu parent = new Menu();
         parent.setName("系统操作");
-        parent.setCode("system_operation");
         parent.setPath("/system");
         parent.setComponent("#");
         MenuMeta menuMeta = new MenuMeta();
@@ -51,8 +50,7 @@ public class MenuControllerTests {
 
         Menu child1 = new Menu();
         child1.setName("用户管理");
-        child1.setCode("user");
-        child1.setParentCode("system_operation");
+        child1.setParentId(1L);
         child1.setPath("/system/user");
         child1.setComponent("#");
         menuMeta.setTitle("用户管理");
@@ -62,8 +60,7 @@ public class MenuControllerTests {
 
         Menu child2 = new Menu();
         child2.setName("权限管理");
-        child2.setCode("role");
-        child2.setParentCode("system_operation");
+        child2.setParentId(1L);
         child2.setPath("/system/role");
         child2.setComponent("#");
         menuMeta.setTitle("权限管理");
@@ -72,8 +69,7 @@ public class MenuControllerTests {
 
         Menu child3 = new Menu();
         child3.setName("菜单管理");
-        child3.setCode("menu");
-        child3.setParentCode("system_operation");
+        child3.setParentId(1L);
         child3.setPath("/system/menu");
         child3.setComponent("#");
         menuMeta.setTitle("菜单管理");

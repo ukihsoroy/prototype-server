@@ -1,22 +1,21 @@
 package org.ko.sigma.conf.security;
 
+import org.ko.sigma.conf.security.authentication.AuthenticationFailureHandlerImpl;
+import org.ko.sigma.conf.security.authentication.AuthenticationSuccessHandlerImpl;
 import org.ko.sigma.conf.security.session.ExpiredSessionStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.social.security.SpringSocialConfigurer;
-import org.ko.sigma.conf.security.authentication.*;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
 
 
-//@Configuration
+@Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -35,7 +34,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private UserDetailsService userDetailsService;
 
-    @Autowired private SpringSocialConfigurer springSocialConfigurer;
+//    @Autowired private SpringSocialConfigurer springSocialConfigurer;
 
     String[] permitAll = new String[]{
             "/authentication/require",
@@ -62,8 +61,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .apply(springSocialConfigurer) //往过滤器链添加过滤器
-                .and()
+//                .apply(springSocialConfigurer) //往过滤器链添加过滤器
+//                .and()
                 .formLogin() //表单登录
                 .loginPage("/authentication/require")
                 .loginProcessingUrl("/authentication/form")//用usernamePasswordFilter来处理请求

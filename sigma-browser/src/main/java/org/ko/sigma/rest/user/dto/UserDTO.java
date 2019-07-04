@@ -1,8 +1,36 @@
 package org.ko.sigma.rest.user.dto;
 
-import org.ko.sigma.rest.user.bean.UserEntity;
+import org.ko.sigma.data.entity.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-public class UserDTO extends UserEntity {
+import java.util.Collection;
+
+public class UserDTO extends User implements UserDetails {
 
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return getDisable() == 0;
+    }
 }

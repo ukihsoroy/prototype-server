@@ -15,8 +15,8 @@
 
     <resultMap id="BaseRoleMenuResultMap" type="org.ko.sigma.data.entity.RoleMenu">
         <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="role_code" property="roleCode" jdbcType="VARCHAR"/>
-        <result column="menu_code" property="menuCode" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="BIGINT"/>
+        <result column="menu_id" property="menuId" jdbcType="BIGINT"/>
         <result column="enable" property="enable" jdbcType="SMALLINT"/>
         <result column="version" property="version" jdbcType="BIGINT"/>
         <result column="create_user" property="createUser" jdbcType="VARCHAR"/>

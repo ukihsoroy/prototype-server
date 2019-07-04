@@ -19,7 +19,12 @@ public class DepartmentUserConstants {
         /**
          * 用户编码（UUID），由系统统一生成，不可修改
          */
-        public static String USER_CODE = "user_code";
+        public static String USER_ID = "user_id";
+
+        /**
+         * 数据状态：0-有效，1-删除
+         */
+        public static String DISABLE = "disable";
     }
 
 }

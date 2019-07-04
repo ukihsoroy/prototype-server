@@ -38,8 +38,8 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     }
 
     @Override
-    public List<MenuDTO> queryMenuByParentCode(String parentCode) {
-        return menuRepository.queryMenuByParentCode(parentCode);
+    public List<MenuDTO> queryMenuByParentId(Long parentId) {
+        return menuRepository.queryMenuByParentId(parentId);
     }
 
     @Override

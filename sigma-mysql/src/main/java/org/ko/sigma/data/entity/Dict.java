@@ -24,11 +24,6 @@ public class Dict extends BasicEntity {
     private Long id;
 
     /**
-     * 字典编码，由系统统一生成，不可修改
-     */
-    private String code;
-
-    /**
      * 字典类型
      */
     private String type;
@@ -42,6 +37,11 @@ public class Dict extends BasicEntity {
      * 字典名称
      */
     private String dictName;
+
+    /**
+     * 数据状态：0-有效，1-删除
+     */
+    private short disable;
 
 
 }

@@ -3,7 +3,7 @@ package org.ko.sigma.rest.user.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
-import org.ko.sigma.rest.user.bean.UserEntity;
+import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.repository.UserRepository;
@@ -18,37 +18,37 @@ import static org.ko.sigma.core.type.SystemCode.*;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class UserServiceImpl extends ServiceImpl<UserRepository, UserEntity> implements UserService {
+public class UserServiceImpl extends ServiceImpl<UserRepository, User> implements UserService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired private UserRepository userRepository;
 
     @Override
-    public IPage<UserDTO> queryUserList(QueryUserPageCondition<UserEntity> condition) {
+    public IPage<UserDTO> queryUserList(QueryUserPageCondition<User> condition) {
         return userRepository.queryUserList(condition);
     }
 
     @Override
-    public UserEntity queryUserInfo(Long id) {
+    public User queryUserInfo(Long id) {
         return userRepository.selectById(id);
     }
 
     @Override
-    public Long createUser(UserEntity userEntity) {
-        if (userRepository.insert(userEntity) == 0) {
+    public Long createUser(User User) {
+        if (userRepository.insert(User) == 0) {
             throw new TransactionalException(INSERT_ERROR);
         }
-        return userEntity.getId();
+        return User.getId();
     }
 
     @Override
-    public UserEntity updateUser(Long id, UserEntity userEntity) {
-        userEntity.setId(id);
-        if (userRepository.updateById(userEntity) == 0) {
+    public User updateUser(Long id, User User) {
+        User.setId(id);
+        if (userRepository.updateById(User) == 0) {
             throw new TransactionalException(UPDATE_ERROR);
         }
-        return userEntity;
+        return User;
     }
 
     @Override

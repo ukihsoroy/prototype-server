@@ -12,7 +12,7 @@ public interface MenuRepository extends BaseMapper<Menu> {
 
     IPage<MenuDTO> queryMenuList(MenuQueryPageCondition condition);
 
-    List<MenuDTO> queryMenuByParentCode(String parentCode);
+    List<MenuDTO> queryMenuByParentId(Long parentId);
 
     List<MenuDTO> queryMenuByRoleCode(String roleCode);
 }
