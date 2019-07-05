@@ -42,8 +42,8 @@ public class MenuController {
 
     @GetMapping("child/{parentId:\\d+}")
     @ApiOperation("通过父ID查询子菜单列表")
-    public Response<List<MenuDTO>> queryMenuByParentId (@ApiParam("父级菜单ID") @PathVariable String parentCode) {
-        List<MenuDTO> menuDTOS = menuService.queryMenuByParentCode(parentCode);
+    public Response<List<MenuDTO>> queryMenuByParentId (@ApiParam("父级菜单ID") @PathVariable Long parentId) {
+        List<MenuDTO> menuDTOS = menuService.queryMenuByParentId(parentId);
         return new Response<>(menuDTOS);
     }
 

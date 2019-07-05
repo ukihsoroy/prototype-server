@@ -24,10 +24,6 @@ security.basic.enabled: false
 mybatis-plus:
   mapper-locations: classpath:org/ko/segma/rest/**/repository/*.xml  #mapper xml扫描
   typeAliasesPackage: org.ko.segma.data.*.domain #小名
-  global-config:
-    db-config:
-      logic-delete-value: 0 # 逻辑已删除值(默认为 1)
-      logic-not-delete-value: 1 # 逻辑未删除值(默认为 0)
 
 mybatis.configuration.mapUnderscoreToCamelCase: true
 
@@ -38,7 +34,10 @@ mapper:
   mappers: tk.mybatis.mapper.common.Mapper #配置的mapper
 
 logging:
-  level: info
+  level: debug
+
+sigma:
+  security:
 
 
 

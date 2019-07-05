@@ -38,13 +38,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     }
 
     @Override
-    public List<MenuDTO> queryMenuByParentCode(String parentCode) {
-        return menuRepository.queryMenuByParentCode(parentCode);
+    public List<MenuDTO> queryMenuByParentId(Long parentId) {
+        return menuRepository.queryMenuByParentId(parentId);
     }
 
     @Override
     public Long createMenu(Menu menu) {
-        menu.setEnable(SystemConstants.Enable.Available);
         if (menuRepository.insert(menu) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
@@ -64,7 +63,6 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     public Long deleteMenu(Long id) {
         Menu menu = new Menu();
         menu.setId(id);
-        menu.setEnable(SystemConstants.Enable.Deleted);
         if (menuRepository.updateById(menu) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }

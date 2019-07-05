@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.ko.sigma.rest.user.bean.UserEntity;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.service.UserService;
@@ -31,7 +31,7 @@ public class UserController {
 
     @GetMapping
     @ApiOperation("查询用户列表")
-    public Response<IPage<UserDTO>> queryUserList(@ApiParam("列表查询参数") @ModelAttribute QueryUserPageCondition<UserEntity> condition) {
+    public Response<IPage<UserDTO>> queryUserList(@ApiParam("列表查询参数") @ModelAttribute QueryUserPageCondition<User> condition) {
         //1. 查询用户列表数据
         IPage<UserDTO> page = userService.queryUserList(condition);
 
@@ -47,9 +47,9 @@ public class UserController {
     public Response<UserDTO> queryUserInfo (
             @ApiParam("用户ID") @PathVariable Long id) {
         LOGGER.info("UserController#queryUserInfo");
-        UserEntity userEntity = userService.queryUserInfo(id);
-        if (Objects.nonNull(userEntity)) {
-            return Response.of(this.map(userEntity));
+        User user = userService.queryUserInfo(id);
+        if (Objects.nonNull(user)) {
+            return Response.of(this.map(user));
         }
         return Response.of(SystemCode.EMPTY_DATA);
     }
@@ -58,17 +58,17 @@ public class UserController {
     @ApiOperation("新建用户")
     public Response<Long> createUser (
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
-        Long adminUserId = userService.createUser(map(userDTO));
-        return Response.of(adminUserId);
+        Long userId = userService.createUser(map(userDTO));
+        return Response.of(userId);
     }
 
     @PutMapping("{id:\\d+}")
     @ApiOperation("通过ID更新用户信息")
-    public Response<UserEntity> updateUser (
+    public Response<User> updateUser (
             @ApiParam("用户ID主键") @PathVariable Long id,
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
-        UserEntity userEntity = userService.updateUser(id, map(userDTO));
-        return Response.of(userEntity);
+        User user = userService.updateUser(id, map(userDTO));
+        return Response.of(user);
     }
 
     @DeleteMapping("{id:\\d+}")
@@ -80,25 +80,25 @@ public class UserController {
     }
 
     /**
-     * UserEntity mapTo UserDTO
-     * @param userEntity
+     * User mapTo UserDTO
+     * @param User
      * @return
      */
-    private UserDTO map (UserEntity userEntity) {
+    private UserDTO map (User User) {
         UserDTO userDTO = new UserDTO();
-        BeanUtils.copyProperties(userEntity, userDTO);
+        BeanUtils.copyProperties(User, userDTO);
         return userDTO;
     }
 
     /**
-     * UserDTO mapTo UserEntity
+     * UserDTO mapTo User
      * @param userDTO
      * @return
      */
-    private UserEntity map (UserDTO userDTO) {
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(userDTO, userEntity);
-        return userEntity;
+    private User map (UserDTO userDTO) {
+        User user = new User();
+        BeanUtils.copyProperties(userDTO, user);
+        return user;
     }
 
 

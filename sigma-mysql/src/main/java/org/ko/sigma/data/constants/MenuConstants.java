@@ -12,11 +12,6 @@ public class MenuConstants {
         public static String ID = "id";
 
         /**
-         * 菜单编码，由系统统一生成，不可修改
-         */
-        public static String CODE = "code";
-
-        /**
          * 菜单名称
          */
         public static String NAME = "name";
@@ -44,7 +39,12 @@ public class MenuConstants {
         /**
          * 上级菜单编码，由系统统一生成，不可修改
          */
-        public static String PARENT_CODE = "parent_code";
+        public static String PARENT_ID = "parent_id";
+
+        /**
+         * 数据状态：0-有效，1-删除
+         */
+        public static String DISABLE = "disable";
     }
 
 }

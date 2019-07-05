@@ -1,7 +1,6 @@
 package org.ko.sigma.data.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import org.ko.sigma.data.bean.BasicEntity;
@@ -14,6 +13,7 @@ import lombok.EqualsAndHashCode;
  * @author K.O
  */
 @Data
+@TableName("t_user")
 @EqualsAndHashCode(callSuper = true)
 public class User extends BasicEntity {
 
@@ -22,11 +22,6 @@ public class User extends BasicEntity {
      */
     @TableId(type = IdType.AUTO)
     private Long id;
-
-    /**
-     * 用户code，系统生成
-     */
-    private String code;
 
     /**
      * 用户名
@@ -76,7 +71,6 @@ public class User extends BasicEntity {
     /**
      * qq三方登陆id
      */
-    @TableField(value = "QQ")
     private String QQ;
 
     /**
@@ -93,6 +87,11 @@ public class User extends BasicEntity {
      * 余额
      */
     private java.math.BigDecimal balance;
+
+    /**
+     * 数据状态：0-有效，1-删除
+     */
+    private short disable;
 
 
 }

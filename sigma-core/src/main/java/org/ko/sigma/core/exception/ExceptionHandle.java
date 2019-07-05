@@ -1,6 +1,6 @@
 package org.ko.sigma.core.exception;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.support.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +24,7 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
     private final static Logger logger = LoggerFactory.getLogger(ExceptionHandle.class);
 
     @ExceptionHandler
-    public ResponseEntity<Object> generalException(Exception ex, WebRequest request) {
+    public ResponseEntity<Object> generalException(Exception ex, WebRequest request) throws Exception {
         ResponseEntity<Object> responseEntity = this.handleException(ex, request);
         HttpStatus httpStatus = responseEntity.getStatusCode();
         List<String> errorMsg = new ArrayList<>();

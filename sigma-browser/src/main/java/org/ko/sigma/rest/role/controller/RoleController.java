@@ -99,8 +99,8 @@ public class RoleController {
     @ApiOperation("为当前权限添加菜单")
     public Response<Long> createRoleMenu (
             @ApiParam("权限ID") @PathVariable String roleCode,
-            @ApiParam("菜单ID列表") @RequestBody List<String> menuCodes) {
-        Long count = roleMenuService.createRoleMenu(roleCode, menuCodes);
+            @ApiParam("菜单ID列表") @RequestBody List<Long> menuIds) {
+        Long count = roleMenuService.createRoleMenu(roleCode, menuIds);
         return new Response<>(count);
     }
 

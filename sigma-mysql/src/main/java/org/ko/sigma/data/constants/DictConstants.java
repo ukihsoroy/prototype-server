@@ -12,11 +12,6 @@ public class DictConstants {
         public static String ID = "id";
 
         /**
-         * 字典编码，由系统统一生成，不可修改
-         */
-        public static String CODE = "code";
-
-        /**
          * 字典类型
          */
         public static String TYPE = "type";
@@ -30,6 +25,11 @@ public class DictConstants {
          * 字典名称
          */
         public static String DICT_NAME = "dict_name";
+
+        /**
+         * 数据状态：0-有效，1-删除
+         */
+        public static String DISABLE = "disable";
     }
 
 }

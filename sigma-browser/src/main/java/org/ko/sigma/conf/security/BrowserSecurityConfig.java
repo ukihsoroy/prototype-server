@@ -1,5 +1,7 @@
 package org.ko.sigma.conf.security;
 
+import org.ko.sigma.conf.security.authentication.AuthenticationFailureHandlerImpl;
+import org.ko.sigma.conf.security.authentication.AuthenticationSuccessHandlerImpl;
 import org.ko.sigma.conf.security.session.ExpiredSessionStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -7,17 +9,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.social.security.SpringSocialConfigurer;
-import org.ko.sigma.conf.security.authentication.*;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
-import java.util.List;
 
 
-//@Configuration
+@Configuration
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -38,8 +39,19 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private SpringSocialConfigurer springSocialConfigurer;
 
-    String[] permitAll = new String[]{
+    private String[] permitAll = new String[]{
+            //swagger requests
+            "/**/swagger-ui.html",
+            "/**/swagger-resources/**",
+            "/**/images/**",
+            "/**/webjars/**",
+            "/**/v2/api-docs",
+            "/**/configuration/ui",
+            "/**/configuration/security",
+
+            //不需要验证的
             "/authentication/require",
+            "/login",
             "/system/register",
             "/system/login",
             "/session/invalid",
@@ -51,11 +63,17 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      * @return
      */
     @Bean
-    public PersistentTokenRepository persistentTokenRepository () {
+    public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
-        tokenRepository.setCreateTableOnStartup(true);
+        tokenRepository.setCreateTableOnStartup(false);
         return tokenRepository;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        //使用security默认的加密规则
+        return new BCryptPasswordEncoder();
     }
 
 
@@ -67,7 +85,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin() //表单登录
                 .loginPage("/authentication/require")
-                .loginProcessingUrl("/authentication/form")//用usernamePasswordFilter来处理请求
+                .loginProcessingUrl("/login")//用usernamePasswordFilter来处理请求
                 .successHandler(authenticationSuccessHandlerImpl)
                 .failureHandler(authenticationFailureHandlerImpl)
                 //记住我功能配置

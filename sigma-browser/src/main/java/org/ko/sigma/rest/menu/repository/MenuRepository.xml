@@ -4,14 +4,13 @@
 
     <resultMap id="BaseMenuResultMap" type="org.ko.sigma.data.entity.Menu">
         <id column="id" property="id" jdbcType="VARCHAR"/>
-        <result column="code" property="code" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
         <result column="path" property="path" jdbcType="VARCHAR"/>
         <result column="component" property="component" jdbcType="VARCHAR"/>
         <result column="redirect" property="redirect" jdbcType="VARCHAR"/>
         <result column="meta_json" property="metaJson" jdbcType="VARCHAR"/>
-        <result column="parent_code" property="parentCode" jdbcType="VARCHAR"/>
-        <result column="enable" property="enable" jdbcType="SMALLINT"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="disable" property="disable" jdbcType="SMALLINT"/>
         <result column="version" property="version" jdbcType="BIGINT"/>
         <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
@@ -30,13 +29,12 @@
                     javaType="java.util.List"
                     ofType="org.ko.sigma.rest.menu.dto.MenuDTO"
                     column="code"
-                    select="queryMenuByParentCode"/>
+                    select="queryMenuByParentId"/>
     </resultMap>
 
     <select id="queryMenuList" resultMap="ResultMapWithChildMenu">
         SELECT
             id,
-            code,
             name,
             path,
             component,
@@ -44,22 +42,21 @@
             meta_json,
             meta_json ->> '$.title' as meta_title,
             meta_json ->> '$.icon' as meta_icon,
-            parent_code,
-            enable,
+            parent_id,
+            disable,
             version,
             create_user,
             gmt_create,
             modified_user,
             gmt_modified
         FROM t_menu
-        WHERE enable = 1
-            AND parent_id = '#'
+        WHERE disable = 1
+            AND parent_id is null
     </select>
 
-    <select id="queryMenuByParentCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">
+    <select id="queryMenuByParentId" resultMap="ResultMapWithChildMenu" parameterType="java.lang.Long">
         SELECT
             id,
-            code,
             name,
             path,
             component,
@@ -67,22 +64,21 @@
             meta_json,
             meta_json ->> '$.title' as meta_title,
             meta_json ->> '$.icon' as meta_icon,
-            parent_code,
-            enable,
+            parent_id,
+            disable,
             version,
             create_user,
             gmt_create,
             modified_user,
             gmt_modified
         FROM t_menu
-        WHERE enable = 1
-            AND parent_code = #{parentCode}
+        WHERE disable = 1
+            AND parent_id = #{parentId}
     </select>
 
     <select id="queryMenuByRoleCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">
         SELECT
             m.id,
-            m.code,
             m.name,
             m.path,
             m.component,
@@ -90,16 +86,16 @@
             m.meta_json,
             m.meta_json ->> '$.title' as meta_title,
             m.meta_json ->> '$.icon' as meta_icon,
-            m.parent_code,
-            m.enable,
+            m.parent_id,
+            m.disable,
             m.version,
             m.create_user,
             m.gmt_create,
             m.modified_user,
             m.gmt_modified
         FROM t_role_menu rm
-        LEFT JOIN t_menu m ON rm.menu_code = m.code AND m.enable = 1
-        WHERE rm.enable = 1 AND rm.role_code = #{roleCode}
+        LEFT JOIN t_menu m ON rm.menu_code = m.code AND m.disable = 1
+        WHERE rm.disable = 1 AND rm.role_code = #{roleCode}
     </select>
 
 </mapper>

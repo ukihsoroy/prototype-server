@@ -1,1 +1,0 @@
-package org.ko.sigma.conf.security;

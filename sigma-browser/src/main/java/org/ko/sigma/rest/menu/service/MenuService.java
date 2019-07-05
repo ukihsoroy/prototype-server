@@ -25,7 +25,7 @@ public interface MenuService extends IService<Menu> {
     Menu queryMenuInfo(Long id);
 
 
-    List<MenuDTO> queryMenuByParentCode(String parentCode);
+    List<MenuDTO> queryMenuByParentId(Long parentId);
 
     /**
      * <p>创建新的菜单</p>

@@ -19,7 +19,7 @@ public class RoleMenuConstants {
         /**
          * 菜单编码，由系统统一生成，不可修改
          */
-        public static String MENU_CODE = "menu_code";
+        public static String MENU_ID = "menu_id";
 
         /**
          * 创建数据权限：0-否，1-是
@@ -40,6 +40,11 @@ public class RoleMenuConstants {
          * 删除数据权限：0-否，1-是
          */
         public static String DELETE = "delete";
+
+        /**
+         * 数据状态：0-有效，1-删除
+         */
+        public static String DISABLE = "disable";
     }
 
 }

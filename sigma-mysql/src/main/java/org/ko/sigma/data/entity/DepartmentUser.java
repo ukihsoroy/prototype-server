@@ -31,7 +31,12 @@ public class DepartmentUser extends BasicEntity {
     /**
      * 用户编码（UUID），由系统统一生成，不可修改
      */
-    private String userCode;
+    private String userId;
+
+    /**
+     * 数据状态：0-有效，1-删除
+     */
+    private short disable;
 
 
 }

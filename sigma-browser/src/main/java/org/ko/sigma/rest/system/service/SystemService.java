@@ -1,19 +1,8 @@
 package org.ko.sigma.rest.system.service;
 
-import org.ko.sigma.rest.user.bean.UserEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.social.security.SocialUserDetailsService;
 
-public interface SystemService extends UserDetailsService {
+public interface SystemService extends UserDetailsService, SocialUserDetailsService {
 
-    /**
-     * 用户登陆
-     * @param username
-     * @param password
-     * @return
-     */
-    UserEntity login(String username, String password);
-
-    UserEntity signIn(UserEntity userEntity);
-
-    Long logout();
 }

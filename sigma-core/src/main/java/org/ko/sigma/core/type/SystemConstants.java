@@ -8,16 +8,16 @@ public final class SystemConstants {
     /**
      * 删除状态
      */
-    public static final class Enable {
+    public static final class Disable {
         /**
          * 删除
          */
-        public static final Short Deleted = 0;
+        public static final Short Available = 0;
 
         //有效
-        public static final Short Available = 1;
+        public static final Short Deleted = 1;
 
-        private Enable () {}
+        private Disable () {}
     }
 
     private SystemConstants () {}

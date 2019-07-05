@@ -1,5 +1,8 @@
 package org.ko.sigma.core.properties;
 
+import org.springframework.boot.context.properties.ConfigurationProperties;
+
+@ConfigurationProperties(prefix = "sigma.file")
 public class FileProperties {
 
     private String folder;

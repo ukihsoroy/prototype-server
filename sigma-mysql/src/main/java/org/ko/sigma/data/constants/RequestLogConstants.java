@@ -32,9 +32,9 @@ public class RequestLogConstants {
         public static String REQUEST_LINK = "request_link";
 
         /**
-         * 删除状态：0-删除 1-有效
+         * 数据状态：0-有效，1-删除
          */
-        public static String AVAILABLE_STATUS = "available_status";
+        public static String DISABLE = "disable";
 
         /**
          * 创建用户ID

@@ -24,11 +24,6 @@ public class Menu extends BasicEntity {
     private Long id;
 
     /**
-     * 菜单编码，由系统统一生成，不可修改
-     */
-    private String code;
-
-    /**
      * 菜单名称
      */
     private String name;
@@ -56,7 +51,12 @@ public class Menu extends BasicEntity {
     /**
      * 上级菜单编码，由系统统一生成，不可修改
      */
-    private String parentCode;
+    private Long parentId;
+
+    /**
+     * 数据状态：0-有效，1-删除
+     */
+    private short disable;
 
 
 }

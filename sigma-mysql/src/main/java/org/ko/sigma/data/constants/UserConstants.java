@@ -12,11 +12,6 @@ public class UserConstants {
         public static String ID = "id";
 
         /**
-         * 用户code，系统生成
-         */
-        public static String CODE = "code";
-
-        /**
          * 用户名
          */
         public static String USERNAME = "username";
@@ -80,6 +75,11 @@ public class UserConstants {
          * 余额
          */
         public static String BALANCE = "balance";
+
+        /**
+         * 数据状态：0-有效，1-删除
+         */
+        public static String DISABLE = "disable";
     }
 
 }

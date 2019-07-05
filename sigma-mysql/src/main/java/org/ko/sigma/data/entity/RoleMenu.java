@@ -31,7 +31,7 @@ public class RoleMenu extends BasicEntity {
     /**
      * 菜单编码，由系统统一生成，不可修改
      */
-    private String menuCode;
+    private Long menuId;
 
     /**
      * 创建数据权限：0-否，1-是
@@ -52,6 +52,11 @@ public class RoleMenu extends BasicEntity {
      * 删除数据权限：0-否，1-是
      */
     private short delete;
+
+    /**
+     * 数据状态：0-有效，1-删除
+     */
+    private short disable;
 
 
 }
