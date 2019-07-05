@@ -14,15 +14,20 @@ import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
 import org.ko.sigma.rest.role.dto.RoleDTO;
 import org.ko.sigma.rest.role.service.RoleMenuService;
 import org.ko.sigma.rest.role.service.RoleService;
+import org.ko.sigma.rest.user.dto.UserDTO;
+import org.ko.sigma.util.SessionHolder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import sun.plugin.liveconnect.SecurityContextHelper;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(description = "权限接口")
+@Api(tags = "权限接口")
 @RestController
 @RequestMapping("role")
 @Validated

@@ -19,7 +19,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@Api(description = "异步Rest调用")
+@Api(tags = "异步Rest调用")
 @Validated
 @RequestMapping("async")
 public class AsyncController {

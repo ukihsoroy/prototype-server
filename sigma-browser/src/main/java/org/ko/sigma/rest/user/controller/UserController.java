@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
 
-@Api(description = "用户接口")
+@Api(tags = "用户接口")
 @RestController
 @RequestMapping("user")
 @Validated
