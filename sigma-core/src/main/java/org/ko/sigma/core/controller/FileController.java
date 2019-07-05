@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-@Api(description = "文件服务")
+@Api(tags = "文件服务")
 @RestController
 @RequestMapping("file")
 public class FileController {
