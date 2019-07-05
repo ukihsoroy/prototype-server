@@ -49,7 +49,6 @@ public class AuthenticationSuccessHandlerImpl extends SavedRequestAwareAuthentic
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
         logger.info("登陆成功");
-
         response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(authentication));
     }

@@ -5,6 +5,7 @@ package org.ko.sigma.core.type;
  */
 public enum SystemCode {
 
+    REQUIRE_AUTHENTICATION("0", "Require Authentication!"),
     SUCCESS("200", "request success!"),
     EMPTY_DATA("201", "empty data!"),
     INSERT_ERROR("202", "insert error!"),

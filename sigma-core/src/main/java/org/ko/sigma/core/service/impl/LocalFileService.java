@@ -4,7 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.bean.FileInfo;
 import org.ko.sigma.core.exception.GeneralException;
-import org.ko.sigma.core.properties.PrototypeProperties;
+import org.ko.sigma.core.properties.FileProperties;
 import org.ko.sigma.core.service.IFileService;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.BASE64;
@@ -22,7 +22,7 @@ import java.util.Date;
 public class LocalFileService implements IFileService {
 
     @Autowired
-    private PrototypeProperties prototypeProperties;
+    private FileProperties fileProperties;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LocalFileService.class);
 
@@ -39,7 +39,7 @@ public class LocalFileService implements IFileService {
                 file.getSize());
         String fileName = new Date().getTime() +
                 file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-        File localFile = new File(prototypeProperties.getFile().getFolder(), fileName);
+        File localFile = new File(fileProperties.getFolder(), fileName);
         try {
             //从请求中将文件拷贝到本地
             file.transferTo(localFile);
@@ -62,7 +62,7 @@ public class LocalFileService implements IFileService {
         String filename = request.getParameter("filename");
         try (
                 InputStream inputStream =
-                        new FileInputStream(new File(prototypeProperties.getFile().getFolder(), fileId));
+                        new FileInputStream(new File(fileProperties.getFolder(), fileId));
                 OutputStream outputStream = request.getResponse().getOutputStream()) {
             request.getResponse().setContentType("application/x-download");
             request.getResponse().addHeader("Content-Disposition", "attachment;filename="

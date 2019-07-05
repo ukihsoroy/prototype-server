@@ -36,5 +36,8 @@ mapper:
 logging:
   level: debug
 
+sigma:
+  security:
+
 
 

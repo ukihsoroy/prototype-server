@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.ko.sigma.rest.role.repository.RoleRepository">
+<mapper namespace="org.ko.sigma.rest.user.repository.UserRoleRepository">
 
-    <resultMap id="BaseRoleResultMap" type="org.ko.sigma.data.entity.Role">
+    <resultMap id="BaseResultMap" type="org.ko.sigma.data.entity.UserRole">
         <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
+        <result column="role_code" property="password" jdbcType="VARCHAR"/>
+        <result column="disable" property="disable" jdbcType="SMALLINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
+        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="modified_user" property="modifiedUser" jdbcType="VARCHAR"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <resultMap id="ResultMapWithRole" type="org.ko.sigma.rest.role.dto.RoleDTO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="code" property="code" jdbcType="BIGINT"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="user_id" property="userId" jdbcType="BIGINT"/>
         <result column="disable" property="disable" jdbcType="SMALLINT"/>
         <result column="version" property="version" jdbcType="BIGINT"/>
         <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
@@ -13,31 +27,18 @@
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <resultMap id="BaseRoleMenuResultMap" type="org.ko.sigma.data.entity.RoleMenu">
-        <id column="id" property="id" jdbcType="BIGINT"/>
-        <result column="role_id" property="roleId" jdbcType="BIGINT"/>
-        <result column="menu_id" property="menuId" jdbcType="BIGINT"/>
-        <result column="disable" property="disable" jdbcType="SMALLINT"/>
-        <result column="version" property="version" jdbcType="BIGINT"/>
-        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
-        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
-        <result column="modified_user" property="modifiedUser" jdbcType="VARCHAR"/>
-        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
-    </resultMap>
-    
-    <resultMap id="ResultMapWithRoleMenu" 
-               type="org.ko.sigma.rest.role.dto.RoleMenuDTO"
-               extends="BaseRoleMenuResultMap">
-        <association property="role"
-                     resultMap="BaseRoleResultMap"
-                     javaType="org.ko.sigma.data.entity.Role"/>
-        <!--<collection property="menus"
-                    javaType="java.lang.List"
-                    ofType="org.ko.prototype.rest.menu.dto.MenuDTO"
-                    resultMap=""
-                    column="role_id"
-                    select=""/>-->
-    </resultMap>
-    
+    <select id="findRolesByUserId" parameterType="java.lang.Long" resultMap="ResultMapWithRole">
+        SELECT
+            r.code,
+            r.name,
+            r.version,
+            r.create_user,
+            r.gmt_create,
+            r.modified_user,
+            r.modified_user
+        FROM t_user_role ur
+        LEFT JOIN t_role r ON ur.role_code = r.code AND r.`disable` = 0
+        WHERE ur.`disable` = 0 AND ur.user_id = #{id}
+    </select>
 
 </mapper>
