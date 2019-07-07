@@ -52,8 +52,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             //不需要验证的
             "/authentication/require",
             "/login",
-            "/system/register",
-            "/system/login",
+            "/register",
             "/session/invalid",
             "/code/*"
     };

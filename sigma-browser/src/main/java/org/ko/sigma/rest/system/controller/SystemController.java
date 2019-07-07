@@ -8,17 +8,18 @@ import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.rest.system.service.SystemService;
 import org.ko.sigma.rest.user.dto.UserDTO;
+import org.ko.sigma.rest.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.web.DefaultRedirectStrategy;
-import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,15 +35,14 @@ public class SystemController {
 
     @Autowired private SystemService systemService;
 
+    @Autowired private UserService userService;
+
+    @Autowired private ProviderSignInUtils providerSignInUtils;
+
     /**
      * 请求的缓存
      */
     private RequestCache requestCache = new HttpSessionRequestCache();
-
-    /**
-     *
-     */
-    private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
     @PostMapping("login")
     @ApiOperation("账号密码登录")
@@ -59,9 +59,12 @@ public class SystemController {
         return new Response<>(1L);
     }
 
-    @PostMapping("signup")
+    @PostMapping("register")
     @ApiOperation("注册新用户")
-    public Response<UserDTO> signup (@ApiParam("用户信息对象") @RequestBody UserDTO userDTO) {
+    public Response<UserDTO> register (@ApiParam("用户信息对象") @RequestBody UserDTO userDTO, HttpServletRequest request) {
+        System.out.println("注册用户");
+        String userId = userDTO.getUsername();
+        providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
         return new Response<>(userDTO);
     }
 
