@@ -5,8 +5,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 public final class SessionHolder {
 
+    private static final String ANONYMOUS = "anonymousUser";
+
     public static UserDTO loginUser () {
-        return (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserDTO userDTO = null;
+        if (isLogin()) {
+            userDTO = (UserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        }
+        return userDTO;
+    }
+
+    public static boolean isLogin () {
+        return !ANONYMOUS.equalsIgnoreCase(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
     }
 
     private SessionHolder () {}

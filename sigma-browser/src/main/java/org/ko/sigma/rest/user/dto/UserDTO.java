@@ -42,9 +42,10 @@ public class UserDTO extends User implements UserDetails {
         return getDisable() == 0;
     }
 
-    @JsonIgnore
     @Override
     public String getPassword() {
         return super.getPassword();
     }
+
+
 }

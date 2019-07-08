@@ -6,11 +6,13 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.system.service.SystemService;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
@@ -63,8 +65,11 @@ public class SystemController {
     @ApiOperation("注册新用户")
     public Response<UserDTO> register (@ApiParam("用户信息对象") @RequestBody UserDTO userDTO, HttpServletRequest request) {
         System.out.println("注册用户");
-        String userId = userDTO.getUsername();
-        providerSignInUtils.doPostSignUp(userId, new ServletWebRequest(request));
+        Long userId = userService.createUser(map(userDTO));
+        if (userId != null) {
+            String username = userDTO.getUsername();
+            providerSignInUtils.doPostSignUp(username, new ServletWebRequest(request));
+        }
         return new Response<>(userDTO);
     }
 
@@ -88,6 +93,20 @@ public class SystemController {
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
     public Response sessionInvalid () {
         return Response.of("session失效");
+    }
+
+
+    /**
+     * UserDTO mapTo User
+     * @param userDTO
+     * @return
+     */
+    private User map (UserDTO userDTO) {
+        User user = new User();
+        if (userDTO != null) {
+            BeanUtils.copyProperties(userDTO, user);
+        }
+        return user;
     }
 
 }

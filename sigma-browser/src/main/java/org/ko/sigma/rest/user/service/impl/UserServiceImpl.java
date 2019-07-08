@@ -11,6 +11,7 @@ import org.ko.sigma.rest.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,8 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
 
     @Autowired private UserRepository userRepository;
 
+    @Autowired private PasswordEncoder passwordEncoder;
+
     @Override
     public IPage<UserDTO> queryUserList(QueryUserPageCondition<User> condition) {
         return userRepository.queryUserList(condition);
@@ -35,20 +38,22 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     }
 
     @Override
-    public Long createUser(User User) {
-        if (userRepository.insert(User) == 0) {
+    public Long createUser(User user) {
+        //加密password
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        if (userRepository.insert(user) == 0) {
             throw new TransactionalException(INSERT_ERROR);
         }
-        return User.getId();
+        return user.getId();
     }
 
     @Override
-    public User updateUser(Long id, User User) {
-        User.setId(id);
-        if (userRepository.updateById(User) == 0) {
+    public User updateUser(Long id, User user) {
+        user.setId(id);
+        if (userRepository.updateById(user) == 0) {
             throw new TransactionalException(UPDATE_ERROR);
         }
-        return User;
+        return user;
     }
 
     @Override
