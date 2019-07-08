@@ -38,10 +38,5 @@ public class Dict extends BasicEntity {
      */
     private String dictName;
 
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
 
 }

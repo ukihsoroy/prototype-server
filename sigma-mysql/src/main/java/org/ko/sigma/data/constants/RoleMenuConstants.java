@@ -40,11 +40,6 @@ public class RoleMenuConstants {
          * 删除数据权限：0-否，1-是
          */
         public static String DELETE = "delete";
-
-        /**
-         * 数据状态：0-有效，1-删除
-         */
-        public static String DISABLE = "disable";
     }
 
 }

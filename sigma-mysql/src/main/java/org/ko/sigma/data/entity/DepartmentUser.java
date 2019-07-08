@@ -33,10 +33,5 @@ public class DepartmentUser extends BasicEntity {
      */
     private String userId;
 
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
 
 }

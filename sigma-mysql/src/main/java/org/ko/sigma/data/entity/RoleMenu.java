@@ -53,10 +53,5 @@ public class RoleMenu extends BasicEntity {
      */
     private short delete;
 
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
 
 }

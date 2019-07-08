@@ -19,12 +19,7 @@ public class UserRoleConstants {
         /**
          * 角色编码，由系统统一生成，不可修改
          */
-        public static String ROLE_ID = "role_id";
-
-        /**
-         * 数据状态：0-有效，1-删除
-         */
-        public static String DISABLE = "disable";
+        public static String ROLE_CODE = "role_code";
     }
 
 }

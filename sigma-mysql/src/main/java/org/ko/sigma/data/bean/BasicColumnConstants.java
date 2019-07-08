@@ -5,7 +5,7 @@ public class BasicColumnConstants {
     /**
      * 数据状态：0-删除，1-有效
      */
-    public static String ENABLE = "enable";
+    public static String DISABLE = "disable";
 
     /**
      * 更新版本

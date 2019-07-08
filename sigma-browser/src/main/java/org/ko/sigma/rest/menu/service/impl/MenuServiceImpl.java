@@ -61,9 +61,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
 
     @Override
     public Long deleteMenu(Long id) {
-        Menu menu = new Menu();
-        menu.setId(id);
-        if (menuRepository.updateById(menu) == 0) {
+        if (menuRepository.deleteById(id) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }
         return id;

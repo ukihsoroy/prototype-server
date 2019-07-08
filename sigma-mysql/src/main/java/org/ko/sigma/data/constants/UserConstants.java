@@ -75,11 +75,6 @@ public class UserConstants {
          * 余额
          */
         public static String BALANCE = "balance";
-
-        /**
-         * 数据状态：0-有效，1-删除
-         */
-        public static String DISABLE = "disable";
     }
 
 }

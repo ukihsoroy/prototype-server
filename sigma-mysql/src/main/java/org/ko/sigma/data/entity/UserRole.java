@@ -26,17 +26,12 @@ public class UserRole extends BasicEntity {
     /**
      * 用户编码（UUID），由系统统一生成，不可修改
      */
-    private String userId;
+    private Long userId;
 
     /**
      * 角色编码，由系统统一生成，不可修改
      */
-    private String roleId;
-
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
+    private String roleCode;
 
 
 }

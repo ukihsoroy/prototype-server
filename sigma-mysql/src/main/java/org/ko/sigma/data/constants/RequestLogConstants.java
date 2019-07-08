@@ -32,11 +32,6 @@ public class RequestLogConstants {
         public static String REQUEST_LINK = "request_link";
 
         /**
-         * 数据状态：0-有效，1-删除
-         */
-        public static String DISABLE = "disable";
-
-        /**
          * 创建用户ID
          */
         public static String CREATE_USER_ID = "create_user_id";

@@ -20,11 +20,6 @@ public class RoleConstants {
          * 角色名称
          */
         public static String NAME = "name";
-
-        /**
-         * 数据状态：0-有效，1-删除
-         */
-        public static String DISABLE = "disable";
     }
 
 }

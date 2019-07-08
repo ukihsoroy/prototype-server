@@ -88,10 +88,5 @@ public class User extends BasicEntity {
      */
     private java.math.BigDecimal balance;
 
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
 
 }

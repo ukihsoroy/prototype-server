@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class BasicEntity implements Serializable {
 
     /**
-     * 数据状态：0-删除，1-有效
+     * 数据状态：0-有效，1-删除
      */
     @TableLogic
     @TableField(select = false)
@@ -28,7 +28,7 @@ public class BasicEntity implements Serializable {
      * 创建用户
      */
     @TableField(value = "create_user", fill = FieldFill.INSERT)
-    private String createUser;
+    private Long createUser;
 
     /**
      * 创建时间
@@ -40,7 +40,7 @@ public class BasicEntity implements Serializable {
      * 更新用户
      */
     @TableField(value = "modified_user", fill = FieldFill.UPDATE)
-    private String modifiedUser;
+    private Long modifiedUser;
 
     /**
      * 更新时间

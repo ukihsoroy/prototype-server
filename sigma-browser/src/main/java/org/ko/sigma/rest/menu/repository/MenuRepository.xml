@@ -12,9 +12,9 @@
         <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
         <result column="disable" property="disable" jdbcType="SMALLINT"/>
         <result column="version" property="version" jdbcType="BIGINT"/>
-        <result column="create_user" property="createUser" jdbcType="VARCHAR"/>
+        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
         <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
-        <result column="modified_user" property="modifiedUser" jdbcType="VARCHAR"/>
+        <result column="modified_user" property="modifiedUser" jdbcType="BIGINT"/>
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
@@ -28,7 +28,7 @@
         <collection property="children"
                     javaType="java.util.List"
                     ofType="org.ko.sigma.rest.menu.dto.MenuDTO"
-                    column="code"
+                    column="id"
                     select="queryMenuByParentId"/>
     </resultMap>
 
@@ -50,7 +50,7 @@
             modified_user,
             gmt_modified
         FROM t_menu
-        WHERE disable = 1
+        WHERE `disable` = 0
             AND parent_id is null
     </select>
 
@@ -72,7 +72,7 @@
             modified_user,
             gmt_modified
         FROM t_menu
-        WHERE disable = 1
+        WHERE `disable` = 0
             AND parent_id = #{parentId}
     </select>
 
@@ -94,8 +94,8 @@
             m.modified_user,
             m.gmt_modified
         FROM t_role_menu rm
-        LEFT JOIN t_menu m ON rm.menu_code = m.code AND m.disable = 1
-        WHERE rm.disable = 1 AND rm.role_code = #{roleCode}
+        LEFT JOIN t_menu m ON rm.menu_id = m.id AND m.`disable` = 0
+        WHERE rm.`disable` = 0 AND rm.role_code = #{roleCode}
     </select>
 
 </mapper>

@@ -44,11 +44,6 @@ public class RequestLog extends BasicEntity {
     private String requestLink;
 
     /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
-    /**
      * 创建用户ID
      */
     private int createUserId;

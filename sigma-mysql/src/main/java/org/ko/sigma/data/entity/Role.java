@@ -33,10 +33,5 @@ public class Role extends BasicEntity {
      */
     private String name;
 
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
 
 }

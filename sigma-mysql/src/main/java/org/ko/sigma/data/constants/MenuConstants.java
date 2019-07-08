@@ -40,11 +40,6 @@ public class MenuConstants {
          * 上级菜单编码，由系统统一生成，不可修改
          */
         public static String PARENT_ID = "parent_id";
-
-        /**
-         * 数据状态：0-有效，1-删除
-         */
-        public static String DISABLE = "disable";
     }
 
 }

@@ -25,11 +25,6 @@ public class DepartmentConstants {
          * 父级部门编码
          */
         public static String PARENT_CODE = "parent_code";
-
-        /**
-         * 数据状态：0-有效，1-删除
-         */
-        public static String DISABLE = "disable";
     }
 
 }

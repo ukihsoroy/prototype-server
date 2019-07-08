@@ -38,10 +38,5 @@ public class Department extends BasicEntity {
      */
     private String parentCode;
 
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
 
 }

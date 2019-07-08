@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;
 import org.apache.ibatis.reflection.MetaObject;
+import org.ko.sigma.rest.user.dto.UserDTO;
+import org.ko.sigma.util.SessionHolder;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,13 +35,15 @@ public class MyBatisPlusConfig implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName(CREATE_USER, "K.O", metaObject);
+        UserDTO userDTO = SessionHolder.loginUser();
+        this.setFieldValByName(CREATE_USER, userDTO.getId(), metaObject);
         this.setFieldValByName(GMT_CREATE, new Date(), metaObject);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        this.setFieldValByName(MODIFIED_USER, "K.O", metaObject);
+        UserDTO userDTO = SessionHolder.loginUser();
+        this.setFieldValByName(MODIFIED_USER, userDTO.getId(), metaObject);
         this.setFieldValByName(GMT_MODIFIED, new Date(), metaObject);
     }
 }
