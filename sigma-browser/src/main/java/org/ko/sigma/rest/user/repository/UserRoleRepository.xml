@@ -41,4 +41,12 @@
         WHERE ur.`disable` = 0 AND ur.user_id = #{id}
     </select>
 
+
+    <insert id="insertList">
+        INSERT INTO `t_user_role` (`user_id`, `role_code`) VALUES
+        <foreach collection="userRoles" item="userRole" separator=",">
+            (#{userRole.userId}, #{userRole.roleCode})
+        </foreach>
+    </insert>
+
 </mapper>

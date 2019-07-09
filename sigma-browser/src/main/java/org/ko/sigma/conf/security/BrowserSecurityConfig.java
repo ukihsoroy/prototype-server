@@ -6,19 +6,21 @@ import org.ko.sigma.conf.security.session.ExpiredSessionStrategyImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
 
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
@@ -57,18 +59,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             "/code/*"
     };
 
-    /**
-     * 记住我功能的实现,
-     * @return
-     */
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource);
-        tokenRepository.setCreateTableOnStartup(false);
-        return tokenRepository;
-    }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         //使用security默认的加密规则
@@ -87,13 +77,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/login")//用usernamePasswordFilter来处理请求
                 .successHandler(authenticationSuccessHandlerImpl)
                 .failureHandler(authenticationFailureHandlerImpl)
-                //记住我功能配置
                 .and()
-                .rememberMe()
-                .tokenRepository(persistentTokenRepository())
-                .tokenValiditySeconds(3600)
                 .userDetailsService(userDetailsService)
-                .and()
                 .sessionManagement()
                 .invalidSessionUrl("/session/invalid")
                 .maximumSessions(1) //同时存在最大session数为1
@@ -102,7 +87,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .and()
                 .logout()
-                .logoutUrl("/system/signOut")
+                .logoutUrl("/logout")
                 .logoutSuccessUrl("/ko-logout.html")
                 .and()
                 .authorizeRequests()//下面的请求

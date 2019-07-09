@@ -13,4 +13,6 @@ public interface UserRoleRepository extends BaseMapper<UserRole> {
 
     List<RoleDTO> findRolesByUserId(@Param("id") Long id);
 
+    Long insertList(@Param("userRoles") List<UserRole> userRoles);
+
 }

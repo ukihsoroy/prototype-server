@@ -1,19 +1,37 @@
 package org.ko.sigma.rest.system.service.impl;
 
+import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.data.entity.User;
+import org.ko.sigma.data.entity.UserRole;
 import org.ko.sigma.rest.system.service.SystemService;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.repository.UserRepository;
+import org.ko.sigma.rest.user.repository.UserRoleRepository;
+import org.ko.sigma.rest.user.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.ko.sigma.core.type.SystemCode.REGISTER_USER_ERROR;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
@@ -21,6 +39,15 @@ public class SystemServiceImpl implements SystemService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
 
     private static final Logger logger = LoggerFactory.getLogger(SystemServiceImpl.class);
@@ -55,5 +82,49 @@ public class SystemServiceImpl implements SystemService {
                 password,
                 true, true, true, true,
                 AuthorityUtils.commaSeparatedStringToAuthorityList("ADMIN, ROLE_USER"));
+    }
+
+    @Override
+    public Long register(UserDTO userDTO, HttpServletRequest request) {
+
+        Long userId = userService.createUser(map(userDTO));
+
+        List<UserRole> userRoles = userDTO.getRoleDTOS().stream().map(roleDTO -> {
+            UserRole userRole = new UserRole();
+            userRole.setRoleCode(roleDTO.getCode());
+            userRole.setUserId(userId);
+            return userRole;
+        }).collect(Collectors.toList());
+
+        Long count = userRoleRepository.insertList(userRoles);
+
+        if (count == 0) {
+            throw new TransactionalException(REGISTER_USER_ERROR);
+        }
+
+        registerSession(userDTO, request);
+
+        return userId;
+    }
+
+    private void registerSession(UserDTO userDTO, HttpServletRequest request) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDTO.getUsername(), userDTO.getPassword());
+        token.setDetails(new WebAuthenticationDetails(request));
+        Authentication authenticatedUser = authenticationManager.authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authenticatedUser);
+        request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+    }
+
+    /**
+     * UserDTO mapTo User
+     * @param userDTO
+     * @return
+     */
+    private User map (UserDTO userDTO) {
+        User user = new User();
+        if (userDTO != null) {
+            BeanUtils.copyProperties(userDTO, user);
+        }
+        return user;
     }
 }
