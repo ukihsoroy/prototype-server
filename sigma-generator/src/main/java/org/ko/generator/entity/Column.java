@@ -1,6 +1,5 @@
 package org.ko.generator.entity;
 
-
 public class Column {
 
     public Column(String columnName, String propertyName, String columnType, String propertyType, boolean primaryKey, Integer length, String comment) {
