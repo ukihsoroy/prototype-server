@@ -24,7 +24,7 @@ public class LocalFileService implements IFileService {
     @Autowired
     private FileProperties fileProperties;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LocalFileService.class);
+    private static final Logger logger = LoggerFactory.getLogger(LocalFileService.class);
 
     /**
      * <p>文件上传</p>
@@ -33,12 +33,17 @@ public class LocalFileService implements IFileService {
      */
     @Override
     public FileInfo upload(MultipartFile file) {
-        LOGGER.info("file info name[{}], originalFileName[{}], size[{}]",
+        logger.info("file info name[{}], originalFileName[{}], size[{}]",
                 file.getName(),
                 file.getOriginalFilename(),
                 file.getSize());
         String fileName = new Date().getTime() +
                 file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+
+        //如果没有目录则创建
+        File folder = new File(fileProperties.getFolder());
+        if (!folder.exists()) folder.mkdir();
+
         File localFile = new File(fileProperties.getFolder(), fileName);
         try {
             //从请求中将文件拷贝到本地
@@ -46,7 +51,7 @@ public class LocalFileService implements IFileService {
             //上传至其他地方
 //            file.getInputStream();
         } catch (IOException e) {
-            LOGGER.error("org.ko.prototype.core.service.impl.LocalFileService#upload exception: {}", e);
+            logger.error("org.ko.prototype.core.service.impl.LocalFileService#upload exception: {}", e.getMessage());
         }
         return new FileInfo(BASE64.encryptBASE64(fileName.getBytes()), file.getOriginalFilename());
     }
@@ -57,20 +62,19 @@ public class LocalFileService implements IFileService {
      * @param request
      */
     @Override
-    public void download(String id, ServletWebRequest request) {
+    public void download(String id, String name, ServletWebRequest request) {
         String fileId = BASE64.decryptBASE64String(id);
-        String filename = request.getParameter("filename");
         try (
                 InputStream inputStream =
                         new FileInputStream(new File(fileProperties.getFolder(), fileId));
                 OutputStream outputStream = request.getResponse().getOutputStream()) {
             request.getResponse().setContentType("application/x-download");
             request.getResponse().addHeader("Content-Disposition", "attachment;filename="
-                    + (StringUtils.isNotBlank(filename) ? filename : fileId));
+                    + (StringUtils.isNotBlank(name) ? name : fileId));
             IOUtils.copy(inputStream, outputStream);
             outputStream.flush();
         } catch (IOException e) {
-            LOGGER.error("org.ko.prototype.core.service.impl.LocalFileService#download exception: {}", e);
+            logger.error("org.ko.prototype.core.service.impl.LocalFileService#download exception: {}", e.getMessage());
             throw new GeneralException(SystemCode.SYSTEM_ERROR);
         }
     }

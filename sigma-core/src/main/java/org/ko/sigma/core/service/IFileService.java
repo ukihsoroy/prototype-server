@@ -8,5 +8,5 @@ public interface IFileService {
 
     FileInfo upload(MultipartFile file);
 
-    void download(String id, ServletWebRequest request);
+    void download(String id, String name, ServletWebRequest request);
 }

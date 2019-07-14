@@ -12,7 +12,9 @@ import static org.ko.sigma.core.type.SystemCode.CONVERTER_ERROR;
 
 public final class BASE64 {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(BASE64.class);
+    private static final Logger logger = LoggerFactory.getLogger(BASE64.class);
+
+    private static String[] REGEXS = {"\n", "\r"};
 
     /**
      * <p>BASE64解密</p>
@@ -23,7 +25,7 @@ public final class BASE64 {
         try {
             return (new BASE64Decoder()).decodeBuffer(key);
         } catch (IOException e) {
-            LOGGER.error("org.ko.prototype.core.utils.BASE64#decryptBASE64 exception: {}", e);
+            logger.error("org.ko.prototype.core.utils.BASE64#decryptBASE64 exception: {}", e.getMessage());
             throw new GeneralException(CONVERTER_ERROR);
         }
     }
@@ -34,7 +36,13 @@ public final class BASE64 {
      * @return 加密后
      */
     public static String encryptBASE64(byte[] key) {
-        return (new BASE64Encoder()).encodeBuffer(key);
+        BASE64Encoder encoder = new BASE64Encoder();
+        String encode = encoder.encodeBuffer(key);
+        String empty = "";
+        for (String regex : REGEXS) {
+            encode = encode.replaceAll(regex, empty);
+        }
+        return encode;
     }
 
     /**

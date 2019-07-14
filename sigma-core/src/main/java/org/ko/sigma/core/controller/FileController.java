@@ -26,8 +26,11 @@ public class FileController {
     }
 
     @GetMapping("{id}")
-    public void download (@PathVariable String id, ServletWebRequest request) {
-        IFileService.download(id, request);
+    @ApiOperation("下载文件")
+    public void download (@PathVariable String id,
+                          @RequestParam(required = false) String name,
+                          ServletWebRequest request) {
+        IFileService.download(id, name, request);
     }
 
 }

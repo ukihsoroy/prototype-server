@@ -8,7 +8,7 @@ spring:
     password: tiger
 
 
-prototype:
+sigma:
   file:
     folder: D://tmp/resources/
 
