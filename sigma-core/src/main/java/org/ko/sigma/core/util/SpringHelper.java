@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * 
- * SpringUtiler
+ * SpringHelper
  *
  */
 @Component
-public class SpringUtiler implements ApplicationContextAware {
+public class SpringHelper implements ApplicationContextAware {
 
     public static ServletContext servletContext;
 
@@ -26,7 +26,7 @@ public class SpringUtiler implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {
-        SpringUtiler.applicationContext = applicationContext;
+        SpringHelper.applicationContext = applicationContext;
     }
 
     public static ApplicationContext getApplicationContext() {
@@ -152,7 +152,7 @@ public class SpringUtiler implements ApplicationContextAware {
      *            the servletContext to set
      */
     public static void setServletContext(ServletContext servletContext) {
-        SpringUtiler.servletContext = servletContext;
+        SpringHelper.servletContext = servletContext;
     }
 
 
