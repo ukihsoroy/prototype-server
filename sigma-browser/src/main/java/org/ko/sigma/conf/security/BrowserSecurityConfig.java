@@ -81,10 +81,10 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .sessionManagement()
                 .invalidSessionUrl("/session/invalid")
-                .maximumSessions(1) //同时存在最大session数为1
-                .maxSessionsPreventsLogin(true) //当session达到最大数量后 阻止后面用户登录
-                .expiredSessionStrategy(new ExpiredSessionStrategyImpl()) //实现谁踢掉后记录, 有个事件
-                .and()
+//                .maximumSessions(1) //同时存在最大session数为1
+//                .maxSessionsPreventsLogin(true) //当session达到最大数量后 阻止后面用户登录
+//                .expiredSessionStrategy(new ExpiredSessionStrategyImpl()) //实现谁踢掉后记录, 有个事件
+//                .and()
                 .and()
                 .logout()
                 .logoutUrl("/logout")

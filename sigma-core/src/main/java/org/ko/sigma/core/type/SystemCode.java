@@ -5,16 +5,16 @@ package org.ko.sigma.core.type;
  */
 public enum SystemCode {
 
-    REQUIRE_AUTHENTICATION("0", "Require Authentication!"),
-    REGISTER_USER_ERROR("199", "注册用户失败"),
-    SUCCESS("200", "request success!"),
-    EMPTY_DATA("201", "empty data!"),
-    INSERT_ERROR("202", "insert error!"),
-    UPDATE_ERROR("202", "update error!"),
-    DELETE_ERROR("202", "delete error!"),
-    SYSTEM_ERROR("500", "system error!"),
-    CONVERTER_ERROR("501", "converter error!"),
-    VALIDATOR_ERROR_CODE("800", "validator error code!")
+    REQUIRE_AUTHENTICATION(0, "Require Authentication!"),
+    REGISTER_USER_ERROR(199, "注册用户失败"),
+    SUCCESS(200, "request success!"),
+    EMPTY_DATA(201, "empty data!"),
+    INSERT_ERROR(202, "insert error!"),
+    UPDATE_ERROR(202, "update error!"),
+    DELETE_ERROR(202, "delete error!"),
+    SYSTEM_ERROR(500, "system error!"),
+    CONVERTER_ERROR(501, "converter error!"),
+    VALIDATOR_ERROR_CODE(800, "validator error code!")
     ;
 
     /**
@@ -33,16 +33,16 @@ public enum SystemCode {
      503 （Service Unavailable）- 服务当前无法处理请求
      */
 
-    private String code;
+    private Integer code;
 
     private String msg;
 
-    SystemCode(String code, String msg) {
+    SystemCode(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 

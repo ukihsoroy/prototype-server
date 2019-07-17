@@ -37,7 +37,7 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
         }
         logger.error(ex.getClass().getName(), ex);
         Response response = new Response<>(Response.FAILED, errorMsg,
-                ex instanceof ValidateException ? VALIDATOR_ERROR_CODE.getCode() : httpStatus.toString(),
+                ex instanceof ValidateException ? VALIDATOR_ERROR_CODE.getCode() : httpStatus.value(),
                 StringUtils.isNotBlank(ex.getMessage())? ex.toString() : ex.getMessage());
         return super.handleExceptionInternal(ex, response, responseEntity.getHeaders(), httpStatus, request);
     }
