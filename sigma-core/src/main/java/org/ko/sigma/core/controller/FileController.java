@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-@Api(description = "文件服务")
+@Api(tags = "文件服务")
 @RestController
 @RequestMapping("file")
 public class FileController {
@@ -26,8 +26,11 @@ public class FileController {
     }
 
     @GetMapping("{id}")
-    public void download (@PathVariable String id, ServletWebRequest request) {
-        IFileService.download(id, request);
+    @ApiOperation("下载文件")
+    public void download (@PathVariable String id,
+                          @RequestParam(required = false) String name,
+                          ServletWebRequest request) {
+        IFileService.download(id, name, request);
     }
 
 }

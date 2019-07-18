@@ -14,7 +14,7 @@ object ConverterSQLTypeHandler {
     container.put("tinyint", "byte")
     container.put("smallint", "short")
     container.put("mediumint", "short")
-    container.put("bigint", "java.math.BigInteger")
+    container.put("bigint", "Long")
     container.put("float", "float")
     container.put("double", "double")
     container.put("decimal", "java.math.BigDecimal")

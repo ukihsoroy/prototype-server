@@ -3,20 +3,29 @@
 <mapper namespace="org.ko.sigma.rest.menu.repository.MenuRepository">
 
     <resultMap id="BaseMenuResultMap" type="org.ko.sigma.data.entity.Menu">
-        <id column="id" property="id" jdbcType="BIGINT"/>
+        <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="name" property="name" jdbcType="VARCHAR"/>
-        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
-        <result column="available_status" property="availableStatus" jdbcType="SMALLINT"/>
+        <result column="path" property="path" jdbcType="VARCHAR"/>
+        <result column="component" property="component" jdbcType="VARCHAR"/>
+        <result column="redirect" property="redirect" jdbcType="VARCHAR"/>
+        <result column="meta_json" property="metaJson" jdbcType="VARCHAR"/>
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR"/>
+        <result column="disable" property="disable" jdbcType="SMALLINT"/>
+        <result column="version" property="version" jdbcType="BIGINT"/>
         <result column="create_user" property="createUser" jdbcType="BIGINT"/>
-        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
-        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
-        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="gmt_create" property="gmtCreate" jdbcType="TIMESTAMP"/>
+        <result column="modified_user" property="modifiedUser" jdbcType="BIGINT"/>
+        <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <resultMap id="ResultMapWithChildMenu"
                type="org.ko.sigma.rest.menu.dto.MenuDTO"
                extends="BaseMenuResultMap">
-        <collection property="menuDTOS"
+        <association property="meta" javaType="org.ko.sigma.data.json.MenuMeta">
+            <result column="meta_title" property="title" jdbcType="VARCHAR"/>
+            <result column="meta_icon" property="icon" jdbcType="VARCHAR"/>
+        </association>
+        <collection property="children"
                     javaType="java.util.List"
                     ofType="org.ko.sigma.rest.menu.dto.MenuDTO"
                     column="id"
@@ -27,44 +36,66 @@
         SELECT
             id,
             name,
+            path,
+            component,
+            redirect,
+            meta_json,
+            meta_json ->> '$.title' as meta_title,
+            meta_json ->> '$.icon' as meta_icon,
             parent_id,
-            available_status,
+            disable,
+            version,
             create_user,
-            create_date,
-            update_user,
-            update_date
+            gmt_create,
+            modified_user,
+            gmt_modified
         FROM t_menu
-        WHERE available_status = 1
-            AND parent_id IS NULL
+        WHERE `disable` = 0
+            AND parent_id is null
     </select>
 
     <select id="queryMenuByParentId" resultMap="ResultMapWithChildMenu" parameterType="java.lang.Long">
         SELECT
             id,
             name,
+            path,
+            component,
+            redirect,
+            meta_json,
+            meta_json ->> '$.title' as meta_title,
+            meta_json ->> '$.icon' as meta_icon,
             parent_id,
-            available_status,
+            disable,
+            version,
             create_user,
-            create_date,
-            update_user,
-            update_date
+            gmt_create,
+            modified_user,
+            gmt_modified
         FROM t_menu
-        WHERE available_status = 1
-            AND parent_id = #{id}
+        WHERE `disable` = 0
+            AND parent_id = #{parentId}
     </select>
 
-    <select id="queryMenuByRoleId" resultMap="ResultMapWithChildMenu" parameterType="java.lang.Long">
+    <select id="queryMenuByRoleCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">
         SELECT
             m.id,
             m.name,
-            m.available_status,
+            m.path,
+            m.component,
+            m.redirect,
+            m.meta_json,
+            m.meta_json ->> '$.title' as meta_title,
+            m.meta_json ->> '$.icon' as meta_icon,
+            m.parent_id,
+            m.disable,
+            m.version,
             m.create_user,
-            m.create_date,
-            m.update_user,
-            m.update_date
+            m.gmt_create,
+            m.modified_user,
+            m.gmt_modified
         FROM t_role_menu rm
-        LEFT JOIN t_menu m ON rm.menu_id = m.id AND m.available_status = 1
-        WHERE rm.available_status = 1 AND rm.role_id = #{roleId}
+        LEFT JOIN t_menu m ON rm.menu_id = m.id AND m.`disable` = 0
+        WHERE rm.`disable` = 0 AND rm.role_code = #{roleCode}
     </select>
 
 </mapper>

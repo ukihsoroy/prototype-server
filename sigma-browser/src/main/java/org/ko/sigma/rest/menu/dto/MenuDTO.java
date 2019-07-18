@@ -1,18 +1,19 @@
 package org.ko.sigma.rest.menu.dto;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.ko.sigma.data.entity.Menu;
+import org.ko.sigma.data.json.MenuMeta;
 
 import java.util.List;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class MenuDTO extends Menu {
 
-    private List<MenuDTO> menuDTOS;
+    private List<MenuDTO> children;
 
-    public List<MenuDTO> getMenuDTOS() {
-        return menuDTOS;
-    }
+    private MenuMeta meta;
 
-    public void setMenuDTOS(List<MenuDTO> menuDTOS) {
-        this.menuDTOS = menuDTOS;
-    }
 }
+

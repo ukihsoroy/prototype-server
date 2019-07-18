@@ -1,6 +1,7 @@
 package org.ko.sigma.core.conf;
 
-import org.ko.sigma.core.properties.PrototypeProperties;
+import org.ko.sigma.core.properties.FileProperties;
+import org.ko.sigma.core.properties.SecurityProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
  * REST TEMPLATE config
  */
 @Configuration
-@EnableConfigurationProperties(PrototypeProperties.class)
+@EnableConfigurationProperties({SecurityProperties.class, FileProperties.class})
 public class RestTemplateConfig {
 
     @Bean

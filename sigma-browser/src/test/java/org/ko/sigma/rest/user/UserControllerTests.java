@@ -6,8 +6,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
-import org.ko.sigma.core.utils.JacksonHelper;
-import org.ko.sigma.rest.user.entity.UserEntity;
+import org.ko.sigma.rest.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -35,24 +34,22 @@ public class UserControllerTests {
     @Autowired private ObjectMapper mapper;
 
     private MockMvc mock;
-    private UserEntity userEntity;
+    private UserDTO userDTO;
 
     @Before
     public void setup () {
         mock = MockMvcBuilders.webAppContextSetup(context).build();
-        userEntity = new UserEntity();
-        userEntity.setUsername("sigma");
-        userEntity.setAge(28);
-        userEntity.setBirthday(new Date());
-        userEntity.setEmail("ko.shen@hotmail.com");
-        userEntity.setNickName("K.O");
-        userEntity.setRoleId(1L);
-        userEntity.setPassword("tiger");
+        userDTO = new UserDTO();
+        userDTO.setUsername("sigma");
+        userDTO.setBirthday(new Date());
+        userDTO.setEmail("ko.shen@hotmail.com");
+        userDTO.setNickname("K.O");
+        userDTO.setPassword("tiger");
     }
 
     @Test
     public void whenCreateSuccess () throws Exception {
-        String content = mapper.writeValueAsString(userEntity);
+        String content = mapper.writeValueAsString(userDTO);
         System.out.println(new Date().getTime());
         String result = mock.perform(post("/sigma/user")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -82,8 +79,8 @@ public class UserControllerTests {
     @Test
     public void whenUpdateSuccess () throws Exception {
         Date time = new Date(LocalDateTime.now().plusYears(1).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
-        userEntity.setBirthday(time);
-        String content = mapper.writeValueAsString(userEntity);
+        userDTO.setBirthday(time);
+        String content = mapper.writeValueAsString(userDTO);
         String result = mock.perform(put("/sigma/user/1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8)
                 .content(content))

@@ -2,7 +2,7 @@ package org.ko.sigma.rest.async.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.rest.async.component.MockQueue;
 import org.ko.sigma.rest.async.component.DeferredResultHolder;
@@ -19,7 +19,7 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@Api(description = "异步Rest调用")
+@Api(tags = "异步Rest调用")
 @Validated
 @RequestMapping("async")
 public class AsyncController {

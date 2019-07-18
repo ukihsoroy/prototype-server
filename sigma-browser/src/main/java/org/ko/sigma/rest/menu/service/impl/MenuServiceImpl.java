@@ -1,11 +1,12 @@
 package org.ko.sigma.rest.menu.service.impl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.type.SystemConstants;
 import org.ko.sigma.data.entity.Menu;
-import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
+import org.ko.sigma.rest.menu.condition.MenuQueryPageCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.repository.MenuRepository;
 import org.ko.sigma.rest.menu.service.MenuService;
@@ -22,7 +23,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     @Autowired private MenuRepository menuRepository;
 
     @Override
-    public List<MenuDTO> queryMenuList(MenuQueryListCondition condition) {
+    public IPage<MenuDTO> queryMenuList(MenuQueryPageCondition condition) {
         return menuRepository.queryMenuList(condition);
     }
 
@@ -32,18 +33,17 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     }
 
     @Override
-    public List<MenuDTO> queryMenuByRoleId(Long roleId) {
-        return menuRepository.queryMenuByRoleId(roleId);
+    public List<MenuDTO> queryMenuByRoleCode(String roleCode) {
+        return menuRepository.queryMenuByRoleCode(roleCode);
     }
 
     @Override
-    public List<MenuDTO> queryMenuByParentId(Long id) {
-        return menuRepository.queryMenuByParentId(id);
+    public List<MenuDTO> queryMenuByParentId(Long parentId) {
+        return menuRepository.queryMenuByParentId(parentId);
     }
 
     @Override
     public Long createMenu(Menu menu) {
-        menu.setAvailableStatus(SystemConstants.AvailableStatus.Available);
         if (menuRepository.insert(menu) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
@@ -61,10 +61,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
 
     @Override
     public Long deleteMenu(Long id) {
-        Menu menu = new Menu();
-        menu.setId(id);
-        menu.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
-        if (menuRepository.updateById(menu) == 0) {
+        if (menuRepository.deleteById(id) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }
         return id;

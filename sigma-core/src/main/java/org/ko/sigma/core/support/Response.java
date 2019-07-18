@@ -26,7 +26,7 @@ public class Response<T> extends SerializeBean {
     /**
      * 消息代码
      */
-    private String code;
+    private Integer code;
 
     /**
      * 消息内容
@@ -70,7 +70,7 @@ public class Response<T> extends SerializeBean {
         this.msg = SystemCode.SUCCESS.getMsg();
     }
 
-    public static <T> Response of (T data) {
+    public static <T> Response<T> of (T data) {
         return new Response<>(data);
     }
 
@@ -84,7 +84,7 @@ public class Response<T> extends SerializeBean {
         this.success = success;
     }
 
-    public static <T> Response of (boolean success, T data) {
+    public static <T> Response<T> of (boolean success, T data) {
         return new Response<>(success, data);
     }
 
@@ -95,14 +95,14 @@ public class Response<T> extends SerializeBean {
      * @param msg
      * @param success
      */
-    public Response(boolean success, T data, String code, String msg) {
+    public Response(boolean success, T data, Integer code, String msg) {
         this.data = data;
         this.code = code;
         this.msg = msg;
         this.success = success;
     }
 
-    public static <T> Response of (boolean success, T data, String code, String msg) {
+    public static <T> Response<T> of (boolean success, T data, Integer code, String msg) {
         return new Response<>(success, data, code, msg);
     }
 
@@ -116,8 +116,8 @@ public class Response<T> extends SerializeBean {
         this.msg = systemCode.getMsg();
     }
 
-    public static Response of (SystemCode systemCode) {
-        return new Response(systemCode);
+    public static <T> Response<T> of (SystemCode systemCode) {
+        return new Response<>(systemCode);
     }
 
     /**
@@ -128,7 +128,7 @@ public class Response<T> extends SerializeBean {
      * @param success
      * @param args
      */
-    public Response(boolean success, T data, String code, String msg, Object... args) {
+    public Response(boolean success, T data, Integer code, String msg, Object... args) {
         this.data = data;
         this.code = code;
         this.msg = msg;
@@ -136,7 +136,7 @@ public class Response<T> extends SerializeBean {
         this.arguments = args;
     }
 
-    public static <T> Response of (boolean success, T data, String code, String msg, Object... args) {
+    public static <T> Response<T> of (boolean success, T data, Integer code, String msg, Object... args) {
         return new Response<>(success, data, code, msg, args);
     }
 
@@ -150,8 +150,8 @@ public class Response<T> extends SerializeBean {
         this.success = success;
     }
 
-    public static Response of (boolean success, String msg) {
-        return new Response(success, msg);
+    public static <T> Response<T> of (boolean success, String msg) {
+        return new Response<>(success, msg);
     }
 
     /**
@@ -160,14 +160,14 @@ public class Response<T> extends SerializeBean {
      * @param code
      * @param msg
      */
-    public Response(boolean success, String code, String msg) {
+    public Response(boolean success, Integer code, String msg) {
         this.code = code;
         this.msg = msg;
         this.success = success;
     }
 
-    public static Response of (boolean success, String code, String msg) {
-        return new Response(success, code, msg);
+    public static <T> Response<T> of (boolean success, Integer code, String msg) {
+        return new Response<>(success, code, msg);
     }
 
     /**
@@ -177,22 +177,22 @@ public class Response<T> extends SerializeBean {
      * @param msg
      * @param args
      */
-    public Response(boolean success, String code, String msg, Object... args) {
+    public Response(boolean success, Integer code, String msg, Object... args) {
         this.code = code;
         this.msg = msg;
         this.success = success;
         this.arguments = args;
     }
 
-    public static Response of (boolean success, String code, String msg, Object... args) {
-        return new Response(success, code, msg, args);
+    public static <T> Response<T> of (boolean success, Integer code, String msg, Object... args) {
+        return new Response<>(success, code, msg, args);
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 

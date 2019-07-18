@@ -27,7 +27,7 @@ public class GeneralException extends CustomRuntimeException {
 
     public GeneralException(SystemCode systemCode) {
         super(systemCode.getMsg());
-        this.code = systemCode.getCode();
+        this.code = systemCode.getCode().toString();
     }
 
 }

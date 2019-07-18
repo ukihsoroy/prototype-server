@@ -1,12 +1,13 @@
 package org.ko.sigma.rest.menu.controller;
 
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.data.entity.Menu;
-import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
+import org.ko.sigma.rest.menu.condition.MenuQueryPageCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.service.MenuService;
 import org.springframework.beans.BeanUtils;
@@ -19,17 +20,17 @@ import java.util.List;
 @RestController
 @RequestMapping("menu")
 @Validated
-@Api(description = "菜单模块")
+@Api(tags = "菜单模块")
 public class MenuController {
 
     @Autowired private MenuService menuService;
 
     @GetMapping
     @ApiOperation("查询全部菜单")
-    public Response<List<MenuDTO>> queryMenuList (@ApiParam("查询参数") @ModelAttribute MenuQueryListCondition condition) {
+    public Response<IPage<MenuDTO>> queryMenuList (@ApiParam("查询参数") @ModelAttribute MenuQueryPageCondition condition) {
         // 1.查询全部菜单
-        List<MenuDTO> menus = menuService.queryMenuList(condition);
-        return new Response<>(menus);
+        IPage<MenuDTO> menus = menuService.queryMenuList(condition);
+        return Response.of(menus);
     }
 
     @GetMapping("{id:\\d+}")
@@ -77,7 +78,9 @@ public class MenuController {
      */
     private MenuDTO map (Menu menu) {
         MenuDTO menuDTO = new MenuDTO();
-        BeanUtils.copyProperties(menu, menuDTO);
+        if (menu != null) {
+            BeanUtils.copyProperties(menu, menuDTO);
+        }
         return menuDTO;
     }
 
@@ -88,7 +91,9 @@ public class MenuController {
      */
     private Menu map (MenuDTO menuDTO) {
         Menu menu = new Menu();
-        BeanUtils.copyProperties(menuDTO, menu);
+        if (menuDTO != null) {
+            BeanUtils.copyProperties(menuDTO, menu);
+        }
         return menu;
     }
 }

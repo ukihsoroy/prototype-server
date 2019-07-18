@@ -3,11 +3,10 @@
 <mapper namespace="org.ko.sigma.rest.role.repository.RoleMenuRepository">
 
     <insert id="insertList">
-        INSERT INTO `t_role_menu` (`role_id`, `menu_id`) VALUES
+        INSERT INTO `t_role_menu` (`role_id`, `menu_id`, `create`, `read`, `update`, `delete`) VALUES
         <foreach collection="roleMenus" item="menu" separator=",">
-            (#{menu.roleId}, #{menu.menuId})
+            (#{menu.roleId}, #{menu.menuId}, #{menu.create}, #{menu.read}, #{menu.update}, #{menu.delete})
         </foreach>
     </insert>
-
 
 </mapper>

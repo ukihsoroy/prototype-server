@@ -1,17 +1,18 @@
 package org.ko.sigma.rest.menu.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.ko.sigma.data.entity.Menu;
-import org.ko.sigma.rest.menu.condition.MenuQueryListCondition;
+import org.ko.sigma.rest.menu.condition.MenuQueryPageCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 
 import java.util.List;
 
 public interface MenuRepository extends BaseMapper<Menu> {
 
-    List<MenuDTO> queryMenuList(MenuQueryListCondition condition);
+    IPage<MenuDTO> queryMenuList(MenuQueryPageCondition condition);
 
-    List<MenuDTO> queryMenuByParentId(Long id);
+    List<MenuDTO> queryMenuByParentId(Long parentId);
 
-    List<MenuDTO> queryMenuByRoleId(Long roleId);
+    List<MenuDTO> queryMenuByRoleCode(String roleCode);
 }

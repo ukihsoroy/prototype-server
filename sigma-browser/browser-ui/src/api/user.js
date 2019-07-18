@@ -1,0 +1,29 @@
+import request from '@/utils/request'
+
+export function login(data) {
+  return request({
+    url: '/login?username=' + data.username + '&password=' + data.password,
+    method: 'post'
+  })
+}
+
+export function getInfo() {
+  return request({
+    url: '/user/info',
+    method: 'get'
+  })
+}
+
+export function getUserMenu(roleCode) {
+  return request({
+    url: '/role/' + roleCode + '/menu',
+    method: 'get'
+  })
+}
+
+export function logout() {
+  return request({
+    url: '/logout',
+    method: 'post'
+  })
+}

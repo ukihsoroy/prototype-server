@@ -1,6 +1,5 @@
 server:
   context-path: /sigma
-  port: 8080
 
 #配置文件默认dev
 spring:
@@ -34,7 +33,10 @@ mapper:
   mappers: tk.mybatis.mapper.common.Mapper #配置的mapper
 
 logging:
-  level: info
+  level: debug
+
+sigma:
+  security:
 
 
 

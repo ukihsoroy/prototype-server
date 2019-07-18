@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
-import org.ko.sigma.core.type.SystemConstants;
 import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
 import org.ko.sigma.rest.role.repository.RoleRepository;
@@ -26,7 +25,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
 
     @Override
     public List<Role> queryRoleList(RoleQueryListCondition condition) {
-        return roleRepository.selectList(new QueryWrapper<Role>().eq("available_status", 1));
+        return roleRepository.selectList(new QueryWrapper<>());
     }
 
     @Override
@@ -36,7 +35,6 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
 
     @Override
     public Long createRole(Role role) {
-        role.setAvailableStatus(SystemConstants.AvailableStatus.Available);
         if (roleRepository.insert(role) == 0) {
             throw new TransactionalException(SystemCode.INSERT_ERROR);
         }
@@ -54,10 +52,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
 
     @Override
     public Long deleteRole(Long id) {
-        Role role = new Role();
-        role.setId(id);
-        role.setAvailableStatus(SystemConstants.AvailableStatus.Deleted);
-        if (roleRepository.updateById(role) == 0) {
+        if (roleRepository.deleteById(id) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }
         return id;

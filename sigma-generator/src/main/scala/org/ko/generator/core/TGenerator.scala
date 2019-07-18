@@ -2,6 +2,10 @@ package org.ko.generator.core
 
 trait TGenerator {
 
-  def executor()
+  /**
+    * 执行生成逻辑
+    * @param name 数据库名称
+    */
+  def executor(name: String*)
 
 }
