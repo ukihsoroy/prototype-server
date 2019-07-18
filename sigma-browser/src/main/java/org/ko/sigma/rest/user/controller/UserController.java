@@ -10,6 +10,7 @@ import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.service.UserService;
+import org.ko.sigma.util.SessionHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -25,7 +26,7 @@ import java.util.Objects;
 @Validated
 public class UserController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired private UserService userService;
 
@@ -46,12 +47,18 @@ public class UserController {
     @ApiOperation("通过ID获取用户详细")
     public Response<UserDTO> queryUserInfo (
             @ApiParam("用户ID") @PathVariable Long id) {
-        LOGGER.info("UserController#queryUserInfo");
+        logger.info("UserController#queryUserInfo");
         User user = userService.queryUserInfo(id);
         if (Objects.nonNull(user)) {
             return Response.of(this.map(user));
         }
         return Response.of(SystemCode.EMPTY_DATA);
+    }
+
+    @GetMapping("info")
+    @ApiOperation("获取当前登录用户信息")
+    public Response<UserDTO> loginUser () {
+        return Response.of(SessionHolder.loginUser());
     }
 
     @PostMapping

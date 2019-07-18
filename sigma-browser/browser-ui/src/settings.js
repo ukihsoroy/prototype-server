@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'sigma-server',
+  title: 'Sigma-Server',
 
   /**
    * @type {boolean} true | false

@@ -1,6 +1,5 @@
 package org.ko.sigma.rest.user.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.ko.sigma.data.entity.User;
@@ -16,6 +15,8 @@ import java.util.List;
 public class UserDTO extends User implements UserDetails {
 
     private List<RoleDTO> roleDTOS;
+
+    private List<String> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

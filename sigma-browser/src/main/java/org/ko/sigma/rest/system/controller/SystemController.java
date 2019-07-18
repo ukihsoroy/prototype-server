@@ -48,7 +48,6 @@ public class SystemController {
         return Response.of(true);
     }
 
-
     @GetMapping("logout")
     @ApiOperation("登出系统")
     public Response<Long> logout () {

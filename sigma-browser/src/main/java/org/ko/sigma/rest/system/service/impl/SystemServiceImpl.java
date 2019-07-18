@@ -1,6 +1,7 @@
 package org.ko.sigma.rest.system.service.impl;
 
 import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.data.entity.User;
 import org.ko.sigma.data.entity.UserRole;
 import org.ko.sigma.rest.system.service.SystemService;
@@ -58,10 +59,12 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDTO userDTO = userRepository.loadUserByUsername(username);
-        if (userDTO == null) {
-            throw new UsernameNotFoundException("用户不存在");
+        if (userDTO != null) {
+            List<String> roles = userDTO.getRoleDTOS().stream().map(Role::getCode).collect(Collectors.toList());
+            userDTO.setRoles(roles);
+            return userDTO;
         }
-        return userDTO;
+        throw new UsernameNotFoundException("用户不存在");
     }
 
 
