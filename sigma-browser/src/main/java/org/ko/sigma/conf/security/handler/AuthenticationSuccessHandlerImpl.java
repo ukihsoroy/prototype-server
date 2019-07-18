@@ -1,4 +1,4 @@
-package org.ko.sigma.conf.security.authentication;
+package org.ko.sigma.conf.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.ko.sigma.core.support.Response;

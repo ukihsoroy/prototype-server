@@ -1,8 +1,8 @@
 package org.ko.sigma.conf.security;
 
-import org.ko.sigma.conf.security.authentication.AuthenticationFailureHandlerImpl;
-import org.ko.sigma.conf.security.authentication.AuthenticationSuccessHandlerImpl;
-import org.ko.sigma.conf.security.session.ExpiredSessionStrategyImpl;
+import org.ko.sigma.conf.security.handler.AuthenticationFailureHandlerImpl;
+import org.ko.sigma.conf.security.handler.AuthenticationSuccessHandlerImpl;
+import org.ko.sigma.conf.security.handler.LogoutSuccessHandlerImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,6 +34,12 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private AuthenticationFailureHandlerImpl authenticationFailureHandlerImpl;
+
+    /**
+     * 登出处理器
+     */
+    @Autowired
+    private LogoutSuccessHandlerImpl logoutSuccessHandler;
 
     @Autowired private DataSource dataSource;
 
@@ -88,7 +94,7 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/ko-logout.html")
+                .logoutSuccessHandler(logoutSuccessHandler)
                 .and()
                 .authorizeRequests()//下面的请求
                 .antMatchers(permitAll).permitAll()//放过这个URL-直接放行
