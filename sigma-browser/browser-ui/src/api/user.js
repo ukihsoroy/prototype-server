@@ -27,3 +27,11 @@ export function logout() {
     method: 'post'
   })
 }
+
+export function getUserList(condition) {
+  return request({
+    url: '/user',
+    method: 'get',
+    condition
+  })
+}
