@@ -24,6 +24,44 @@
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <select id="queryUserList" resultType="org.ko.sigma.rest.user.dto.UserDTO">
+        SELECT
+            u.username,
+            u.nickname,
+            u.birthday,
+            u.gender,
+            u.mobile,
+            u.email,
+            u.balance,
+            u.signature,
+            r.name roleName
+        FROM t_user u
+        JOIN t_user_role ur ON u.id = ur.user_id AND ur.`disable` = 0
+        JOIN t_role r ON ur.role_code = r.code AND r.`disable` = 0
+        WHERE u.`disable` = 0
+        <if test="username != null and username != ''">
+            AND u.username LIKE CONCAT('%', #{username}, '%')
+        </if>
+        <if test="nickname != null and nickname != ''">
+            AND u.nickname LIKE CONCAT('%', #{nickname}, '%')
+        </if>
+<!--        <if test="birthday != null">
+            AND u.birthday &gt; #{birthday} AND u.birthday &lt; #{birthday}
+        </if>-->
+        <if test="gender != null">
+            AND u.gender = #{gender}
+        </if>
+        <if test="mobile != null and mobile != ''">
+            AND u.mobile LIKE CONCAT('%', #{mobile}, '%')
+        </if>
+        <if test="email != null and email != ''">
+            AND u.email LIKE CONCAT('%', #{email}, '%')
+        </if>
+        <if test="roleCode != null and roleCode != ''">
+            AND ur.role_code = #{roleCode}
+        </if>
+    </select>
+
     <resultMap id="ResultMapWithRoles" type="org.ko.sigma.rest.user.dto.UserDTO" extends="BaseResultMap">
         <collection property="roleDTOS"
                     javaType="java.util.List"
@@ -31,10 +69,6 @@
                     column="id"
                     select="org.ko.sigma.rest.user.repository.UserRoleRepository.findRolesByUserId"/>
     </resultMap>
-    
-    <select id="queryUserList" resultType="org.ko.sigma.rest.user.dto.UserDTO">
-        select * from t_user
-    </select>
 
 
     <select id="loadUserByUsername" resultMap="ResultMapWithRoles" parameterType="string">

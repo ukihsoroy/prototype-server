@@ -18,6 +18,8 @@ public class UserDTO extends User implements UserDetails {
 
     private List<String> roles;
 
+    private String roleName;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roleDTOS;
