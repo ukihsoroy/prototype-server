@@ -66,15 +66,15 @@
       <el-table-column label="操作" fixed="right" width="200">
         <template slot-scope="scope">
           <el-button size="mini" icon="el-icon-edit" type="primary">编辑</el-button>
-          <el-button size="mini" icon="el-icon-delete" type="danger">删除</el-button>
+          <el-button size="mini" icon="el-icon-delete" @click="deleteUserById(scope.row.id)"  type="danger">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
       :total="condition.total">
     </el-pagination>
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { getUserList } from "@/api/user";
+import { getUserList, deleteUserById } from "@/api/user";
 import { get } from "https";
 import { debuglog } from "util";
 import { sign } from 'crypto';
@@ -125,11 +125,21 @@ export default {
           console.log(e);
         });
     },
-    handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+    deleteUserById(userId) {
+      deleteUserById(userId).then((response) => {
+        this.$message.success("删除成功！")
+        this.fetchUserList()
+      }).catch((e) => {
+        console.log(e)
+      })
     },
-    handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+    handleSizeChange(size) {
+      this.condition.size = size
+      this.fetchUserList()
+    },
+    handleCurrentChange(current) {
+      this.condition.current = current
+      this.fetchUserList()
     }
   },
   created() {
