@@ -26,6 +26,7 @@
 
     <select id="queryUserList" resultType="org.ko.sigma.rest.user.dto.UserDTO">
         SELECT
+            u.id,
             u.username,
             u.nickname,
             u.birthday,

@@ -14,6 +14,13 @@ export function getInfo() {
   })
 }
 
+export function deleteUserById(userId) {
+  return request({
+    url: '/user/' + userId,
+    method: 'delete'
+  })
+}
+
 export function getUserMenu(roleCode) {
   return request({
     url: '/role/' + roleCode + '/menu',
