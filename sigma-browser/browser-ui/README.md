@@ -62,3 +62,5 @@ npm install -g serve
 # 这个模式会处理即将提到的路由问题
 serve -s dist
 ```
+
+http://39.105.164.165:1337/sigma/swagger-ui.html
