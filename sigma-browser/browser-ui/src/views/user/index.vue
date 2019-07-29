@@ -96,14 +96,14 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="fetchUserInfo">确 定</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import { getUserList, deleteUserById } from '@/api/user'
+import { getUserList, deleteUserById, putUserById } from '@/api/user'
 // import { get } from 'https'
 // import { debuglog } from 'util'
 // import { sign } from 'crypto'
@@ -163,6 +163,14 @@ export default {
       }).catch((e) => {
         console.log(e)
       })
+    },
+    fetchUserInfo() {
+        putUserById(this.editData).then((response) => {
+          this.dialogFormVisible = false
+        }).catch((error) => {
+          console.log(error)
+          this.dialogFormVisible = false
+        })
     },
     handleSizeChange(size) {
       this.condition.size = size
