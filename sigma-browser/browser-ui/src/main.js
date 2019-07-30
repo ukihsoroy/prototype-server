@@ -16,6 +16,8 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import filter from '@/plugins/filter'
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -31,6 +33,8 @@ import '@/permission' // permission control
 
 // set ElementUI lang to EN , { locale }
 Vue.use(ElementUI)
+
+Object.keys(filter).forEach(key => Vue.filter(key, filter[key]))
 
 Vue.config.productionTip = false
 
