@@ -5,6 +5,6 @@ spring:
     driverClassName: com.mysql.jdbc.Driver
     url: jdbc:mysql:///sigma_server?autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
     username: root
-    password: tiger
+    password: Passw0rd.
 
 log.path: /tmp/log
