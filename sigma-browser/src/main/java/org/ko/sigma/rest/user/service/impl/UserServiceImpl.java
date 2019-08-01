@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.data.entity.User;
-import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
+import org.ko.sigma.rest.user.condition.QueryUserCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.repository.UserRepository;
 import org.ko.sigma.rest.user.service.UserService;
@@ -28,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     @Autowired private PasswordEncoder passwordEncoder;
 
     @Override
-    public IPage<UserDTO> queryUserList(QueryUserPageCondition<User> condition) {
+    public IPage<UserDTO> queryUserList(QueryUserCondition<User> condition) {
         return userRepository.queryUserList(condition);
     }
 

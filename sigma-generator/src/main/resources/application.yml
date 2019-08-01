@@ -4,11 +4,11 @@ spring:
   profiles.active: dev
   application.name: sigma-generator
   freemarker.template-loader-path: classpath:/templates/
-  datasource:
-    driver-class-name: org.h2.Driver
-    username: root
-    password: sunniwell
-    url: jdbc:h2:~/data/db
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    username: root
+#    password: sunniwell
+#    url: jdbc:h2:~/data/db
 
 # 生成工具配置
 sigma.generator:

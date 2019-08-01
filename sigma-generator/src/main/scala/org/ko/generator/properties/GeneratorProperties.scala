@@ -11,11 +11,6 @@ class GeneratorProperties {
   var entity = new EntityProperties()
 
   //controller生成配置
-  var controllerProperties = new ControllerProperties()
+  var backEnd = new BackEndProperties()
 
-  //service生成配置
-  var serviceProperties = new ServiceProperties()
-
-  //数据层生成配置
-  var repositoryProperties = new RepositoryProperties()
 }

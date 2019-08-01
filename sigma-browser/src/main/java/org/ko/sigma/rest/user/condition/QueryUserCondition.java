@@ -6,7 +6,7 @@ import org.ko.sigma.data.bean.PageCondition;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class QueryUserPageCondition<User> extends PageCondition<User> {
+public class QueryUserCondition<User> extends PageCondition<User> {
 
     private String username;
 
