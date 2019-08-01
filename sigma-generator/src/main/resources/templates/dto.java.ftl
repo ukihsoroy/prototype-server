@@ -1,7 +1,12 @@
-package ${rootPackage}.bo;
+package ${rootPackage}.dto;
 
-import ${rootPackage}.entity.${domainName};
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import org.ko.sigma.data.entity.${entityName};
 
-public class ${domainName}Bo extends ${domainName} {
+@Data
+@EqualsAndHashCode(callSuper = true)
+public class ${entityName}DTO extends ${entityName} {
+
 
 }

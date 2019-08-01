@@ -1,18 +1,19 @@
 package ${rootPackage}.repository;
 
-import ${rootPackage}.bo.${domainName}Bo;
-import ${rootPackage}.command.${domainName}Command;
-import org.apache.ibatis.annotations.Mapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.ko.sigma.data.entity.${entityName};
 import org.springframework.stereotype.Repository;
-import ${rootPackage}.${mapperPackage}.${domainName}Mapper;
-import ${rootPackage}.${domainPackage}.${domainName};
+import ${rootPackage}.dto.${entityName}DTO;
+import ${rootPackage}.condition.Query${entityName}Condition;
+
+
 import java.util.List;
 
 @Repository
-@Mapper
-public interface ${domainName}Repository extends ${domainName}Mapper{
+public interface ${entityName}Repository extends BaseMapper<${entityName}> {
 
-    List<${domainName}Bo> queryList(${domainName}Command command);
+    List<${entityName}DTO> queryList(Query${entityName}Condition condition);
 
-    int insertList (List<${domainName}> ${variableName}s);
+    int insertList (List<${entityName}> ${entityName?uncap_first}s);
+
 }

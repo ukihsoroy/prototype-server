@@ -16,12 +16,12 @@ import org.springframework.stereotype.Component
   * @param properties
   */
 @Component
-class RepositoryGenerator @Autowired()(
+class DTOGenerator @Autowired()(
                                         freemarker: Configuration,
                                         properties: GeneratorProperties
                                       ) extends AbstractGenerator {
 
-  val REPOSITORY_PACKAGE = "/repository/"
+  val CONDITION_PACKAGE = "/dto/"
 
   /**
     * 执行生成逻辑
@@ -44,10 +44,10 @@ class RepositoryGenerator @Autowired()(
         moduleRoot + "/"
           + properties.backEnd.module
           + ROOT_DIR + properties.backEnd.rootPackage.replaceAll("\\.", "/") + "/"
-          + packageName + REPOSITORY_PACKAGE
+          + packageName + CONDITION_PACKAGE
         )
 
-      val repositoryFileName = javaDir + entityName + "Repository.java"
+      val repositoryFileName = javaDir + entityName + "DTO.java"
 
       val params = new java.util.HashMap[String, Object]()
 
@@ -57,10 +57,8 @@ class RepositoryGenerator @Autowired()(
 
       if (StringUtils.isNotEmpty(repositoryFileName)) {
         val dir = new File(javaDir)
-        if (!dir.exists()) {
-          dir.mkdirs()
-        }
-        val template = freemarker.getTemplate(properties.backEnd.repositoryTemplate)
+        if (!dir.exists()) dir.mkdirs()
+        val template = freemarker.getTemplate(properties.backEnd.dtoTemplate)
         val out = new OutputStreamWriter(new FileOutputStream(new File(repositoryFileName)), "UTF-8")
         template.process(params, out)
         out.close()

@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.User;
-import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
+import org.ko.sigma.rest.user.condition.QueryUserCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.ko.sigma.rest.user.service.UserService;
 import org.ko.sigma.util.SessionHolder;
@@ -32,7 +32,7 @@ public class UserController {
 
     @GetMapping
     @ApiOperation("查询用户列表")
-    public Response<IPage<UserDTO>> queryUserList(@ApiParam("列表查询参数") @ModelAttribute QueryUserPageCondition<User> condition) {
+    public Response<IPage<UserDTO>> queryUserList(@ApiParam("列表查询参数") @ModelAttribute QueryUserCondition<User> condition) {
         //1. 查询用户列表数据
         IPage<UserDTO> page = userService.queryUserList(condition);
 

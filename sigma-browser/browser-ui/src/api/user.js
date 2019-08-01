@@ -28,6 +28,14 @@ export function deleteUserById(userId) {
   })
 }
 
+export function putUserById(user) {
+  return request({
+    url: '/user/' + user.id,
+    method: 'put',
+    data: user
+  })
+}
+
 export function getUserMenu(roleCode) {
   return request({
     url: '/role/' + roleCode + '/menu',

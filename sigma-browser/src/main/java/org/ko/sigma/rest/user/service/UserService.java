@@ -3,7 +3,7 @@ package org.ko.sigma.rest.user.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.ko.sigma.data.entity.User;
-import org.ko.sigma.rest.user.condition.QueryUserPageCondition;
+import org.ko.sigma.rest.user.condition.QueryUserCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 
 public interface UserService extends IService<User> {
@@ -13,7 +13,7 @@ public interface UserService extends IService<User> {
      * @param condition
      * @return
      */
-    IPage<UserDTO> queryUserList(QueryUserPageCondition<User> condition);
+    IPage<UserDTO> queryUserList(QueryUserCondition<User> condition);
 
     /**
      * <p>查询用户详细</p>
