@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.Role;
-import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
+import org.ko.sigma.rest.role.condition.QueryRoleCondition;
 import org.ko.sigma.rest.role.repository.RoleRepository;
 import org.ko.sigma.rest.role.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     @Autowired private RoleRepository roleRepository;
 
     @Override
-    public List<Role> queryRoleList(RoleQueryListCondition condition) {
+    public List<Role> queryRoleList(QueryRoleCondition condition) {
         return roleRepository.selectList(new QueryWrapper<>());
     }
 

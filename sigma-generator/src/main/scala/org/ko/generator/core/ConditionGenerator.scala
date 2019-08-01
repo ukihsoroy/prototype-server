@@ -28,13 +28,13 @@ class ConditionGenerator @Autowired()(
     *
     * @param names 数据库名称
     */
-  override def executor(names: String*): Unit = {
+  override def executor(names: List[String]): Unit = {
     names.foreach { name =>
       //表名字
       val entityName = reformatTable(name, properties.prefix)
 
       //包名称
-      val packageName = name.replaceFirst(properties.prefix, "").replaceAll("_", "")
+      val packageName = name.replaceFirst(properties.prefix, "").split("_")(0)
 
       val dir = new File(this.getClass.getClassLoader.getResource(".").toURI).getAbsolutePath
       val index = dir.indexOf("target")

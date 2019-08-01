@@ -10,7 +10,7 @@ import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.service.MenuService;
-import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
+import org.ko.sigma.rest.role.condition.QueryRoleCondition;
 import org.ko.sigma.rest.role.dto.RoleDTO;
 import org.ko.sigma.rest.role.service.RoleMenuService;
 import org.ko.sigma.rest.role.service.RoleService;
@@ -47,7 +47,7 @@ public class RoleController {
     @GetMapping
     @ApiOperation("查询全部权限")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public Response<List<RoleDTO>> queryRoleList(@ApiParam("权限查询参数") @ModelAttribute RoleQueryListCondition condition) {
+    public Response<List<RoleDTO>> queryRoleList(@ApiParam("权限查询参数") @ModelAttribute QueryRoleCondition condition) {
         //1. 查询用户列表数据
         List<Role> roles = roleService.queryRoleList(condition);
 

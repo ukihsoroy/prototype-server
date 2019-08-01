@@ -26,6 +26,6 @@ public class ${entityName} extends BasicEntity {
     </#if>
     private ${column.propertyType} ${column.propertyName};
 
-    </#list>
+</#list>
 
 }

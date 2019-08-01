@@ -24,7 +24,7 @@ class EntityGenerator @Autowired()(
   val ENTITY_PACKAGE = "/entity/"
   val CONSTANTS_PACKAGE = "/constants/"
 
-  override def executor(names: String*): Unit = {
+  override def executor(names: List[String]): Unit = {
     names.foreach { name =>
       //全部字段
       val columns = findColumnByTableName(name)
