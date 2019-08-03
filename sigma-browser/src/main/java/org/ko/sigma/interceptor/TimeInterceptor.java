@@ -22,8 +22,10 @@ public class TimeInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         LOGGER.info("TimeInterceptor#preHandle");
-        LOGGER.info("object param bean name: {}", HandlerMethod.class.cast(handler).getBean().getClass().getName());
-        LOGGER.info("object param bean name: {}", HandlerMethod.class.cast(handler).getMethod().getName());
+        if (handler instanceof HandlerMethod) {
+            LOGGER.info("object param bean name: {}", HandlerMethod.class.cast(handler).getBean().getClass().getName());
+            LOGGER.info("object param bean name: {}", HandlerMethod.class.cast(handler).getMethod().getName());
+        }
         request.setAttribute("startTime", new Date().getTime());
         return true;
     }
