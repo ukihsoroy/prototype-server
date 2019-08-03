@@ -16,6 +16,8 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import animated from 'animate.css'
+
 import filter from '@/plugins/filter'
 
 /**
@@ -33,6 +35,7 @@ import filter from '@/plugins/filter'
 
 // set ElementUI lang to EN , { locale }
 Vue.use(ElementUI)
+Vue.use(animated)
 
 Object.keys(filter).forEach(key => Vue.filter(key, filter[key]))
 
