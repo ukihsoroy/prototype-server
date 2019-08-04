@@ -4,9 +4,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
-import org.ko.sigma.core.type.SystemConstants;
 import org.ko.sigma.data.entity.Menu;
-import org.ko.sigma.rest.menu.condition.MenuQueryPageCondition;
+import org.ko.sigma.rest.menu.condition.QueryMenuCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.repository.MenuRepository;
 import org.ko.sigma.rest.menu.service.MenuService;
@@ -23,7 +22,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     @Autowired private MenuRepository menuRepository;
 
     @Override
-    public IPage<MenuDTO> queryMenuList(MenuQueryPageCondition condition) {
+    public IPage<MenuDTO> queryMenuList(QueryMenuCondition condition) {
         return menuRepository.queryMenuList(condition);
     }
 

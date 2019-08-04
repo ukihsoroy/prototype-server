@@ -1,9 +1,9 @@
 package org.ko.generator.generator
 
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource
-import org.junit.{Before, Test}
 import org.junit.runner.RunWith
-import org.ko.generator.core.{ConditionGenerator, DTOGenerator, EntityGenerator, RepositoryGenerator}
+import org.junit.{Before, Test}
+import org.ko.generator.conf.GeneratorConf
+import org.ko.generator.core._
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.junit4.SpringRunner
@@ -12,6 +12,40 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest
 @RunWith(classOf[SpringRunner])
 class GeneratorTests {
+
+  val tables = List(
+    "t_user", "t_menu", "t_department", "t_department_user", "t_dict", "t_request_log", "t_role", "t_role_menu", "t_user_role"
+  )
+
+  @Test
+  def generatorEntity (): Unit = {
+    entity.executor(tables)
+  }
+
+  @Test
+  def generatorRepository (): Unit = {
+    repository.executor(tables)
+  }
+
+  @Test
+  def generatorCondition (): Unit = {
+    condition.executor(tables)
+  }
+
+  @Test
+  def generatorDTO (): Unit = {
+    dto.executor(tables)
+  }
+
+  @Test
+  def generatorService (): Unit = {
+    service.executor(tables)
+  }
+
+  @Test
+  def generatorController (): Unit = {
+    controller.executor(tables)
+  }
 
   @Autowired
   private val entity: EntityGenerator = null
@@ -25,37 +59,20 @@ class GeneratorTests {
   @Autowired
   private val dto: DTOGenerator = null
 
+  @Autowired
+  private val service: ServiceGenerator = null
+
+  @Autowired
+  private val controller: ControllerGenerator = null
+
   @Before
   def before (): Unit = {
-    val dataSource = new MysqlDataSource
-    dataSource.setDatabaseName("sigma_server")
-    dataSource.setPort(3306)
-    dataSource.setUser("root")
-    dataSource.setPassword("tiger")
+    val dataSource = GeneratorConf.dataSource()
     entity.dataSource(dataSource)
     repository.dataSource(dataSource)
     condition.dataSource (dataSource)
     dto.dataSource(dataSource)
+    service.dataSource(dataSource)
+    controller.dataSource(dataSource)
   }
-
-  @Test
-  def generatorEntity (): Unit = {
-    entity.executor("t_user", "t_menu", "t_department", "t_department_user", "t_dict", "t_request_log", "t_role", "t_role_menu", "t_user_role")
-  }
-
-  @Test
-  def generatorRepository (): Unit = {
-    repository.executor("t_department")
-  }
-
-  @Test
-  def generatorCondition (): Unit = {
-    condition.executor("t_department")
-  }
-
-  @Test
-  def generatorDTO (): Unit = {
-    dto.executor("t_department")
-  }
-
 }

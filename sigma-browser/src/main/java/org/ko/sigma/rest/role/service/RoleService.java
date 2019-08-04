@@ -2,7 +2,7 @@ package org.ko.sigma.rest.role.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.ko.sigma.data.entity.Role;
-import org.ko.sigma.rest.role.condition.RoleQueryListCondition;
+import org.ko.sigma.rest.role.condition.QueryRoleCondition;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface RoleService extends IService<Role> {
      * @param condition
      * @return
      */
-    List<Role> queryRoleList(RoleQueryListCondition condition);
+    List<Role> queryRoleList(QueryRoleCondition condition);
 
     /**
      * <p>通过主键查询权限</p>
@@ -24,9 +24,9 @@ public interface RoleService extends IService<Role> {
 
     /**
      * <p>创建新的权限</p>
-     * @param mapRole
+     * @param role
      */
-    Long createRole(Role mapRole);
+    Long createRole(Role role);
 
     /**
      * <p>通过ID</p>

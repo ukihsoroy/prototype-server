@@ -1,6 +1,8 @@
 package org.ko.sigma.rest.system.service.impl;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.data.constants.RoleCodeEnum;
 import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.data.entity.User;
 import org.ko.sigma.data.entity.UserRole;
@@ -29,8 +31,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.ko.sigma.core.type.SystemCode.REGISTER_USER_ERROR;
 
@@ -92,12 +96,22 @@ public class SystemServiceImpl implements SystemService {
 
         Long userId = userService.createUser(map(userDTO));
 
-        List<UserRole> userRoles = userDTO.getRoleDTOS().stream().map(roleDTO -> {
-            UserRole userRole = new UserRole();
-            userRole.setRoleCode(roleDTO.getCode());
-            userRole.setUserId(userId);
-            return userRole;
-        }).collect(Collectors.toList());
+        List<UserRole> userRoles;
+        if (CollectionUtils.isNotEmpty(userDTO.getRoles())) {
+            userRoles = userDTO.getRoleDTOS().stream().map(roleDTO -> {
+                UserRole userRole = new UserRole();
+                userRole.setRoleCode(roleDTO.getCode());
+                userRole.setUserId(userId);
+                return userRole;
+            }).collect(Collectors.toList());
+        } else {
+            userRoles = Stream.of(RoleCodeEnum.ROLE_USER).map(roleDTO -> {
+                UserRole userRole = new UserRole();
+                userRole.setRoleCode(roleDTO.getCode());
+                userRole.setUserId(userId);
+                return userRole;
+            }).collect(Collectors.toList());
+        }
 
         Long count = userRoleRepository.insertList(userRoles);
 

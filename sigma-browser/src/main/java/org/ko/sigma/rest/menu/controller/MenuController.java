@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.data.entity.Menu;
-import org.ko.sigma.rest.menu.condition.MenuQueryPageCondition;
+import org.ko.sigma.rest.menu.condition.QueryMenuCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.service.MenuService;
 import org.springframework.beans.BeanUtils;
@@ -27,7 +27,7 @@ public class MenuController {
 
     @GetMapping
     @ApiOperation("查询全部菜单")
-    public Response<IPage<MenuDTO>> queryMenuList (@ApiParam("查询参数") @ModelAttribute MenuQueryPageCondition condition) {
+    public Response<IPage<MenuDTO>> queryMenuList (@ApiParam("查询参数") @ModelAttribute QueryMenuCondition condition) {
         // 1.查询全部菜单
         IPage<MenuDTO> menus = menuService.queryMenuList(condition);
         return Response.of(menus);

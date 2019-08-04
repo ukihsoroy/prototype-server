@@ -17,4 +17,5 @@ public class SpringSocialConfigurerImpl extends SpringSocialConfigurer {
         filter.setFilterProcessesUrl(filterProcessesUrl);
         return (T)filter;
     }
+
 }

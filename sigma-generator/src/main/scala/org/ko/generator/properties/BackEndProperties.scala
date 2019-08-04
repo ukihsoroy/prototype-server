@@ -10,7 +10,11 @@ class BackEndProperties {
 
   val serviceTemplate: String = "service.java.ftl"
 
+  val serviceImplTemplate: String = "serviceImpl.java.ftl"
+
   val repositoryTemplate: String = "repository.java.ftl"
+
+  val repositoryXMLTemplate: String = "repository.xml.ftl"
 
   val conditionTemplate: String = "condition.java.ftl"
 

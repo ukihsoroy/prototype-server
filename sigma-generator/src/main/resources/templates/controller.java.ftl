@@ -1,73 +1,102 @@
 package ${rootPackage}.controller;
 
-import ${rootPackage}.bo.${domainName}Bo;
-import ${rootPackage}.command.${domainName}Command;
-import ${rootPackage}.entity.${domainName};
-import com.panhai.common.model.Result;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import ${rootPackage}.service.${domainName}Service;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
+import org.ko.sigma.core.support.Response;
+import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.data.entity.${entityName};
+import ${rootPackage}.condition.Query${entityName}Condition;
+import ${rootPackage}.dto.${entityName}DTO;
+import ${rootPackage}.service.${entityName}MenuService;
+import ${rootPackage}.service.${entityName}Service;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.context.request.ServletWebRequest;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
-
-@Api("${domainName}Controller")
-@Validated
+@Api(tags = "${comment}接口")
 @RestController
-@RequestMapping("${variableName}")
-public class ${domainName}Controller {
+@RequestMapping("${entityName?uncap_first}")
+@Validated
+public class ${entityName}Controller {
 
-    @Autowired private ${domainName}Service ${variableName}Service;
+    /**
+     * ${comment}service
+     */
+    @Autowired private ${entityName}Service ${entityName?uncap_first}Service;
 
     @GetMapping
-    @ApiOperation("查询列表")
-    public Result<List<${domainName}Bo>> query (
-            @ApiParam("查询列表参数") @ModelAttribute ${domainName}Command condition,
-            @ApiParam("页数") @RequestParam(required = false, defaultValue = "1") int page,
-            @ApiParam("条数") @RequestParam(required = false, defaultValue = "10") int limit) {
-        return ${variableName}Service.query(condition, page, limit);
+    @ApiOperation("查询全部${comment}")
+    public Response<List<${entityName}DTO>> query${entityName}List(@ApiParam("${comment}查询参数") @ModelAttribute Query${entityName}Condition condition) {
+        //1. 查询${comment}列表数据
+        List<${entityName}> ${entityName?uncap_first}s = ${entityName?uncap_first}Service.query${entityName}List(condition);
+
+        //2. 如果不为空
+        if (CollectionUtils.isNotEmpty(${entityName?uncap_first}s)) {
+            List<${entityName}DTO> ${entityName?uncap_first}DTOS = ${entityName?uncap_first}s.stream().map(this::map).collect(Collectors.toList());
+            return new Response<>(${entityName?uncap_first}DTOS);
+        }
+        return new Response<>(SystemCode.EMPTY_DATA);
     }
 
-    @GetMapping("{id}")
-    @ApiOperation("通过业务主键获取详情")
-    public Result<${domainName}> detail (
-            @ApiParam("业务主键") @PathVariable String id) {
-        return ${variableName}Service.detail(id);
+    @GetMapping("{id:\\d+}")
+    @ApiOperation("通过ID查询${comment}")
+    public Response<${entityName}DTO> query${entityName}Info (@ApiParam("主键") @PathVariable Long id) {
+        ${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.query${entityName}Info(id);
+        return new Response<>(map(${entityName?uncap_first}));
     }
 
     @PostMapping
-    @ApiOperation("新增资源")
-    public Result<${domainName}> save (
-            @ApiParam("业务对象") @Valid @RequestBody ${domainName}Bo ${variableName}Bo) {
-        return ${variableName}Service.save(${variableName}Bo);
+    @ApiOperation("新增${comment}")
+    public Response<Long> create${entityName} (
+            @ApiParam("${comment}传输对象实体") @RequestBody ${entityName}DTO ${entityName?uncap_first}DTO) {
+        Long ${entityName?uncap_first}Id = ${entityName?uncap_first}Service.create${entityName}(map(${entityName?uncap_first}DTO));;
+        return new Response<>(${entityName?uncap_first}Id);
     }
 
-    @PutMapping("{id}")
-    @ApiOperation("更新资源")
-    public Result<${domainName}> update (
-            @ApiParam("业务主键") @PathVariable String id,
-            @ApiParam("业务对象") @Valid @RequestBody ${domainName}Bo ${variableName}Bo) {
-        return ${variableName}Service.update(id, ${variableName}Bo);
+    @PutMapping("{id:\\d+}")
+    @ApiOperation("修改${comment}")
+    public Response<${entityName}DTO> update${entityName} (
+            @ApiParam("${comment}ID主键") @PathVariable Long id,
+            @ApiParam("${comment}传输对象实体") @RequestBody ${entityName}DTO ${entityName?uncap_first}DTO) {
+        ${entityName} ${entityName?uncap_first} = ${entityName?uncap_first}Service.update${entityName}(id, map(${entityName?uncap_first}DTO));
+        return new Response<>(map(${entityName?uncap_first}));
     }
 
-    @DeleteMapping("{id}")
-    @ApiOperation("删除资源")
-    public Result<String> remove (
-            @ApiParam("申报单ID") @PathVariable String id) {
-        return ${variableName}Service.remove(id);
+    @DeleteMapping("{id:\\d+}")
+    @ApiOperation("删除${comment}")
+    public Response<Long> delete${entityName}(@ApiParam("用户ID主键") @PathVariable Long id) {
+        Long result = ${entityName?uncap_first}Service.delete${entityName}(id);
+        return new Response<>(result);
     }
 
-    @GetMapping("export")
-    @ApiOperation("导出Excel")
-    public void export (
-            @ApiParam("查询列表参数") @ModelAttribute ${domainName}Command condition, ServletWebRequest request) {
-        ${variableName}Service.export(condition, request);
+    /**
+     * ${entityName} mapTo ${entityName}DTO
+     * @param ${entityName?uncap_first}
+     * @return ${entityName?uncap_first}DTO
+     */
+    private ${entityName}DTO map (${entityName} ${entityName?uncap_first}) {
+        ${entityName}DTO ${entityName?uncap_first}DTO = new ${entityName}DTO();
+        BeanUtils.copyProperties(${entityName?uncap_first}, ${entityName?uncap_first}DTO);
+        return ${entityName?uncap_first}DTO;
+    }
+
+    /**
+     * ${entityName}DTO mapTo ${entityName}
+     * @param ${entityName?uncap_first}DTO
+     * @return
+     */
+    private ${entityName} map (${entityName}DTO ${entityName?uncap_first}DTO) {
+        ${entityName} ${entityName?uncap_first} = new ${entityName}();
+        BeanUtils.copyProperties(${entityName?uncap_first}DTO, ${entityName?uncap_first});
+        return ${entityName?uncap_first};
     }
 
 }

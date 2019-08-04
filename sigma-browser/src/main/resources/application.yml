@@ -1,4 +1,4 @@
-server:
+server.servlet:
   context-path: /sigma
 
 #配置文件默认dev
@@ -31,9 +31,6 @@ mapper:
   not-empty: true #
   before: true #
   mappers: tk.mybatis.mapper.common.Mapper #配置的mapper
-
-logging:
-  level: debug
 
 sigma:
   security:
