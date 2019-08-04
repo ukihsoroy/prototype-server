@@ -63,7 +63,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             "/login",
             "/register",
             "/session/invalid",
-            "/code/*"
+            "/code/*",
+            "/valid/**"
     };
 
     @Bean

@@ -1,8 +1,11 @@
 package org.ko.sigma.rest.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.constants.RoleCodeEnum;
+import org.ko.sigma.data.constants.UserConstants;
 import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.data.entity.User;
 import org.ko.sigma.data.entity.UserRole;
@@ -36,7 +39,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.ko.sigma.core.type.SystemCode.REGISTER_USER_ERROR;
+import static org.ko.sigma.core.type.SystemCode.*;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
@@ -94,7 +97,11 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public Long register(UserDTO userDTO, HttpServletRequest request) {
 
+        //检查用户名，邮箱，手机是否重复
+        validatorRegister(userDTO);
+        
         Long userId = userService.createUser(map(userDTO));
+
 
         List<UserRole> userRoles;
         if (CollectionUtils.isNotEmpty(userDTO.getRoles())) {
@@ -122,6 +129,35 @@ public class SystemServiceImpl implements SystemService {
         registerSession(userDTO, request);
 
         return userId;
+    }
+
+    @Override
+    public void validUserUnique(String column, String value) {
+        User user = userRepository.selectOne(new QueryWrapper<User>().eq(column, value));
+        if (user != null) {
+            throw new TransactionalException(column + "重复!");
+        }
+    }
+
+    private void validatorRegister(UserDTO userDTO) {
+        Integer countUsername = userRepository.selectCount(
+                new QueryWrapper<User>().eq(UserConstants.Columns.USERNAME, userDTO.getUsername()));
+        if (countUsername > 0) {
+            throw new TransactionalException(USERNAME_REPEAT);
+        }
+
+        Integer countMobile = userRepository.selectCount(
+                new QueryWrapper<User>().eq(UserConstants.Columns.MOBILE, userDTO.getMobile()));
+        if (countMobile > 0) {
+            throw new TransactionalException(MOBILE_REPEAT);
+        }
+
+        Integer countEmail = userRepository.selectCount(
+                new QueryWrapper<User>().eq(UserConstants.Columns.EMAIL, userDTO.getEmail()));
+        if (countEmail > 0) {
+            throw new TransactionalException(EMAIL_REPEAT);
+        }
+
     }
 
     private void registerSession(UserDTO userDTO, HttpServletRequest request) {

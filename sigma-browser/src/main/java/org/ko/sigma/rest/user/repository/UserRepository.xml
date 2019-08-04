@@ -14,6 +14,7 @@
         <result column="email" property="email" jdbcType="VARCHAR"/>
         <result column="wechat" property="wechat" jdbcType="VARCHAR"/>
         <result column="weibo" property="weibo" jdbcType="VARCHAR"/>
+        <result column="qq" property="qq" jdbcType="VARCHAR"/>
         <result column="signature" property="signature" jdbcType="VARCHAR"/>
         <result column="balance" property="balance" jdbcType="VARCHAR"/>
         <result column="disable" property="disable" jdbcType="SMALLINT"/>

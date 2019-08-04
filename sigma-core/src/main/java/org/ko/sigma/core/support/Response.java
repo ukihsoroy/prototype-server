@@ -46,6 +46,11 @@ public class Response<T> extends SerializeBean {
 
     private Response() {}
 
+
+    public static Response of () {
+        return new Response(true);
+    }
+
     /**
      * 构造器
      * @param success

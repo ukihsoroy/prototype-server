@@ -1,6 +1,7 @@
 package org.ko.sigma.data.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import org.ko.sigma.data.bean.BasicEntity;
@@ -71,7 +72,7 @@ public class User extends BasicEntity {
     /**
      * qq三方登陆id
      */
-    private String QQ;
+    private String qq;
 
     /**
      * 微博三方登陆id

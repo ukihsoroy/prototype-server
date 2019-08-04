@@ -6,14 +6,18 @@ package org.ko.sigma.core.type;
 public enum SystemCode {
 
     REQUIRE_AUTHENTICATION(0, "Require Authentication!"),
-    REGISTER_USER_ERROR(199, "注册用户失败"),
     SUCCESS(200, "request success!"),
     EMPTY_DATA(201, "empty data!"),
     INSERT_ERROR(202, "insert error!"),
     UPDATE_ERROR(202, "update error!"),
     DELETE_ERROR(202, "delete error!"),
     SYSTEM_ERROR(500, "system error!"),
-    CONVERTER_ERROR(501, "converter error!"),
+    REGISTER_USER_ERROR(501, "注册用户失败"),
+    CONVERTER_ERROR(502, "converter error!"),
+    UNIQUE_ERROR(503, "已重复"),
+    USERNAME_REPEAT(503, "用户名重复"),
+    MOBILE_REPEAT(503, "手机号已注册"),
+    EMAIL_REPEAT(503, "邮箱已注册"),
     VALIDATOR_ERROR_CODE(800, "validator error code!")
     ;
 

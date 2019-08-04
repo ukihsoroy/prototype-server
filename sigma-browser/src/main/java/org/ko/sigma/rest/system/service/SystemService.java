@@ -9,4 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 public interface SystemService extends UserDetailsService, SocialUserDetailsService {
 
     Long register(UserDTO userDTO, HttpServletRequest request);
+
+    /**
+     * 校验用户唯一索引字段是否重复
+     * @param column
+     */
+    void validUserUnique(String column, String value);
 }

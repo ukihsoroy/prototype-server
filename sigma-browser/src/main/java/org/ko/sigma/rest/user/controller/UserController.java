@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Api(tags = "用户接口")
@@ -107,6 +108,5 @@ public class UserController {
         BeanUtils.copyProperties(userDTO, user);
         return user;
     }
-
 
 }

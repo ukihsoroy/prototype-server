@@ -16,12 +16,17 @@
 2. Spring Security
 3. Mybatis Plus
 
-## 开发人员
+## 0x03.开发人员
 
 1. [K.O](https://github.com/sigmako)
 2. [Xiao-Cuir](https://github.com/Xiao-Cuir)
 
-## 更新日志
+## 0x04.更新日志
+
+### - 2019.08.04
+
+1. 注册接口添加，用户名，邮箱，手机号重复校验。
+2. 添加用户字段校验接口。
 
 ### - 2019.08.03
 
