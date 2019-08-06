@@ -49,9 +49,10 @@ sigma:
 
 aliyun:
   sms:
-    regionId: cn-hangzhou
-    accessKeyId:
-    accessSecret:
+    region-id: cn-hangzhou
+    access-key-id:
+    access-secret:
+    sign-name: sigma
 
 
 

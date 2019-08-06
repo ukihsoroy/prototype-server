@@ -3,7 +3,6 @@ package org.ko.sigma.core.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.ko.sigma.core.service.IMailService;
 import org.ko.sigma.core.service.ISMSService;
 import org.ko.sigma.core.support.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,13 @@ public class SMSController {
     @Autowired
     private ISMSService smsService;
 
+    private static final String DEFAULT_TEMPLATE_CODE = "SMS_172007235";
+
     @PostMapping("code")
-    @ApiOperation("使用邮件发送验证码")
+    @ApiOperation("发送手机短信验证码")
     public Response sendCode(
-            @ApiParam("使用的模板名称") @NotBlank(message = "模板名称不能为空") @RequestParam String name,
-            @ApiParam("mail") @NotBlank(message = "手机不能为空") @RequestParam String mobile) throws Exception {
+            @ApiParam("使用的模板名称") @RequestParam(required = false, defaultValue = DEFAULT_TEMPLATE_CODE) String name,
+            @ApiParam("手机号码") @NotBlank(message = "手机不能为空")  @RequestParam String mobile) {
         smsService.sendCode(name, mobile);
         return Response.of();
     }

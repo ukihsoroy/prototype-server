@@ -18,6 +18,7 @@ public enum SystemCode {
     USERNAME_REPEAT(503, "用户名重复"),
     MOBILE_REPEAT(503, "手机号已注册"),
     EMAIL_REPEAT(503, "邮箱已注册"),
+    SEND_ERROR(504, "发送失败"),
     VALIDATOR_ERROR_CODE(800, "validator error code!")
     ;
 

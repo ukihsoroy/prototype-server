@@ -26,7 +26,7 @@ public final class JacksonHelper {
     }
 
 
-    public static <T> List<T> toList (String json, Class<T> clazz) {
+    public static <T> List<T> string2List (String json, Class<T> clazz) {
         try {
             return mapper.readValue(json, mapper.getTypeFactory().constructParametricType(List.class, clazz));
         } catch (IOException e) {
@@ -35,7 +35,7 @@ public final class JacksonHelper {
         return null;
     }
 
-    public static <T> List<T> toList (File file, Class<T> clazz) {
+    public static <T> List<T> file2List (File file, Class<T> clazz) {
         try {
             return mapper.readValue(file, mapper.getTypeFactory().constructParametricType(List.class, clazz));
         } catch (IOException e) {
@@ -44,11 +44,7 @@ public final class JacksonHelper {
         return null;
     }
 
-    public static String parseJson (Object res) throws IOException {
-        return mapper.writeValueAsString(res);
-    }
-
-    public static Map<String, String> toMap (String json)  {
+    public static Map<String, String> string2Map (String json)  {
         try {
             return mapper.readValue(json, new TypeReference<Map<String, String>>(){});
         } catch (IOException e) {
