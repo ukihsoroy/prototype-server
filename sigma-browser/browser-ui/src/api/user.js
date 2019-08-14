@@ -7,6 +7,21 @@ export function login(data) {
   })
 }
 
+export function logout() {
+  return request({
+    url: '/logout',
+    method: 'post'
+  })
+}
+
+export function register(data) {
+  return request({
+    url: '/register',
+    method: 'post',
+    data
+  })
+}
+
 export function getInfo() {
   return request({
     url: '/user/info',
@@ -40,13 +55,6 @@ export function getUserMenu(roleCode) {
   return request({
     url: '/role/' + roleCode + '/menu',
     method: 'get'
-  })
-}
-
-export function logout() {
-  return request({
-    url: '/logout',
-    method: 'post'
   })
 }
 

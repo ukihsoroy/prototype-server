@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { login, register } from '@/api/user'
 import { setToken } from '@/utils/auth'
 
 export default {
@@ -81,14 +81,14 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (value.length < 4) {
-        callback(new Error('Please enter the correct user name'))
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 4) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('请输入用户密码（不得少于6位）'))
       } else {
         callback()
       }
@@ -105,7 +105,23 @@ export default {
       loading: false,
       passwordType: 'password',
       redirect: undefined,
-      todoInfo: 'Login'
+      todoInfo: 'Login',
+      registerModel: {
+        'avatar': 'string',
+        'birthday': '2019-08-03T06:33:34.161Z',
+        'email': 'string',
+        'enabled': true,
+        'gender': 0,
+        'nickname': 'string',
+        'password': '',
+        'mobile': '1360312313',
+        'roleDTOS': [
+          {
+            'code': 'ROLE_USER'
+          }
+        ],
+        'username': ''
+      }
     }
   },
   computed: {
@@ -133,12 +149,20 @@ export default {
       })
     },
     handleLogin() {
-      if (this.registerType) {
-        alert('开发中！')
-      } else {
-        this.$refs.loginForm.validate(valid => {
-          if (valid) {
-            this.loading = true
+      this.$refs.loginForm.validate(valid => {
+        if (valid) {
+          this.loading = true
+          if (this.registerType) {
+            const tempData = Object.assign(this.registerModel, this.loginForm)
+            register(tempData).then((response) => {
+              this.$message({
+                message: '恭喜你，注册成功！快去登录吧！',
+                type: 'success'
+              })
+              this.todoInfo = 'Login'
+              this.loading = false
+            })
+          } else {
             login(this.loginForm).then((response) => {
               setToken(response.data.principal.password)
               this.$router.push({ path: this.redirect || '/' })
@@ -146,12 +170,12 @@ export default {
             }).catch((e) => {
               this.loading = false
             })
-          } else {
-            console.log('error submit!!')
-            return false
           }
-        })
-      }
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
     handleRegister() { // 注册
       this.todoInfo = this.registerType ? 'Login' : 'Register'
