@@ -1,12 +1,22 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
+const argv = require('yargs').argv;
 
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 const name = defaultSettings.title || 'vue Admin Template' // page title
+
+let devServer
+if (argv.DEV_SERVER === 'local') {
+  devServer = `http://localhost:${port}/mock/`;
+} else if (argv.DEV_SERVER === 'sigma'){
+  devServer = 'http://39.105.164.165:1337/sigma';
+} else {
+  devServer = 'http://127.0.0.1:1337/sigma';
+}
 
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
@@ -40,8 +50,7 @@ module.exports = {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
-       target: `http://39.105.164.165:1337/sigma`,
-        // target: `http://127.0.0.1:1337/sigma`,
+        target: devServer,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
