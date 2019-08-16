@@ -65,3 +65,11 @@ export function getUserList(condition) {
     params: condition
   })
 }
+
+export function validateUser(data) {
+  return request({
+    url: '/valid/user/username',
+    method: 'get',
+    params: data
+  })
+}
