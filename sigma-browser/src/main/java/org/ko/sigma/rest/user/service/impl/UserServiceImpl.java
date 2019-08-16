@@ -1,8 +1,11 @@
 package org.ko.sigma.rest.user.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.user.condition.QueryUserCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;

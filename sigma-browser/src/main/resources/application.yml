@@ -3,12 +3,24 @@ server.servlet:
 
 #配置文件默认dev
 spring:
+  application.name: sigma-browser
   profiles:
     active: dev
   data:
     redis:
       repositories:
         enabled: false
+  mail:
+    host: smtp.qq.com
+    username: #814777765@qq.com
+    password: #
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
 
 management:
   health:
@@ -34,6 +46,13 @@ mapper:
 
 sigma:
   security:
+
+aliyun:
+  sms:
+    region-id: cn-hangzhou
+    access-key-id:
+    access-secret:
+    sign-name: sigma
 
 
 

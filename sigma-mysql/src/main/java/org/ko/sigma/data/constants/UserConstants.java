@@ -59,7 +59,7 @@ public class UserConstants {
         /**
          * qq三方登陆id
          */
-        public static String QQ = "QQ";
+        public static String QQ = "qq";
 
         /**
          * 微博三方登陆id

@@ -4,6 +4,7 @@ package org.ko.sigma.rest.system.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.ko.sigma.core.exception.CustomRuntimeException;
 import org.ko.sigma.core.support.Response;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.rest.system.service.SystemService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @RestController
@@ -60,6 +62,15 @@ public class SystemController {
         System.out.println("注册用户");
         Long userId = systemService.register(userDTO, request);
         return new Response<>(userId);
+    }
+
+    @GetMapping("valid/user/{column}")
+    @ApiOperation("校验是否重复注册")
+    public Response validUserUnique(
+            @ApiParam("字段名称") @NotBlank(message = "字段名称不能为空") @PathVariable String column,
+            @ApiParam("字段值") @NotBlank(message = "字段值不能为空") @RequestParam String value) {
+        systemService.validUserUnique(column, value);
+        return Response.of();
     }
 
     @GetMapping("/authentication/require")

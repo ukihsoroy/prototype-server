@@ -8,4 +8,8 @@ public class TransactionalException extends GeneralException {
         super(code);
     }
 
+    public TransactionalException(String message) {
+        super(message);
+    }
+
 }

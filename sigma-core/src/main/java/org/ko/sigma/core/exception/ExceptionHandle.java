@@ -15,8 +15,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.ko.sigma.core.type.SystemCode.VALIDATOR_ERROR_CODE;
-
 @ControllerAdvice
 @ResponseBody
 public class ExceptionHandle extends ResponseEntityExceptionHandler {
@@ -26,6 +24,7 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
     @ExceptionHandler
     public ResponseEntity<Object> generalException(Exception ex, WebRequest request) throws Exception {
         ResponseEntity<Object> responseEntity = this.handleException(ex, request);
+        assert responseEntity != null;
         HttpStatus httpStatus = responseEntity.getStatusCode();
         List<String> errorMsg = new ArrayList<>();
         // 自定义异常设定Http异常代码
@@ -37,8 +36,8 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
         }
         logger.error(ex.getClass().getName(), ex);
         Response response = new Response<>(Response.FAILED, errorMsg,
-                ex instanceof ValidateException ? VALIDATOR_ERROR_CODE.getCode() : httpStatus.value(),
-                StringUtils.isNotBlank(ex.getMessage())? ex.toString() : ex.getMessage());
+                ex instanceof GeneralException ? ((GeneralException) ex).getCode() : httpStatus.value(),
+                StringUtils.isNotBlank(ex.getMessage()) ? ex.toString() : ex.getMessage());
         return super.handleExceptionInternal(ex, response, responseEntity.getHeaders(), httpStatus, request);
     }
 }
