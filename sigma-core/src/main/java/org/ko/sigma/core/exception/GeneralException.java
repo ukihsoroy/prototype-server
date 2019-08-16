@@ -9,7 +9,7 @@ public class GeneralException extends CustomRuntimeException {
 
     private static final long serialVersionUID = 1633213333563068730L;
 
-    private String code;
+    private Integer code;
 
     public GeneralException() {}
 
@@ -27,7 +27,14 @@ public class GeneralException extends CustomRuntimeException {
 
     public GeneralException(SystemCode systemCode) {
         super(systemCode.getMsg());
-        this.code = systemCode.getCode().toString();
+        this.code = systemCode.getCode();
     }
 
+    public void setCode(Integer code) {
+        this.code = code;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
 }

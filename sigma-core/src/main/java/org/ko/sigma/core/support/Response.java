@@ -56,6 +56,7 @@ public class Response<T> extends SerializeBean {
      * @param success
      */
     public Response(boolean success) {
+        this.code = 200;
         this.success = success;
     }
 

@@ -3,7 +3,7 @@ package org.ko.sigma.rest.system.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.exception.TransactionalException;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.exception.UniqueException;
 import org.ko.sigma.data.constants.RoleCodeEnum;
 import org.ko.sigma.data.constants.UserConstants;
 import org.ko.sigma.data.entity.Role;
@@ -34,7 +34,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -135,7 +134,7 @@ public class SystemServiceImpl implements SystemService {
     public void validUserUnique(String column, String value) {
         User user = userRepository.selectOne(new QueryWrapper<User>().eq(column, value));
         if (user != null) {
-            throw new TransactionalException(column + "重复!");
+            throw new UniqueException(column + "重复!");
         }
     }
 
