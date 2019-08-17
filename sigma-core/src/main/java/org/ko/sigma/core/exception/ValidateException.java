@@ -9,6 +9,8 @@ public class ValidateException extends CustomRuntimeException {
 
     private static final long serialVersionUID = 3196735858881429614L;
 
+    private Integer code;
+
     /**
      * 验证结果
      */
@@ -35,5 +37,9 @@ public class ValidateException extends CustomRuntimeException {
 
     public List<String> getValidateMsg() {
         return this.validateMsg;
+    }
+
+    public Integer getCode() {
+        return code;
     }
 }
