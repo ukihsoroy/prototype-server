@@ -49,6 +49,8 @@
         <el-col :span="6" :offset="6">
           <el-form-item>
             <el-button type="primary" icon="el-icon-search" @click="fetchUserList">查询</el-button>
+            <el-button type="primary" icon="el-icon-download">导出</el-button>
+            <el-button type="primary" icon="el-icon-plus" disabled @click="addUser">添加</el-button>
           </el-form-item>
         </el-col>
       </el-row>
@@ -91,7 +93,7 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     />
-    <el-dialog title="用户信息" :visible.sync="dialogFormVisible">
+    <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form :form="editData" style="width: 400px;" label-width="70px">
         <el-form-item label="用户名">
           <el-input v-model="editData.username" />
@@ -109,8 +111,8 @@
           <el-date-picker
             v-model="editData.birthday"
             type="datetime"
-            placeholder="选择日期时间">
-          </el-date-picker>
+            placeholder="选择日期时间"
+          />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -145,16 +147,26 @@ export default {
       userLoading: true,
       dialogFormVisible: false,
       formLabelWidth: '120px',
-      editData: ''
+      editData: '',
+      textMap: {
+        create: '添加',
+        update: '修改'
+      },
+      dialogStatus: ''
     }
   },
   created() {
     this.fetchUserList()
   },
   methods: {
+    addUser() { // 添加用户
+      this.dialogFormVisible = true
+      this.dialogStatus = 'create'
+    },
     handleUpdate(row) { // 用户编辑
       this.dialogFormVisible = true
       this.editData = row
+      this.dialogStatus = 'update'
     },
     fetchUserList() {
       this.userLoading = true
@@ -184,12 +196,18 @@ export default {
       })
     },
     fetchUserInfo() {
-        putUserById(this.editData).then((response) => {
-          this.dialogFormVisible = false
-        }).catch((error) => {
-          console.log(error)
-          this.dialogFormVisible = false
+      putUserById(this.editData).then((response) => {
+        this.dialogFormVisible = false
+        this.$notify({
+          title: '成功',
+          message: '更新成功',
+          type: 'success',
+          duration: 2000
         })
+      }).catch((error) => {
+        console.log(error)
+        this.dialogFormVisible = false
+      })
     },
     handleSizeChange(size) {
       this.condition.size = size
