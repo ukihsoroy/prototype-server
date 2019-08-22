@@ -173,7 +173,6 @@ export default {
       getUserList(this.condition)
         .then(response => {
           if (response.success) {
-            console.log(response)
             const { records, current, total, size } = { ...response.data }
             this.users = records
             this.condition.current = current

@@ -81,7 +81,6 @@ export default {
   data() {
     const validateUsername = (rule, value, callback) => {
       if (value.length < 4) {
-        console.log(this.todoInfo)
         callback(new Error('请输入用户名'))
       } else if (this.todoInfo === 'Register') {
         validateUser({ value: this.loginForm.username })

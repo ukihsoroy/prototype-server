@@ -54,8 +54,6 @@ const actions = {
         if (!roles || roles.length <= 0) {
           reject('getInfo: roles must be a non-null array!')
         }
-        console.log('2323')
-        console.log(roles)
         commit('SET_ROLES', roles)
         commit('SET_NAME', nickname)
         commit('SET_AVATAR', avatar)

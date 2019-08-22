@@ -1,8 +1,22 @@
 <template>
   <div class="app-container">
-    <div class="filter-container">
-      <span @click="getU">11111111</span>
-    </div>
+    <header class="header-container">
+      <el-input size="mini" placeholder="搜索" style="width: 200px;" />
+      <el-button size="mini" type="success" icon="el-icon-search">搜索</el-button>
+      <el-button size="mini" type="primary" icon="el-icon-plus">新增</el-button>
+    </header>
+    <section class="middle-container">
+      <el-table
+        :data="menuData"
+        style="width: 100%;margin-bottom: 20px;"
+        row-key="id"
+        :default-expand-all="true"
+        :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+      >
+        <el-table-column prop="name" label="名称" />
+        <el-table-column prop="path" label="链接地址" />
+      </el-table>
+    </section>
   </div>
 </template>
 
@@ -12,18 +26,13 @@ import { getUserMenu } from '@/api/user'
 export default {
   data() {
     return {
-      a: 1
+      menuData: []
     }
   },
-  methods: {
-    getU() {
-      getUserMenu(this.$store.getters.roles[0]).then(response => {
-        console.log('111')
-        console.log(response)
-      })
-
-      return 1
-    }
+  mounted() {
+    getUserMenu(this.$store.getters.roles[0]).then(response => {
+      this.menuData = response.data
+    })
   }
 }
 </script>
