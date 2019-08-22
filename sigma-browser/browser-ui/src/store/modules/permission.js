@@ -31,7 +31,7 @@ export function filterAsyncRoutes(routes, roles) {
         tmp.component = Layout
         tmp.children = filterAsyncRoutes(tmp.children, roles)
       } else {
-        tmp.component = () => import(`@/views/${route.component}`)
+        tmp.component = () => import(`@/views${route.component}`)
       }
       res.push(tmp)
     }
