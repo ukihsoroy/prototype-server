@@ -8,8 +8,14 @@
 ## 打包部署
 
 ```shell
+# 打包
 mvn clean package
+
+# 启动
 nohup java -jar -Xmx128m -Xms128m -Dspring.profiles.active=uat sigma-browser-1.0-SNAPSHOT.jar &
+
+# tail log
+tail -f nohup.out
 ```
 
 ## 功能列表
