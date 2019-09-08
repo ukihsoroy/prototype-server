@@ -6,15 +6,15 @@
       <el-button size="mini" type="primary" icon="el-icon-plus">新增</el-button>
     </header>
     <div class="middle-container">
-      <el-row>
-        <el-col>
+      <el-row :gutter="15">
+        <el-col :xs="24" :sm="24" :md="16" :lg="16" :xl="17">
           <el-card class="box-card" shadow="never">
             <div slot="header" class="clearfix">
               <span class="role-span">角色列表</span>
               <div id="opt" style="float: right">
                 <el-radio-group v-model="opt" size="mini">
-                  <el-radio-button label="菜单权限" />
-                  <el-radio-button label="操作权限" />
+                  <el-radio-button label="菜单分配" />
+                  <!-- <el-radio-button label="权限分配" /> -->
                 </el-radio-group>
               </div>
             </div>
@@ -46,6 +46,28 @@
             </el-table>
           </el-card>
         </el-col>
+        <el-col :xs="24" :sm="24" :md="8" :lg="8" :xl="7">
+          <el-card v-show="opt === '菜单分配'" class="box-card" shadow="never">
+            <div slot="header" class="clearfix">
+              <span class="role-span">菜单分配</span>
+              <el-button
+                icon="el-icon-check"
+                size="mini"
+                style="float: right; padding: 6px 9px"
+                type="primary"
+              >保存</el-button>
+            </div>
+            <el-tree
+              ref="menu"
+              :data="menus"
+              :default-checked-keys="menuIds"
+              :props="defaultProps"
+              accordion
+              show-checkbox
+              node-key="id"
+            />
+          </el-card>
+        </el-col>
       </el-row>
     </div>
   </div>
@@ -53,13 +75,20 @@
 
 <script>
 import { getAllRole } from '@/api/role'
+import { getMenu } from '@/api/menu'
 import { parseTime } from '@/utils/index'
 
 export default {
   data() {
     return {
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      },
       data: [],
-      opt: '菜单分配'
+      opt: '菜单分配',
+      menus: [],
+      menuIds: []
     }
   },
   created() {
@@ -68,10 +97,31 @@ export default {
   methods: {
     parseTime,
     initDate() { // 初始化
-      getAllRole().then(res => {
-        this.data = res.data
+      Promise.all([getAllRole(), getMenu()]).then(res => {
+        this.data = res[0].data
+        this.menus = this.handleMenuData(res[1].data.records)
+        console.log(res[1].data.records)
+        console.log(this.menus)
       })
+    },
+    handleMenuData(data) {
+      const res = []
+      data.forEach(tmp => {
+        tmp.label = tmp.name
+        if (tmp.children && tmp.children.length !== 0) {
+          tmp.children = this.handleMenuData(tmp.children)
+        }
+        res.push(tmp)
+      })
+      return res
     }
   }
 }
 </script>
+
+<style rel="stylesheet/scss" lang="scss">
+  .role-span {
+    font-weight: bold;color: #303133;
+    font-size: 15px;
+  }
+</style>
