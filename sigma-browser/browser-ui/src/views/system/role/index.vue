@@ -51,10 +51,12 @@
             <div slot="header" class="clearfix">
               <span class="role-span">菜单分配</span>
               <el-button
+                :disabled="!showButton"
                 icon="el-icon-check"
                 size="mini"
                 style="float: right; padding: 6px 9px"
                 type="primary"
+                @click="savePermission"
               >保存</el-button>
             </div>
             <el-tree
@@ -74,7 +76,7 @@
 </template>
 
 <script>
-import { getAllRole, getRoleCodeMenu } from '@/api/role'
+import { getAllRole, getRoleCodeMenu, postRoleCodeMenu } from '@/api/role'
 import { getMenu } from '@/api/menu'
 import { parseTime } from '@/utils/index'
 
@@ -89,7 +91,9 @@ export default {
       opt: '菜单分配',
       menus: [],
       menuIds: [],
-      menuLoading: false
+      menuLoading: false,
+      showButton: false,
+      releCode: 0
     }
   },
   created() {
@@ -104,7 +108,9 @@ export default {
       })
     },
     handleCurrentChange(val) {
-      getRoleCodeMenu(val.code).then(res => {
+      this.releCode = val.code
+      this.showButton = true
+      getRoleCodeMenu(this.releCode).then(res => {
         this.$refs.menu.setCheckedKeys([])
         this.menuIds = this.handleMenuIds(res.data)
       })
@@ -118,6 +124,11 @@ export default {
         }
       })
       return res
+    },
+    savePermission() {
+      postRoleCodeMenu(this.releCode, this.menuIds).then(res => {
+        console.log(res)
+      })
     }
   }
 }

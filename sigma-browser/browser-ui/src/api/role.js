@@ -13,3 +13,11 @@ export function getRoleCodeMenu(roleCode) {
     method: 'get'
   })
 }
+
+export function postRoleCodeMenu(roleCode, menuIds) {
+  return request({
+    url: '/role/' + roleCode + '/menu',
+    method: 'post',
+    data: menuIds
+  })
+}
