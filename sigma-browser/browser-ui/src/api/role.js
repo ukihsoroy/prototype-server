@@ -6,3 +6,10 @@ export function getAllRole() {
     method: 'get'
   })
 }
+
+export function getRoleCodeMenu(roleCode) {
+  return request({
+    url: '/role/' + roleCode + '/menu',
+    method: 'get'
+  })
+}

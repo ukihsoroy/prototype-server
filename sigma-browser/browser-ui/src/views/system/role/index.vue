@@ -18,7 +18,7 @@
                 </el-radio-group>
               </div>
             </div>
-            <el-table :data="data" highlight-current-row size="small" style="width: 100%;">
+            <el-table :data="data" highlight-current-row size="small" style="width: 100%;" @current-change="handleCurrentChange">
               <el-table-column prop="name" label="角色名称" />
               <el-table-column prop="code" label="角色编码" />
               <el-table-column :show-overflow-tooltip="true" prop="gmtCreate" label="创建日期">
@@ -62,7 +62,7 @@
               :data="menus"
               :default-checked-keys="menuIds"
               :props="defaultProps"
-              accordion
+              :default-expanded-keys="[1]"
               show-checkbox
               node-key="id"
             />
@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import { getAllRole } from '@/api/role'
+import { getAllRole, getRoleCodeMenu } from '@/api/role'
 import { getMenu } from '@/api/menu'
 import { parseTime } from '@/utils/index'
 
@@ -83,12 +83,13 @@ export default {
     return {
       defaultProps: {
         children: 'children',
-        label: 'label'
+        label: 'name'
       },
       data: [],
       opt: '菜单分配',
       menus: [],
-      menuIds: []
+      menuIds: [],
+      menuLoading: false
     }
   },
   created() {
@@ -99,19 +100,22 @@ export default {
     initDate() { // 初始化
       Promise.all([getAllRole(), getMenu()]).then(res => {
         this.data = res[0].data
-        this.menus = this.handleMenuData(res[1].data.records)
-        console.log(res[1].data.records)
-        console.log(this.menus)
+        this.menus = res[1].data.records
       })
     },
-    handleMenuData(data) {
+    handleCurrentChange(val) {
+      getRoleCodeMenu(val.code).then(res => {
+        this.$refs.menu.setCheckedKeys([])
+        this.menuIds = this.handleMenuIds(res.data)
+      })
+    },
+    handleMenuIds(data) {
       const res = []
       data.forEach(tmp => {
-        tmp.label = tmp.name
+        res.push(tmp.id)
         if (tmp.children && tmp.children.length !== 0) {
-          tmp.children = this.handleMenuData(tmp.children)
+          this.handleMenuIds(tmp.children)
         }
-        res.push(tmp)
       })
       return res
     }
