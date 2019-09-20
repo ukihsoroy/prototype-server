@@ -1,11 +1,16 @@
 package org.ko.sigma.rest.role.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.data.constants.RoleConstants;
+import org.ko.sigma.data.constants.RoleMenuConstants;
 import org.ko.sigma.data.entity.Role;
+import org.ko.sigma.data.entity.RoleMenu;
 import org.ko.sigma.rest.role.condition.QueryRoleCondition;
+import org.ko.sigma.rest.role.repository.RoleMenuRepository;
 import org.ko.sigma.rest.role.repository.RoleRepository;
 import org.ko.sigma.rest.role.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +28,19 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
      */
     @Autowired private RoleRepository roleRepository;
 
+    /**
+     * 权限菜单关联数据
+     */
+    @Autowired private RoleMenuRepository roleMenuRepository;
+
     @Override
     public List<Role> queryRoleList(QueryRoleCondition condition) {
         return roleRepository.selectList(new QueryWrapper<>());
     }
 
     @Override
-    public Role queryRoleInfo(Long id) {
-        return roleRepository.selectById(id);
+    public Role queryRoleInfo(String code) {
+        return roleRepository.selectOne(new QueryWrapper<Role>().eq(RoleConstants.Columns.CODE, code));
     }
 
     @Override
@@ -42,20 +52,21 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     }
 
     @Override
-    public Role updateRole(Long id, Role role) {
-        role.setId(id);
-        if (roleRepository.updateById(role) == 0) {
+    public Role updateRole(String code, Role role) {
+        role.setCode(code);
+        if (roleRepository.update(role, new UpdateWrapper<Role>().eq(RoleConstants.Columns.CODE, code)) == 0) {
             throw new TransactionalException(SystemCode.UPDATE_ERROR);
         }
         return role;
     }
 
     @Override
-    public Long deleteRole(Long id) {
-        if (roleRepository.deleteById(id) == 0) {
+    public String deleteRole(String code) {
+        roleMenuRepository.delete(new QueryWrapper<RoleMenu>().eq(RoleMenuConstants.Columns.ROLE_CODE, code));
+        if (roleRepository.delete(new QueryWrapper<Role>().eq(RoleConstants.Columns.CODE, code)) == 0) {
             throw new TransactionalException(SystemCode.DELETE_ERROR);
         }
-        return id;
+        return code;
     }
 
 

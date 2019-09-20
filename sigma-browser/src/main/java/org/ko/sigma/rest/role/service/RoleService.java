@@ -17,10 +17,10 @@ public interface RoleService extends IService<Role> {
 
     /**
      * <p>通过主键查询权限</p>
-     * @param id
+     * @param code
      * @return
      */
-    Role queryRoleInfo(Long id);
+    Role queryRoleInfo(String code);
 
     /**
      * <p>创建新的权限</p>
@@ -30,17 +30,17 @@ public interface RoleService extends IService<Role> {
 
     /**
      * <p>通过ID</p>
-     * @param id role Id
+     * @param code role code
      * @param role 权限对象
      * @return
      */
-    Role updateRole(Long id, Role role);
+    Role updateRole(String code, Role role);
 
     /**
      * <p>删除权限</p>
-     * @param id role主键id
+     * @param code role编码
      * @return
      */
-    Long deleteRole(Long id);
+    String deleteRole(String code);
 
 }

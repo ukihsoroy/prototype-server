@@ -1,6 +1,8 @@
 package org.ko.sigma.rest.role.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.ko.sigma.data.constants.RoleMenuConstants;
 import org.ko.sigma.data.entity.RoleMenu;
 import org.ko.sigma.rest.role.repository.RoleMenuRepository;
 import org.ko.sigma.rest.role.service.RoleMenuService;
@@ -22,6 +24,11 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuRepository, RoleMen
     public Long createRoleMenu(String roleCode, List<Long> menuIds) {
         List<RoleMenu> roleMenus =  menuIds.stream().map(menuId -> buildRoleMenu(roleCode, menuId)).collect(Collectors.toList());
         return roleMenuRepository.insertList(roleMenus);
+    }
+
+    @Override
+    public Integer removeRoleMenu(String roleCode) {
+        return roleMenuRepository.delete(new QueryWrapper<RoleMenu>().eq(RoleMenuConstants.Columns.ROLE_CODE, roleCode));
     }
 
     private RoleMenu buildRoleMenu (String roleCode, Long menuId) {

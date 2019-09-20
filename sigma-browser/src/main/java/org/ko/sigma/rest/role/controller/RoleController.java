@@ -59,11 +59,11 @@ public class RoleController {
         return new Response<>(SystemCode.EMPTY_DATA);
     }
 
-    @GetMapping("{id:\\d+}")
+    @GetMapping("{code}")
     @ApiOperation("通过ID查询权限")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public Response<RoleDTO> queryRoleInfo (@ApiParam("主键") @PathVariable Long id) {
-        Role role = roleService.queryRoleInfo(id);
+    public Response<RoleDTO> queryRoleInfo (@ApiParam("主键") @PathVariable String code) {
+        Role role = roleService.queryRoleInfo(code);
         return new Response<>(map(role));
     }
 
@@ -76,21 +76,21 @@ public class RoleController {
         return new Response<>(roleId);
     }
 
-    @PutMapping("{id:\\d+}")
+    @PutMapping("{code}")
     @ApiOperation("修改权限")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public Response<RoleDTO> updateRole (
-            @ApiParam("用户ID主键") @PathVariable Long id,
+            @ApiParam("用户ID主键") @PathVariable String code,
             @ApiParam("用户传输对象实体") @RequestBody RoleDTO roleDTO) {
-        Role role = roleService.updateRole(id, map(roleDTO));
+        Role role = roleService.updateRole(code, map(roleDTO));
         return new Response<>(map(role));
     }
 
-    @DeleteMapping("{id:\\d+}")
+    @DeleteMapping("{code}")
     @ApiOperation("删除权限")
     @PreAuthorize("hasAnyRole('ADMIN')")
-    public Response<Long> deleteRole(@ApiParam("用户ID主键") @PathVariable Long id) {
-        Long result = roleService.deleteRole(id);
+    public Response<String> deleteRole(@ApiParam("权限编码") @PathVariable String code) {
+        String result = roleService.deleteRole(code);
         return new Response<>(result);
     }
 
@@ -101,12 +101,23 @@ public class RoleController {
         return new Response<>(menuDTOS);
     }
 
+    /**
+     * 该方法会先删除全部菜单，在新增新的数据
+     * @param roleCode 权限代码
+     * @param menuIds 菜单编号
+     * @return 插入条数
+     */
     @PostMapping("{roleCode}/menu")
     @ApiOperation("为当前权限添加菜单")
     @PreAuthorize("hasAnyRole('ADMIN')")
     public Response<Long> createRoleMenu (
             @ApiParam("权限ID") @PathVariable String roleCode,
             @ApiParam("菜单ID列表") @RequestBody List<Long> menuIds) {
+
+        // 删除原有菜单
+        roleMenuService.removeRoleMenu(roleCode);
+
+        // 新增菜单
         Long count = roleMenuService.createRoleMenu(roleCode, menuIds);
         return new Response<>(count);
     }

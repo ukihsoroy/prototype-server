@@ -10,6 +10,6 @@ spring:
 
 sigma:
   file:
-    folder: D://tmp/resources/
+    folder: C://tmp/resources/
 
-log.path: D://tmp/log
+log.path: C://tmp/log
