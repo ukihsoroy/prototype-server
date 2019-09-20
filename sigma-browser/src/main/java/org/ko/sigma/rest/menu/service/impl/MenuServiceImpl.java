@@ -54,6 +54,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
         return parentMenus;
     }
 
+    /**
+     * 递归添加子菜单
+     * @param parentMenu 父菜单
+     * @param childrenMenuMap 子菜单结合
+     */
     private void deepPutChildrenMenu(MenuDTO parentMenu, Map<Long, List<MenuDTO>> childrenMenuMap) {
         Long parentId = parentMenu.getId();
         if (childrenMenuMap.containsKey(parentId)) {
