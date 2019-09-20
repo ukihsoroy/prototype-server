@@ -2,6 +2,7 @@ package org.ko.sigma.rest.menu.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.Menu;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
@@ -33,7 +36,31 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
 
     @Override
     public List<MenuDTO> queryMenuByRoleCode(String roleCode) {
-        return menuRepository.queryMenuByRoleCode(roleCode);
+
+        // 查询该权限下的全部菜单
+        List<MenuDTO> menuDTOS = menuRepository.queryMenuByRoleCode(roleCode);
+
+        // 取出一级
+        List<MenuDTO> parentMenus = menuDTOS.stream().filter(menuDTO -> menuDTO.getParentId() == null)
+                .collect(Collectors.toList());
+
+        // 对菜单按照parent_id分组
+        Map<Long, List<MenuDTO>> childrenMenuMap = menuDTOS.stream().filter(menuDTO -> menuDTO.getParentId() != null)
+                .collect(Collectors.groupingBy(MenuDTO::getParentId));
+
+        // 装填菜单
+        parentMenus.forEach(parentMenu -> deepPutChildrenMenu(parentMenu, childrenMenuMap));
+
+        return parentMenus;
+    }
+
+    private void deepPutChildrenMenu(MenuDTO parentMenu, Map<Long, List<MenuDTO>> childrenMenuMap) {
+        Long parentId = parentMenu.getId();
+        if (childrenMenuMap.containsKey(parentId)) {
+            List<MenuDTO> children = childrenMenuMap.get(parentId);
+            parentMenu.setChildren(children);
+            children.forEach(menuDTO -> deepPutChildrenMenu(menuDTO, childrenMenuMap));
+        }
     }
 
     @Override
@@ -65,4 +92,5 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
         }
         return id;
     }
+
 }

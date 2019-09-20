@@ -72,11 +72,10 @@
             modified_user,
             gmt_modified
         FROM t_menu
-        WHERE `disable` = 0
-            AND parent_id = #{parentId}
+        WHERE `disable` = 0 AND parent_id = #{parentId}
     </select>
 
-    <select id="queryMenuByRoleCode" resultMap="ResultMapWithChildMenu" parameterType="java.lang.String">
+    <select id="queryMenuByRoleCode" resultType="org.ko.sigma.rest.menu.dto.MenuDTO" parameterType="java.lang.String">
         SELECT
             m.id,
             m.name,
