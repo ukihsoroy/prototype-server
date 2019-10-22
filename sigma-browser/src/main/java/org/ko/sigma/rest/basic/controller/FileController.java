@@ -1,9 +1,9 @@
-package org.ko.sigma.core.controller;
+package org.ko.sigma.rest.basic.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.ko.sigma.core.bean.FileInfo;
-import org.ko.sigma.core.service.IFileService;
+import org.ko.sigma.rest.basic.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
@@ -17,12 +17,12 @@ import java.io.IOException;
 public class FileController {
 
     @Autowired
-    private IFileService IFileService;
+    private FileService fileService;
 
     @PostMapping
     @ApiOperation("上传文件")
     public FileInfo upload (MultipartFile file) throws IOException {
-        return IFileService.upload(file);
+        return fileService.upload(file);
     }
 
     @GetMapping("{id}")
@@ -30,7 +30,7 @@ public class FileController {
     public void download (@PathVariable String id,
                           @RequestParam(required = false) String name,
                           ServletWebRequest request) {
-        IFileService.download(id, name, request);
+        fileService.download(id, name, request);
     }
 
 }

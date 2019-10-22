@@ -1,4 +1,4 @@
-package org.ko.sigma.core.service.impl;
+package org.ko.sigma.rest.basic.service.impl;
 
 import com.aliyuncs.CommonRequest;
 import com.aliyuncs.CommonResponse;
@@ -8,9 +8,9 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.ko.sigma.core.exception.TransactionalException;
-import org.ko.sigma.core.service.ISMSService;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.JacksonHelper;
+import org.ko.sigma.rest.basic.service.SmsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +20,8 @@ import java.util.Map;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class AliyunSMSServiceImpl implements ISMSService {
+public class AliyunSMSServiceImpl implements SmsService {
 
-    //"cn-hangzhou"
     @Value("${aliyun.sms.region-id}")
     private String regionId;
 

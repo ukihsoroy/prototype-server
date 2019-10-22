@@ -1,10 +1,10 @@
-package org.ko.sigma.core.controller;
+package org.ko.sigma.rest.basic.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.ko.sigma.core.service.IMailService;
 import org.ko.sigma.core.support.Response;
+import org.ko.sigma.rest.basic.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import javax.validation.constraints.NotBlank;
 @RequestMapping("mail")
 public class MailController {
 
-    @Autowired private IMailService mailService;
+    @Autowired private MailService mailService;
 
     private static final String DEFAULT_MAIL_NAME = "register_mail";
 

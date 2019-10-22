@@ -1,24 +1,23 @@
-package org.ko.sigma.core.service.impl;
+package org.ko.sigma.rest.basic.service.impl;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.bean.FileInfo;
 import org.ko.sigma.core.exception.GeneralException;
 import org.ko.sigma.core.properties.FileProperties;
-import org.ko.sigma.core.service.IFileService;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.BASE64;
+import org.ko.sigma.rest.basic.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.Date;
 
-public class FastDFSFileService implements IFileService {
+public class FastDFSFileService implements FileService {
 
     @Autowired
     private FileProperties fileProperties;

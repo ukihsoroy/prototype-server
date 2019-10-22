@@ -25,6 +25,11 @@ public class DictConstants {
          * 字典名称
          */
         public static String DICT_NAME = "dict_name";
+
+        /**
+         * 数据状态：0-有效，1-删除
+         */
+        public static String DISABLE = "disable";
     }
 
 }

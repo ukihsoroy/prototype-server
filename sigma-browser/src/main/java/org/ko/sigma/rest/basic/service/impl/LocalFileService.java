@@ -1,13 +1,13 @@
-package org.ko.sigma.core.service.impl;
+package org.ko.sigma.rest.basic.service.impl;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.bean.FileInfo;
 import org.ko.sigma.core.exception.GeneralException;
 import org.ko.sigma.core.properties.FileProperties;
-import org.ko.sigma.core.service.IFileService;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.BASE64;
+import org.ko.sigma.rest.basic.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.io.*;
 import java.util.Date;
 
 @Service
-public class LocalFileService implements IFileService {
+public class LocalFileService implements FileService {
 
     @Autowired
     private FileProperties fileProperties;

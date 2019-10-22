@@ -9,39 +9,39 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * <p>字典表</p>
+ * <p>短信验证码日志表</p>
  * @author K.O
  */
 @Data
-@TableName("t_dict")
+@TableName("t_sms_log")
 @EqualsAndHashCode(callSuper = true)
-public class Dict extends BasicEntity {
+public class SmsLog extends BasicEntity {
 
     /**
-     * 主键
+     * 
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 字典类型
+     * 
      */
-    private String type;
+    private Long userId;
 
     /**
-     * 字典编码
+     * 
      */
-    private String dictCode;
+    private short type;
 
     /**
-     * 字典名称
+     * 
      */
-    private String dictName;
+    private String info;
 
     /**
-     * 数据状态：0-有效，1-删除
+     * 
      */
-    private short disable;
+    private String smsCode;
 
 
 }

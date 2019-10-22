@@ -1,10 +1,10 @@
-package org.ko.sigma.core.controller;
+package org.ko.sigma.rest.basic.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.ko.sigma.core.service.ISMSService;
 import org.ko.sigma.core.support.Response;
+import org.ko.sigma.rest.basic.service.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import javax.validation.constraints.NotBlank;
 public class SMSController {
 
     @Autowired
-    private ISMSService smsService;
+    private SmsService smsService;
 
     private static final String DEFAULT_TEMPLATE_CODE = "SMS_172007235";
 

@@ -1,7 +1,7 @@
-package org.ko.sigma.core.service.impl;
+package org.ko.sigma.rest.basic.service.impl;
 
 import freemarker.template.Template;
-import org.ko.sigma.core.service.IMailService;
+import org.ko.sigma.rest.basic.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class IMailServiceImpl implements IMailService {
+public class MailServiceImpl implements MailService {
 
     @Autowired
     private JavaMailSender mailSender;

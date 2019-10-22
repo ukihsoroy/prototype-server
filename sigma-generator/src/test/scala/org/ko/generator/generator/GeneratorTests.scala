@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner
 class GeneratorTests {
 
   val tables = List(
-    "t_user", "t_menu", "t_department", "t_department_user", "t_dict", "t_request_log", "t_role", "t_role_menu", "t_user_role"
+    "t_dict"
   )
 
   @Test
