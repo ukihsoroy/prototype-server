@@ -21,14 +21,12 @@ public class SMSController {
     @Autowired
     private SmsService smsService;
 
-    private static final String DEFAULT_TEMPLATE_CODE = "SMS_172007235";
-
     @PostMapping("code")
     @ApiOperation("发送手机短信验证码")
-    public Response sendCode(
-            @ApiParam("使用的模板名称") @RequestParam(required = false, defaultValue = DEFAULT_TEMPLATE_CODE) String name,
-            @ApiParam("手机号码") @NotBlank(message = "手机不能为空")  @RequestParam String mobile) {
-        smsService.sendCode(name, mobile);
+    public Response sendCode(@ApiParam("手机号码") @NotBlank(message = "手机不能为空")  @RequestParam String mobile,
+            @ApiParam(value = "使用的模板类型", allowableValues = "1.注册 2.登陆 3.找回密码") @RequestParam Short type
+            ) {
+        smsService.sendCode(mobile, type);
         return Response.of();
     }
 

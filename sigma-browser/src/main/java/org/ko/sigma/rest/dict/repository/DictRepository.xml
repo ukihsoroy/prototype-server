@@ -5,9 +5,10 @@
     <select id="queryList" resultType="org.ko.sigma.rest.dict.dto.DictDTO">
         SELECT
             d.id,
+            d.code,
+            d.value,
             d.type,
-            d.dict_code,
-            d.dict_name,
+            d.desc,
             d.disable
         FROM t_dict d
     </select>
@@ -16,16 +17,18 @@
         INSERT INTO t_dict d
           (
             d.id,
+            d.code,
+            d.value,
             d.type,
-            d.dict_code,
-            d.dict_name,
+            d.desc,
             d.disable
           )
         <foreach collection="dicts" item="dict" open="VALUES (" separator="), (" close=")">
             #{dict.id, jdbcType=BIGINT},
-            #{dict.type, jdbcType=VARCHAR},
-            #{dict.dictCode, jdbcType=VARCHAR},
-            #{dict.dictName, jdbcType=VARCHAR},
+            #{dict.code, jdbcType=VARCHAR},
+            #{dict.value, jdbcType=VARCHAR},
+            #{dict.type, jdbcType=SMALLINT},
+            #{dict.desc, jdbcType=VARCHAR},
             #{dict.disable, jdbcType=SMALLINT}
         </foreach>
     </insert>

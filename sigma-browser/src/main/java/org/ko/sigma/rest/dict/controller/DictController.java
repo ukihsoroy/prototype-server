@@ -19,21 +19,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "字典表接口")
+@Api(tags = "字典表，如果条件允许，可以放一部分进入缓存接口")
 @RestController
 @RequestMapping("dict")
 @Validated
 public class DictController {
 
     /**
-     * 字典表service
+     * 字典表，如果条件允许，可以放一部分进入缓存service
      */
     @Autowired private DictService dictService;
 
     @GetMapping
-    @ApiOperation("查询全部字典表")
-    public Response<List<DictDTO>> queryDictList(@ApiParam("字典表查询参数") @ModelAttribute QueryDictCondition condition) {
-        //1. 查询字典表列表数据
+    @ApiOperation("查询全部字典表，如果条件允许，可以放一部分进入缓存")
+    public Response<List<DictDTO>> queryDictList(@ApiParam("字典表，如果条件允许，可以放一部分进入缓存查询参数") @ModelAttribute QueryDictCondition condition) {
+        //1. 查询字典表，如果条件允许，可以放一部分进入缓存列表数据
         List<Dict> dicts = dictService.queryDictList(condition);
 
         //2. 如果不为空
@@ -45,31 +45,31 @@ public class DictController {
     }
 
     @GetMapping("{id:\\d+}")
-    @ApiOperation("通过ID查询字典表")
+    @ApiOperation("通过ID查询字典表，如果条件允许，可以放一部分进入缓存")
     public Response<DictDTO> queryDictInfo (@ApiParam("主键") @PathVariable Long id) {
         Dict dict = dictService.queryDictInfo(id);
         return new Response<>(map(dict));
     }
 
     @PostMapping
-    @ApiOperation("新增字典表")
+    @ApiOperation("新增字典表，如果条件允许，可以放一部分进入缓存")
     public Response<Long> createDict (
-            @ApiParam("字典表传输对象实体") @RequestBody DictDTO dictDTO) {
+            @ApiParam("字典表，如果条件允许，可以放一部分进入缓存传输对象实体") @RequestBody DictDTO dictDTO) {
         Long dictId = dictService.createDict(map(dictDTO));;
         return new Response<>(dictId);
     }
 
     @PutMapping("{id:\\d+}")
-    @ApiOperation("修改字典表")
+    @ApiOperation("修改字典表，如果条件允许，可以放一部分进入缓存")
     public Response<DictDTO> updateDict (
-            @ApiParam("字典表ID主键") @PathVariable Long id,
-            @ApiParam("字典表传输对象实体") @RequestBody DictDTO dictDTO) {
+            @ApiParam("字典表，如果条件允许，可以放一部分进入缓存ID主键") @PathVariable Long id,
+            @ApiParam("字典表，如果条件允许，可以放一部分进入缓存传输对象实体") @RequestBody DictDTO dictDTO) {
         Dict dict = dictService.updateDict(id, map(dictDTO));
         return new Response<>(map(dict));
     }
 
     @DeleteMapping("{id:\\d+}")
-    @ApiOperation("删除字典表")
+    @ApiOperation("删除字典表，如果条件允许，可以放一部分进入缓存")
     public Response<Long> deleteDict(@ApiParam("用户ID主键") @PathVariable Long id) {
         Long result = dictService.deleteDict(id);
         return new Response<>(result);

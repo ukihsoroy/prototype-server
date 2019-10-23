@@ -10,7 +10,6 @@ import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.${entityName};
 import ${rootPackage}.condition.Query${entityName}Condition;
 import ${rootPackage}.dto.${entityName}DTO;
-import ${rootPackage}.service.${entityName}MenuService;
 import ${rootPackage}.service.${entityName}Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;

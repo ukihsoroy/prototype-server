@@ -19,7 +19,7 @@ import java.util.List;
 public class DictServiceImpl extends ServiceImpl<DictRepository, Dict> implements DictService {
 
     /**
-     * 字典表数据库对象
+     * 字典表，如果条件允许，可以放一部分进入缓存数据库对象
      */
     @Autowired private DictRepository dictRepository;
 

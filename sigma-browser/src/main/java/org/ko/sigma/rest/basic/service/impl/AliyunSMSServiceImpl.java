@@ -51,11 +51,11 @@ public class AliyunSMSServiceImpl implements SmsService {
 
     /**
      * https://dysms.console.aliyun.com/dysms.htm?spm=a2c81.54da98d.aliyun_sidebar.159.1fbd1127we1TzO#/quickStart
-     * @param name
      * @param mobile
+     * @param type: 对应发送模板类型
      */
     @Override
-    public void sendCode(String name, String mobile) {
+    public void sendCode(String mobile, Short type) {
         DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
 
@@ -70,7 +70,7 @@ public class AliyunSMSServiceImpl implements SmsService {
         request.putQueryParameter(REGION_ID, regionId);
         request.putQueryParameter(PHONE_NUMBERS, mobile);
         request.putQueryParameter(SIGN_NAME, signName);
-        request.putQueryParameter(TEMPLATE_CODE, name);
+        request.putQueryParameter(TEMPLATE_CODE, "");
         request.putQueryParameter(TEMPLATE_PARAM, JacksonHelper.obj2String(params));
         try {
             CommonResponse response = client.getCommonResponse(request);

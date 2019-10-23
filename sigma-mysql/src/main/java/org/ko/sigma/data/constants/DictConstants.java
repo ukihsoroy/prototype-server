@@ -12,19 +12,24 @@ public class DictConstants {
         public static String ID = "id";
 
         /**
-         * 字典类型
+         * 编码
+         */
+        public static String CODE = "code";
+
+        /**
+         * 字典值
+         */
+        public static String VALUE = "value";
+
+        /**
+         * 类型
          */
         public static String TYPE = "type";
 
         /**
-         * 字典编码
+         * 描述
          */
-        public static String DICT_CODE = "dict_code";
-
-        /**
-         * 字典名称
-         */
-        public static String DICT_NAME = "dict_name";
+        public static String DESC = "desc";
 
         /**
          * 数据状态：0-有效，1-删除
