@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
-@Api(tags = "消息服务")
+@Api(tags = "消息发送")
 @RestController
 @RequestMapping("message")
 public class MessageController {

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Api(tags = "字典表，如果条件允许，可以放一部分进入缓存接口")
+@Api(tags = "字典表")
 @RestController
 @RequestMapping("dict")
 @Validated
@@ -32,7 +32,7 @@ public class DictController {
 
     @GetMapping
     @ApiOperation("查询全部字典表，如果条件允许，可以放一部分进入缓存")
-    public Response<List<DictDTO>> queryDictList(@ApiParam("字典表，如果条件允许，可以放一部分进入缓存查询参数") @ModelAttribute QueryDictCondition condition) {
+    public Response<List<DictDTO>> queryDictList(@ApiParam("字典表") @ModelAttribute QueryDictCondition condition) {
         //1. 查询字典表，如果条件允许，可以放一部分进入缓存列表数据
         List<Dict> dicts = dictService.queryDictList(condition);
 
