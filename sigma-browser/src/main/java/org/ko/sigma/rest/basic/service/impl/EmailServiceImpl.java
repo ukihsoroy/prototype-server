@@ -1,7 +1,7 @@
 package org.ko.sigma.rest.basic.service.impl;
 
 import freemarker.template.Template;
-import org.ko.sigma.rest.basic.service.MailService;
+import org.ko.sigma.rest.basic.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,9 +15,9 @@ import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Service("email")
 @Transactional(rollbackFor = Throwable.class)
-public class MailServiceImpl implements MailService {
+public class EmailServiceImpl implements MessageService {
 
     @Autowired
     private JavaMailSender mailSender;
@@ -28,24 +28,23 @@ public class MailServiceImpl implements MailService {
     @Value("${spring.mail.username}")
     private String from;
 
-    private static String suffix = ".ftl";
+    private static final String DEFAULT_MAIL_NAME = "register_mail";
 
     @Override
-    public void sendCode(String name, String mail) throws Exception {
-
+    public void send(String address, String messageType) throws Exception {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setFrom(from);
-        helper.setTo(mail);
+        helper.setTo(address);
         helper.setSubject("主题：模板邮件");
 
         Map<String, Object> model = new HashMap<>();
         model.put("code", "123456");
-        Template template = freeMarkerConfigurer.getConfiguration().getTemplate(name + suffix);
+        String suffix = ".ftl";
+        Template template = freeMarkerConfigurer.getConfiguration().getTemplate(DEFAULT_MAIL_NAME + suffix);
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
         helper.setText(text, true);
         mailSender.send(mimeMessage);
-
     }
 }

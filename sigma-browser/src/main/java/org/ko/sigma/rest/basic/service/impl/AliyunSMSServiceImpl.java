@@ -10,7 +10,7 @@ import com.aliyuncs.profile.DefaultProfile;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.JacksonHelper;
-import org.ko.sigma.rest.basic.service.SmsService;
+import org.ko.sigma.rest.basic.service.MessageService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Service("sms")
 @Transactional(rollbackFor = Throwable.class)
-public class AliyunSMSServiceImpl implements SmsService {
+public class AliyunSMSServiceImpl implements MessageService {
 
     @Value("${aliyun.sms.region-id}")
     private String regionId;
@@ -51,11 +51,11 @@ public class AliyunSMSServiceImpl implements SmsService {
 
     /**
      * https://dysms.console.aliyun.com/dysms.htm?spm=a2c81.54da98d.aliyun_sidebar.159.1fbd1127we1TzO#/quickStart
-     * @param mobile
-     * @param type: 对应发送模板类型
+     * @param address 手机号
+     * @param messageType: 对应发送模板类型
      */
     @Override
-    public void sendCode(String mobile, Short type) {
+    public void send(String address, String messageType) {
         DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
 
@@ -68,9 +68,9 @@ public class AliyunSMSServiceImpl implements SmsService {
         request.setAction(ACTION);
         request.setVersion(VERSION);
         request.putQueryParameter(REGION_ID, regionId);
-        request.putQueryParameter(PHONE_NUMBERS, mobile);
+        request.putQueryParameter(PHONE_NUMBERS, address);
         request.putQueryParameter(SIGN_NAME, signName);
-        request.putQueryParameter(TEMPLATE_CODE, "");
+        request.putQueryParameter(TEMPLATE_CODE, "SMS_172007235");
         request.putQueryParameter(TEMPLATE_PARAM, JacksonHelper.obj2String(params));
         try {
             CommonResponse response = client.getCommonResponse(request);
@@ -82,5 +82,4 @@ public class AliyunSMSServiceImpl implements SmsService {
             e.printStackTrace();
         }
     }
-
 }
