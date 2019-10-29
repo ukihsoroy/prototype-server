@@ -27,8 +27,8 @@
 
 ## 0x03.开发人员
 
-1. [K.O](https://github.com/sigmako)
-2. [Xiao-Cuir](https://github.com/ccj)
+1. [K.O](https://github.com/sigmaol)
+2. [CuiChaoJin](https://github.com/ccj)
 
 ## 0x04.更新日志
 
