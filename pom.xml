@@ -21,6 +21,7 @@
         <module>sigma-app</module>
         <module>sigma-mysql</module>
         <module>sigma-generator</module>
+        <module>sigma-mongo</module>
     </modules>
 
     <properties>

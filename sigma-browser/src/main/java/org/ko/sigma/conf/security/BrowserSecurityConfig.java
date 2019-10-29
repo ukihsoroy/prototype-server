@@ -88,7 +88,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http
                 .apply(springSocialConfigurer) //往过滤器链添加过滤器
                 .and()

@@ -2,13 +2,13 @@
 
 ## 0x01.简介
 
-> quick-sigma-server是j2ee快启动框架，包含后台管理系统以及业务服务器的通用功能抽象。
+> quick-sigma-server是j2ee快启动框架，集成通用业务抽象和可插拔技术组件中间件，可以作为商业项目或毕业设计快速启动模板。
 
 ## 0x02.技术选型
 
 ### - FrontEnd
 
-1. Vue-Element
+1. `sigma-browser-ui`: [浏览器端管理后台代码](https://github.com/sigmaol/sigma-browser-ui)
 
 ### - BackEnd
 
@@ -16,12 +16,26 @@
 2. Spring Security
 3. Mybatis Plus
 
+## 0x03.项目结构介绍
+
+- `sigma-app`: 移动端后台
+- `sigma-browser`: 浏览器端后台
+- `sigma-core`: 框架核心依赖代码
+- `sigma-generator`: 代码生成工具，包含前后台代码生成。
+- `sigma-mysql`: mysql数据库依赖，**app**与**browser**公用。
+- `sigma-mongo`: mongo数据库依赖，**app**与**browser**公用。
+
 ## 0x03.开发人员
 
 1. [K.O](https://github.com/sigmako)
-2. [Xiao-Cuir](https://github.com/Xiao-Cuir)
+2. [Xiao-Cuir](https://github.com/ccj)
 
 ## 0x04.更新日志
+
+### - 2019-10-29
+
+1.抽取前端项目，创建了一个新的github仓库：[https://github.com/sigmaol/sigma-browser-ui](https://github.com/sigmaol/sigma-browser-ui)。
+2.添加mongodb访问，调整项目文档。
 
 ### - 2019-09-20
 
