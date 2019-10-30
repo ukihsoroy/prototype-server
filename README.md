@@ -32,6 +32,10 @@
 
 ## 0x04.更新日志
 
+### - 2019-10-30
+
+1.添加短信登陆
+
 ### - 2019-10-29
 
 1.抽取前端项目，创建了一个新的github仓库：[https://github.com/sigmaol/sigma-browser-ui](https://github.com/sigmaol/sigma-browser-ui)。

@@ -27,10 +27,6 @@ management:
     redis:
       enabled: false # 禁用Redis健康检查
 
-
-# 关闭security默认
-security.basic.enabled: false
-
 # mybatis 配置
 mybatis-plus:
   mapper-locations: classpath:org/ko/segma/rest/**/repository/*.xml  #mapper xml扫描
@@ -50,8 +46,8 @@ sigma:
 aliyun:
   sms:
     region-id: cn-hangzhou
-    access-key-id:
-    access-secret:
+    access-key-id: LTAI5QC0m4Utt7i9
+    access-secret: YDdpvQoZfqsStQAfX6O8mqGlYmHEDF
     sign-name: sigma
 
 

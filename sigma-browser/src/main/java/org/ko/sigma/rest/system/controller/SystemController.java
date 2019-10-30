@@ -50,6 +50,14 @@ public class SystemController {
         return Response.of(true);
     }
 
+    @PostMapping("/authentication/mobile")
+    @ApiOperation("手机号码登陆")
+    public Response mobileLogin(
+            @ApiParam("手机号") @RequestParam String mobile,
+            @ApiParam("验证码") @RequestParam String smsCode) {
+        return Response.of(true);
+    }
+
     @GetMapping("logout")
     @ApiOperation("登出系统")
     public Response<Long> logout () {

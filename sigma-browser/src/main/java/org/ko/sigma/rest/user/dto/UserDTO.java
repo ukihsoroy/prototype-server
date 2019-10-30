@@ -50,5 +50,10 @@ public class UserDTO extends User implements UserDetails {
         return super.getPassword();
     }
 
+    @Override
+    public String getUsername() {
+        return null;
+    }
+
 
 }
