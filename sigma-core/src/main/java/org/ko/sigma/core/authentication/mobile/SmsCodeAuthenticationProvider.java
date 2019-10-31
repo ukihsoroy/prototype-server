@@ -1,5 +1,6 @@
 package org.ko.sigma.core.authentication.mobile;
 
+import org.ko.sigma.core.authentication.SigmaUserDetailsService;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.Authentication;
@@ -25,8 +26,11 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         SmsCodeAuthenticationToken authenticationToken = (SmsCodeAuthenticationToken) authentication;
 
+        //强转成我们自己的userDetailsService
+        SigmaUserDetailsService sigmaUserDetailsService = (SigmaUserDetailsService) userDetailsService;
+
         //通过用户名获取用户信息，这里默认用户名是手机号，要调整一下
-        UserDetails user = userDetailsService.loadUserByUsername((String) authenticationToken.getPrincipal());
+        UserDetails user = sigmaUserDetailsService.loadUserByMobile((String) authenticationToken.getPrincipal());
 
         //如果用户为空，抛出异常
         if (user == null) {

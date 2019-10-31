@@ -25,6 +25,10 @@
         <result column="gmt_modified" property="gmtModified" jdbcType="TIMESTAMP"/>
     </resultMap>
 
+    <sql id="basicColumn">
+        id, username, password, nickname, birthday, gender, mobile, email, wechat, weibo, qq, signature, balance, version
+    </sql>
+
     <select id="queryUserList" resultType="org.ko.sigma.rest.user.dto.UserDTO">
         SELECT
             u.id,
@@ -74,6 +78,14 @@
 
 
     <select id="loadUserByUsername" resultMap="ResultMapWithRoles" parameterType="string">
-        SELECT * FROM t_user t WHERE t.username = #{username} AND t.disable = 0;
+        SELECT 
+        <include refid="basicColumn"></include>
+        FROM t_user t WHERE t.username = #{username} AND t.disable = 0;
+    </select>
+
+    <select id="loadUserByMobile" resultMap="ResultMapWithRoles" parameterType="string">
+        SELECT
+        <include refid="basicColumn"></include>
+        FROM t_user t WHERE t.mobile = #{mobile} AND t.disable = 0;
     </select>
 </mapper>

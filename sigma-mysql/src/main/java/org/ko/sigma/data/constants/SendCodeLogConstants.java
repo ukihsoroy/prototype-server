@@ -2,7 +2,7 @@ package org.ko.sigma.data.constants;
 
 import org.ko.sigma.data.bean.BasicColumnConstants;
 
-public class SmsLogConstants {
+public class SendCodeLogConstants {
 
     public static class Columns extends BasicColumnConstants {
 
@@ -12,19 +12,24 @@ public class SmsLogConstants {
         public static String ID = "id";
 
         /**
-         * 用户ID
+         * 接收方
          */
-        public static String USER_ID = "user_id";
+        public static String RECEIVE_ADDRESS = "receive_address";
 
         /**
-         * 发送短信类型
+         * 发送消息类型
          */
-        public static String TYPE = "type";
+        public static String SEND_TYPE = "send_type";
 
         /**
-         * 短信验证码
+         * 消息类型
          */
-        public static String SMS_CODE = "sms_code";
+        public static String MESSAGE_TYPE = "message_type";
+
+        /**
+         * 消息代码
+         */
+        public static String MESSAGE_CODE = "message_code";
 
         /**
          * 失效时间，单位秒

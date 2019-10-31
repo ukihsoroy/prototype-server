@@ -73,6 +73,17 @@ public class SystemServiceImpl implements SystemService {
         throw new UsernameNotFoundException("用户不存在");
     }
 
+    @Override
+    public UserDetails loadUserByMobile(String mobile) throws UsernameNotFoundException {
+        UserDTO userDTO = userRepository.loadUserByMobile(mobile);
+        if (userDTO != null) {
+            List<String> roles = userDTO.getRoleDTOS().stream().map(Role::getCode).collect(Collectors.toList());
+            userDTO.setRoles(roles);
+            return userDTO;
+        }
+        throw new UsernameNotFoundException("用户不存在");
+    }
+
 
     @Override
     public SocialUserDetails loadUserByUserId(String username) throws UsernameNotFoundException {

@@ -7,7 +7,7 @@ import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.${entityName};
 import ${rootPackage}.condition.Query${entityName}Condition;
 import ${rootPackage}.repository.${entityName}Repository;
-import org.ko.sigma.rest.${entityName?uncap_first}.service.${entityName}Service;
+import ${rootPackage}.service.${entityName}Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -9,8 +9,15 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.util.GeneratorCodeUtils;
 import org.ko.sigma.core.util.JacksonHelper;
-import org.ko.sigma.rest.basic.service.MessageService;
+import org.ko.sigma.data.entity.Dict;
+import org.ko.sigma.data.entity.SendCodeLog;
+import org.ko.sigma.rest.basic.service.IdentifyingCodeService;
+import org.ko.sigma.rest.dict.service.DictService;
+import org.ko.sigma.rest.log.repository.SendCodeLogRepository;
+import org.ko.sigma.rest.log.service.SendCodeLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,19 +27,30 @@ import java.util.Map;
 
 @Service("sms")
 @Transactional(rollbackFor = Throwable.class)
-public class AliyunSMSServiceImpl implements MessageService {
+public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeService {
 
-    @Value("${aliyun.sms.region-id}")
+    @Value("${sms.aliyun.regionId}")
     private String regionId;
 
-    @Value("${aliyun.sms.access-key-id}")
+    @Value("${sms.aliyun.accessKeyId}")
     private String accessKeyId;
 
-    @Value("${aliyun.sms.access-secret}")
+    @Value("${sms.aliyun.accessSecret}")
     private String accessSecret;
 
-    @Value("${aliyun.sms.sign-name}")
+    @Value("${sms.aliyun.signName}")
     private String signName;
+
+    @Value("${sms.dictKey}")
+    private String smsDictKey;
+
+    private static final String SEND_TYPE = "sms";
+
+    @Autowired
+    private DictService dictService;
+
+    @Autowired
+    private SendCodeLogService sendCodeLogService;
 
     private static final String DOMAIN_ADDRESS = "dysmsapi.aliyuncs.com";
 
@@ -59,8 +77,12 @@ public class AliyunSMSServiceImpl implements MessageService {
         DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
 
+        Dict dict = dictService.findDictByCodeAndType(smsDictKey, messageType);
+
+        String code = GeneratorCodeUtils.numberCode();
+
         Map<String, String> params = new HashMap<>();
-        params.put(CODE, "123456");
+        params.put(CODE, code);
 
         CommonRequest request = new CommonRequest();
         request.setMethod(MethodType.POST);
@@ -70,7 +92,7 @@ public class AliyunSMSServiceImpl implements MessageService {
         request.putQueryParameter(REGION_ID, regionId);
         request.putQueryParameter(PHONE_NUMBERS, address);
         request.putQueryParameter(SIGN_NAME, signName);
-        request.putQueryParameter(TEMPLATE_CODE, "SMS_172007235");
+        request.putQueryParameter(TEMPLATE_CODE, dict.getValue());
         request.putQueryParameter(TEMPLATE_PARAM, JacksonHelper.obj2String(params));
         try {
             CommonResponse response = client.getCommonResponse(request);
@@ -78,6 +100,13 @@ public class AliyunSMSServiceImpl implements MessageService {
             if (aliyunSmsResponse == null || !OK.equalsIgnoreCase(aliyunSmsResponse.get("Code"))) {
                 throw new TransactionalException(SystemCode.SEND_ERROR);
             }
+            SendCodeLog sendCodeLog = new SendCodeLog();
+            sendCodeLog.setReceiveAddress(address);
+            sendCodeLog.setSendType(SEND_TYPE);
+            sendCodeLog.setMessageCode(code);
+            sendCodeLog.setMessageType(messageType);
+            sendCodeLog.setExpireIn(180L);
+            sendCodeLogService.createSendCodeLog(sendCodeLog);
         } catch (ClientException e) {
             e.printStackTrace();
         }

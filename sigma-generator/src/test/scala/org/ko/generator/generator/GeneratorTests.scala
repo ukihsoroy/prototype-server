@@ -14,7 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner
 class GeneratorTests {
 
   val tables = List(
-    "t_dict"
+    "t_send_code_log"
   )
 
   @Test

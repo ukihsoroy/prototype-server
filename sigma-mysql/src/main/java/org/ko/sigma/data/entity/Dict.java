@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * <p>字典表，如果条件允许，可以放一部分进入缓存</p>
+ * <p>字典表</p>
  * @author K.O
  */
 @Data
@@ -24,29 +24,23 @@ public class Dict extends BasicEntity {
     private Long id;
 
     /**
-     * 编码
+     * 字典编码
      */
     private String code;
 
     /**
-     * 字典值
+     * 字典名称
      */
     private String value;
 
     /**
-     * 类型
+     * 字典类型
      */
-    private short type;
+    private String type;
 
     /**
      * 描述
      */
-    private String desc;
-
-    /**
-     * 数据状态：0-有效，1-删除
-     */
-    private short disable;
-
+    private String description;
 
 }

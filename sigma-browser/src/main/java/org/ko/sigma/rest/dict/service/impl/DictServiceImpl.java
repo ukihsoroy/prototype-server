@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.data.constants.DictConstants;
 import org.ko.sigma.data.entity.Dict;
 import org.ko.sigma.rest.dict.condition.QueryDictCondition;
 import org.ko.sigma.rest.dict.repository.DictRepository;
@@ -19,7 +20,7 @@ import java.util.List;
 public class DictServiceImpl extends ServiceImpl<DictRepository, Dict> implements DictService {
 
     /**
-     * 字典表，如果条件允许，可以放一部分进入缓存数据库对象
+     * 字典表数据库对象
      */
     @Autowired private DictRepository dictRepository;
 
@@ -58,5 +59,17 @@ public class DictServiceImpl extends ServiceImpl<DictRepository, Dict> implement
         return id;
     }
 
+    @Override
+    public Dict findDictByCodeAndType(String code, String type) {
+        return dictRepository.selectOne(new QueryWrapper<Dict>()
+                .eq(DictConstants.Columns.CODE, code)
+                .eq(DictConstants.Columns.TYPE, type));
+    }
+
+    @Override
+    public List<Dict> findDictByCode(String code) {
+        return dictRepository.selectList(new QueryWrapper<Dict>()
+                .eq(DictConstants.Columns.CODE, code));
+    }
 
 }

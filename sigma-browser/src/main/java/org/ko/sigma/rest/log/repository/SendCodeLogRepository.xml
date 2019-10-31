@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.ko.sigma.rest.log.repository.SendCodeLogRepository">
+
+    <select id="queryList" resultType="org.ko.sigma.rest.log.dto.SendCodeLogDTO">
+        SELECT
+            scl.id,
+            scl.receive_address,
+            scl.send_type,
+            scl.message_type,
+            scl.message_code,
+            scl.expire_in,
+            scl.disable
+        FROM t_send_code_log scl
+    </select>
+
+    <insert id="insertList">
+        INSERT INTO t_send_code_log scl
+          (
+            scl.id,
+            scl.receive_address,
+            scl.send_type,
+            scl.message_type,
+            scl.message_code,
+            scl.expire_in,
+            scl.disable
+          )
+        <foreach collection="sendCodeLogs" item="sendCodeLog" open="VALUES (" separator="), (" close=")">
+            #{sendCodeLog.id, jdbcType=BIGINT},
+            #{sendCodeLog.receiveAddress, jdbcType=VARCHAR},
+            #{sendCodeLog.sendType, jdbcType=VARCHAR},
+            #{sendCodeLog.messageType, jdbcType=VARCHAR},
+            #{sendCodeLog.messageCode, jdbcType=VARCHAR},
+            #{sendCodeLog.expireIn, jdbcType=BIGINT},
+            #{sendCodeLog.disable, jdbcType=SMALLINT}
+        </foreach>
+    </insert>
+</mapper>

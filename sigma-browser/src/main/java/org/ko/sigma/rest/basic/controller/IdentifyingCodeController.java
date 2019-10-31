@@ -4,26 +4,25 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
-import org.ko.sigma.rest.basic.service.MessageService;
+import org.ko.sigma.rest.basic.service.IdentifyingCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
-@Api(tags = "消息发送")
+@Api(tags = "发送验证码接口")
 @RestController
-@RequestMapping("message")
-public class MessageController {
+@RequestMapping("code")
+public class IdentifyingCodeController {
 
     /**
      * 注入具体实现
      */
     @Autowired
-    private Map<String, MessageService> instances;
+    private Map<String, IdentifyingCodeService> instances;
 
-    @PostMapping("/{sendType}/send/{messageType}")
+    @PostMapping("/{sendType}/{messageType}")
     @ApiOperation("发送消息")
     public Response send(
             @ApiParam("发送类型") @PathVariable String sendType,

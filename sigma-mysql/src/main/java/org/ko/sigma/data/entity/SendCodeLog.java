@@ -9,39 +9,49 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
- * <p>短信验证码日志表</p>
+ * <p>验证码日志</p>
  * @author K.O
  */
 @Data
-@TableName("t_sms_log")
+@TableName("t_send_code_log")
 @EqualsAndHashCode(callSuper = true)
-public class SmsLog extends BasicEntity {
+public class SendCodeLog extends BasicEntity {
 
     /**
-     * 
+     * 主键ID
      */
     @TableId(type = IdType.AUTO)
     private Long id;
 
     /**
-     * 
+     * 接收方
      */
-    private Long userId;
+    private String receiveAddress;
 
     /**
-     * 
+     * 发送消息类型
      */
-    private short type;
+    private String sendType;
 
     /**
-     * 
+     * 消息类型
      */
-    private String info;
+    private String messageType;
 
     /**
-     * 
+     * 消息代码
      */
-    private String smsCode;
+    private String messageCode;
+
+    /**
+     * 失效时间，单位秒
+     */
+    private Long expireIn;
+
+    /**
+     * 逻辑删除状态
+     */
+    private short disable;
 
 
 }

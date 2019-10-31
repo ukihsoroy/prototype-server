@@ -8,7 +8,7 @@
             d.code,
             d.value,
             d.type,
-            d.desc,
+            d.description,
             d.disable
         FROM t_dict d
     </select>
@@ -20,15 +20,15 @@
             d.code,
             d.value,
             d.type,
-            d.desc,
+            d.description,
             d.disable
           )
         <foreach collection="dicts" item="dict" open="VALUES (" separator="), (" close=")">
             #{dict.id, jdbcType=BIGINT},
             #{dict.code, jdbcType=VARCHAR},
             #{dict.value, jdbcType=VARCHAR},
-            #{dict.type, jdbcType=SMALLINT},
-            #{dict.desc, jdbcType=VARCHAR},
+            #{dict.type, jdbcType=VARCHAR},
+            #{dict.description, jdbcType=VARCHAR},
             #{dict.disable, jdbcType=SMALLINT}
         </foreach>
     </insert>
