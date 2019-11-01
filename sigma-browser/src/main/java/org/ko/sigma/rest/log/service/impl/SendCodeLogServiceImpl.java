@@ -2,6 +2,7 @@ package org.ko.sigma.rest.log.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.ko.sigma.core.authentication.mobile.ISmsCodeService;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.SendCodeLog;
@@ -16,7 +17,8 @@ import java.util.List;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
-public class SendCodeLogServiceImpl extends ServiceImpl<SendCodeLogRepository, SendCodeLog> implements SendCodeLogService {
+public class SendCodeLogServiceImpl extends ServiceImpl<SendCodeLogRepository, SendCodeLog>
+        implements SendCodeLogService, ISmsCodeService {
 
     /**
      * 验证码日志数据库对象
@@ -64,4 +66,8 @@ public class SendCodeLogServiceImpl extends ServiceImpl<SendCodeLogRepository, S
     }
 
 
+    @Override
+    public String findSmsCode(String mobile) {
+        return findCodeByType("sms", "login", mobile);
+    }
 }

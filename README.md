@@ -32,19 +32,25 @@
 
 ## 0x04.更新日志
 
+### - 2019-11-01
+
+1. 短信登录注册，以及短信验证
+2. 新增验证码记录表
+3. sms功能开发完成
+
 ### - 2019-10-30
 
-1.添加短信登陆
+1. 注册用户，验证发送
 
 ### - 2019-10-29
 
-1.抽取前端项目，创建了一个新的github仓库：[https://github.com/sigmaol/sigma-browser-ui](https://github.com/sigmaol/sigma-browser-ui)。
-2.添加mongodb访问，调整项目文档。
+1. 抽取前端项目，创建了一个新的github仓库：[https://github.com/sigmaol/sigma-browser-ui](https://github.com/sigmaol/sigma-browser-ui)。
+2. 添加mongodb访问，调整项目文档。
 
 ### - 2019-09-20
 
-1.修改权限下新增菜单报错异常
-2.调整权限和菜单关联关系
+1. 修改权限下新增菜单报错异常
+2. 调整权限和菜单关联关系
 
 ### - 2019-08-17
 

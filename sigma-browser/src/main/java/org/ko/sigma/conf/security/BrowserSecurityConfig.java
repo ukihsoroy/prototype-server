@@ -4,6 +4,7 @@ import org.ko.sigma.conf.security.handler.AuthenticationFailureHandlerImpl;
 import org.ko.sigma.conf.security.handler.AuthenticationSuccessHandlerImpl;
 import org.ko.sigma.conf.security.handler.LogoutSuccessHandlerImpl;
 import org.ko.sigma.conf.security.session.ExpiredSessionStrategyImpl;
+import org.ko.sigma.core.authentication.mobile.ISmsCodeService;
 import org.ko.sigma.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import org.ko.sigma.core.authentication.mobile.SmsCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
+    @Autowired private ISmsCodeService smsCodeService;
+
     private String[] permitAll = new String[]{
             //swagger requests
             "/**/swagger-ui.html",
@@ -98,12 +101,13 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
         SmsCodeFilter smsCodeFilter = new SmsCodeFilter();
         smsCodeFilter.setAuthenticationFailureHandler(authenticationFailureHandlerImpl);
 //        smsCodeFilter.setSecurityProperties();
+        smsCodeFilter.setSmsCodeService(smsCodeService);
         smsCodeFilter.afterPropertiesSet();
 
         http.addFilterAfter(smsCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin() //表单登录
                     .loginPage("/authentication/require")
-                    .loginProcessingUrl("/login")//用usernamePasswordFilter来处理请求
+                    .loginProcessingUrl("/login") //用usernamePasswordFilter来处理请求
                     .successHandler(authenticationSuccessHandlerImpl)
                     .failureHandler(authenticationFailureHandlerImpl)
                     .and()

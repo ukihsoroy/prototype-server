@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -36,6 +37,8 @@ public class SmsCodeFilter extends OncePerRequestFilter implements InitializingB
     private Set<String> urls = new HashSet<>();
 
     private SecurityProperties securityProperties;
+
+    private ISmsCodeService smsCodeService;
 
     private AntPathMatcher pathMatcher = new AntPathMatcher();
 
@@ -81,10 +84,9 @@ public class SmsCodeFilter extends OncePerRequestFilter implements InitializingB
 
     private void validate(ServletWebRequest request) throws ServletRequestBindingException {
 
-        // 查询数据库获取短信验证码的发送数据
-//        ImageCode codeInSession = (ImageCode) sessionStrategy.getAttribute(request,
-//                ValidateCodeProcessor.SESSION_KEY_PREFIX+"IMAGE");
-        String dbSmsCode = "123456";
+        //查询短信验证码
+        String codeInDatabase = smsCodeService
+                .findSmsCode(ServletRequestUtils.getStringParameter(request.getRequest(), "mobile"));
 
         //获取请求的手机验证码
         String codeInRequest = ServletRequestUtils.getStringParameter(request.getRequest(), "smsCode");
@@ -93,16 +95,16 @@ public class SmsCodeFilter extends OncePerRequestFilter implements InitializingB
             throw new SigmaAuthenticationException("验证码不能为空");
         }
 
-//        if (Objects.isNull(codeInSession)) {
-//            throw new SigmaAuthenticationException("验证码不存在");
-//        }
+        if (Objects.isNull(codeInDatabase)) {
+            throw new SigmaAuthenticationException("验证码不存在");
+        }
 
 //        if (codeInSession.isExpired()) {
 //            sessionStrategy.removeAttribute(request, ValidateCodeController.SESSION_KEY);
 //            throw new SigmaAuthenticationException("验证码已过期");
 //        }
 
-        if (!StringUtils.equals(dbSmsCode, codeInRequest)) {
+        if (!StringUtils.equals(codeInDatabase, codeInRequest)) {
             throw new SigmaAuthenticationException("验证码不匹配");
         }
 
@@ -126,5 +128,9 @@ public class SmsCodeFilter extends OncePerRequestFilter implements InitializingB
 
     public void setSecurityProperties(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
+    }
+
+    public void setSmsCodeService(ISmsCodeService smsCodeService) {
+        this.smsCodeService = smsCodeService;
     }
 }
