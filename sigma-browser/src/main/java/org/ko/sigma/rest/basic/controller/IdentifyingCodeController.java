@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
 
-@Api(tags = "发送验证码接口")
+@Api(tags = "验证码接口")
 @RestController
 @RequestMapping("code")
 public class IdentifyingCodeController {
@@ -22,15 +22,28 @@ public class IdentifyingCodeController {
     @Autowired
     private Map<String, IdentifyingCodeService> instances;
 
-    @PostMapping("/{sendType}/{messageType}")
+    @GetMapping("/{sendType}/{messageType}")
     @ApiOperation("发送消息")
-    public Response send(
+    public Response sendCode(
             @ApiParam("发送类型") @PathVariable String sendType,
             @ApiParam("使用的模板类型") @PathVariable String messageType,
             @ApiParam("接收方") @NotBlank(message = "接收方不能为空") @RequestParam String address)
             throws Exception {
 
-        instances.get(sendType).send(address, messageType);
+        instances.get(sendType).sendCode(address, messageType);
+        return Response.of();
+    }
+
+    @PostMapping("/{sendType}/{messageType}")
+    @ApiOperation("发送消息")
+    public Response checkCode(
+            @ApiParam("发送类型") @PathVariable String sendType,
+            @ApiParam("使用的模板类型") @PathVariable String messageType,
+            @ApiParam("接收方") @NotBlank(message = "接收方不能为空") @RequestParam String address,
+            @ApiParam("验证码") @NotBlank(message = "验证码不能为空") @RequestParam String code)
+            throws Exception {
+
+        instances.get(sendType).checkCode(address, messageType, code);
         return Response.of();
     }
 }

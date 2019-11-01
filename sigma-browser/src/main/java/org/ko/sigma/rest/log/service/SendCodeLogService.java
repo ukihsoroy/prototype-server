@@ -1,6 +1,7 @@
 package org.ko.sigma.rest.log.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.apache.ibatis.annotations.Param;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.ko.sigma.rest.log.condition.QuerySendCodeLogCondition;
 
@@ -45,5 +46,17 @@ public interface SendCodeLogService extends IService<SendCodeLog> {
      * @return
      */
     Long deleteSendCodeLog(Long id);
+
+    /**
+     * 通过发送类型，消息类型，接收方 获取验证码
+     * @param sendType
+     * @param messageType
+     * @param address
+     * @return
+     */
+    String findCodeByType(
+            @Param("sendType") String sendType,
+            @Param("messageType") String messageType,
+            @Param("address") String address);
 
 }

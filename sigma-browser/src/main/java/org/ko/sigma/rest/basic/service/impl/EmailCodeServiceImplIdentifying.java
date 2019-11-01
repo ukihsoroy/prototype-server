@@ -1,7 +1,11 @@
 package org.ko.sigma.rest.basic.service.impl;
 
 import freemarker.template.Template;
+import org.apache.commons.lang3.StringUtils;
+import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.rest.basic.service.IdentifyingCodeService;
+import org.ko.sigma.rest.dict.service.DictService;
+import org.ko.sigma.rest.log.service.SendCodeLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -28,10 +32,18 @@ public class EmailCodeServiceImplIdentifying implements IdentifyingCodeService {
     @Value("${spring.mail.username}")
     private String from;
 
+    @Autowired
+    private DictService dictService;
+
+    @Autowired
+    private SendCodeLogService sendCodeLogService;
+
     private static final String DEFAULT_MAIL_NAME = "register_mail";
 
+    private static final String SEND_TYPE = "email";
+
     @Override
-    public void send(String address, String messageType) throws Exception {
+    public void sendCode(String address, String messageType) throws Exception {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
@@ -46,5 +58,14 @@ public class EmailCodeServiceImplIdentifying implements IdentifyingCodeService {
         String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
         helper.setText(text, true);
         mailSender.send(mimeMessage);
+    }
+
+    @Override
+    public void checkCode(String address, String messageType, String code) throws Exception {
+        String logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
+
+        if (StringUtils.isEmpty(logCode) || !code.equalsIgnoreCase(logCode)) {
+            throw new TransactionalException("验证码不正确");
+        }
     }
 }

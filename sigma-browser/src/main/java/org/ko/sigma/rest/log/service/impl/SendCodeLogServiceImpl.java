@@ -58,5 +58,10 @@ public class SendCodeLogServiceImpl extends ServiceImpl<SendCodeLogRepository, S
         return id;
     }
 
+    @Override
+    public String findCodeByType(String sendType, String messageType, String address) {
+        return sendCodeLogRepository.findCodeByType(sendType, messageType, address);
+    }
+
 
 }

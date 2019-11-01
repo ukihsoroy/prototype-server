@@ -7,6 +7,7 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.exception.TransactionalException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.GeneratorCodeUtils;
@@ -73,7 +74,7 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
      * @param messageType: 对应发送模板类型
      */
     @Override
-    public void send(String address, String messageType) {
+    public void sendCode(String address, String messageType) {
         DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
         IAcsClient client = new DefaultAcsClient(profile);
 
@@ -109,6 +110,15 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
             sendCodeLogService.createSendCodeLog(sendCodeLog);
         } catch (ClientException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void checkCode(String address, String messageType, String code) throws Exception {
+        String logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
+
+        if (StringUtils.isEmpty(logCode) || !code.equalsIgnoreCase(logCode)) {
+            throw new TransactionalException("验证码不正确");
         }
     }
 }

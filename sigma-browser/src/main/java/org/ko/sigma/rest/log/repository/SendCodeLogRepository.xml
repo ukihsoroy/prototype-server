@@ -35,4 +35,15 @@
             #{sendCodeLog.disable, jdbcType=SMALLINT}
         </foreach>
     </insert>
+
+    <select id="findCodeByType" resultType="string">
+        SELECT
+            scl.message_code
+        FROM t_send_code_log scl
+        WHERE scl.send_type = #{sendType}
+            AND scl.message_type = #{messageType}
+            AND scl.receive_address = #{address}
+            AND  DATE_ADD(scl.gmt_create, INTERVAL scl.expire_in SECOND) > NOW()
+            LIMIT 1
+    </select>
 </mapper>

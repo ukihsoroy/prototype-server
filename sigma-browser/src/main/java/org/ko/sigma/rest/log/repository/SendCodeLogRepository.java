@@ -1,6 +1,7 @@
 package org.ko.sigma.rest.log.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.springframework.stereotype.Repository;
 import org.ko.sigma.rest.log.dto.SendCodeLogDTO;
@@ -15,5 +16,10 @@ public interface SendCodeLogRepository extends BaseMapper<SendCodeLog> {
     List<SendCodeLogDTO> queryList(QuerySendCodeLogCondition condition);
 
     int insertList (List<SendCodeLog> sendCodeLogs);
+
+    String findCodeByType(
+            @Param("sendType") String sendType,
+            @Param("messageType") String messageType,
+            @Param("address") String address);
 
 }
