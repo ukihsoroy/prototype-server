@@ -67,6 +67,9 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             "/**/v2/api-docs",
             "/**/configuration/ui",
             "/**/configuration/security",
+            "/**/*.html",
+            "/**/*.css",
+            "/**/*.js",
 
             //不需要验证的
             "/authentication/*",
