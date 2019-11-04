@@ -32,6 +32,15 @@
                     select="queryMenuByParentId"/>
     </resultMap>
 
+    <resultMap id="ResultMapReformatMeta"
+               type="org.ko.sigma.rest.menu.dto.MenuDTO"
+               extends="BaseMenuResultMap">
+        <association property="meta" javaType="org.ko.sigma.data.json.MenuMeta">
+            <result column="meta_title" property="title" jdbcType="VARCHAR"/>
+            <result column="meta_icon" property="icon" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
     <select id="queryMenuList" resultMap="ResultMapWithChildMenu">
         SELECT
             id,
@@ -75,7 +84,7 @@
         WHERE `disable` = 0 AND parent_id = #{parentId}
     </select>
 
-    <select id="queryMenuByRoleCode" resultType="org.ko.sigma.rest.menu.dto.MenuDTO" parameterType="java.lang.String">
+    <select id="queryMenuByRoleCode" resultMap="ResultMapReformatMeta" parameterType="java.lang.String">
         SELECT
             m.id,
             m.name,
