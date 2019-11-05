@@ -80,12 +80,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             "/valid/**"
     };
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        //使用security默认的加密规则
-        return new BCryptPasswordEncoder();
-    }
-
     /**
      * Spring security manager
      * 升级boot2.0后容器中没有，自己添加注入
