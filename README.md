@@ -32,6 +32,12 @@
 
 ## 0x04.更新日志
 
+### - 2019-11-05
+
+- 修改菜单显示问题
+- 添加直接单Jar包部署能力
+- 重构全局异常和异常代码
+
 ### - 2019-11-01
 
 1. 短信登录注册，以及短信验证
@@ -44,7 +50,7 @@
 
 ### - 2019-10-29
 
-1. 抽取前端项目，创建了一个新的github仓库：[https://github.com/sigmaol/sigma-browser-ui](https://github.com/sigmaol/sigma-browser-ui)。
+1. 抽取前端项目，创了一个新的github仓库：[https://github.com/sigmaol/sigma-browser-ui](https://github.com/sigmaol/sigma-browser-ui)。
 2. 添加mongodb访问，调整项目文档。
 
 ### - 2019-09-20

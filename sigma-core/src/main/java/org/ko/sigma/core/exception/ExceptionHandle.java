@@ -15,12 +15,12 @@ public class ExceptionHandle extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ValidateException.class)
     public Response validateException(ValidateException ve, WebRequest webRequest) {
-        return Response.of(Response.FAILED, ve.getCode(), ve.getMessage());
+        return Response.of(false, ve.getCode(), ve.getMessage());
     }
 
-    @ExceptionHandler(GeneralException.class)
-    public Response generalException(GeneralException ge, WebRequest request) {
-        return Response.of(Response.FAILED, ge.getCode(), ge.getMessage());
+    @ExceptionHandler(BusinessException.class)
+    public Response generalException(BusinessException ge, WebRequest request) {
+        return Response.of(false, ge.getCode(), ge.getMessage());
     }
 
 }

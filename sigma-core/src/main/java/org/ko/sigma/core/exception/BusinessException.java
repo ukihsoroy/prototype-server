@@ -5,27 +5,27 @@ import org.ko.sigma.core.type.SystemCode;
 /**
  * GeneralException
  */
-public class GeneralException extends CustomRuntimeException {
+public class BusinessException extends CustomRuntimeException {
 
     private static final long serialVersionUID = 1633213333563068730L;
 
     private Integer code;
 
-    public GeneralException() {}
+    public BusinessException() {}
 
-    public GeneralException(Throwable cause) {
+    public BusinessException(Throwable cause) {
         super(cause);
     }
 
-    public GeneralException(String message, Throwable cause) {
+    public BusinessException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public GeneralException(String message) {
+    public BusinessException(String message) {
         super(message);
     }
 
-    public GeneralException(SystemCode systemCode) {
+    public BusinessException(SystemCode systemCode) {
         super(systemCode.getMsg());
         this.code = systemCode.getCode();
     }

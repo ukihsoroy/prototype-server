@@ -1,22 +1,15 @@
 package org.ko.sigma.core.support;
 
-import com.google.common.base.Strings;
 import lombok.ToString;
 import org.ko.sigma.core.bean.SerializeBean;
 import org.ko.sigma.core.type.SystemCode;
 
 /**
- * 
  * Response
- *
  * @author <A>K.O</A>
- *
  */
 @ToString
 public class Response<T> extends SerializeBean {
-
-    public static final boolean FAILED = false;
-    public static final boolean SUCCESS = true;
 
     /**
      * 成功 OR 失败
@@ -38,14 +31,7 @@ public class Response<T> extends SerializeBean {
      */
     private T data;
 
-    /**
-     * 消息参数
-     */
-    private Object[] arguments;
-
-
     private Response() {}
-
 
     public static Response of () {
         return new Response(true);
@@ -71,7 +57,7 @@ public class Response<T> extends SerializeBean {
      */
     public Response(T data) {
         this.data = data;
-        this.success = SUCCESS;
+        this.success = true;
         this.code = SystemCode.SUCCESS.getCode();
         this.msg = SystemCode.SUCCESS.getMsg();
     }
@@ -128,26 +114,6 @@ public class Response<T> extends SerializeBean {
 
     /**
      * 构造器
-     * @param data
-     * @param code
-     * @param msg
-     * @param success
-     * @param args
-     */
-    public Response(boolean success, T data, Integer code, String msg, Object... args) {
-        this.data = data;
-        this.code = code;
-        this.msg = msg;
-        this.success = success;
-        this.arguments = args;
-    }
-
-    public static <T> Response<T> of (boolean success, T data, Integer code, String msg, Object... args) {
-        return new Response<>(success, data, code, msg, args);
-    }
-
-    /**
-     * 构造器
      * @param success
      * @param msg
      */
@@ -176,47 +142,12 @@ public class Response<T> extends SerializeBean {
         return new Response<>(success, code, msg);
     }
 
-    /**
-     * 构造器
-     * @param success
-     * @param code
-     * @param msg
-     * @param args
-     */
-    public Response(boolean success, Integer code, String msg, Object... args) {
-        this.code = code;
-        this.msg = msg;
-        this.success = success;
-        this.arguments = args;
-    }
-
-    public static <T> Response<T> of (boolean success, Integer code, String msg, Object... args) {
-        return new Response<>(success, code, msg, args);
-    }
-
     public Integer getCode() {
         return code;
     }
 
     public void setCode(Integer code) {
         this.code = code;
-    }
-
-    public String getMsg() {
-        if (this.arguments == null || this.arguments.length == 0) {
-            return this.msg;
-        } else {
-            if (Strings.isNullOrEmpty(this.msg)) {
-                return null;
-            } else {
-                return String.format(this.msg, this.arguments);
-            }
-        }
-    }
-
-    public void setMsg(String msg, Object... args) {
-        this.msg = msg;
-        this.arguments = args;
     }
 
     public void setMsg(String msg) {

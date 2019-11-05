@@ -3,7 +3,7 @@ package org.ko.sigma.rest.log.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.authentication.mobile.ISmsCodeService;
-import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.ko.sigma.rest.log.condition.QuerySendCodeLogCondition;
@@ -38,7 +38,7 @@ public class SendCodeLogServiceImpl extends ServiceImpl<SendCodeLogRepository, S
     @Override
     public Long createSendCodeLog(SendCodeLog sendCodeLog) {
         if (sendCodeLogRepository.insert(sendCodeLog) == 0) {
-            throw new TransactionalException(SystemCode.INSERT_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return sendCodeLog.getId();
     }
@@ -47,7 +47,7 @@ public class SendCodeLogServiceImpl extends ServiceImpl<SendCodeLogRepository, S
     public SendCodeLog updateSendCodeLog(Long id, SendCodeLog sendCodeLog) {
         sendCodeLog.setId(id);
         if (sendCodeLogRepository.updateById(sendCodeLog) == 0) {
-            throw new TransactionalException(SystemCode.UPDATE_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return sendCodeLog;
     }
@@ -55,7 +55,7 @@ public class SendCodeLogServiceImpl extends ServiceImpl<SendCodeLogRepository, S
     @Override
     public Long deleteSendCodeLog(Long id) {
         if (sendCodeLogRepository.deleteById(id) == 0) {
-            throw new TransactionalException(SystemCode.DELETE_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return id;
     }

@@ -3,7 +3,7 @@ package org.ko.sigma.rest.basic.service.impl;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.bean.FileInfo;
-import org.ko.sigma.core.exception.GeneralException;
+import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.properties.FileProperties;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.BASE64;
@@ -73,7 +73,7 @@ public class FastDFSFileService implements FileService {
             outputStream.flush();
         } catch (IOException e) {
             logger.error("org.ko.prototype.core.service.impl.LocalFileService#download exception: {}", e.getMessage());
-            throw new GeneralException(SystemCode.SYSTEM_ERROR);
+            throw new BusinessException(SystemCode.SYSTEM_ERROR);
         }
     }
 }

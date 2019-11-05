@@ -2,7 +2,7 @@ package org.ko.sigma.rest.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.collections.CollectionUtils;
-import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.exception.UniqueException;
 import org.ko.sigma.data.constants.RoleCodeEnum;
 import org.ko.sigma.data.constants.UserConstants;
@@ -133,7 +133,7 @@ public class SystemServiceImpl implements SystemService {
         Long count = userRoleRepository.insertList(userRoles);
 
         if (count == 0) {
-            throw new TransactionalException(REGISTER_USER_ERROR);
+            throw new BusinessException(REGISTER_USER_ERROR);
         }
 
         registerSession(userDTO, request);
@@ -153,19 +153,19 @@ public class SystemServiceImpl implements SystemService {
         Integer countUsername = userRepository.selectCount(
                 new QueryWrapper<User>().eq(UserConstants.Columns.USERNAME, userDTO.getUsername()));
         if (countUsername > 0) {
-            throw new TransactionalException(USERNAME_REPEAT);
+            throw new BusinessException(USERNAME_REPEAT);
         }
 
         Integer countMobile = userRepository.selectCount(
                 new QueryWrapper<User>().eq(UserConstants.Columns.MOBILE, userDTO.getMobile()));
         if (countMobile > 0) {
-            throw new TransactionalException(MOBILE_REPEAT);
+            throw new BusinessException(MOBILE_REPEAT);
         }
 
         Integer countEmail = userRepository.selectCount(
                 new QueryWrapper<User>().eq(UserConstants.Columns.EMAIL, userDTO.getEmail()));
         if (countEmail > 0) {
-            throw new TransactionalException(EMAIL_REPEAT);
+            throw new BusinessException(EMAIL_REPEAT);
         }
 
     }

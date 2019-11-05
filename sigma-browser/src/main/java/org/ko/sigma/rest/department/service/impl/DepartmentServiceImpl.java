@@ -2,7 +2,7 @@ package org.ko.sigma.rest.department.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.data.entity.Department;
 import org.ko.sigma.rest.department.condition.QueryDepartmentCondition;
@@ -36,7 +36,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentRepository, Dep
     @Override
     public Long createDepartment(Department department) {
         if (departmentRepository.insert(department) == 0) {
-            throw new TransactionalException(SystemCode.INSERT_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return department.getId();
     }
@@ -45,7 +45,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentRepository, Dep
     public Department updateDepartment(Long id, Department department) {
         department.setId(id);
         if (departmentRepository.updateById(department) == 0) {
-            throw new TransactionalException(SystemCode.UPDATE_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return department;
     }
@@ -53,7 +53,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentRepository, Dep
     @Override
     public Long deleteDepartment(Long id) {
         if (departmentRepository.deleteById(id) == 0) {
-            throw new TransactionalException(SystemCode.DELETE_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return id;
     }

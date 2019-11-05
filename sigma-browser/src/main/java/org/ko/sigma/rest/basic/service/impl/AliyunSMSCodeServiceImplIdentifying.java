@@ -8,7 +8,7 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.apache.commons.lang3.StringUtils;
-import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.type.SystemCode;
 import org.ko.sigma.core.util.GeneratorCodeUtils;
 import org.ko.sigma.core.util.JacksonHelper;
@@ -16,7 +16,6 @@ import org.ko.sigma.data.entity.Dict;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.ko.sigma.rest.basic.service.IdentifyingCodeService;
 import org.ko.sigma.rest.dict.service.DictService;
-import org.ko.sigma.rest.log.repository.SendCodeLogRepository;
 import org.ko.sigma.rest.log.service.SendCodeLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -99,7 +98,7 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
             CommonResponse response = client.getCommonResponse(request);
             Map<String, String> aliyunSmsResponse = JacksonHelper.string2Map(response.getData());
             if (aliyunSmsResponse == null || !OK.equalsIgnoreCase(aliyunSmsResponse.get("Code"))) {
-                throw new TransactionalException(SystemCode.SEND_ERROR);
+                throw new BusinessException(SystemCode.SEND_ERROR);
             }
             SendCodeLog sendCodeLog = new SendCodeLog();
             sendCodeLog.setReceiveAddress(address);
@@ -118,7 +117,7 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
         String logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
 
         if (StringUtils.isEmpty(logCode) || !code.equalsIgnoreCase(logCode)) {
-            throw new TransactionalException("验证码不正确");
+            throw new BusinessException("验证码不正确");
         }
     }
 }

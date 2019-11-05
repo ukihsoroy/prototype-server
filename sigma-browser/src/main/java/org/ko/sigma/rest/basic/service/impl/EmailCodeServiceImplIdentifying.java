@@ -2,7 +2,7 @@ package org.ko.sigma.rest.basic.service.impl;
 
 import freemarker.template.Template;
 import org.apache.commons.lang3.StringUtils;
-import org.ko.sigma.core.exception.TransactionalException;
+import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.rest.basic.service.IdentifyingCodeService;
 import org.ko.sigma.rest.dict.service.DictService;
 import org.ko.sigma.rest.log.service.SendCodeLogService;
@@ -65,7 +65,7 @@ public class EmailCodeServiceImplIdentifying implements IdentifyingCodeService {
         String logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
 
         if (StringUtils.isEmpty(logCode) || !code.equalsIgnoreCase(logCode)) {
-            throw new TransactionalException("验证码不正确");
+            throw new BusinessException("验证码不正确");
         }
     }
 }

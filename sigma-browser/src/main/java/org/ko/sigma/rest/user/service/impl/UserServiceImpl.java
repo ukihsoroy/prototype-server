@@ -1,11 +1,8 @@
 package org.ko.sigma.rest.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.commons.lang3.StringUtils;
-import org.ko.sigma.core.exception.TransactionalException;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.user.condition.QueryUserCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
@@ -45,7 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         //加密password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (userRepository.insert(user) == 0) {
-            throw new TransactionalException(INSERT_ERROR);
+            throw new BusinessException(UNKNOWN_ERROR);
         }
         return user.getId();
     }
@@ -54,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     public User updateUser(Long id, User user) {
         user.setId(id);
         if (userRepository.updateById(user) == 0) {
-            throw new TransactionalException(UPDATE_ERROR);
+            throw new BusinessException(UNKNOWN_ERROR);
         }
         return user;
     }
@@ -62,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     @Override
     public Long removeUser(Long id) {
         if (userRepository.deleteById(id) == 0) {
-            throw new TransactionalException(DELETE_ERROR);
+            throw new BusinessException(UNKNOWN_ERROR);
         }
         return id;
     }

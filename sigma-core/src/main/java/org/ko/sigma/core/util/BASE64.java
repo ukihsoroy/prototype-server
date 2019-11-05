@@ -1,6 +1,6 @@
 package org.ko.sigma.core.util;
 
-import org.ko.sigma.core.exception.GeneralException;
+import org.ko.sigma.core.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sun.misc.BASE64Decoder;
@@ -8,7 +8,8 @@ import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 
-import static org.ko.sigma.core.type.SystemCode.CONVERTER_ERROR;
+import static org.ko.sigma.core.type.SystemCode.SYSTEM_ERROR;
+
 
 public final class BASE64 {
 
@@ -26,7 +27,7 @@ public final class BASE64 {
             return (new BASE64Decoder()).decodeBuffer(key);
         } catch (IOException e) {
             logger.error("org.ko.prototype.core.utils.BASE64#decryptBASE64 exception: {}", e.getMessage());
-            throw new GeneralException(CONVERTER_ERROR);
+            throw new BusinessException(SYSTEM_ERROR);
         }
     }
 
