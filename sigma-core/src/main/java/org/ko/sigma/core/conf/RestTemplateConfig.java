@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -27,6 +29,12 @@ public class RestTemplateConfig {
         factory.setReadTimeout(5000);
         factory.setConnectTimeout(5000);
         return factory;
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        //使用security默认的加密规则
+        return new BCryptPasswordEncoder();
     }
 
 }
