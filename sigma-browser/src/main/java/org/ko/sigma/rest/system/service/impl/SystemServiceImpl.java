@@ -38,7 +38,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.ko.sigma.core.type.SystemCode.*;
+import static org.ko.sigma.core.constant.SystemCode.*;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)

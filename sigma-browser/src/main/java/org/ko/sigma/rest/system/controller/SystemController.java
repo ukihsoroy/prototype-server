@@ -5,7 +5,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.ko.sigma.core.support.Response;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.rest.system.service.SystemService;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.slf4j.Logger;

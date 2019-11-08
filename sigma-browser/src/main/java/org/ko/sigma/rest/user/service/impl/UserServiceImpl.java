@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.ko.sigma.core.type.SystemCode.*;
+import static org.ko.sigma.core.constant.SystemCode.*;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)

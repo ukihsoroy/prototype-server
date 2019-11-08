@@ -1,6 +1,6 @@
 package org.ko.sigma.core.exception;
 
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 
 /**
  * GeneralException

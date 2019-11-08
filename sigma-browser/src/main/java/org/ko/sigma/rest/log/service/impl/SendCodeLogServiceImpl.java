@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.authentication.mobile.ISmsCodeService;
 import org.ko.sigma.core.exception.BusinessException;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.ko.sigma.rest.log.condition.QuerySendCodeLogCondition;
 import org.ko.sigma.rest.log.repository.SendCodeLogRepository;

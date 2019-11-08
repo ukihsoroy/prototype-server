@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.BusinessException;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.constants.RoleConstants;
 import org.ko.sigma.data.constants.RoleMenuConstants;
 import org.ko.sigma.data.entity.Role;

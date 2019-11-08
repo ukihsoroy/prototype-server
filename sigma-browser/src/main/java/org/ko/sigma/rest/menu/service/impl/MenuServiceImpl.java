@@ -3,7 +3,7 @@ package org.ko.sigma.rest.menu.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.BusinessException;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.Menu;
 import org.ko.sigma.rest.menu.condition.QueryMenuCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;

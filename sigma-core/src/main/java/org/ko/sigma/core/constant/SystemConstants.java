@@ -1,4 +1,4 @@
-package org.ko.sigma.core.type;
+package org.ko.sigma.core.constant;
 
 /**
  * 系统常量类

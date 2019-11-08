@@ -2,7 +2,7 @@ package org.ko.sigma.core.support;
 
 import lombok.ToString;
 import org.ko.sigma.core.bean.SerializeBean;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 
 /**
  * Response

@@ -9,7 +9,7 @@ import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.exception.BusinessException;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.core.util.GeneratorCodeUtils;
 import org.ko.sigma.core.util.JacksonHelper;
 import org.ko.sigma.data.entity.Dict;

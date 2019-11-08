@@ -5,7 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.bean.FileInfo;
 import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.properties.FileProperties;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.core.util.BASE64;
 import org.ko.sigma.rest.basic.service.FileService;
 import org.slf4j.Logger;

@@ -8,7 +8,7 @@ import sun.misc.BASE64Encoder;
 
 import java.io.IOException;
 
-import static org.ko.sigma.core.type.SystemCode.SYSTEM_ERROR;
+import static org.ko.sigma.core.constant.SystemCode.SYSTEM_ERROR;
 
 
 public final class BASE64 {

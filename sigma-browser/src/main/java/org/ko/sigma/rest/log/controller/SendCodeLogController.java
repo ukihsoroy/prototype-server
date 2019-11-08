@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.support.Response;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.ko.sigma.rest.log.condition.QuerySendCodeLogCondition;
 import org.ko.sigma.rest.log.dto.SendCodeLogDTO;

@@ -3,7 +3,7 @@ package org.ko.sigma.rest.department.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.ko.sigma.core.exception.BusinessException;
-import org.ko.sigma.core.type.SystemCode;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.Department;
 import org.ko.sigma.rest.department.condition.QueryDepartmentCondition;
 import org.ko.sigma.rest.department.repository.DepartmentRepository;
