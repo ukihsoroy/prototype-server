@@ -6,6 +6,8 @@ import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.user.condition.QueryUserCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
 
+import javax.servlet.http.HttpServletResponse;
+
 public interface UserService extends IService<User> {
 
     /**
@@ -45,4 +47,9 @@ public interface UserService extends IService<User> {
      */
     Long removeUser(Long id);
 
+    /**
+     * 到处excel
+     * @param condition
+     */
+    void export(String name, QueryUserCondition<User> condition, HttpServletResponse response);
 }

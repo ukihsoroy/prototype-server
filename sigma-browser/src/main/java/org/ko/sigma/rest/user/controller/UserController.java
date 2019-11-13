@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Objects;
 
 @Api(tags = "用户接口")
@@ -84,6 +85,14 @@ public class UserController {
             @ApiParam("用户ID") @PathVariable Long id) {
         Long result = userService.removeUser(id);
         return Response.of(result);
+    }
+
+    @GetMapping("export")
+    @ApiOperation("到处excel列表")
+    public void export(@ApiParam("列表查询参数") @ModelAttribute QueryUserCondition<User> condition,
+                       @ApiParam("name") @RequestParam String name,
+                       HttpServletResponse response) {
+        userService.export(name, condition, response);
     }
 
     /**

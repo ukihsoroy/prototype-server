@@ -117,6 +117,9 @@ public class ExportExcelHelper {
                     case "INTEGER":
                         row.createCell(j).setCellValue(Integer.parseInt(content[i][j]));
                         break;
+                    case "LONG":
+                        row.createCell(j).setCellValue(Long.parseLong(content[i][j]));
+                        break;
                     case "PERCENT":
                         style.setDataFormat(HSSFDataFormat.getBuiltinFormat("0.00%"));
                         Cell cell = row.createCell(j);
@@ -128,6 +131,11 @@ public class ExportExcelHelper {
                         Cell cell1 = row.createCell(j);
                         cell1.setCellStyle(style);
                         row.createCell(j).setCellValue(this.parseDate(content[i][j]));
+                        break;
+                    case "VARCHAR":
+                        row.createCell(j).setCellValue(content[i][j]);
+                        break;
+
                 }
             } else {
                 row.createCell(j).setCellValue(content[i][j]);

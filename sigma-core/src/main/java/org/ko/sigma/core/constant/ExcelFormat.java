@@ -8,8 +8,10 @@ public enum ExcelFormat {
 
     FORMAT_INTEGER("INTEGER"),
     FORMAT_DOUBLE("DOUBLE"),
+    FORMAT_LONG("LONG"),
     FORMAT_PERCENT("PERCENT"),
-    FORMAT_DATE("DATE");
+    FORMAT_DATE("DATE"),
+    FORMAT_VARCHAR("VARCHAR");
 
     private String value;
 
