@@ -46,8 +46,8 @@ sigma:
 sms:
   aliyun:
     regionId: cn-hangzhou
-    accessKeyId:
-    accessSecret:
+    accessKeyId: LTAI5QC0m4Utt7i9
+    accessSecret: YDdpvQoZfqsStQAfX6O8mqGlYmHEDF
     signName: sigma
   dictKey: sms_template
 
