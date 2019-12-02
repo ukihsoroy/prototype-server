@@ -74,17 +74,17 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
      */
     @Override
     public void sendCode(String address, String messageType) {
-        DefaultProfile profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
-        IAcsClient client = new DefaultAcsClient(profile);
+        var profile = DefaultProfile.getProfile(regionId, accessKeyId, accessSecret);
+        var client = new DefaultAcsClient(profile);
 
-        Dict dict = dictService.findDictByCodeAndType(smsDictKey, messageType);
+        var dict = dictService.findDictByCodeAndType(smsDictKey, messageType);
 
-        String code = GeneratorCodeUtils.numberCode();
+        var code = GeneratorCodeUtils.numberCode();
 
-        Map<String, String> params = new HashMap<>();
+        var params = new HashMap<>();
         params.put(CODE, code);
 
-        CommonRequest request = new CommonRequest();
+        var request = new CommonRequest();
         request.setMethod(MethodType.POST);
         request.setDomain(DOMAIN_ADDRESS);
         request.setAction(ACTION);
@@ -95,8 +95,8 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
         request.putQueryParameter(TEMPLATE_CODE, dict.getValue());
         request.putQueryParameter(TEMPLATE_PARAM, JacksonHelper.obj2String(params));
         try {
-            CommonResponse response = client.getCommonResponse(request);
-            Map<String, String> aliyunSmsResponse = JacksonHelper.string2Map(response.getData());
+            var response = client.getCommonResponse(request);
+            var aliyunSmsResponse = JacksonHelper.string2Map(response.getData());
             if (aliyunSmsResponse == null || !OK.equalsIgnoreCase(aliyunSmsResponse.get("Code"))) {
                 throw new BusinessException(SystemCode.SEND_ERROR);
             }
@@ -114,7 +114,7 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
 
     @Override
     public void checkCode(String address, String messageType, String code) throws Exception {
-        String logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
+        var logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
 
         if (StringUtils.isEmpty(logCode) || !code.equalsIgnoreCase(logCode)) {
             throw new BusinessException("验证码不正确");

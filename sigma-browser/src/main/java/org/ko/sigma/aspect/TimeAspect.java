@@ -24,13 +24,13 @@ public class TimeAspect {
     @Around("execution(* org.ko.sigma.rest.user.controller.UserController.*(..))")
     public Object handleControllerMethod (ProceedingJoinPoint joinPoint) throws Throwable {
         LOGGER.info("TimeAspect#handleControllerMethod start!");
-        Object[] args = joinPoint.getArgs();
+        var args = joinPoint.getArgs();
         for (Object arg : args) {
             LOGGER.info("args: {}", arg);
         }
 
         long startTime = new Date().getTime();
-        Object object = joinPoint.proceed();
+        var object = joinPoint.proceed();
         long endTime = new Date().getTime();
         LOGGER.info("TimeAspect#handleControllerMethod use time: {} ms", endTime - startTime);
         LOGGER.info("TimeAspect#handleControllerMethod end!");

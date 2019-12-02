@@ -35,14 +35,14 @@ public class FastDFSFileService implements FileService {
                 file.getName(),
                 file.getOriginalFilename(),
                 file.getSize());
-        String fileName = new Date().getTime() +
+        var fileName = new Date().getTime() +
                 file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 
         //如果没有目录则创建
-        File folder = new File(fileProperties.getFolder());
+        var folder = new File(fileProperties.getFolder());
         if (!folder.exists()) folder.mkdir();
 
-        File localFile = new File(fileProperties.getFolder(), fileName);
+        var localFile = new File(fileProperties.getFolder(), fileName);
         try {
             //从请求中将文件拷贝到本地
             file.transferTo(localFile);

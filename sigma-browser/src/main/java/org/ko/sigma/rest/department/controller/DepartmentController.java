@@ -34,7 +34,7 @@ public class DepartmentController {
     @ApiOperation("查询全部部门表")
     public Response<List<DepartmentDTO>> queryDepartmentList(@ApiParam("部门表查询参数") @ModelAttribute QueryDepartmentCondition condition) {
         //1. 查询部门表列表数据
-        List<Department> departments = departmentService.queryDepartmentList(condition);
+        var departments = departmentService.queryDepartmentList(condition);
 
         //2. 如果不为空
         if (CollectionUtils.isNotEmpty(departments)) {

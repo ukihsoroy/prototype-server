@@ -36,8 +36,8 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
      */
     @Bean
     public FilterRegistrationBean timeFilter () {
-        FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        TimeFilter timeFilter = new TimeFilter();
+        var registrationBean = new FilterRegistrationBean();
+        var timeFilter = new TimeFilter();
         registrationBean.setFilter(timeFilter);
         registrationBean.setUrlPatterns(Arrays.asList("/*"));
         return registrationBean;

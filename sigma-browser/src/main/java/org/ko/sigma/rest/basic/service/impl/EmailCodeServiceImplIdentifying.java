@@ -44,25 +44,25 @@ public class EmailCodeServiceImplIdentifying implements IdentifyingCodeService {
 
     @Override
     public void sendCode(String address, String messageType) throws Exception {
-        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        var mimeMessage = mailSender.createMimeMessage();
 
-        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+        var helper = new MimeMessageHelper(mimeMessage, true);
         helper.setFrom(from);
         helper.setTo(address);
         helper.setSubject("主题：模板邮件");
 
-        Map<String, Object> model = new HashMap<>();
+        var model = new HashMap<>();
         model.put("code", "123456");
-        String suffix = ".ftl";
-        Template template = freeMarkerConfigurer.getConfiguration().getTemplate(DEFAULT_MAIL_NAME + suffix);
-        String text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
+        var suffix = ".ftl";
+        var template = freeMarkerConfigurer.getConfiguration().getTemplate(DEFAULT_MAIL_NAME + suffix);
+        var text = FreeMarkerTemplateUtils.processTemplateIntoString(template, model);
         helper.setText(text, true);
         mailSender.send(mimeMessage);
     }
 
     @Override
     public void checkCode(String address, String messageType, String code) throws Exception {
-        String logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
+        var logCode = sendCodeLogService.findCodeByType(SEND_TYPE, messageType, address);
 
         if (StringUtils.isEmpty(logCode) || !code.equalsIgnoreCase(logCode)) {
             throw new BusinessException("验证码不正确");

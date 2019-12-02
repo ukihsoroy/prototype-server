@@ -48,7 +48,7 @@ public class AsyncController {
     @GetMapping("deferred/result")
     public DeferredResult<Response<String>> deferredResult () {
         LOGGER.info("main thread start!");
-        String orderNumber = RandomStringUtils.randomNumeric(8);
+        var orderNumber = RandomStringUtils.randomNumeric(8);
         LOGGER.info("AsyncController#deferredResult order number: {}", orderNumber);
         mockQueue.setPlaceOrder(orderNumber);
         DeferredResult<Response<String>> result = new DeferredResult<>();

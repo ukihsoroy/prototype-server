@@ -36,7 +36,7 @@ public class MyBatisPlusConfig implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        UserDTO userDTO = SessionHolder.loginUser();
+        var userDTO = SessionHolder.loginUser();
         if (userDTO != null) {
             this.setFieldValByName(CREATE_USER, userDTO.getId(), metaObject);
         }
@@ -45,7 +45,7 @@ public class MyBatisPlusConfig implements MetaObjectHandler {
 
     @Override
     public void updateFill(MetaObject metaObject) {
-        UserDTO userDTO = SessionHolder.loginUser();
+        var userDTO = SessionHolder.loginUser();
         if (userDTO != null) {
             this.setFieldValByName(MODIFIED_USER, userDTO.getId(), metaObject);
         }
