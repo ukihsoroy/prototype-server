@@ -77,7 +77,8 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
             "/register",
             "/session/invalid",
             "/code/**",
-            "/valid/**"
+            "/valid/**",
+            "/testunit/**"
     };
 
     /**

@@ -1,5 +1,5 @@
 server.servlet:
-  context-path: /sigma
+  context-path: /api
 
 #配置文件默认dev
 spring:

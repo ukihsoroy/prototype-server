@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.7.18-log - MySQL Community Server (GPL)
--- Server OS:                    Win64
--- HeidiSQL Version:             10.2.0.5599
+-- 主机:                           39.105.164.165
+-- 服务器版本:                        5.7.26 - MySQL Community Server (GPL)
+-- 服务器操作系统:                      Linux
+-- HeidiSQL 版本:                  10.3.0.5780
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,12 +11,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
 -- Dumping database structure for sigma_server
 CREATE DATABASE IF NOT EXISTS `sigma_server` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `sigma_server`;
 
--- Dumping structure for table sigma_server.t_department
+-- 导出  表 sigma_server.t_department 结构
 CREATE TABLE IF NOT EXISTS `t_department` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `code` varchar(50) NOT NULL COMMENT '部门编码，由系统统一生成，不可修改',
@@ -33,11 +32,12 @@ CREATE TABLE IF NOT EXISTS `t_department` (
   KEY `parent_code` (`parent_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门表';
 
--- Dumping data for table sigma_server.t_department: ~0 rows (approximately)
+-- 正在导出表  sigma_server.t_department 的数据：~0 rows (大约)
+DELETE FROM `t_department`;
 /*!40000 ALTER TABLE `t_department` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_department` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_department_user
+-- 导出  表 sigma_server.t_department_user 结构
 CREATE TABLE IF NOT EXISTS `t_department_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `department_code` varchar(50) NOT NULL COMMENT '部门编码，由系统统一生成，不可修改',
@@ -53,11 +53,12 @@ CREATE TABLE IF NOT EXISTS `t_department_user` (
   KEY `user_code` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门用户关联表，事实表';
 
--- Dumping data for table sigma_server.t_department_user: ~0 rows (approximately)
+-- 正在导出表  sigma_server.t_department_user 的数据：~0 rows (大约)
+DELETE FROM `t_department_user`;
 /*!40000 ALTER TABLE `t_department_user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_department_user` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_dict
+-- 导出  表 sigma_server.t_dict 结构
 CREATE TABLE IF NOT EXISTS `t_dict` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `code` varchar(50) NOT NULL COMMENT '字典编码',
@@ -74,14 +75,15 @@ CREATE TABLE IF NOT EXISTS `t_dict` (
   KEY `dict_code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='字典表';
 
--- Dumping data for table sigma_server.t_dict: ~2 rows (approximately)
+-- 正在导出表  sigma_server.t_dict 的数据：~2 rows (大约)
+DELETE FROM `t_dict`;
 /*!40000 ALTER TABLE `t_dict` DISABLE KEYS */;
 INSERT INTO `t_dict` (`id`, `code`, `value`, `type`, `description`, `disable`, `version`, `create_user`, `gmt_create`, `modified_user`, `gmt_modified`) VALUES
 	(1, 'sms_template', 'SMS_172007235', 'login', '阿里云短信模板登录', 0, 1, NULL, NULL, NULL, NULL),
 	(2, 'sms_template', 'SMS_172007235', 'register', '阿里云短信注册模板', 0, 1, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `t_dict` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_menu
+-- 导出  表 sigma_server.t_menu 结构
 CREATE TABLE IF NOT EXISTS `t_menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `name` varchar(50) NOT NULL COMMENT '菜单名称',
@@ -99,16 +101,17 @@ CREATE TABLE IF NOT EXISTS `t_menu` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='菜单表，维度表';
 
--- Dumping data for table sigma_server.t_menu: ~4 rows (approximately)
+-- 正在导出表  sigma_server.t_menu 的数据：~4 rows (大约)
+DELETE FROM `t_menu`;
 /*!40000 ALTER TABLE `t_menu` DISABLE KEYS */;
 INSERT INTO `t_menu` (`id`, `name`, `path`, `component`, `redirect`, `meta_json`, `parent_id`, `disable`, `version`, `create_user`, `gmt_create`, `modified_user`, `gmt_modified`) VALUES
-	(1, '系统操作', '/system', '#', NULL, '{"icon": "#", "title": "系统操作"}', NULL, 0, 1, NULL, NULL, NULL, '2019-07-08 21:52:33'),
-	(2, '用户管理', '/system/user', '#', NULL, '{"icon": "#", "title": "用户管理"}', 1, 0, 1, NULL, NULL, NULL, '2019-07-08 22:27:45'),
-	(3, '权限管理', '/system/role', '#', NULL, '{"icon": "#", "title": "权限管理"}', 1, 0, 1, NULL, NULL, NULL, NULL),
-	(4, '菜单管理', '/system/menu', '#', NULL, '{"icon": "#", "title": "菜单管理"}', 1, 0, 1, NULL, NULL, NULL, NULL);
+	(1, '系统操作', '/system', '/system', NULL, '{"icon": "#", "title": "系统操作"}', NULL, 0, 1, NULL, NULL, NULL, '2019-07-08 21:52:33'),
+	(2, '用户管理', '/system/user', '/system/user', NULL, '{"icon": "#", "title": "用户管理"}', 1, 0, 1, NULL, NULL, NULL, '2019-07-08 22:27:45'),
+	(3, '权限管理', '/system/role', '/system/role', NULL, '{"icon": "#", "title": "权限管理"}', 1, 0, 1, NULL, NULL, NULL, NULL),
+	(4, '菜单管理', '/system/menu', '/system/menu', NULL, '{"icon": "#", "title": "菜单管理"}', 1, 0, 1, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `t_menu` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_request_log
+-- 导出  表 sigma_server.t_request_log 结构
 CREATE TABLE IF NOT EXISTS `t_request_log` (
   `id` varchar(32) NOT NULL COMMENT '主键ID，使用UUID',
   `user_id` varchar(32) DEFAULT NULL COMMENT '请求用户ID',
@@ -123,11 +126,12 @@ CREATE TABLE IF NOT EXISTS `t_request_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='请求日志表';
 
--- Dumping data for table sigma_server.t_request_log: ~0 rows (approximately)
+-- 正在导出表  sigma_server.t_request_log 的数据：~0 rows (大约)
+DELETE FROM `t_request_log`;
 /*!40000 ALTER TABLE `t_request_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_request_log` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_role
+-- 导出  表 sigma_server.t_role 结构
 CREATE TABLE IF NOT EXISTS `t_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `code` varchar(50) NOT NULL COMMENT '角色编码，由系统统一生成，不可修改',
@@ -142,7 +146,8 @@ CREATE TABLE IF NOT EXISTS `t_role` (
   UNIQUE KEY `code` (`code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='系统角色表，维度表';
 
--- Dumping data for table sigma_server.t_role: ~3 rows (approximately)
+-- 正在导出表  sigma_server.t_role 的数据：~4 rows (大约)
+DELETE FROM `t_role`;
 /*!40000 ALTER TABLE `t_role` DISABLE KEYS */;
 INSERT INTO `t_role` (`id`, `code`, `name`, `disable`, `version`, `create_user`, `gmt_create`, `modified_user`, `gmt_modified`) VALUES
 	(1, 'ROLE_ADMIN', '系统管理员', 0, 1, NULL, NULL, NULL, NULL),
@@ -151,7 +156,7 @@ INSERT INTO `t_role` (`id`, `code`, `name`, `disable`, `version`, `create_user`,
 	(4, 'ROLE_STUDENT', '汪精卫', 1, 1, 1, '2019-09-20 02:33:42', 1, '2019-09-20 02:34:25');
 /*!40000 ALTER TABLE `t_role` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_role_menu
+-- 导出  表 sigma_server.t_role_menu 结构
 CREATE TABLE IF NOT EXISTS `t_role_menu` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `role_code` varchar(50) NOT NULL COMMENT '角色编码，由系统统一生成，不可修改',
@@ -169,9 +174,10 @@ CREATE TABLE IF NOT EXISTS `t_role_menu` (
   PRIMARY KEY (`id`),
   KEY `role_code` (`role_code`),
   KEY `menu_code` (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='权限菜单关联表，事实表';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='权限菜单关联表，事实表';
 
--- Dumping data for table sigma_server.t_role_menu: ~8 rows (approximately)
+-- 正在导出表  sigma_server.t_role_menu 的数据：~11 rows (大约)
+DELETE FROM `t_role_menu`;
 /*!40000 ALTER TABLE `t_role_menu` DISABLE KEYS */;
 INSERT INTO `t_role_menu` (`id`, `role_code`, `menu_id`, `create`, `read`, `update`, `delete`, `disable`, `version`, `create_user`, `gmt_create`, `modified_user`, `gmt_modified`) VALUES
 	(1, 'ROLE_ADMIN', 1, 1, 1, 1, 1, 0, 1, NULL, NULL, NULL, NULL),
@@ -181,10 +187,13 @@ INSERT INTO `t_role_menu` (`id`, `role_code`, `menu_id`, `create`, `read`, `upda
 	(5, 'ROLE_STUDENT', 1, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, NULL),
 	(6, 'ROLE_STUDENT', 2, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, NULL),
 	(7, 'ROLE_STUDENT', 3, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, NULL),
-	(8, 'ROLE_STUDENT', 4, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, NULL);
+	(8, 'ROLE_STUDENT', 4, 0, 0, 0, 0, 1, 1, NULL, NULL, NULL, NULL),
+	(9, 'ROLE_ADMIN', 2, 1, 1, 1, 1, 0, 1, NULL, NULL, NULL, NULL),
+	(10, 'ROLE_ADMIN', 3, 1, 1, 1, 1, 0, 1, NULL, NULL, NULL, NULL),
+	(11, 'ROLE_ADMIN', 4, 1, 1, 1, 1, 0, 1, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `t_role_menu` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_send_code_log
+-- 导出  表 sigma_server.t_send_code_log 结构
 CREATE TABLE IF NOT EXISTS `t_send_code_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `receive_address` varchar(50) NOT NULL COMMENT '接收方',
@@ -201,11 +210,12 @@ CREATE TABLE IF NOT EXISTS `t_send_code_log` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='验证码日志';
 
--- Dumping data for table sigma_server.t_send_code_log: ~0 rows (approximately)
+-- 正在导出表  sigma_server.t_send_code_log 的数据：~0 rows (大约)
+DELETE FROM `t_send_code_log`;
 /*!40000 ALTER TABLE `t_send_code_log` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_send_code_log` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_user
+-- 导出  表 sigma_server.t_user 结构
 CREATE TABLE IF NOT EXISTS `t_user` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `username` varchar(50) NOT NULL COMMENT '用户名',
@@ -231,14 +241,15 @@ CREATE TABLE IF NOT EXISTS `t_user` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='用户表，维度表';
 
--- Dumping data for table sigma_server.t_user: ~2 rows (approximately)
+-- 正在导出表  sigma_server.t_user 的数据：~2 rows (大约)
+DELETE FROM `t_user`;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
 INSERT INTO `t_user` (`id`, `username`, `password`, `avatar`, `nickname`, `birthday`, `gender`, `mobile`, `email`, `wechat`, `QQ`, `weibo`, `signature`, `balance`, `disable`, `version`, `create_user`, `gmt_create`, `modified_user`, `gmt_modified`) VALUES
-	(1, 'sigma', '$2a$10$b3VrgiJ6Ai6gI/kGzKAem.pUl0ca4JE3219qyPeW4EYFM/fy3bl5K', NULL, 'K.O', '2020-06-09 20:54:21', 1, '13604261402', 'ko.shen@hotmail.com', NULL, NULL, NULL, NULL, 0.00, 0, 0, NULL, NULL, NULL, NULL),
+	(1, 'sigma', '$2a$10$b3VrgiJ6Ai6gI/kGzKAem.pUl0ca4JE3219qyPeW4EYFM/fy3bl5K', 'https://github.com/account', 'K.O', '2020-06-09 20:54:21', 1, '13604261401', 'ko.shen@hotmail.comnm', NULL, NULL, NULL, NULL, 0.00, 0, 0, NULL, NULL, 1, '2019-12-15 15:33:31'),
 	(4, 'you_leet', '$2a$10$21gu9X9Qw2GqYVp1zCe40e.gDrVrOT.W82GFtaa/VeV/ZxbJ42MFO', NULL, 'Sigma', NULL, 0, '13604261403', 'you_leet@foxmail.com', NULL, NULL, NULL, NULL, 0.00, 0, 1, NULL, '2019-07-09 21:48:48', NULL, NULL);
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 
--- Dumping structure for table sigma_server.t_user_role
+-- 导出  表 sigma_server.t_user_role 结构
 CREATE TABLE IF NOT EXISTS `t_user_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_id` bigint(20) NOT NULL COMMENT '用户编码（UUID），由系统统一生成，不可修改',
@@ -254,7 +265,8 @@ CREATE TABLE IF NOT EXISTS `t_user_role` (
   KEY `role_code` (`role_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户权限关联表，事实表';
 
--- Dumping data for table sigma_server.t_user_role: ~2 rows (approximately)
+-- 正在导出表  sigma_server.t_user_role 的数据：~2 rows (大约)
+DELETE FROM `t_user_role`;
 /*!40000 ALTER TABLE `t_user_role` DISABLE KEYS */;
 INSERT INTO `t_user_role` (`id`, `user_id`, `role_code`, `disable`, `version`, `create_user`, `gmt_create`, `modified_user`, `gmt_modified`) VALUES
 	(1, 1, 'ROLE_ADMIN', 0, 1, NULL, NULL, NULL, NULL),

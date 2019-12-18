@@ -1,15 +1,20 @@
 package org.ko.sigma.conf;
 
+import org.ko.sigma.core.support.api.ApiHandlerMapping;
 import org.ko.sigma.filter.TimeFilter;
 import org.ko.sigma.interceptor.TimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
+import org.springframework.web.servlet.resource.ResourceUrlProvider;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -41,6 +46,20 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
         registrationBean.setFilter(timeFilter);
         registrationBean.setUrlPatterns(Arrays.asList("/*"));
         return registrationBean;
+    }
+
+    @Override
+    public RequestMappingHandlerMapping requestMappingHandlerMapping(
+            ContentNegotiationManager mvcContentNegotiationManager,
+            FormattingConversionService mvcConversionService,
+            ResourceUrlProvider mvcResourceUrlProvider) {
+
+        //Api版本管理
+        RequestMappingHandlerMapping handlerMapping = new ApiHandlerMapping();
+
+        handlerMapping.setOrder(0);
+        handlerMapping.setInterceptors(getInterceptors(mvcConversionService, mvcResourceUrlProvider));
+        return handlerMapping;
     }
 
     @Override
