@@ -17,7 +17,6 @@
 
     <modules>
         <module>sigma-core</module>
-        <module>sigma-browser</module>
         <module>sigma-app</module>
         <module>sigma-mysql</module>
         <module>sigma-generator</module>
