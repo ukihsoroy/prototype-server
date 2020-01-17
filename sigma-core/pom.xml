@@ -129,12 +129,6 @@
             <version>${spring.social.version}</version>
         </dependency>
 
-        <!-- Jedis -->
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-        </dependency>
-
         <!--swagger 文档-->
         <dependency>
             <groupId>io.springfox</groupId>
@@ -147,47 +141,17 @@
             <version>${swagger.version}</version>
         </dependency>
 
-        <!--Apache POI Excel 导出-->
+        <!--alpha-commons framework-->
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${apache.poi.version}</version>
+            <groupId>io.github.sigmaol</groupId>
+            <artifactId>common-utils</artifactId>
+            <version>${alpha-commons.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${apache.poi.version}</version>
-        </dependency>
-
-        <!--Apache common 工具包-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>${apache.lang3.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>${apache.collections.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-beanutils</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>${apache.beanutils.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>${apache.io.version}</version>
-        </dependency>
-
-        <!--google guava 工具包-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>${guava.version}</version>
+            <groupId>io.github.sigmaol</groupId>
+            <artifactId>common-web</artifactId>
+            <version>${alpha-commons.version}</version>
         </dependency>
 
         <!--Lombok 插件-->
@@ -195,7 +159,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
     </dependencies>
 
 </project>

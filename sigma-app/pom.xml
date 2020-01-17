@@ -48,6 +48,7 @@
             <artifactId>sigma-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.ko.sigma</groupId>
             <artifactId>sigma-mysql</artifactId>
