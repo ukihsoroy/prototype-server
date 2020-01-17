@@ -1,7 +1,7 @@
 package org.ko.sigma.conf.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.ko.sigma.core.support.Response;
+import io.github.sigmaol.web.api.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -33,6 +33,6 @@ public class AuthenticationFailureHandlerImpl extends SimpleUrlAuthenticationFai
         logger.info("登陆失败;");
         response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR.value());
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(Response.of(exception.getMessage())));
+        response.getWriter().write(objectMapper.writeValueAsString(Response.ok(exception.getMessage())));
     }
 }

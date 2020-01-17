@@ -2,6 +2,7 @@ package org.ko.sigma.rest.user.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.github.sigmaol.web.api.ResponseCode;
 import org.ko.sigma.core.bean.ExcelHeader;
 import org.ko.sigma.core.bean.ExportExcelHelper;
 import org.ko.sigma.core.constant.ExcelFormat;
@@ -23,8 +24,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static org.ko.sigma.core.constant.SystemCode.UNKNOWN_ERROR;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
@@ -51,7 +50,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
         //加密password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         if (userRepository.insert(user) == 0) {
-            throw new BusinessException(UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return user.getId();
     }
@@ -60,7 +59,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     public User updateUser(Long id, User user) {
         user.setId(id);
         if (userRepository.updateById(user) == 0) {
-            throw new BusinessException(UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return user;
     }
@@ -68,7 +67,7 @@ public class UserServiceImpl extends ServiceImpl<UserRepository, User> implement
     @Override
     public Long removeUser(Long id) {
         if (userRepository.deleteById(id) == 0) {
-            throw new BusinessException(UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return id;
     }

@@ -2,8 +2,8 @@ package org.ko.sigma.rest.dict.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.github.sigmaol.web.api.ResponseCode;
 import org.ko.sigma.core.exception.BusinessException;
-import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.constants.DictConstants;
 import org.ko.sigma.data.entity.Dict;
 import org.ko.sigma.rest.dict.condition.QueryDictCondition;
@@ -37,7 +37,7 @@ public class DictServiceImpl extends ServiceImpl<DictRepository, Dict> implement
     @Override
     public Long createDict(Dict dict) {
         if (dictRepository.insert(dict) == 0) {
-            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return dict.getId();
     }
@@ -46,7 +46,7 @@ public class DictServiceImpl extends ServiceImpl<DictRepository, Dict> implement
     public Dict updateDict(Long id, Dict dict) {
         dict.setId(id);
         if (dictRepository.updateById(dict) == 0) {
-            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return dict;
     }
@@ -54,7 +54,7 @@ public class DictServiceImpl extends ServiceImpl<DictRepository, Dict> implement
     @Override
     public Long deleteDict(Long id) {
         if (dictRepository.deleteById(id) == 0) {
-            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return id;
     }

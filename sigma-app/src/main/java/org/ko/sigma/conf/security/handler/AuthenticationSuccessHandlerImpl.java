@@ -1,7 +1,7 @@
 package org.ko.sigma.conf.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.ko.sigma.core.support.Response;
+import io.github.sigmaol.web.api.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -51,6 +51,6 @@ public class AuthenticationSuccessHandlerImpl extends SavedRequestAwareAuthentic
                                         Authentication authentication) throws IOException {
         logger.info("登陆成功");
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(Response.of(authentication)));
+        response.getWriter().write(objectMapper.writeValueAsString(Response.ok(authentication)));
     }
 }

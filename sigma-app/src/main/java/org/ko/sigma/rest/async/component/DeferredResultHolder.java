@@ -1,7 +1,6 @@
 package org.ko.sigma.rest.async.component;
 
-
-import org.ko.sigma.core.support.Response;
+import io.github.sigmaol.web.api.Response;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.async.DeferredResult;
 

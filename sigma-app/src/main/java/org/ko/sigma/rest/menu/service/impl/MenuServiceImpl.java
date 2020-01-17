@@ -2,8 +2,8 @@ package org.ko.sigma.rest.menu.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.github.sigmaol.web.api.ResponseCode;
 import org.ko.sigma.core.exception.BusinessException;
-import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.Menu;
 import org.ko.sigma.rest.menu.condition.QueryMenuCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
@@ -75,7 +75,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     @Override
     public Long createMenu(Menu menu) {
         if (menuRepository.insert(menu) == 0) {
-            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return menu.getId();
     }
@@ -84,7 +84,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     public Menu updateMenu(Long id, Menu menu) {
         menu.setId(id);
         if (menuRepository.updateById(menu) == 0) {
-            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return menu;
     }
@@ -92,7 +92,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuRepository, Menu> implement
     @Override
     public Long deleteMenu(Long id) {
         if (menuRepository.deleteById(id) == 0) {
-            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
+            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
         }
         return id;
     }

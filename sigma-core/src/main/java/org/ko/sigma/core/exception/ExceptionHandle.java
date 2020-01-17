@@ -1,6 +1,6 @@
 package org.ko.sigma.core.exception;
 
-import org.ko.sigma.core.support.Response;
+import io.github.sigmaol.web.api.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,7 +1,7 @@
 package org.ko.sigma.conf.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.ko.sigma.core.support.Response;
+import io.github.sigmaol.web.api.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -31,6 +31,6 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler {
                                 Authentication authentication) throws IOException, ServletException {
         logger.info("推出成功");
         response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(Response.of("退出成功")));
+        response.getWriter().write(objectMapper.writeValueAsString(Response.ok("退出成功")));
     }
 }
