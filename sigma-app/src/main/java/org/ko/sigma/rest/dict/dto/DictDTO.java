@@ -8,5 +8,4 @@ import org.ko.sigma.data.entity.Dict;
 @EqualsAndHashCode(callSuper = true)
 public class DictDTO extends Dict {
 
-
 }

@@ -1,6 +1,5 @@
 package org.ko.sigma.rest.system.controller;
 
-
 import io.github.sigmaol.web.api.Response;
 import io.github.sigmaol.web.api.ResponseCode;
 import io.swagger.annotations.Api;
