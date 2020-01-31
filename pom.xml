@@ -19,7 +19,7 @@
         <module>sigma-core</module>
         <module>sigma-app</module>
         <module>sigma-mysql</module>
-        <module>sigma-generator</module>
+        <module>sigma-codegen</module>
         <module>sigma-mongo</module>
         <module>sigma-process</module>
     </modules>
