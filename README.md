@@ -21,7 +21,7 @@
 - `sigma-app`: 移动端后台
 - `sigma-browser`: 浏览器端后台
 - `sigma-core`: 框架核心依赖代码
-- `sigma-generator`: 代码生成工具，包含前后台代码生成。
+- `sigma-codegen`: 代码生成工具，包含前后台代码生成。
 - `sigma-mysql`: mysql数据库依赖，**app**与**browser**公用。
 - `sigma-mongo`: mongo数据库依赖，**app**与**browser**公用。
 
