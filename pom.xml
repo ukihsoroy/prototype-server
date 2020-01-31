@@ -21,6 +21,7 @@
         <module>sigma-mysql</module>
         <module>sigma-generator</module>
         <module>sigma-mongo</module>
+        <module>sigma-process</module>
     </modules>
 
     <properties>
