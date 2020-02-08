@@ -8,9 +8,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>sigma-generator</artifactId>
+    <artifactId>sigma-codegen</artifactId>
 
-    <name>sigma-generator</name>
+    <name>sigma-codegen</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

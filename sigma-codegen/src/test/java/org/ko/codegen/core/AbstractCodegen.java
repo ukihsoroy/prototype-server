@@ -1,12 +1,14 @@
 package org.ko.codegen.core;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import freemarker.template.Configuration;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.codegen.constants.SQLConstants;
 import org.ko.codegen.entity.Column;
 import org.ko.codegen.util.ConverterSQLTypeHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,12 +16,14 @@ import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.ko.codegen.constants.SQLConstants.INFORMATION_SCHEMA_TABLES;
 import static org.ko.codegen.constants.SchemaColumnNameConstants.*;
 
 /**
- * description: AbstractCodegen <br>
+ * description: 代码生成模板方法 <br>
  * date: 1/31/2020 20:07 <br>
  *
  * @author zhiyuan.shen <br>
@@ -30,6 +34,11 @@ public abstract class AbstractCodegen implements ICodegen {
     protected static final Logger logger = LoggerFactory.getLogger(AbstractCodegen.class);
 
     protected static final String ROOT_DIR = "/src/main/java/";
+
+    /**
+     * 模板引擎
+     */
+    protected Configuration freemarker = Configuration.getDefaultConfiguration();
 
     protected JdbcTemplate jDBCTemplate = new JdbcTemplate();
 
@@ -57,9 +66,7 @@ public abstract class AbstractCodegen implements ICodegen {
 
     private List<Column> findColumnByTableName (String name){
         String database = mysqlDataSource.getDatabaseName();
-        jDBCTemplate.query(SQLConstants.INFORMATION_SCHEMA_COLUMNS, new RowMapper<Column>() {
-
-
+        return jDBCTemplate.query(SQLConstants.INFORMATION_SCHEMA_COLUMNS, new RowMapper<Column>() {
             @Override
             public Column mapRow(ResultSet rs, int i) throws SQLException {
                 String columnName = rs.getString(COLUMN_NAME);
@@ -83,32 +90,29 @@ public abstract class AbstractCodegen implements ICodegen {
         }, database, name);
     }
 
-    /**
-     *
-     * @param value
-     * @return
-     */
-    protected def int(value: String): Int = {
-        var res = 0
-        if (StringUtils.isNotEmpty(value)) res = value.toInt
-        res
-    }
+    private static Pattern linePattern = Pattern.compile("_(\\w)");
 
-    protected String mapUnderscoreToCamelCase(String name){
-        String[] sp = name.split("_");
-        StringBuilder res = new StringBuilder()
-        res.append(sp.head)
-        sp.tail.map(x => x.replaceFirst(x.charAt(0).toString, x.charAt(0).toUpper.toString)).foreach(res.append)
-        res.toString()
-    }
-
-    protected def reformatTable (name: String, prefix: String): String = {
-        var entityName = ""
-        if (name.startsWith(prefix)) {
-            entityName = mapUnderscoreToCamelCase(name.replaceFirst(prefix, ""))
-        } else {
-            entityName = mapUnderscoreToCamelCase(name)
+    /** 下划线转驼峰 */
+    protected static String mapUnderscoreToCamelCase(String value) {
+        value = value.toLowerCase();
+        Matcher matcher = linePattern.matcher(value);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, matcher.group(1).toUpperCase());
         }
-        entityName.replaceFirst(entityName.charAt(0).toString, entityName.charAt(0).toUpper.toString)
+        matcher.appendTail(sb);
+        return sb.toString();
+    }
+
+
+    protected String reformatTable (String name, String prefix){
+        String entityName = "";
+        if (name.startsWith(prefix)) {
+            entityName = mapUnderscoreToCamelCase(name.replaceFirst(prefix, ""));
+        } else {
+            entityName = mapUnderscoreToCamelCase(name);
+        }
+        return entityName.replaceFirst(String.valueOf(entityName.charAt(0)),
+                String.valueOf(entityName.charAt(0)).toUpperCase());
     }
 }

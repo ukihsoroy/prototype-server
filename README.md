@@ -18,12 +18,13 @@
 
 ## 0x03.项目结构介绍
 
-- `sigma-app`: 移动端后台
-- `sigma-browser`: 浏览器端后台
+- `sigma-admin-ui`: admin管理前台代码
+- `sigma-app`: admin管理后台代码
 - `sigma-core`: 框架核心依赖代码
 - `sigma-codegen`: 代码生成工具，包含前后台代码生成。
 - `sigma-mysql`: mysql数据库依赖，**app**与**browser**公用。
 - `sigma-mongo`: mongo数据库依赖，**app**与**browser**公用。
+- `sigma-process`: 流程引擎相关，添加工作流
 
 ## 0x03.开发人员
 

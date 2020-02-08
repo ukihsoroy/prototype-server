@@ -12,16 +12,18 @@ public final class CodegenConstants {
     /**
      * 数据库表名字前缀
      */
-    public static final String prefix = "t_";
+    public static final String PREFIX = "t_";
+
+    public static final String CHARSET_NAME = "UTF-8";
 
     /**
      * 后端对应的配置属性类
      */
     public static final class BackEndProperties {
 
-        public static final String module = "sigma-browser";
+        public static final String MODULE = "sigma-app";
 
-        public static final String rootPackage = "org.ko.sigma.rest";
+        public static final String ROOT_PACKAGE = "org.ko.sigma.rest";
 
         public static final String controllerTemplate = "controller.java.ftl";
 
@@ -33,7 +35,9 @@ public final class CodegenConstants {
 
         public static final String repositoryXMLTemplate = "repository.xml.ftl";
 
-        public static final String conditionTemplate = "condition.java.ftl";
+        public static final String CONDITION_TEMPLATE = "condition.java.ftl";
+
+        public static final String CONDITION_PACKAGE = "/condition/";
 
         public static final String dtoTemplate = "dto.java.ftl";
 

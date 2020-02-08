@@ -1,5 +1,6 @@
 package org.ko.codegen.core;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -15,5 +16,5 @@ public interface ICodegen {
      * 执行生成逻辑
      * @param names 数据库的表名称
      */
-    void executor(String... names);
+    void executor(String... names) throws Exception;
 }
