@@ -96,8 +96,8 @@ public abstract class AbstractCodegen implements ICodegen {
 
     protected String mapUnderscoreToCamelCase(String name){
         String[] sp = name.split("_");
-        StringBuilder res = new StringBuilder();
-        res.append(sp[0]);
+        StringBuilder res = new StringBuilder()
+        res.append(sp.head)
         sp.tail.map(x => x.replaceFirst(x.charAt(0).toString, x.charAt(0).toUpper.toString)).foreach(res.append)
         res.toString()
     }
