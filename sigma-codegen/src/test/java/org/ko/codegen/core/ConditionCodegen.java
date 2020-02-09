@@ -7,6 +7,7 @@ import org.ko.codegen.constants.CodegenConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
@@ -22,6 +23,14 @@ import java.util.Map;
  * @version 1.0 <br>
  */
 public class ConditionCodegen extends AbstractCodegen {
+
+    /**
+     * 初始化配置数据源
+     * @param dataSource
+     */
+    public ConditionCodegen(DataSource dataSource) {
+        setDataSource(dataSource);
+    }
 
     @Override
     public void executor(String... names) throws Exception {
@@ -51,7 +60,7 @@ public class ConditionCodegen extends AbstractCodegen {
             if (StringUtils.isNotEmpty(repositoryFileName)) {
                 File dirFile = new File(javaDir);
                 if (!dirFile.exists()) dirFile.mkdirs();
-                Template template = freemarker.getTemplate(CodegenConstants.BackEndProperties.CONDITION_TEMPLATE);
+                Template template = cfg.getTemplate(CodegenConstants.BackEndProperties.CONDITION_TEMPLATE);
                 Writer out = new OutputStreamWriter(new FileOutputStream(new File(repositoryFileName)),
                         CodegenConstants.CHARSET_NAME);
                 template.process(params, out);

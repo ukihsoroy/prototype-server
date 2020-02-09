@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.ko.codegen.core.CodegenTest;
 
 /**
- * description: CodegenTests <br>
+ * description: 代码生成 <br>
  * date: 2020/2/8 21:59 <br>
  *
  * @author K.O <br>
@@ -12,8 +12,10 @@ import org.ko.codegen.core.CodegenTest;
  */
 public class Codegen extends CodegenTest {
 
-    @Test public void codegen() throws Exception {
-        conditionCodegen.executor("tests");
+    String[] tables = new String[]{"t_user"};
+
+    @Test public void conditionGen() throws Exception {
+        conditionCodegen.executor(tables);
     }
 
 }

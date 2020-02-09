@@ -21,7 +21,7 @@ public final class CodegenConstants {
      */
     public static final class BackEndProperties {
 
-        public static final String MODULE = "sigma-app";
+        public static final String MODULE = "sigma-gentest";
 
         public static final String ROOT_PACKAGE = "org.ko.sigma.rest";
 

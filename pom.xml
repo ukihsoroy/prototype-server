@@ -115,4 +115,12 @@
             <!--</plugin>-->
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>snapshot</id>
+            <name>maven-snapshot</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+    </repositories>
 </project>

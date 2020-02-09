@@ -1,6 +1,7 @@
 package org.ko.codegen.core;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.ko.codegen.CodegenDatasourceBuild;
 
 /**
  * description: CodegenTestParent <br>
@@ -11,11 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class CodegenTest {
 
-    protected ConditionCodegen conditionCodegen;
-
-
-    @BeforeEach public void before() {
-        conditionCodegen = new ConditionCodegen();
-    }
+    protected ConditionCodegen conditionCodegen = new ConditionCodegen(CodegenDatasourceBuild.mysqlDataSource());
 
 }

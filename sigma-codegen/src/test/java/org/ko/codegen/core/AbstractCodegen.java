@@ -1,14 +1,15 @@
 package org.ko.codegen.core;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
 import org.apache.commons.lang3.StringUtils;
+import org.ko.codegen.constants.CodegenConstants;
 import org.ko.codegen.constants.SQLConstants;
 import org.ko.codegen.entity.Column;
 import org.ko.codegen.util.ConverterSQLTypeHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -38,13 +39,21 @@ public abstract class AbstractCodegen implements ICodegen {
     /**
      * 模板引擎
      */
-    protected Configuration freemarker = Configuration.getDefaultConfiguration();
+    protected static Configuration cfg;
 
     protected JdbcTemplate jDBCTemplate = new JdbcTemplate();
 
     protected MysqlDataSource mysqlDataSource;
 
-    public void dataSource (DataSource dataSource){
+    static {
+        cfg = new Configuration(Configuration.getVersion());
+        cfg.setDefaultEncoding(CodegenConstants.CHARSET_NAME);
+        cfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
+        TemplateLoader templateLoader =
+        cfg.setTemplateLoader();
+    }
+
+    protected void setDataSource (DataSource dataSource){
         jDBCTemplate.setDataSource(dataSource);
 
         if (dataSource instanceof MysqlDataSource) {
