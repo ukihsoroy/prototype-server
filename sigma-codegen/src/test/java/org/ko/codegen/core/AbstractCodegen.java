@@ -1,8 +1,8 @@
 package org.ko.codegen.core;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import freemarker.cache.TemplateLoader;
 import freemarker.template.Configuration;
+import freemarker.template.TemplateExceptionHandler;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.codegen.constants.CodegenConstants;
 import org.ko.codegen.constants.SQLConstants;
@@ -48,9 +48,8 @@ public abstract class AbstractCodegen implements ICodegen {
     static {
         cfg = new Configuration(Configuration.getVersion());
         cfg.setDefaultEncoding(CodegenConstants.CHARSET_NAME);
-        cfg.setTagSyntax(Configuration.AUTO_DETECT_TAG_SYNTAX);
-        TemplateLoader templateLoader =
-        cfg.setTemplateLoader();
+        cfg.setClassForTemplateLoading(AbstractCodegen.class, "/");
+        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
     }
 
     protected void setDataSource (DataSource dataSource){
@@ -66,7 +65,6 @@ public abstract class AbstractCodegen implements ICodegen {
     protected List<String> findTableNames(String database){
         return jDBCTemplate.queryForList(INFORMATION_SCHEMA_TABLES, String.class, database);
     }
-
 
     protected String findTableComment (String name){
         String database = mysqlDataSource.getDatabaseName();
