@@ -2,7 +2,7 @@ package org.ko.generator.properties
 
 class BackEndProperties {
 
-  val module: String = "sigma-browser"
+  val module: String = "sigma-app"
 
   val rootPackage: String = "org.ko.sigma.rest"
 
