@@ -5,7 +5,7 @@ server.servlet:
 spring:
   application.name: sigma-browser
   profiles:
-    active: dev,secu
+    active: dev
   data:
     redis:
       repositories:
@@ -13,6 +13,7 @@ spring:
   mail:
     host: smtp.qq.com
     username: 814777765@qq.com
+    password:
     properties:
       mail:
         smtp:
@@ -45,6 +46,8 @@ sigma:
 sms:
   aliyun:
     regionId: cn-hangzhou
+    accessKeyId: LTAI5QC0m4Utt7i9
+    accessSecret: YDdpvQoZfqsStQAfX6O8mqGlYmHEDF
     signName: sigma
   dictKey: sms_template
 

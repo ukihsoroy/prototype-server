@@ -25,5 +25,3 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-
-application-secu.yml

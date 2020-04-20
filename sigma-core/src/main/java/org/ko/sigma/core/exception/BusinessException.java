@@ -1,6 +1,6 @@
 package org.ko.sigma.core.exception;
 
-import io.github.sigmaol.web.api.IResponseCode;
+import org.ko.sigma.core.constant.SystemCode;
 
 /**
  * GeneralException
@@ -25,9 +25,9 @@ public class BusinessException extends CustomRuntimeException {
         super(message);
     }
 
-    public BusinessException(IResponseCode responseCode) {
-        super(responseCode.getMessage());
-        this.code = responseCode.getCode();
+    public BusinessException(SystemCode systemCode) {
+        super(systemCode.getMsg());
+        this.code = systemCode.getCode();
     }
 
     public void setCode(Integer code) {

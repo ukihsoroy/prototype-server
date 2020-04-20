@@ -1,10 +1,12 @@
 package org.ko.sigma.rest.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.github.sigmaol.web.api.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.ko.sigma.core.support.Response;
+import org.ko.sigma.core.constant.SystemCode;
+import org.ko.sigma.core.support.api.ApiVersion;
 import org.ko.sigma.data.entity.User;
 import org.ko.sigma.rest.user.condition.QueryUserCondition;
 import org.ko.sigma.rest.user.dto.UserDTO;
@@ -18,6 +20,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.util.Objects;
 
 @Api(tags = "用户接口")
 @RestController
@@ -36,7 +39,10 @@ public class UserController {
         IPage<UserDTO> page = userService.queryUserList(condition);
 
         //2. 如果不为空
-        return Response.ok(page);
+        if (!page.getRecords().isEmpty()) {
+            return Response.of(page);
+        }
+        return Response.of(SystemCode.EMPTY_DATA);
     }
 
     @GetMapping("{id:\\d+}")
@@ -45,13 +51,16 @@ public class UserController {
             @ApiParam("用户ID") @PathVariable Long id) {
         logger.info("UserController#queryUserInfo");
         User user = userService.queryUserInfo(id);
-        return Response.ok(this.map(user));
+        if (Objects.nonNull(user)) {
+            return Response.of(this.map(user));
+        }
+        return Response.of(SystemCode.EMPTY_DATA);
     }
 
     @GetMapping("info")
     @ApiOperation("获取当前登录用户信息")
     public Response<UserDTO> loginUser () {
-        return Response.ok(SessionHolder.loginUser());
+        return Response.of(SessionHolder.loginUser());
     }
 
     @PostMapping
@@ -59,7 +68,7 @@ public class UserController {
     public Response<Long> createUser (
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
         Long userId = userService.createUser(map(userDTO));
-        return Response.ok(userId);
+        return Response.of(userId);
     }
 
     @PutMapping("{id:\\d+}")
@@ -68,7 +77,7 @@ public class UserController {
             @ApiParam("用户ID主键") @PathVariable Long id,
             @ApiParam("用户传输对象实体") @RequestBody UserDTO userDTO) {
         User user = userService.updateUser(id, map(userDTO));
-        return Response.ok(user);
+        return Response.of(user);
     }
 
     @DeleteMapping("{id:\\d+}")
@@ -76,7 +85,7 @@ public class UserController {
     public Response<Long> removeUser (
             @ApiParam("用户ID") @PathVariable Long id) {
         Long result = userService.removeUser(id);
-        return Response.ok(result);
+        return Response.of(result);
     }
 
     @GetMapping("export")

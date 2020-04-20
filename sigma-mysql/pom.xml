@@ -16,7 +16,7 @@
         <!--阿里监控数据源 druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
+            <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
 

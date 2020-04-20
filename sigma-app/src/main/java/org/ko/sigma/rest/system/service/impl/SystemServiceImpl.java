@@ -1,7 +1,6 @@
 package org.ko.sigma.rest.system.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import io.github.sigmaol.web.api.ResponseCode;
 import org.apache.commons.collections.CollectionUtils;
 import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.exception.UniqueException;
@@ -38,6 +37,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static org.ko.sigma.core.constant.SystemCode.*;
 
 @Service
 @Transactional(rollbackFor = Throwable.class)
@@ -132,7 +133,7 @@ public class SystemServiceImpl implements SystemService {
         Long count = userRoleRepository.insertList(userRoles);
 
         if (count == 0) {
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(REGISTER_USER_ERROR);
         }
 
         registerSession(userDTO, request);
@@ -152,19 +153,19 @@ public class SystemServiceImpl implements SystemService {
         Integer countUsername = userRepository.selectCount(
                 new QueryWrapper<User>().eq(UserConstants.Columns.USERNAME, userDTO.getUsername()));
         if (countUsername > 0) {
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(USERNAME_REPEAT);
         }
 
         Integer countMobile = userRepository.selectCount(
                 new QueryWrapper<User>().eq(UserConstants.Columns.MOBILE, userDTO.getMobile()));
         if (countMobile > 0) {
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(MOBILE_REPEAT);
         }
 
         Integer countEmail = userRepository.selectCount(
                 new QueryWrapper<User>().eq(UserConstants.Columns.EMAIL, userDTO.getEmail()));
         if (countEmail > 0) {
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(EMAIL_REPEAT);
         }
 
     }

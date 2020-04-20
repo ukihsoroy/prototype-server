@@ -1,5 +1,6 @@
 package org.ko.sigma.rest.basic.service.impl;
 
+import freemarker.template.Template;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.rest.basic.service.IdentifyingCodeService;
@@ -14,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
+import javax.mail.internet.MimeMessage;
 import java.util.HashMap;
+import java.util.Map;
 
 @Service("email")
 @Transactional(rollbackFor = Throwable.class)

@@ -1,10 +1,12 @@
 package org.ko.sigma.rest.department.controller;
 
 
-import io.github.sigmaol.web.api.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
+import org.ko.sigma.core.support.Response;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.Department;
 import org.ko.sigma.rest.department.condition.QueryDepartmentCondition;
 import org.ko.sigma.rest.department.dto.DepartmentDTO;
@@ -33,8 +35,13 @@ public class DepartmentController {
     public Response<List<DepartmentDTO>> queryDepartmentList(@ApiParam("部门表查询参数") @ModelAttribute QueryDepartmentCondition condition) {
         //1. 查询部门表列表数据
         var departments = departmentService.queryDepartmentList(condition);
-        List<DepartmentDTO> departmentDTOS = departments.stream().map(this::map).collect(Collectors.toList());
-        return new Response<>(departmentDTOS);
+
+        //2. 如果不为空
+        if (CollectionUtils.isNotEmpty(departments)) {
+            List<DepartmentDTO> departmentDTOS = departments.stream().map(this::map).collect(Collectors.toList());
+            return new Response<>(departmentDTOS);
+        }
+        return new Response<>(SystemCode.EMPTY_DATA);
     }
 
     @GetMapping("{id:\\d+}")

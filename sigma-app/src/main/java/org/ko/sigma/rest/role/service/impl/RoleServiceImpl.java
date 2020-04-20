@@ -3,8 +3,8 @@ package org.ko.sigma.rest.role.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import io.github.sigmaol.web.api.ResponseCode;
 import org.ko.sigma.core.exception.BusinessException;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.constants.RoleConstants;
 import org.ko.sigma.data.constants.RoleMenuConstants;
 import org.ko.sigma.data.entity.Role;
@@ -46,7 +46,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     @Override
     public Long createRole(Role role) {
         if (roleRepository.insert(role) == 0) {
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return role.getId();
     }
@@ -55,7 +55,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     public Role updateRole(String code, Role role) {
         role.setCode(code);
         if (roleRepository.update(role, new UpdateWrapper<Role>().eq(RoleConstants.Columns.CODE, code)) == 0) {
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return role;
     }
@@ -64,7 +64,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleRepository, Role> implement
     public String deleteRole(String code) {
         roleMenuRepository.delete(new QueryWrapper<RoleMenu>().eq(RoleMenuConstants.Columns.ROLE_CODE, code));
         if (roleRepository.delete(new QueryWrapper<Role>().eq(RoleConstants.Columns.CODE, code)) == 0) {
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(SystemCode.UNKNOWN_ERROR);
         }
         return code;
     }

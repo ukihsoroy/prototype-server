@@ -1,11 +1,12 @@
 package org.ko.sigma.rest.role.controller;
 
 
-import io.github.sigmaol.web.api.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.collections.CollectionUtils;
+import org.ko.sigma.core.support.Response;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.Role;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
 import org.ko.sigma.rest.menu.service.MenuService;
@@ -50,8 +51,12 @@ public class RoleController {
         //1. 查询用户列表数据
         List<Role> roles = roleService.queryRoleList(condition);
 
-        List<RoleDTO> roleDTOS = roles.stream().map(this::map).collect(Collectors.toList());
-        return new Response<>(roleDTOS);
+        //2. 如果不为空
+        if (CollectionUtils.isNotEmpty(roles)) {
+            List<RoleDTO> roleDTOS = roles.stream().map(this::map).collect(Collectors.toList());
+            return new Response<>(roleDTOS);
+        }
+        return new Response<>(SystemCode.EMPTY_DATA);
     }
 
     @GetMapping("{code}")

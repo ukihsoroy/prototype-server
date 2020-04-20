@@ -1,10 +1,11 @@
 package org.ko.sigma.rest.system.controller;
 
-import io.github.sigmaol.web.api.Response;
-import io.github.sigmaol.web.api.ResponseCode;
+
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.ko.sigma.core.support.Response;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.rest.system.service.SystemService;
 import org.ko.sigma.rest.user.dto.UserDTO;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class SystemController {
 
     @PostMapping("/authentication/mobile")
     @ApiOperation("手机号码登陆")
-    public Response<?> mobileLogin(
+    public Response mobileLogin(
             @ApiParam("手机号") @RequestParam String mobile,
             @ApiParam("验证码") @RequestParam String smsCode) {
         return Response.of(true);
@@ -69,11 +70,11 @@ public class SystemController {
 
     @GetMapping("valid/user/{column}")
     @ApiOperation("校验是否重复注册")
-    public Response<?> validUserUnique(
+    public Response validUserUnique(
             @ApiParam("字段名称") @NotBlank(message = "字段名称不能为空") @PathVariable String column,
             @ApiParam("字段值") @NotBlank(message = "字段值不能为空") @RequestParam String value) {
         systemService.validUserUnique(column, value);
-        return Response.ok();
+        return Response.of();
     }
 
     @GetMapping("/authentication/require")
@@ -89,12 +90,12 @@ public class SystemController {
             String targetUrl = savedRequest.getRedirectUrl();
             logger.info("引发跳转的URL是: {}", targetUrl);
         }
-        return Response.fail(ResponseCode.UN_AUTHORIZED);
+        return Response.of(SystemCode.REQUIRE_AUTHENTICATION);
     }
 
     @GetMapping("session/invalid")
     @ResponseStatus(code = HttpStatus.UNAUTHORIZED)
-    public Response<String> sessionInvalid () {
-        return Response.ok("session失效");
+    public Response sessionInvalid () {
+        return Response.of("session失效");
     }
 }

@@ -1,8 +1,8 @@
 package org.ko.sigma.rest.testunit.controller;
 
-import io.github.sigmaol.web.api.version.ApiVersion;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.ko.sigma.core.support.api.ApiVersion;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

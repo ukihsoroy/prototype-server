@@ -1,6 +1,6 @@
 package org.ko.sigma.conf;
 
-import io.github.sigmaol.web.api.version.ApiHandlerMapping;
+import org.ko.sigma.core.support.api.ApiHandlerMapping;
 import org.ko.sigma.filter.TimeFilter;
 import org.ko.sigma.interceptor.TimeInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;

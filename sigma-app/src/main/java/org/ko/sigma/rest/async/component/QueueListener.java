@@ -1,7 +1,7 @@
 package org.ko.sigma.rest.async.component;
 
-import io.github.sigmaol.web.api.Response;
 import org.apache.commons.lang3.StringUtils;
+import org.ko.sigma.core.support.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,9 +1,9 @@
 package org.ko.sigma.rest.async.controller;
 
-import io.github.sigmaol.web.api.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.ko.sigma.core.support.Response;
 import org.ko.sigma.rest.async.component.MockQueue;
 import org.ko.sigma.rest.async.component.DeferredResultHolder;
 import org.slf4j.Logger;

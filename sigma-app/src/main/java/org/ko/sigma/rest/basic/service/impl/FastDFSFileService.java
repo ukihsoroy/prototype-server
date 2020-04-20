@@ -1,12 +1,12 @@
 package org.ko.sigma.rest.basic.service.impl;
 
-import io.github.sigmaol.help.Base64Helper;
-import io.github.sigmaol.web.api.ResponseCode;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.bean.FileInfo;
 import org.ko.sigma.core.exception.BusinessException;
 import org.ko.sigma.core.properties.FileProperties;
+import org.ko.sigma.core.constant.SystemCode;
+import org.ko.sigma.core.util.BASE64;
 import org.ko.sigma.rest.basic.service.FileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class FastDFSFileService implements FileService {
         } catch (IOException e) {
             logger.error("org.ko.prototype.core.service.impl.LocalFileService#upload exception: {}", e.getMessage());
         }
-        return new FileInfo(Base64Helper.encodeToString(fileName.getBytes()), file.getOriginalFilename());
+        return new FileInfo(BASE64.encryptBASE64(fileName.getBytes()), file.getOriginalFilename());
     }
 
     /**
@@ -61,7 +61,7 @@ public class FastDFSFileService implements FileService {
      */
     @Override
     public void download(String id, String name, ServletWebRequest request) {
-        String fileId = Base64Helper.decode(id);
+        String fileId = BASE64.decryptBASE64String(id);
         try (
                 InputStream inputStream =
                         new FileInputStream(new File(fileProperties.getFolder(), fileId));
@@ -73,7 +73,7 @@ public class FastDFSFileService implements FileService {
             outputStream.flush();
         } catch (IOException e) {
             logger.error("org.ko.prototype.core.service.impl.LocalFileService#download exception: {}", e.getMessage());
-            throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+            throw new BusinessException(SystemCode.SYSTEM_ERROR);
         }
     }
 }

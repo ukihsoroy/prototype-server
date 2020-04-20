@@ -21,13 +21,9 @@
         <module>sigma-mysql</module>
         <module>sigma-codegen</module>
         <module>sigma-mongo</module>
-        <module>sigma-process</module>
     </modules>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
         <project.version>1.0-SNAPSHOT</project.version>
         <skipTests>true</skipTests>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -39,10 +35,14 @@
         <spring.mybatis.version>1.3.2</spring.mybatis.version>
         <mybatis.common.mapper>1.2.3</mybatis.common.mapper>
         <spring.security.version>4.2.5.RELEASE</spring.security.version>
+        <apache.collections.version>3.2.2</apache.collections.version>
+        <apache.lang3.version>3.9</apache.lang3.version>
+        <apache.beanutils.version>1.9.3</apache.beanutils.version>
+        <apache.io.version>2.6</apache.io.version>
+        <apache.poi.version>4.1.1</apache.poi.version>
         <spring.social.version>1.1.6.RELEASE</spring.social.version>
         <guava.version>28.0-jre</guava.version>
         <aliyun.sms.version>4.0.3</aliyun.sms.version>
-        <alpha-commons.version>1.0.0.SNAPSHOT</alpha-commons.version>
     </properties>
 
     <dependencyManagement>
@@ -116,11 +116,4 @@
         </plugins>
     </build>
 
-    <repositories>
-        <repository>
-            <id>snapshot</id>
-            <name>maven-snapshot</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-        </repository>
-    </repositories>
 </project>

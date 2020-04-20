@@ -1,15 +1,18 @@
 package org.ko.sigma.rest.basic.service.impl;
 
 import com.aliyuncs.CommonRequest;
+import com.aliyuncs.CommonResponse;
 import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.IAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
-import io.github.sigmaol.web.api.ResponseCode;
 import org.apache.commons.lang3.StringUtils;
 import org.ko.sigma.core.exception.BusinessException;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.core.util.GeneratorCodeUtils;
 import org.ko.sigma.core.util.JacksonHelper;
+import org.ko.sigma.data.entity.Dict;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.ko.sigma.rest.basic.service.IdentifyingCodeService;
 import org.ko.sigma.rest.dict.service.DictService;
@@ -20,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
+import java.util.Map;
 
 @Service("sms")
 @Transactional(rollbackFor = Throwable.class)
@@ -94,7 +98,7 @@ public class AliyunSMSCodeServiceImplIdentifying implements IdentifyingCodeServi
             var response = client.getCommonResponse(request);
             var aliyunSmsResponse = JacksonHelper.string2Map(response.getData());
             if (aliyunSmsResponse == null || !OK.equalsIgnoreCase(aliyunSmsResponse.get("Code"))) {
-                throw new BusinessException(ResponseCode.INTERNAL_SERVER_ERROR);
+                throw new BusinessException(SystemCode.SEND_ERROR);
             }
             SendCodeLog sendCodeLog = new SendCodeLog();
             sendCodeLog.setReceiveAddress(address);

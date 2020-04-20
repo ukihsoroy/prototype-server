@@ -2,10 +2,10 @@ package org.ko.sigma.rest.menu.controller;
 
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import io.github.sigmaol.web.api.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.ko.sigma.core.support.Response;
 import org.ko.sigma.data.entity.Menu;
 import org.ko.sigma.rest.menu.condition.QueryMenuCondition;
 import org.ko.sigma.rest.menu.dto.MenuDTO;
@@ -30,7 +30,7 @@ public class MenuController {
     public Response<IPage<MenuDTO>> queryMenuList (@ApiParam("查询参数") @ModelAttribute QueryMenuCondition condition) {
         // 1.查询全部菜单
         IPage<MenuDTO> menus = menuService.queryMenuList(condition);
-        return Response.ok(menus);
+        return Response.of(menus);
     }
 
     @GetMapping("{id:\\d+}")

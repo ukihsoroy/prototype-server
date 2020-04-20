@@ -1,10 +1,12 @@
 package org.ko.sigma.rest.log.controller;
 
 
-import io.github.sigmaol.web.api.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
+import org.ko.sigma.core.support.Response;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.SendCodeLog;
 import org.ko.sigma.rest.log.condition.QuerySendCodeLogCondition;
 import org.ko.sigma.rest.log.dto.SendCodeLogDTO;
@@ -35,8 +37,11 @@ public class SendCodeLogController {
         List<SendCodeLog> sendCodeLogs = sendCodeLogService.querySendCodeLogList(condition);
 
         //2. 如果不为空
-        List<SendCodeLogDTO> sendCodeLogDTOS = sendCodeLogs.stream().map(this::map).collect(Collectors.toList());
-        return new Response<>(sendCodeLogDTOS);
+        if (CollectionUtils.isNotEmpty(sendCodeLogs)) {
+            List<SendCodeLogDTO> sendCodeLogDTOS = sendCodeLogs.stream().map(this::map).collect(Collectors.toList());
+            return new Response<>(sendCodeLogDTOS);
+        }
+        return new Response<>(SystemCode.EMPTY_DATA);
     }
 
     @GetMapping("{id:\\d+}")

@@ -1,10 +1,12 @@
 package org.ko.sigma.rest.dict.controller;
 
 
-import io.github.sigmaol.web.api.Response;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.collections.CollectionUtils;
+import org.ko.sigma.core.support.Response;
+import org.ko.sigma.core.constant.SystemCode;
 import org.ko.sigma.data.entity.Dict;
 import org.ko.sigma.rest.dict.condition.QueryDictCondition;
 import org.ko.sigma.rest.dict.dto.DictDTO;
@@ -35,8 +37,11 @@ public class DictController {
         List<Dict> dicts = dictService.queryDictList(condition);
 
         //2. 如果不为空
-        List<DictDTO> dictDTOS = dicts.stream().map(this::map).collect(Collectors.toList());
-        return new Response<>(dictDTOS);
+        if (CollectionUtils.isNotEmpty(dicts)) {
+            List<DictDTO> dictDTOS = dicts.stream().map(this::map).collect(Collectors.toList());
+            return new Response<>(dictDTOS);
+        }
+        return new Response<>(SystemCode.EMPTY_DATA);
     }
 
     @GetMapping("{id:\\d+}")
