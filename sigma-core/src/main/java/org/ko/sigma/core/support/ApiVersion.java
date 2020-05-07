@@ -1,4 +1,4 @@
-package org.ko.sigma.core.support.api;
+package org.ko.sigma.core.support;
 
 import java.lang.annotation.*;
 

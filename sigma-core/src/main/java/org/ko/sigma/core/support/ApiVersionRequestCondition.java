@@ -1,6 +1,5 @@
-package org.ko.sigma.core.support.api;
+package org.ko.sigma.core.support;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.mvc.condition.RequestCondition;
@@ -16,6 +15,11 @@ import java.util.regex.Pattern;
 public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRequestCondition> {
 
     private static final Logger logger = LoggerFactory.getLogger(ApiVersionRequestCondition.class);
+
+    /**
+     * 用于匹配request中的版本号 v1 v2等
+     */
+    private static final Pattern VERSION_PATTERN = Pattern.compile("/v(\\d+).*");
 
     /**
      * 保存当前的版本号
@@ -43,12 +47,15 @@ public class ApiVersionRequestCondition implements RequestCondition<ApiVersionRe
 
     @Override
     public ApiVersionRequestCondition getMatchingCondition(HttpServletRequest request) {
+        //正则匹配请求的uri，看是否有版本号 v1
+        Matcher matcher = VERSION_PATTERN.matcher(request.getRequestURI());
 
-        //从请求中读取版本号
-        var ver = request.getParameter("_v");
+        if (logger.isDebugEnabled()) {
+            logger.debug("url: " + request.getRequestURI());
+        }
 
-        if (StringUtils.isNotBlank(ver)) {
-            var version = Integer.parseInt(ver);
+        if (matcher.find()) {
+            int version = Integer.parseInt(matcher.group(1));
             //超过当前最大版本号或者低于最低版本号均返回不匹配
             if (version <= maxVersion && version >= this.version) {
                 return this;

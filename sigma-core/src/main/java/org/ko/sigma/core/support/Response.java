@@ -1,15 +1,13 @@
 package org.ko.sigma.core.support;
 
-import lombok.ToString;
-import org.ko.sigma.core.bean.SerializeBean;
-import org.ko.sigma.core.constant.SystemCode;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Response
  * @author <A>K.O</A>
  */
-@ToString
-public class Response<T> extends SerializeBean {
+public class Response<T> implements Serializable {
 
     /**
      * 成功 OR 失败
@@ -24,17 +22,24 @@ public class Response<T> extends SerializeBean {
     /**
      * 消息内容
      */
-    private String msg;
+    private String message;
 
     /**
      * 返回结果
      */
     private T data;
 
+    /**
+     * 请求时间
+     */
+    private Long timestamp = new Date().getTime();
+
+
     private Response() {}
 
-    public static Response of () {
-        return new Response(true);
+
+    public static Response<?> ok () {
+        return new Response<>(true);
     }
 
     /**
@@ -46,8 +51,8 @@ public class Response<T> extends SerializeBean {
         this.success = success;
     }
 
-    public static Response of (boolean success) {
-        return new Response(success);
+    public static Response<?> of (boolean success) {
+        return new Response<>(success);
     }
 
     /**
@@ -58,11 +63,11 @@ public class Response<T> extends SerializeBean {
     public Response(T data) {
         this.data = data;
         this.success = true;
-        this.code = SystemCode.SUCCESS.getCode();
-        this.msg = SystemCode.SUCCESS.getMsg();
+        this.code = ResponseCode.SUCCESS.getCode();
+        this.message = ResponseCode.SUCCESS.getMessage();
     }
 
-    public static <T> Response<T> of (T data) {
+    public static <T> Response<T> ok (T data) {
         return new Response<>(data);
     }
 
@@ -84,62 +89,63 @@ public class Response<T> extends SerializeBean {
      * 构造器
      * @param data
      * @param code
-     * @param msg
+     * @param message
      * @param success
      */
-    public Response(boolean success, T data, Integer code, String msg) {
+    public Response(boolean success, T data, Integer code, String message) {
         this.data = data;
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.success = success;
     }
 
-    public static <T> Response<T> of (boolean success, T data, Integer code, String msg) {
-        return new Response<>(success, data, code, msg);
+    public static <T> Response<T> of (boolean success, T data, Integer code, String message) {
+        return new Response<>(success, data, code, message);
     }
 
     /**
      * 构造器
-     * @param systemCode
+     * @param responseCode
      */
-    public Response(SystemCode systemCode) {
+    public Response(IResponseCode responseCode) {
         this.success = false;
-        this.code = systemCode.getCode();
-        this.msg = systemCode.getMsg();
+        this.code = responseCode.getCode();
+        this.message = responseCode.getMessage();
     }
 
-    public static <T> Response<T> of (SystemCode systemCode) {
-        return new Response<>(systemCode);
+    public static <T> Response<T> fail (IResponseCode responseCode) {
+        return new Response<>(responseCode);
     }
+
 
     /**
      * 构造器
      * @param success
-     * @param msg
+     * @param message
      */
-    public Response(boolean success, String msg) {
-        this.msg = msg;
+    public Response(boolean success, String message) {
+        this.message = message;
         this.success = success;
     }
 
-    public static <T> Response<T> of (boolean success, String msg) {
-        return new Response<>(success, msg);
+    public static <T> Response<T> of (boolean success, String message) {
+        return new Response<>(success, message);
     }
 
     /**
      * 构造器
      * @param success
      * @param code
-     * @param msg
+     * @param message
      */
-    public Response(boolean success, Integer code, String msg) {
+    public Response(boolean success, Integer code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
         this.success = success;
     }
 
-    public static <T> Response<T> of (boolean success, Integer code, String msg) {
-        return new Response<>(success, code, msg);
+    public static <T> Response<T> of (boolean success, Integer code, String message) {
+        return new Response<>(success, code, message);
     }
 
     public Integer getCode() {
@@ -150,8 +156,12 @@ public class Response<T> extends SerializeBean {
         this.code = code;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getMessage() {
+        return message;
     }
 
     public boolean isSuccess() {
@@ -168,5 +178,9 @@ public class Response<T> extends SerializeBean {
 
     public void setData(T data) {
         this.data = data;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
     }
 }

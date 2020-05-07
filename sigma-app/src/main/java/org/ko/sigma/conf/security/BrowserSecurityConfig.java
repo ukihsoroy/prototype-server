@@ -3,12 +3,10 @@ package org.ko.sigma.conf.security;
 import org.ko.sigma.conf.security.handler.AuthenticationFailureHandlerImpl;
 import org.ko.sigma.conf.security.handler.AuthenticationSuccessHandlerImpl;
 import org.ko.sigma.conf.security.handler.LogoutSuccessHandlerImpl;
-import org.ko.sigma.conf.security.session.ExpiredSessionStrategyImpl;
 import org.ko.sigma.core.authentication.mobile.ISmsCodeService;
 import org.ko.sigma.core.authentication.mobile.SmsCodeAuthenticationSecurityConfig;
 import org.ko.sigma.core.authentication.mobile.SmsCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,10 +15,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.social.security.SpringSocialConfigurer;
 
 import javax.sql.DataSource;
 
@@ -51,8 +46,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired private DataSource dataSource;
 
     @Autowired private UserDetailsService userDetailsService;
-
-    @Autowired private SpringSocialConfigurer springSocialConfigurer;
 
     @Autowired private SmsCodeAuthenticationSecurityConfig smsCodeAuthenticationSecurityConfig;
 
@@ -127,8 +120,6 @@ public class BrowserSecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticated() //都需要认证
                     .and()
                 .csrf().disable()
-                .apply(springSocialConfigurer) //往过滤器链添加过滤器
-                    .and()
                 .apply(smsCodeAuthenticationSecurityConfig);
     }
 }
