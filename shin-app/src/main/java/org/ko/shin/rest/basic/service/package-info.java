@@ -1,0 +1,1 @@
+package org.ko.shin.rest.basic.service;

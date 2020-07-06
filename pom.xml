@@ -10,17 +10,17 @@
         <version>2.2.0.RELEASE</version>
     </parent>
 
-    <groupId>org.ko.sigma</groupId>
-    <artifactId>quick-sigma-server</artifactId>
+    <groupId>org.ko.shin</groupId>
+    <artifactId>shin-server</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>sigma-core</module>
-        <module>sigma-app</module>
-        <module>sigma-mysql</module>
-        <module>sigma-codegen</module>
-        <module>sigma-mongo</module>
+        <module>shin-core</module>
+        <module>shin-app</module>
+        <module>shin-mysql</module>
+        <module>shin-codegen</module>
+        <module>shin-mongo</module>
     </modules>
 
     <properties>
