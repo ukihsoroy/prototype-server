@@ -10,17 +10,17 @@
         <version>2.2.0.RELEASE</version>
     </parent>
 
-    <groupId>org.ko.shin</groupId>
-    <artifactId>shin-server</artifactId>
+    <groupId>org.ko.prototype</groupId>
+    <artifactId>prototype-server</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>shin-core</module>
-        <module>shin-app</module>
-        <module>shin-mysql</module>
-        <module>shin-codegen</module>
-        <module>shin-mongo</module>
+        <module>prototype-core</module>
+        <module>prototype-app</module>
+        <module>prototype-mysql</module>
+        <module>prototype-codegen</module>
+        <module>prototype-mongo</module>
     </modules>
 
     <properties>

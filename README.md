@@ -1,14 +1,14 @@
-# shin-server
+# prototype-server
 
 ## 0x01.简介
 
-> shin-server是j2ee快启动框架，集成通用业务抽象和可插拔技术组件中间件，可以作为商业项目或毕业设计快速启动模板。
+> prototype-server是j2ee快启动框架，集成通用业务抽象和可插拔技术组件中间件，可以作为商业项目或毕业设计快速启动模板。
 
 ## 0x02.技术选型
 
 ### - FrontEnd
 
-1. `shin-browser-ui`: [浏览器端管理后台代码]()
+1. `prototype-browser-ui`: [浏览器端管理后台代码]()
 
 ### - BackEnd
 
@@ -18,16 +18,16 @@
 
 ## 0x03.项目结构介绍
 
-- `shin-app`: 移动端后台
-- `shin-browser`: 浏览器端后台
-- `shin-core`: 框架核心依赖代码
-- `shin-generator`: 代码生成工具，包含前后台代码生成。
-- `shin-mysql`: mysql数据库依赖，**app**与**browser**公用。
-- `shin-mongo`: mongo数据库依赖，**app**与**browser**公用。
+- `prototype-app`: 移动端后台
+- `prototype-browser`: 浏览器端后台
+- `prototype-core`: 框架核心依赖代码
+- `prototype-generator`: 代码生成工具，包含前后台代码生成。
+- `prototype-mysql`: mysql数据库依赖，**app**与**browser**公用。
+- `prototype-mongo`: mongo数据库依赖，**app**与**browser**公用。
 
 ## 0x03.开发人员
 
-1. [K.O](https://github.com/shinol)
+1. [K.O](https://github.com/prototypeol)
 2. [CuiChaoJin](https://github.com/ccj)
 
 ## 0x04.更新日志
